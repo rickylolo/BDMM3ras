@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptCourse| Página Principal</title>
+    <link rel="shortcut icon" href="img\cripto.png">
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/admin.js"></script>
+    <link href="css/curso.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <!--                 NAVBAR                 -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light">
+        <div class="container">
+            <img src="img/cripto.png" width="70px">
+            <a class="navbar-brand fs-4 p-4" href="index.html">CryptCourse</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Categorías
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Desarrollo</a></li>
+                            <li><a class="dropdown-item" href="#">Negocios</a></li>
+                            <li><a class="dropdown-item" href="#">Finanzas</a></li>
+                            <li><a class="dropdown-item" href="#">Cocina</a></li>
+                            <li><a class="dropdown-item" href="#">Productividad</a></li>
+                            <li><a class="dropdown-item" href="#">Diseño</a></li>
+                            <li><a class="dropdown-item" href="#">Marketing</a></li>
+
+                        </ul>
+                    </li>
+
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                    <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+
+                </form>
+                <div id="perfil">
+                    <div class="d-flex flex-column dropstart misDatosUsuario">
+                        <div class="miImagen dropdown p-2 mx-auto" id="DatosUser" data-bs-toggle="dropdown"
+                            aria-expanded="false"><img src="img/avatar.jpg" class="pfp rounded-circle">
+                        </div>
+                        <ul class="dropdown-menu " aria-labelledby="DatosUser">
+                            <li class="misDatosUser">
+                                <div class="d-flex flex-row miImagen">
+                                    <div class="p-2"><img src="img/avatar.jpg" class="pfp rounded-circle">
+                                    </div>
+                                    <div class="p-2">
+                                        <div class="d-flex flex-column">
+
+                                            <p class="fs-5 p-1 fw-bold">rickylolo</p>
+
+                                            <p class="text-muted fs-6" id="correo">ricky_lolo29@hotmail.com</p>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="" data-bs-toggle="modal"
+                                    data-bs-target="#miModalEditUser">Editar
+                                    Perfil</a>
+                            </li>
+                            <li><a class="dropdown-item" href="misCursos.html">Mis cursos</a></li>
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#miModalMensaje">Ver
+                                    Mensajes</a></li>
+
+                            <li><a class="dropdown-item" href="paginaAdmin.html">Página Admin</a></li>
+                            <li><a class="dropdown-item" href="paginaInstructor.html">Página Instructor</a></li>
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="index.html">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <hr class="solid">
+    <div class="container">
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" id="mostrarUsuarios">Usuarios</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button"
+                    aria-expanded="false">Categorias</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" id="mostrarCategorias">Mostrar</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#miModalCategoria">Agregar</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Método
+                    Pago</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" id="mostrarMetodosPago">Mostrar</a></li>
+                    <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#miModalMetodoPago">Agregar</a>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+        <div id="misUsuariosBloqueados">
+            <nav class="navbar navbar-light" id="buscarUsersBlock">
+                <div class="container-fluid">
+                    <a class="navbar-brand fs-3 fw-bold p-2">Usuarios bloqueados</a>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Buscar Usuario" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+            </nav>
+            <hr class="solid">
+            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                    <div class="d-flex">
+                        <img src="img/avatar.jpg" class="pfp rounded-circle">
+                        <div class="align-self-center">
+                            <p class="fs-5 p-3 fw-bold align-middle">rickylolo</p>
+                        </div>
+                    </div>
+                    <div class="align-self-start">
+                        <small class="text-muted p-3">8:35pm 22/Feb/2023</small>
+                    </div>
+                </div>
+                <hr class="solid">
+                <div class="d-flex justify-content-end">
+                    <p class="mb-1"><button type="button" class="btn btn-success">Desbloquear</button></p>
+                </div>
+
+            </a>
+            <hr class="solid">
+            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                    <div class="d-flex">
+                        <img src="img/avatar2.jpg" class="pfp rounded-circle">
+                        <div class="align-self-center">
+                            <p class="fs-5 p-3 fw-bold align-middle">Nicholas Schaufrman</p>
+                        </div>
+                    </div>
+                    <div class="align-self-start">
+                        <small class="text-muted p-3">9:17pm 23/Feb/2023</small>
+                    </div>
+                </div>
+                <hr class="solid">
+                <div class="d-flex justify-content-end">
+                    <p class="mb-1"><button type="button" class="btn btn-success">Desbloquear</button></p>
+                </div>
+            </a>
+            <hr class="solid">
+            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                    <div class="d-flex">
+                        <img src="img/avatar3.jpg" class="pfp rounded-circle">
+                        <div class="align-self-center">
+                            <p class="fs-5 p-3 fw-bold align-middle">Robertin123</p>
+                        </div>
+                    </div>
+                    <div class="align-self-start">
+                        <small class="text-muted p-3">8:35pm 23/Feb/2023</small>
+                    </div>
+                </div>
+                <hr class="solid">
+                <div class="d-flex justify-content-end">
+                    <p class="mb-1"><button type="button" class="btn btn-success">Desbloquear</button></p>
+                </div>
+            </a>
+            <hr class="solid">
+        </div>
+        <div id="misCategoriasAdmin">
+            <nav class="navbar navbar-light" id="buscarUsersBlock">
+                <div class="container-fluid">
+                    <a class="navbar-brand fs-3 fw-bold p-2">Categorias</a>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Buscar Categoria"
+                            aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+            </nav>
+            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                    <div class="container">
+
+                        <div class="d-flex flex-row">
+
+                            <div class="flex-fill">
+                                <p class="fs-5 p-3 fw-bold">Desarrollo</p>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <p class="mb-1"><button type="button" class="btn btn-primary"><i
+                                            class="bi bi-pen"></i></button></p>
+                                <p class="mb-1"><button type="button" class="btn btn-danger"><i
+                                            class="bi bi-trash"></i></button></p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <hr class="solid">
+                <div class="d-flex flex-row justify-content-between p-2">
+                    <small class="text-muted p-1">Num. Cursos: 5</small>
+                    <small class="text-muted p-1">8:35pm 22/Feb/2023</small>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                    <div class="container">
+
+                        <div class="d-flex flex-row">
+
+                            <div class="flex-fill">
+                                <p class="fs-5 p-3 fw-bold">Negocios</p>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <p class="mb-1"><button type="button" class="btn btn-primary"><i
+                                            class="bi bi-pen"></i></button></p>
+                                <p class="mb-1"><button type="button" class="btn btn-danger"><i
+                                            class="bi bi-trash"></i></button>
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <hr class="solid">
+                <div class="d-flex flex-row justify-content-between p-2">
+                    <small class="text-muted p-1">Num. Cursos: 5</small>
+                    <small class="text-muted p-1">8:35pm 22/Feb/2023</small>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                    <div class="container">
+
+                        <div class="d-flex flex-row">
+
+                            <div class="flex-fill">
+                                <p class="fs-5 p-3 fw-bold">Desarrollo</p>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <p class="mb-1"><button type="button" class="btn btn-primary"><i
+                                            class="bi bi-pen"></i></button></p>
+                                <p class="mb-1"><button type="button" class="btn btn-danger"><i
+                                            class="bi bi-trash"></i></button>
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <hr class="solid">
+                <div class="d-flex flex-row justify-content-between p-2">
+                    <small class="text-muted p-1">Num. Cursos: 5</small>
+                    <small class="text-muted p-1">8:35pm 22/Feb/2023</small>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                    <div class="container">
+
+                        <div class="d-flex flex-row">
+
+                            <div class="flex-fill">
+                                <p class="fs-5 p-3 fw-bold">Finanzas</p>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <p class="mb-1"><button type="button" class="btn btn-primary"><i
+                                            class="bi bi-pen"></i></button></p>
+                                <p class="mb-1"><button type="button" class="btn btn-danger"><i
+                                            class="bi bi-trash"></i></button>
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <hr class="solid">
+                <div class="d-flex flex-row justify-content-between p-2">
+                    <small class="text-muted p-1">Num. Cursos: 5</small>
+                    <small class="text-muted p-1">8:35pm 22/Feb/2023</small>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                    <div class="container">
+
+                        <div class="d-flex flex-row">
+
+                            <div class="flex-fill">
+                                <p class="fs-5 p-3 fw-bold">Cocina</p>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <p class="mb-1"><button type="button" class="btn btn-primary"><i
+                                            class="bi bi-pen"></i></button></p>
+                                <p class="mb-1"><button type="button" class="btn btn-danger"><i
+                                            class="bi bi-trash"></i></button>
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <hr class="solid">
+                <div class="d-flex flex-row justify-content-between p-2">
+                    <small class="text-muted p-1">Num. Cursos: 5</small>
+                    <small class="text-muted p-1">8:35pm 22/Feb/2023</small>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                    <div class="container">
+
+                        <div class="d-flex flex-row">
+
+                            <div class="flex-fill">
+                                <p class="fs-5 p-3 fw-bold">Productividad</p>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <p class="mb-1"><button type="button" class="btn btn-primary"><i
+                                            class="bi bi-pen"></i></button></p>
+                                <p class="mb-1"><button type="button" class="btn btn-danger"><i
+                                            class="bi bi-trash"></i></button>
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <hr class="solid">
+                <div class="d-flex flex-row justify-content-between p-2">
+                    <small class="text-muted p-1">Num. Cursos: 5</small>
+                    <small class="text-muted p-1">8:35pm 22/Feb/2023</small>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                    <div class="container">
+
+                        <div class="d-flex flex-row">
+
+                            <div class="flex-fill">
+                                <p class="fs-5 p-3 fw-bold">Diseño</p>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <p class="mb-1"><button type="button" class="btn btn-primary"><i
+                                            class="bi bi-pen"></i></button></p>
+                                <p class="mb-1"><button type="button" class="btn btn-danger"><i
+                                            class="bi bi-trash"></i></button>
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <hr class="solid">
+                <div class="d-flex flex-row justify-content-between p-2">
+                    <small class="text-muted p-1">Num. Cursos: 5</small>
+                    <small class="text-muted p-1">8:35pm 22/Feb/2023</small>
+                </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                    <div class="container">
+
+                        <div class="d-flex flex-row">
+
+                            <div class="flex-fill">
+                                <p class="fs-5 p-3 fw-bold">Marketing</p>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <p class="mb-1"><button type="button" class="btn btn-primary"><i
+                                            class="bi bi-pen"></i></button></p>
+                                <p class="mb-1"><button type="button" class="btn btn-danger"><i
+                                            class="bi bi-trash"></i></button>
+                                </p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <hr class="solid">
+                <div class="d-flex flex-row justify-content-between p-2">
+                    <small class="text-muted p-1">Num. Cursos: 5</small>
+                    <small class="text-muted p-1">8:35pm 22/Feb/2023</small>
+                </div>
+            </a>
+
+
+        </div>
+        <div id="misMetodosPago">
+            <hr class="solid">
+            <a href="#" class="p-4 list-group-item list-group-item-action" aria-current="true">
+                <div class="misMetodosImgs d-flex w-100 justify-content-between">
+                    <div class="d-flex flex-fill">
+                        <img src="img/paypal.jpg">
+                        <p class="fs-5 p-3 fw-bold align-middle">Paypal</p>
+
+                    </div>
+                    <p class="mb-1"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                    </p>
+
+                </div>
+
+
+            </a>
+            <hr class="solid">
+            <a href="#" class="p-4 list-group-item list-group-item-action" aria-current="true">
+                <div class="misMetodosImgs d-flex w-100 justify-content-between">
+                    <div class="d-flex flex-fill">
+                        <img src="img/tarjeta.png">
+                        <p class="fs-5 p-3 fw-bold align-middle">Tarjeta Credito</p>
+
+                    </div>
+                    <p class="mb-1"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                    </p>
+
+                </div>
+
+
+            </a>
+            <hr class="solid">
+            <a href="#" class="p-4 list-group-item list-group-item-action" aria-current="true">
+                <div class="misMetodosImgs d-flex w-100 justify-content-between">
+                    <div class="d-flex">
+                        <img src="img/tarjeta.png">
+                        <p class="fs-5 p-3 fw-bold align-middle">Tarjeta Debito</p>
+
+                    </div>
+                    <p class="mb-1"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                    </p>
+
+                </div>
+
+
+            </a>
+            <hr class="solid">
+        </div>
+
+    </div>
+
+
+
+
+    <!--  >MODAL WINDOW MENSAJES<-->
+    <div class="modal fade" id="miModalMensaje" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+        data-bs-backdrop="static">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Chat</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex flex-row justify-content-between">
+                        <div id="misChats">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                    <div class="d-flex flex-row miImagen chat">
+                                        <div class="p-2"><img src="img/html.jpg" class="pfp">
+                                        </div>
+                                        <div class="p-2">
+                                            <div class="d-flex flex-column">
+                                                <p class="fs-6 p-1 fw-bold">Curso de HTML 5</p>
+                                                <p class="text-muted fs-6 fw-light" id="correo">Instructor: Nicholas
+                                                    Schaufrman
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                    <div class="d-flex flex-row miImagen chat">
+                                        <div class="p-2"><img src="img/css.png" class="pfp">
+                                        </div>
+                                        <div class="p-2">
+                                            <div class="d-flex flex-column">
+                                                <p class="fs-6 p-1 fw-bold">Curso de CSS 3</p>
+                                                <p class="text-muted fs-6 fw-light" id="correo">Instructor: Nicholas
+                                                    Schaufrman
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                                    <div class="d-flex flex-row miImagen chat">
+                                        <div class="p-2"><img src="img/javascript.jpg" class="pfp">
+                                        </div>
+                                        <div class="p-2">
+                                            <div class="d-flex flex-column">
+                                                <p class="fs-6 p-1 fw-bold">Curso de Javascript</p>
+                                                <p class="text-muted fs-6 fw-light" id="correo">Instructor: Nicholas
+                                                    Schaufrman
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div id="miMensaje" class="p-2 flex-fill">
+                            <div class="d-flex flex-row miImagen">
+                                <div class="p-2"><img src="img/html.jpg" class="pfp">
+                                </div>
+                                <div class="p-2">
+                                    <div class="d-flex flex-column">
+                                        <p class="fs-5 p-1 fw-bold">Curso de HTML 5</p>
+                                        <p class="text-muted fs-6" id="correo">Instructor: Nicholas Schaufrman</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action bg-" aria-current="true">
+                                    <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                                        <div class="d-flex">
+                                            <img src="img/avatar.jpg" class="pfp rounded-circle">
+                                            <div class="align-self-center">
+                                                <p class="fs-5 p-3 fw-bold align-middle">rickylolo</p>
+                                            </div>
+                                        </div>
+                                        <div class="align-self-start">
+                                            <small class="text-muted p-3">8:35pm 22/Feb/2023</small>
+                                        </div>
+                                    </div>
+                                    <hr class="solid">
+                                    <p class="mb-1">Tengo dudas del curso</p>
+
+                                </a>
+                                <hr class="solid">
+                                <a href="#" class="list-group-item list-group-item-action bg-" aria-current="true">
+                                    <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                                        <div class="d-flex">
+                                            <img src="img/avatar2.jpg" class="pfp rounded-circle">
+                                            <div class="align-self-center">
+                                                <p class="fs-5 p-3 fw-bold align-middle">Nicholas Schaufrman</p>
+                                            </div>
+                                        </div>
+                                        <div class="align-self-start">
+                                            <small class="text-muted p-3">9:17pm 23/Feb/2023</small>
+                                        </div>
+                                    </div>
+                                    <hr class="solid">
+                                    <p class="mb-1">Cuál es tu duda</p>
+                                </a>
+                                <hr class="solid">
+                                <a href="#" class="list-group-item list-group-item-action bg-" aria-current="true">
+                                    <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                                        <div class="d-flex">
+                                            <img src="img/avatar.jpg" class="pfp rounded-circle">
+                                            <div class="align-self-center">
+                                                <p class="fs-5 p-3 fw-bold align-middle">rickylolo</p>
+                                            </div>
+                                        </div>
+                                        <div class="align-self-start">
+                                            <small class="text-muted p-3">8:35pm 23/Feb/2023</small>
+                                        </div>
+                                    </div>
+                                    <hr class="solid">
+                                    <p class="mb-1">Que diferencia hay entre un div y un span</p>
+
+                                </a>
+                                <hr class="solid">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <form class="d-flex" role="search">
+
+                        <input class="form-control me-2" type="search" placeholder="Escribe aqui tu mensaje"
+                            aria-label="Buscar">
+
+                        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-send"></i></button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  >MODAL WINDOW METODO DE PAGO<-->
+    <div class="modal fade" id="miModalMetodoPago" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+        data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Registro Metodo de Pago</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post">
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <h5>Ingresa los siguientes datos:</h5>
+                            </div>
+                        </div>
+                        <form method="POST">
+
+                            <div class="row modalTexto">
+                                Nombre del metodo
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="bi bi-file-person"></i></span>
+                                <input type="text" class="form-control" id="nameMetodo" name="nameMetodo" placeholder=""
+                                    aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+
+
+
+
+                            <div class="row modalTexto">
+                                Imagen del metodo de pago
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-camera"> </i></span>
+                                <input type="file" onchange="vista_preliminarMetPago(event)" class="form-control"
+                                    id="metodoIMG" name="metodoIMG" placeholder="Foto de perfil" aria-label="Username"
+                                    aria-describedby="basic-addon1">
+
+
+                            </div>
+                            <div class="d-flex justify-content-center"><img src="" alt="" id="img-foto-metodo"
+                                    width="250px" height="250px"></div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" id="ButtonRegistroMetodoPago">Registrar
+                            Metodo de Pago</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--  >MODAL WINDOW CATEGORIA<-->
+    <div class="modal fade" id="miModalCategoria" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+        data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Registro categoría</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="post">
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-12">
+                                <h5>Ingresa los siguientes datos:</h5>
+                            </div>
+                        </div>
+                        <form method="POST">
+                            <div class="row modalTexto">
+                                Nombre de Categoria:
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">@</span>
+                                <input type="text" class="form-control" id="nameCat" name="nameCat"
+                                    placeholder="Nombre de la categoría" aria-label="Username"
+                                    aria-describedby="basic-addon1">
+                            </div>
+
+                            <div class="row modalTexto">
+                                Descripción de la categoría:
+                            </div>
+
+                            <textarea class="form-control" id="descCat" name="descCat"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" id="ButtonRegistroCategoria"
+                            data-bs-dismiss="modal">Registrar
+                            Categoría</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--  >MODAL EDIT USER<-->
+    <div class="modal fade" id="miModalEditUser" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+        data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Edita tus datos</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="" action="" enctype="multipart/form-data">
+                    <div class="modal-body">
+
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-12">
+                                <h5>Ingresa los siguientes datos:</h5>
+                            </div>
+                        </div>
+                        <div class="row modalTexto">
+                            Correo Electrónico
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">@</span>
+
+                            <input type="text" class="form-control" id="E_email" name="E_email"
+                                placeholder="Correo Electrónico" aria-label="Username" aria-describedby="basic-addon1"
+                                value="">
+
+                        </div>
+
+                        <div class="row modalTexto">
+                            Nombre de usuario
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-person"></i></span>
+
+                            <input type="text" class="form-control" id="E_usuario" name="E_usuario"
+                                placeholder="Nombre de usuario" aria-label="Username" aria-describedby="basic-addon1"
+                                value="">
+
+                        </div>
+
+                        <div class="row modalTexto">
+                            Nombre(s)
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-person"></i></span>
+                            <input type="text" class="form-control" id="E_names" name="E_names" placeholder="Nombre(s)"
+                                aria-label="Username" aria-describedby="basic-addon1" value="">
+
+                        </div>
+
+
+                        <div class="row modalTexto">
+                            Apellido(s)
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i
+                                    class="bi bi-file-person-fill"></i></span>
+
+                            <input type="text" class="form-control" id="E_lastName" name="E_lastName"
+                                placeholder="Apellido(s)" aria-label="Username" aria-describedby="basic-addon1"
+                                value="">
+
+                        </div>
+
+                        <div class="row modalTexto">
+                            Contraseña
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-key"></i></span>
+                            <input type="password" class="form-control" id="E_contrasenia" name="E_contrasenia"
+                                placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" value="">
+
+                        </div>
+                        <p style="font-size: small;">Contraseña con un mínimo de 8 caracteres, una
+                            mayúscula, una minúscula, un número y un carácter
+                            especial.
+                        <p>
+
+
+                        <div class="row modalTexto">
+                            Fecha de nacimiento
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i
+                                    class="bi bi-file-person-fill"></i></span>
+
+                            <input type="date" class="form-control" id="E_FechaNacimiento" name="E_FechaNacimiento"
+                                placeholder="Fecha de Nacimiento" aria-label="Fecha Nacimiento"
+                                aria-describedby="basic-addon1" value="">
+
+                        </div>
+
+                        <div class="row modalTexto">
+                            Foto de perfil
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-camera"> </i></span>
+                            <input type="file" onchange="vista_preliminar(event)" class="form-control" id="E_userIMG"
+                                name="E_userIMG" placeholder="Foto de perfil" aria-label="Username"
+                                aria-describedby="basic-addon1">
+
+
+                        </div>
+                        <div class="d-flex justify-content-center"><img src="" alt="" id="img-foto" width="250px"
+                                height="250px"></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="EditUser">Actualizar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--FOOTER<-->
+    <footer class="w-100 d-flex justify-content-center flex-wrap">
+        <p class="fs-5 px-3 pt-3 PCELText"><img src="img/cripto.png" class="" width="40" height="40">
+        <p class="fs-5 px-3 pt-3">&copy; Todos los derechos reservados</p>
+        </p>
+        <div id="iconos">
+            <a href="" data-bs-toggle="modal" data-bs-target="#miModalContacto"><i class="bi bi-shop"></i></a>
+            <a href="https://www.facebook.com/RicardoGrimaldo29/"><i class="bi bi-facebook"></i></a>
+            <a href="https://twitter.com/rickylolo29"><i class="bi bi-twitter"></i></a>
+            <a href="https://www.instagram.com/rickylolo29/"><i class="bi bi-instagram"></i></a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

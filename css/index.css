@@ -1,0 +1,172 @@
+.miImagen img {
+  max-width: 3.3rem;
+  max-height: 3.3rem;
+  width: 3.1rem;
+  height: 3.1rem;
+  object-fit: cover;
+}
+
+.miImagen img:hover {
+  cursor: pointer;
+  border: 0.1rem solid rgba(226, 226, 226, 0.466);
+}
+
+.navbar {
+  background: linear-gradient(70deg, rgb(223, 223, 223), rgb(255, 255, 255));
+  max-height: 7.5rem;
+}
+
+.misDatosUser {
+  max-height: 5rem;
+}
+#correo {
+  position: relative;
+  top: -1rem;
+}
+
+#navbarCursosInstructor {
+  background: white;
+}
+.post-img {
+  width: 100%;
+  height: 10rem;
+  background-size: cover;
+  background-position: center;
+  align-items: center;
+  transform: scale(0.8);
+  transition: 0.15s;
+}
+
+.post {
+  box-shadow: 0 1px 3px 1px rgb(136, 136, 136);
+  overflow: hidden;
+  transition: 0.15s;
+}
+
+.post .miCarrito {
+  opacity: 0;
+  transition: 0.15s;
+  margin-bottom: 0.3rem;
+  background-color: #929292;
+  color: white;
+  border-radius: 9px;
+}
+
+.post:hover .miCarrito {
+  opacity: 1;
+}
+
+.post:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 2px 2px rgba(70, 70, 70, 0.15);
+}
+
+.post-header {
+  width: 100%;
+  height: 10rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.post:hover .post-img {
+  transform: scale(0.9);
+}
+
+.post-body {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.post-body span {
+  display: inline-block;
+  color: rgb(0, 0, 0);
+  margin-bottom: 10px;
+  font-size: small;
+}
+
+.post-body h2 {
+  margin-bottom: 20px;
+}
+
+.post-body p {
+  line-height: 1.2;
+  margin-bottom: 0rem;
+}
+
+.post-body .post-link:hover {
+  background: #9c9c9c;
+  box-shadow: 1px 2px 6px 1px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+.post-list {
+  display: flex;
+  justify-content: center;
+  padding: 30px 15px;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.misCursosInstructor {
+  max-height: 7.7rem;
+}
+
+.misCursosInstructor img {
+  position: relative;
+  margin-right: 1rem;
+}
+
+.misCursosInstructor p {
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.misMetodosImgs img {
+  width: 100%;
+  max-width: 7.5rem;
+  height: 5rem;
+  max-height: 5rem;
+}
+.misVideos {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  overflow: hidden;
+  z-index: 0;
+}
+footer {
+  background-image: linear-gradient(rgb(255, 255, 255), rgb(168, 168, 168));
+  max-height: 7.5rem;
+  color: black;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+#iconos a {
+  color: rgb(66, 66, 66) !important;
+}
+
+@media (max-width: 920px) {
+  .content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  .content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .content {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
