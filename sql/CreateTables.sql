@@ -208,7 +208,7 @@ CREATE TABLE nivelCurso(
  CONSTRAINT FK_nivelCurso_usuarioCurso
 	FOREIGN KEY (usuarioCurso_id) REFERENCES usuarioCurso(usuarioCurso_id)
 );
-
+/*
 DROP TABLE IF EXISTS nivelCurso;
 DROP TABLE IF EXISTS usuarioCurso;
 DROP TABLE IF EXISTS Multimedia;
@@ -220,3 +220,4 @@ DROP TABLE IF EXISTS Categoria;
 DROP TABLE IF EXISTS Curso;
 DROP TABLE IF EXISTS Usuario;
 DROP TABLE IF EXISTS MetodoPago;
+*/
