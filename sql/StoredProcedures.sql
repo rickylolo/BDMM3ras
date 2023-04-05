@@ -265,12 +265,12 @@ DROP PROCEDURE IF EXISTS sp_GestionMensaje;
 DELIMITER //
 CREATE PROCEDURE sp_GestionMensaje
 (
-	Mensaje_id 			 INT,
-    UsuarioInstructor_id INT,			
-    UsuarioAlumno_id 	 INT,			
-    Curso_id 			 INT,		
-    texto  				 TEXT,
-    tiempoRegistro 		 DATETIME		
+	sp_Mensaje_id 			 INT,
+    sp_UsuarioInstructor_id INT,			
+    sp_UsuarioAlumno_id 	 INT,			
+    sp_Curso_id 			 INT,		
+    sp_texto  				 TEXT,
+    sp_tiempoRegistro 		 DATETIME		
 )		
 
 BEGIN
@@ -294,4 +294,97 @@ BEGIN
    END IF;
 END //
 
+
+/*--------------------------------------------------------------------------------CURSO CATEGORIA--------------------------------------------------------------------------*/
+DROP PROCEDURE IF EXISTS sp_GestionCursoCategoria;
+DELIMITER //
+CREATE PROCEDURE sp_GestionCursoCategoria
+(
+	sp_CursoCategoria_id 	INT,
+    sp_Curso_id 			INT,				
+    sp_Categoria_id 		INT 			
+)		
+
+BEGIN
+   IF Operacion = 'I' /*INSERT CURSO CATEGORIA*/
+   THEN  
+		INSERT INTO CursoCategoria(Curso_id,Categoria_id) 
+			VALUES (sp_Curso_id,sp_Categoria_id);
+   END IF;
+    IF Operacion = 'D' THEN /*DELETE CURSO CATEGORIA*/
+          DELETE FROM CursoCategoria WHERE CursoCategoria_id = sp_CursoCategoria_id;
+   END IF;
+      IF Operacion = 'A' THEN /*GET ALL CURSOS DE UNA CATEGORIA*/
+		SELECT CursoCategoria_id, Curso_id, Categoria_id, Usuario_id, nombre, descripcion, tiempoRegistro
+        FROM vObtenerTodasCategoriaDeCurso
+		WHERE Categoria_id = sp_Categoria_id;
+   END IF;
+     IF Operacion = 'C' THEN /*GET ALL CATEGORIAS CURSO*/
+	    SELECT CursoCategoria_id, Categoria_id, Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
+        FROM vObtenerTodosLosCursosDeUnaCategoria
+		WHERE Curso_id = sp_Curso_id;
+   END IF;
+END //
+
+
+
+/*--------------------------------------------------------------------------------NIVEL--------------------------------------------------------------------------*/
+DROP PROCEDURE IF EXISTS sp_GestionNivel;
+DELIMITER //
+CREATE PROCEDURE sp_GestionNivel
+(
+	sp_Nivel_id 			INT,
+    sp_Curso_id 			INT,				
+    sp_noNivel          	INT,          			
+    sp_nombre  				VARCHAR(50),		
+    sp_costoNivel  			DECIMAL(9,2)
+)		
+
+BEGIN
+   IF Operacion = 'I' /*INSERT NIVEL*/
+   THEN  
+		INSERT INTO Nivel(Curso_id,noNivel,nombre,costoNivel) 
+			VALUES (sp_Curso_id,sp_noNivel,sp_nombre,sp_costoNivel);
+   END IF;
+   	IF Operacion = 'E'  /*EDIT NIVEL*/
+    THEN 
+    	SET sp_Curso_id=IF(sp_Curso_id='',NULL,sp_Curso_id),
+			sp_noNivel=IF(sp_noNivel='',NULL,sp_noNivel),
+            sp_nombre=IF(sp_nombre='',NULL,sp_nombre),
+            sp_costoNivel=IF(sp_costoNivel='',NULL,sp_costoNivel);
+		UPDATE Nivel 
+			SET Curso_id = IFNULL(sp_Curso_id,Curso_id), 
+				noNivel= IFNULL(sp_noNivel,noNivel),
+                nombre = IFNULL(sp_nombre,nombre), 
+                costoNivel = IFNULL(sp_costoNivel,costoNivel)
+                
+		WHERE Nivel_id = sp_Nivel_id;
+   END IF;
+    IF Operacion = 'D' THEN /*DELETE NIVEL*/
+          DELETE FROM Nivel WHERE Nivel_id = sp_Nivel_id;
+   END IF;
+END //
+
+/*--------------------------------------------------------------------------------MULTIMEDIA--------------------------------------------------------------------------*/
+DROP PROCEDURE IF EXISTS sp_GestionMultimedia;
+DELIMITER //
+CREATE PROCEDURE sp_GestionMultimedia
+(
+	sp_Multimedia_id 		INT,
+    sp_Nivel_id 			INT,				
+    sp_multimedia  			MEDIUMBLOB, 					
+    sp_texto 				TEXT, 						
+    sp_tipoMultimedia 		TINYINT			
+)		
+
+BEGIN
+   IF Operacion = 'I' /*INSERT MULTIMEDIA*/
+   THEN  
+		INSERT INTO Multimedia(Nivel_id,multimedia,texto,tipoMultimedia) 
+			VALUES (sp_Nivel_id,sp_multimedia,sp_texto,sp_tipoMultimedia);
+   END IF;
+    IF Operacion = 'D' THEN /*DELETE MULTIMEDIA*/
+          DELETE FROM Multimedia WHERE Multimedia_id = sp_Multimedia_id;
+   END IF;
+END //
 

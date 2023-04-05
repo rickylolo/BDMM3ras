@@ -32,11 +32,30 @@ CREATE VIEW vComentarioCurso AS
 SELECT ComentarioCurso_id, Usuario_id, Curso_id, isLike, texto, tiempoRegistro
 FROM ComentarioCurso;
 
-/*--------------------------------------------------------------------------------COMENTARIO CURSO--------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------------MENSAJE-------------------------------------------------------------------------*/
 DROP VIEW IF EXISTS vMensaje;
 
 CREATE VIEW vMensaje AS
 SELECT Mensaje_id, UsuarioInstructor_id, UsuarioAlumno_id, Curso_id, texto, tiempoRegistro
 FROM Mensaje;
+
+
+/*--------------------------------------------------------------------------------CURSO CATEGORIA-------------------------------------------------------------------------*/
+DROP VIEW IF EXISTS vObtenerTodasCategoriaDeCurso;
+
+CREATE VIEW vObtenerTodasCategoriaDeCurso AS
+SELECT CursoCategoria_id, Curso_id, A.Categoria_id, Usuario_id, nombre, descripcion, tiempoRegistro
+FROM CursoCategoria A
+LEFT JOIN Categoria B
+ON A.Categoria_id = B.Categoria_id;
+
+
+DROP VIEW IF EXISTS vObtenerTodosLosCursosDeUnaCategoria;
+
+CREATE VIEW vObtenerTodosLosCursosDeUnaCategoria AS
+SELECT CursoCategoria_id, Categoria_id, A.Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
+FROM CursoCategoria A
+LEFT JOIN Curso B
+ON A.Curso_id = B.Curso_id;
 
 

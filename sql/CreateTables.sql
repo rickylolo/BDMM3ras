@@ -140,6 +140,7 @@ DROP TABLE IF EXISTS Nivel;
 CREATE TABLE Nivel(
 	Nivel_id 			INT AUTO_INCREMENT NOT NULL 	COMMENT'Clave Primaria de los niveles',
     Curso_id 			INT NOT NULL 					COMMENT'Clave Foránea del curso',
+    noNivel             INT NOT NULL           			COMMENT'Numero del nivel',
     nombre  			VARCHAR(50) NOT NULL 			COMMENT'Nombre del nivel',
     costoNivel  		DECIMAL(9,2) UNSIGNED NOT NULL 	COMMENT'Costo del nivel',
  CONSTRAINT PK_Nivel
@@ -208,6 +209,7 @@ CREATE TABLE nivelCurso(
  CONSTRAINT FK_nivelCurso_usuarioCurso
 	FOREIGN KEY (usuarioCurso_id) REFERENCES usuarioCurso(usuarioCurso_id)
 );
+
 /*
 DROP TABLE IF EXISTS nivelCurso;
 DROP TABLE IF EXISTS usuarioCurso;
