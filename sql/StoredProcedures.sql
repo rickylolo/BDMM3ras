@@ -388,3 +388,73 @@ BEGIN
    END IF;
 END //
 
+
+/*--------------------------------------------------------------------------------USUARIO CURSO--------------------------------------------------------------------------*/
+DROP PROCEDURE IF EXISTS sp_GestionUsuarioCurso;
+DELIMITER //
+CREATE PROCEDURE sp_GestionUsuarioCurso
+(
+	sp_usuarioCurso_id 			INT,
+    sp_MetodoPago_id 			INT,				
+    sp_Curso_id 				INT, 					
+    sp_Usuario_id 				INT,								
+    sp_nivelesCompletados 		TINYINT,          
+    sp_tiempoCompletado 		DATETIME,		
+    sp_costoCurso  				DECIMAL(9,2) 
+)		
+
+BEGIN
+   IF Operacion = 'I' /*INSERT USUARIO CURSO*/
+   THEN  
+		INSERT INTO usuarioCurso(MetodoPago_id,Curso_id,Usuario_id,tiempoRegistro,costoCurso) 
+			VALUES (sp_MetodoPago_id,sp_Curso_id, sp_Usuario_id,now(),sp_costoCurso);
+   END IF;
+   
+END //
+
+/*--------------------------------------------------------------------------------USUARIO CURSO--------------------------------------------------------------------------*/
+DROP PROCEDURE IF EXISTS sp_GestionUsuarioCurso;
+DELIMITER //
+CREATE PROCEDURE sp_GestionUsuarioCurso
+(
+	sp_usuarioCurso_id 			INT,
+    sp_MetodoPago_id 			INT,				
+    sp_Curso_id 				INT, 					
+    sp_Usuario_id 				INT,								
+    sp_nivelesCompletados 		TINYINT,          
+    sp_tiempoCompletado 		DATETIME,		
+    sp_costoCurso  				DECIMAL(9,2) 
+)		
+
+BEGIN
+   IF Operacion = 'I' /*INSERT USUARIO CURSO*/
+   THEN  
+		INSERT INTO usuarioCurso(MetodoPago_id,Curso_id,Usuario_id,tiempoRegistro,costoCurso) 
+			VALUES (sp_MetodoPago_id,sp_Curso_id, sp_Usuario_id,now(),sp_costoCurso);
+   END IF;
+   
+END //
+
+/*--------------------------------------------------------------------------------USUARIO NIVEL--------------------------------------------------------------------------*/
+DROP PROCEDURE IF EXISTS sp_GestionUsuarioNivel;
+DELIMITER //
+CREATE PROCEDURE sp_GestionUsuarioNivel
+(
+	sp_nivelCurso_id 			INT,	
+    sp_MetodoPago_id 			INT,				
+    sp_usuarioCurso_id			INT,					
+    sp_Nivel_id 				INT,				
+    sp_costoNivel  				DECIMAL(9,2)
+)		
+
+BEGIN
+   IF Operacion = 'I' /*INSERT USUARIO NIVEL*/
+   THEN  
+		INSERT INTO usuarioCurso(MetodoPago_id,usuarioCurso_id,Nivel_id,tiempoRegistro,costoNivel) 
+			VALUES (sp_MetodoPago_id,sp_usuarioCurso_id,sp_Nivel_id,now(),sp_costoNivel);
+   END IF;
+   
+END //
+
+
+

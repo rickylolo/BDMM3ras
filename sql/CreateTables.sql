@@ -176,7 +176,7 @@ CREATE TABLE usuarioCurso(
     tiempoRegistro 			DATETIME NOT NULL 				COMMENT'Tiempo de registro del usuario al curso',
 	isFinalizado			BIT NOT NULL 					COMMENT'Bandera que indica si el usuario termino el curso',
     nivelesCompletados 		TINYINT DEFAULT 0               COMMENT'Cantidad de niveles completados del curso por el estudiante',
-	tiempoCompletado 		DATETIME NOT NULL 				COMMENT'Tiempo de finalización del usuario al curso',
+	tiempoCompletado 		DATETIME 						COMMENT'Tiempo de finalización del usuario al curso',
 	costoCurso  			DECIMAL(9,2) UNSIGNED NOT NULL 	COMMENT'Costo del curso en ese momento',
  CONSTRAINT PK_usuarioCurso
 	PRIMARY KEY (usuarioCurso_id),
@@ -198,7 +198,7 @@ CREATE TABLE nivelCurso(
 	Nivel_id 				INT NOT NULL 					COMMENT'Clave Foránea del nivel',
     tiempoRegistro 			DATETIME NOT NULL 				COMMENT'Tiempo de registro del usuario al curso',
 	isFinalizado			BIT NOT NULL 					COMMENT'Bandera que indica si el usuario termino el nivel',
-	tiempoCompletado 		DATETIME NOT NULL 				COMMENT'Tiempo de finalización del usuario al nivel',
+	tiempoCompletado 		DATETIME						COMMENT'Tiempo de finalización del usuario al nivel',
 	costoNivel  			DECIMAL(9,2) UNSIGNED NOT NULL 	COMMENT'Costo del nivel en ese momento',
  CONSTRAINT PK_nivelCurso
 	PRIMARY KEY (nivelCurso_id),
