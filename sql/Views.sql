@@ -1,6 +1,11 @@
 USE BDMM_PROYECTO;
 
 /*--------------------------------------------------------------------------------USUARIOS--------------------------------------------------------------------------*/
+DROP VIEW IF EXISTS vUsuario;
+
+CREATE VIEW vUsuario AS
+SELECT Usuario_id, MetodoPago_id, correo, userPassword, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo, fechaRegistro, ultimoCambio, esBloqueado
+FROM Usuario;
 
 
 /*--------------------------------------------------------------------------------METODOS DE PAGO--------------------------------------------------------------------------*/

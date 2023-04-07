@@ -66,18 +66,24 @@ BEGIN
    END IF;
     IF Operacion = 'L' THEN /*LOG IN USUARIO*/
 		SELECT Usuario_id, rolUsuario
-        FROM Usuario
+        FROM vUsuario
         WHERE 1=1 
 			AND correo = sp_correo
-            AND userPassword = sp_userPassword;
+            AND userPassword = sp_userPassword
+            AND esBloqueado = 0;
    END IF;
       IF Operacion = 'A' THEN /*GET DATOS ALL USUARIOS*/
-		SELECT Usuario_id, MetodoPago_id, correo, userPassword, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo, fechaRegistro, ultimoCambio, esBloqueado
-        FROM Usuario;
+		SELECT Usuario_id, MetodoPago_id, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo
+        FROM vUsuario;
+   END IF;
+      IF Operacion = 'B' THEN /*GET DATOS ALL USUARIOS BLOQUEADOS*/
+		SELECT Usuario_id, MetodoPago_id, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo
+        FROM vUsuario
+        WHERE esBloqueado = 1;
    END IF;
      IF Operacion = 'G' THEN /*GET DATOS USUARIO*/
 		SELECT Usuario_id, MetodoPago_id, correo, userPassword, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo, fechaRegistro, ultimoCambio, esBloqueado
-        FROM Usuario
+        FROM vUsuario
         WHERE Usuario_id = sp_Usuario_id;
    END IF;
 END //
@@ -131,6 +137,7 @@ DROP PROCEDURE IF EXISTS sp_GestionCurso;
 DELIMITER //
 CREATE PROCEDURE sp_GestionCurso
 (
+	Operacion CHAR(1),
 	sp_Curso_id 			INT, 
 	sp_Usuario_id 			INT,			    			    
 	sp_costoCurso  			DECIMAL(9,2),					    					    					    
@@ -141,6 +148,7 @@ CREATE PROCEDURE sp_GestionCurso
 )		
 
 BEGIN
+	DECLARE u_costoCurso DECIMAL(9,2);
    IF Operacion = 'I' /*INSERT CURSO*/
    THEN  
 		INSERT INTO Curso(Usuario_id,costoCurso,imagenCurso,nombre,descripcion) 
@@ -148,12 +156,12 @@ BEGIN
    END IF;
 	IF Operacion = 'E'  /*EDIT CURSO*/
     THEN 
-    	SET sp_costoCurso=IF(sp_costoCurso='',NULL,sp_costoCurso),
-			sp_imagenCurso=IF(sp_imagenCurso='',NULL,sp_imagenCurso),
+    	SET u_costoCurso = CONVERT(sp_costoCurso,DECIMAL(9,2));
+    	SET sp_imagenCurso=IF(sp_imagenCurso='',NULL,sp_imagenCurso),
             sp_nombre=IF(sp_nombre='',NULL,sp_nombre),
             sp_descripcion=IF(sp_descripcion='',NULL,sp_descripcion);
 		UPDATE Curso 
-			SET costoCurso = IFNULL(sp_costoCurso,costoCurso), 
+			SET costoCurso = IFNULL(u_costoCurso,costoCurso), 
 				imagenCurso= IFNULL(sp_imagenCurso,imagenCurso),
 				nombre= IFNULL(sp_nombre,nombre),
                 descripcion= IFNULL(sp_descripcion,descripcion)
@@ -162,6 +170,9 @@ BEGIN
    END IF;
     IF Operacion = 'D' THEN /*DELETE CURSO*/
           DELETE FROM Curso WHERE  Curso_id = sp_Curso_id;
+   END IF;
+       IF Operacion = 'B' THEN /*DAR DE BAJA CURSO*/
+          UPDATE Curso SET isBaja = 1 WHERE Curso_id = sp_Curso_id;
    END IF;
       IF Operacion = 'A' THEN /*GET ALL CURSO*/
 		SELECT Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
@@ -179,6 +190,7 @@ DROP PROCEDURE IF EXISTS sp_GestionCategoria;
 DELIMITER //
 CREATE PROCEDURE sp_GestionCategoria
 (
+	Operacion CHAR(1),
 	sp_Categoria_id 		INT,
 	sp_Usuario_id 			INT, 				
 	sp_nombre 				VARCHAR(30),	
@@ -222,6 +234,7 @@ DROP PROCEDURE IF EXISTS sp_GestionComentarioCurso;
 DELIMITER //
 CREATE PROCEDURE sp_GestionComentarioCurso
 (
+	Operacion CHAR(1),
 	sp_ComentarioCurso_id 	INT, 
     sp_Usuario_id 			INT,			
     sp_Curso_id 			INT,				
@@ -265,6 +278,7 @@ DROP PROCEDURE IF EXISTS sp_GestionMensaje;
 DELIMITER //
 CREATE PROCEDURE sp_GestionMensaje
 (
+	Operacion CHAR(1),
 	sp_Mensaje_id 			 INT,
     sp_UsuarioInstructor_id INT,			
     sp_UsuarioAlumno_id 	 INT,			
@@ -300,6 +314,7 @@ DROP PROCEDURE IF EXISTS sp_GestionCursoCategoria;
 DELIMITER //
 CREATE PROCEDURE sp_GestionCursoCategoria
 (
+	Operacion CHAR(1),
 	sp_CursoCategoria_id 	INT,
     sp_Curso_id 			INT,				
     sp_Categoria_id 		INT 			
@@ -333,6 +348,7 @@ DROP PROCEDURE IF EXISTS sp_GestionNivel;
 DELIMITER //
 CREATE PROCEDURE sp_GestionNivel
 (
+	Operacion CHAR(1),
 	sp_Nivel_id 			INT,
     sp_Curso_id 			INT,				
     sp_noNivel          	INT,          			
@@ -370,6 +386,7 @@ DROP PROCEDURE IF EXISTS sp_GestionMultimedia;
 DELIMITER //
 CREATE PROCEDURE sp_GestionMultimedia
 (
+	Operacion CHAR(1),
 	sp_Multimedia_id 		INT,
     sp_Nivel_id 			INT,				
     sp_multimedia  			MEDIUMBLOB, 					
@@ -394,6 +411,7 @@ DROP PROCEDURE IF EXISTS sp_GestionUsuarioCurso;
 DELIMITER //
 CREATE PROCEDURE sp_GestionUsuarioCurso
 (
+	Operacion CHAR(1),
 	sp_usuarioCurso_id 			INT,
     sp_MetodoPago_id 			INT,				
     sp_Curso_id 				INT, 					
@@ -417,6 +435,7 @@ DROP PROCEDURE IF EXISTS sp_GestionUsuarioCurso;
 DELIMITER //
 CREATE PROCEDURE sp_GestionUsuarioCurso
 (
+	Operacion CHAR(1),
 	sp_usuarioCurso_id 			INT,
     sp_MetodoPago_id 			INT,				
     sp_Curso_id 				INT, 					
@@ -440,10 +459,11 @@ DROP PROCEDURE IF EXISTS sp_GestionUsuarioNivel;
 DELIMITER //
 CREATE PROCEDURE sp_GestionUsuarioNivel
 (
-	sp_nivelCurso_id 			INT,	
-    sp_MetodoPago_id 			INT,				
-    sp_usuarioCurso_id			INT,					
-    sp_Nivel_id 				INT,				
+	Operacion CHAR(1),
+	sp_nivelCurso_id 			INT,
+    sp_MetodoPago_id 			INT,
+    sp_usuarioCurso_id			INT,
+    sp_Nivel_id 				INT,
     sp_costoNivel  				DECIMAL(9,2)
 )		
 
