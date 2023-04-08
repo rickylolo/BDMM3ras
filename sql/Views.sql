@@ -64,3 +64,48 @@ LEFT JOIN Curso B
 ON A.Curso_id = B.Curso_id;
 
 
+/*--------------------------------------------------------------------------------NIVEL-------------------------------------------------------------------------*/
+
+DROP VIEW IF EXISTS vObtenerTodosLosNivelesDeUnCurso;
+
+CREATE VIEW vObtenerTodosLosNivelesDeUnCurso AS
+SELECT Nivel_id, noNivel, A.nombre AS nombreNivel, costoNivel, A.Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, B.nombre AS nombreCurso, descripcion, isBaja
+FROM Nivel A
+LEFT JOIN Curso B
+ON A.Curso_id = B.Curso_id;
+
+/*-------------------------------------------------------------------------------- MULTIMEDIA -------------------------------------------------------------------------*/
+
+DROP VIEW IF EXISTS vObtenerTodaMultimediaDeUnNivel;
+
+CREATE VIEW vObtenerTodaMultimediaDeUnNivel AS
+SELECT A.Nivel_id, Multimedia_id, multimedia, texto, tipoMultimedia
+FROM Nivel A
+LEFT JOIN Multimedia B
+ON A.Nivel_id = B.Nivel_id;
+
+/*-------------------------------------------------------------------------------- USUARIO CURSO -------------------------------------------------------------------------*/
+DROP VIEW IF EXISTS vObtenerTodosLosCursosDeUnUsuario;
+
+CREATE VIEW vObtenerTodosLosCursosDeUnUsuario AS
+SELECT A.Usuario_id,usuarioCurso_id, B.Curso_id, isFinalizado, nivelesCompletados, tiempoCompletado, B.costoCurso, noNiveles, imagenCurso, C.nombre, C.descripcion
+FROM Usuario A
+LEFT JOIN usuarioCurso B
+ON A.Usuario_id = B.Usuario_id
+LEFT JOIN Curso C
+ON B.Curso_id = C.Curso_id
+GROUP BY 1;
+
+/*-------------------------------------------------------------------------------- USUARIO NIVEL CURSO-------------------------------------------------------------------------*/
+DROP VIEW IF EXISTS vObtenerTodosLosNivelesDeUnCursoDeUnUsuario;
+
+CREATE VIEW vObtenerTodosLosNivelesDeUnCursoDeUnUsuario AS
+SELECT A.Usuario_id, C.nivelCurso_id, C.MetodoPago_id, C.usuarioCurso_id, C.Nivel_id, C.isFinalizado, C.costoNivel, noNivel, D.nombre
+FROM Usuario A
+LEFT JOIN usuarioCurso B
+ON A.Usuario_id = B.Usuario_id
+LEFT JOIN nivelCurso C
+ON B.usuarioCurso_id = C.usuarioCurso_id
+LEFT JOIN Nivel D
+ON C.Nivel_id = D.Nivel_id
+GROUP BY nivelCurso_id;

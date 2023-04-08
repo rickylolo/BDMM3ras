@@ -100,11 +100,107 @@ class Curso extends DB
         $query = $this->connect()->query($update);
         return $query;
     }
+     
+    // ---------------------------------------                                     <--   CURSO - CATEGORIA  -->                                    ------------------------------------------
 
+      
+    // ---------------------------------------CONSULTA DE INFORMACION------------------------------------------
+
+    // QUERY Get Datos Cursos de una Categoria
+
+    function getCursosDeUnaCategoria($Categoria_id)
+    {
+        $get = "CALL sp_GestionCurso(
+                'A',    #Operacion 
+                NULL ,  # CursoCategoria id
+                NULL  	,	# Curso id
+                $Categoria_id # Categoria id 
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
+    // QUERY Get Datos Categorias de un curso
+
+    function getCategoriasDeUnCurso($Curso_id)
+    {
+        $get = "CALL sp_GestionCurso(
+                'C',    #Operacion 
+                NULL ,  # CursoCategoria id
+                $Curso_id  	,	# Curso id
+                NULL # Categoria id 
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
+
+       // ---------------------------------------INSERTAR INFORMACION------------------------------------------
+    // QUERY Insertar Curso
+
+    function insertarCursoCategoria($Curso_id, $Categoria_id)
+    {
+        $insert = "CALL sp_GestionCurso(
+                'I',            # Operacion
+                NULL ,          # CursoCategoria id
+                $Curso_id  	,	# Curso id
+                $Categoria_id   # Categoria id
+        ); ";
+        $query = $this->connect()->query($insert);
+        return $query;
+    }
 
      // ---------------------------------------ELIMINAR INFORMACION------------------------------------------
 
+    function eliminarCursoCategoria($CursoCategoria_id)
+    {
+        $delete = "CALL sp_GestionMensaje(
+                'D',    #Operacion 
+                $CursoCategoria_id ,  # CursoCategoria id
+                NULL  	,	# Curso id
+                NULL       # Categoria id 
+        );";
+        $query = $this->connect()->query($delete);
+        return $query;
+    }
      
+
+     // ---------------------------------------                                     <--   USUARIO - CURSO  -->                                    ------------------------------------------
+
+      
+    // ---------------------------------------CONSULTA DE INFORMACION------------------------------------------
+
+    // QUERY Get Datos Cursos de un Usuario
+    function getCursosDeUnUsuario($Usuario_id)
+    {
+        $get = "CALL sp_GestionUsuarioCurso(
+                'G', 		#Operacion
+                NULL, 		#usuarioCurso Id
+                NULL, 		#MetodoPago Id
+                NULL, 		#Curso Id
+                $Usuario_id,#Usuario Id
+                NULL		#costoCurso
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
+    function insertarCursoAUsuario($MetodoPago_id, $Curso_id,$Usuario_id,$costoCurso)
+    {
+        $insert = "CALL sp_GestionCurso(
+                  'I',  #Operacion
+                  NULL, #usuarioCurso Id
+                  $MetodoPago_id,    #MetodoPago Id
+                  $Curso_id,    #Curso Id
+                  $Usuario_id,    #Usuario Id
+                  $costoCurso #costoCurso
+        ); ";
+        $query = $this->connect()->query($insert);
+        return $query;
+    }
+
+
+
 }
 
 ?>

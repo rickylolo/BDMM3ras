@@ -230,9 +230,9 @@ END //
 
 
 /*--------------------------------------------------------------------------------COMENTARIO CURSO--------------------------------------------------------------------------*/
-DROP PROCEDURE IF EXISTS sp_GestionComentarioCurso;
+DROP PROCEDURE IF EXISTS sp_GestionComentario;
 DELIMITER //
-CREATE PROCEDURE sp_GestionComentarioCurso
+CREATE PROCEDURE sp_GestionComentario
 (
 	Operacion CHAR(1),
 	sp_ComentarioCurso_id 	INT, 
@@ -283,8 +283,7 @@ CREATE PROCEDURE sp_GestionMensaje
     sp_UsuarioInstructor_id INT,			
     sp_UsuarioAlumno_id 	 INT,			
     sp_Curso_id 			 INT,		
-    sp_texto  				 TEXT,
-    sp_tiempoRegistro 		 DATETIME		
+    sp_texto  				 TEXT
 )		
 
 BEGIN
@@ -296,12 +295,12 @@ BEGIN
     IF Operacion = 'D' THEN /*DELETE MENSAJE*/
           DELETE FROM ComentarioCurso WHERE ComentarioCurso_id = sp_ComentarioCurso_id;
    END IF;
-      IF Operacion = 'I' THEN /*GET ALL MENSAJES INSTRUCTOR*/
+      IF Operacion = 'A' THEN /*GET ALL MENSAJES INSTRUCTOR*/
 		SELECT Mensaje_id, UsuarioInstructor_id, UsuarioAlumno_id, Curso_id, texto, tiempoRegistro
         FROM Mensaje
 		WHERE UsuarioInstructor_id = sp_UsuarioInstructor_id;
    END IF;
-     IF Operacion = 'E' THEN /*GET ALL MENSAJES ESTUDIANTE*/
+     IF Operacion = 'G' THEN /*GET ALL MENSAJES ESTUDIANTE*/
 	    SELECT Mensaje_id, UsuarioInstructor_id, UsuarioAlumno_id, Curso_id, texto, tiempoRegistro
         FROM Mensaje
 		WHERE UsuarioAlumno_id = sp_UsuarioAlumno_id;
@@ -357,6 +356,7 @@ CREATE PROCEDURE sp_GestionNivel
 )		
 
 BEGIN
+	DECLARE u_costoNivel DECIMAL(9,2);
    IF Operacion = 'I' /*INSERT NIVEL*/
    THEN  
 		INSERT INTO Nivel(Curso_id,noNivel,nombre,costoNivel) 
@@ -364,21 +364,25 @@ BEGIN
    END IF;
    	IF Operacion = 'E'  /*EDIT NIVEL*/
     THEN 
-    	SET sp_Curso_id=IF(sp_Curso_id='',NULL,sp_Curso_id),
-			sp_noNivel=IF(sp_noNivel='',NULL,sp_noNivel),
-            sp_nombre=IF(sp_nombre='',NULL,sp_nombre),
-            sp_costoNivel=IF(sp_costoNivel='',NULL,sp_costoNivel);
+		SET u_costoNivel = CONVERT(sp_costoNivel,DECIMAL(9,2));
+    	SET sp_noNivel=IF(sp_noNivel='',NULL,sp_noNivel),
+            sp_nombre=IF(sp_nombre='',NULL,sp_nombre);
 		UPDATE Nivel 
-			SET Curso_id = IFNULL(sp_Curso_id,Curso_id), 
-				noNivel= IFNULL(sp_noNivel,noNivel),
+			SET noNivel= IFNULL(sp_noNivel,noNivel),
                 nombre = IFNULL(sp_nombre,nombre), 
-                costoNivel = IFNULL(sp_costoNivel,costoNivel)
+                costoNivel = IFNULL(u_costoNivel,costoNivel)
                 
 		WHERE Nivel_id = sp_Nivel_id;
    END IF;
     IF Operacion = 'D' THEN /*DELETE NIVEL*/
           DELETE FROM Nivel WHERE Nivel_id = sp_Nivel_id;
    END IF;
+    IF Operacion = 'G' THEN /*GET ALL NIVELES DEL CURSO*/
+		SELECT Nivel_id, noNivel, nombreNivel, costoNivel, Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombreCurso, descripcion, isBaja
+        FROM vObtenerTodosLosNivelesDeUnCurso
+        WHERE Curso_id = sp_Curso_id;
+   END IF;
+   
 END //
 
 /*--------------------------------------------------------------------------------MULTIMEDIA--------------------------------------------------------------------------*/
@@ -403,6 +407,12 @@ BEGIN
     IF Operacion = 'D' THEN /*DELETE MULTIMEDIA*/
           DELETE FROM Multimedia WHERE Multimedia_id = sp_Multimedia_id;
    END IF;
+   
+      IF Operacion = 'G' THEN /*GET ALL MULTIMEDIA DEL NIVEL*/
+		SELECT Nivel_id, Multimedia_id, multimedia, texto, tipoMultimedia
+        FROM vObtenerTodaMultimediaDeUnNivel
+        WHERE Nivel_id = sp_Nivel_id;
+   END IF;
 END //
 
 
@@ -415,9 +425,7 @@ CREATE PROCEDURE sp_GestionUsuarioCurso
 	sp_usuarioCurso_id 			INT,
     sp_MetodoPago_id 			INT,				
     sp_Curso_id 				INT, 					
-    sp_Usuario_id 				INT,								
-    sp_nivelesCompletados 		TINYINT,          
-    sp_tiempoCompletado 		DATETIME,		
+    sp_Usuario_id 				INT,								      
     sp_costoCurso  				DECIMAL(9,2) 
 )		
 
@@ -427,37 +435,18 @@ BEGIN
 		INSERT INTO usuarioCurso(MetodoPago_id,Curso_id,Usuario_id,tiempoRegistro,costoCurso) 
 			VALUES (sp_MetodoPago_id,sp_Curso_id, sp_Usuario_id,now(),sp_costoCurso);
    END IF;
-   
-END //
-
-/*--------------------------------------------------------------------------------USUARIO CURSO--------------------------------------------------------------------------*/
-DROP PROCEDURE IF EXISTS sp_GestionUsuarioCurso;
-DELIMITER //
-CREATE PROCEDURE sp_GestionUsuarioCurso
-(
-	Operacion CHAR(1),
-	sp_usuarioCurso_id 			INT,
-    sp_MetodoPago_id 			INT,				
-    sp_Curso_id 				INT, 					
-    sp_Usuario_id 				INT,								
-    sp_nivelesCompletados 		TINYINT,          
-    sp_tiempoCompletado 		DATETIME,		
-    sp_costoCurso  				DECIMAL(9,2) 
-)		
-
-BEGIN
-   IF Operacion = 'I' /*INSERT USUARIO CURSO*/
+   IF Operacion = 'G' /*GET USUARIO CURSOS*/
    THEN  
-		INSERT INTO usuarioCurso(MetodoPago_id,Curso_id,Usuario_id,tiempoRegistro,costoCurso) 
-			VALUES (sp_MetodoPago_id,sp_Curso_id, sp_Usuario_id,now(),sp_costoCurso);
+		SELECT Usuario_id, usuarioCurso_id, Curso_id, isFinalizado, nivelesCompletados, tiempoCompletado, costoCurso, noNiveles, imagenCurso, nombre, descripcion
+        FROM vObtenerTodosLosCursosDeUnUsuario
+        WHERE Usuario_id = sp_Usuario_id;
    END IF;
-   
 END //
 
-/*--------------------------------------------------------------------------------USUARIO NIVEL--------------------------------------------------------------------------*/
-DROP PROCEDURE IF EXISTS sp_GestionUsuarioNivel;
+/*--------------------------------------------------------------------------------NIVEL CURSO--------------------------------------------------------------------------*/
+DROP PROCEDURE IF EXISTS sp_GestionNivelCurso;
 DELIMITER //
-CREATE PROCEDURE sp_GestionUsuarioNivel
+CREATE PROCEDURE sp_GestionNivelCurso
 (
 	Operacion CHAR(1),
 	sp_nivelCurso_id 			INT,
@@ -470,10 +459,15 @@ CREATE PROCEDURE sp_GestionUsuarioNivel
 BEGIN
    IF Operacion = 'I' /*INSERT USUARIO NIVEL*/
    THEN  
-		INSERT INTO usuarioCurso(MetodoPago_id,usuarioCurso_id,Nivel_id,tiempoRegistro,costoNivel) 
+		INSERT INTO nivelCurso(MetodoPago_id,usuarioCurso_id,Nivel_id,tiempoRegistro,costoNivel) 
 			VALUES (sp_MetodoPago_id,sp_usuarioCurso_id,sp_Nivel_id,now(),sp_costoNivel);
    END IF;
-   
+   IF Operacion = 'G' /*GET USUARIO NIVELES CURSO*/
+   THEN  
+		SELECT Usuario_id, nivelCurso_id, MetodoPago_id, usuarioCurso_id, Nivel_id, isFinalizado, costoNivel, noNivel, nombre
+        FROM vObtenerTodosLosNivelesDeUnCursoDeUnUsuario
+        WHERE usuarioCurso_id = sp_usuarioCurso_id;
+   END IF;
 END //
 
 
