@@ -72,17 +72,13 @@ BEGIN
             AND userPassword = sp_userPassword
             AND esBloqueado = 0;
    END IF;
-      IF Operacion = 'A' THEN /*GET DATOS ALL USUARIOS*/
-		SELECT Usuario_id, MetodoPago_id, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo
-        FROM vUsuario;
-   END IF;
       IF Operacion = 'B' THEN /*GET DATOS ALL USUARIOS BLOQUEADOS*/
-		SELECT Usuario_id, MetodoPago_id, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo
+		SELECT Usuario_id, MetodoPago_id, correo, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo
         FROM vUsuario
         WHERE esBloqueado = 1;
    END IF;
      IF Operacion = 'G' THEN /*GET DATOS USUARIO*/
-		SELECT Usuario_id, MetodoPago_id, correo, userPassword, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo, fechaRegistro, ultimoCambio, esBloqueado
+		SELECT Usuario_id, MetodoPago_id, correo, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo
         FROM vUsuario
         WHERE Usuario_id = sp_Usuario_id;
    END IF;

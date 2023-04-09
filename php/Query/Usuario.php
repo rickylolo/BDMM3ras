@@ -80,29 +80,6 @@ class User extends DB
         return $query;
     }
 
-     // QUERY Get Datos Todos Usuarios 
-
-    function getAllUsersData()
-    {
-        $get = "CALL sp_GestionUsuario(
-            'A', #Operacion
-            NULL, #Id Usuario
-            NULL, #Correo
-            NULL, #Nickname
-            NULL, #Contraseña
-            NULL, #Rol de usuario
-            NULL, #PFP
-            NULL, #Descripcion
-            NULL, # Nombre(s)
-            NULL, # Apellido Paterno
-            NULL, # Apellido Materno
-            NULL, # Fecha de nacimiento
-            NULL, # Genero
-            NULL  # Flag Perfil Bloqueado          
-        ); ";
-        $query = $this->connect()->query($get);
-        return $query;
-    }
 
     // ---------------------------------------INSERTAR INFORMACION------------------------------------------
     // QUERY Insertar Usuario
