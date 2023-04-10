@@ -144,6 +144,17 @@ NULL 		# Curso isBaja
 ); 
 
 CALL sp_GestionCurso(
+'I', 	#Operacion
+NULL, 	# Curso Id
+1, 	# Usuario Id
+150.00,  	# Curso Costo
+2,	# Curso Imagen
+'JavaScript',	# Curso Nombre
+'Curso de JavaScript para principiantes', 	# Curso Descripcion
+NULL 		# Curso isBaja
+); 
+
+CALL sp_GestionCurso(
 'A', 	#Operacion
 NULL, 	# Curso Id
 NULL, 	# Usuario Id
@@ -278,24 +289,42 @@ NULL # texto
 CALL sp_GestionMensaje(
 'I',  		#Operacion
 NULL, 		# Id
-2, 			# Instructor Id
-3, 			# Alumno Id
+2, 			# User Instructor Id
+3, 			# User Alumno Id
 1, 			# Curso Id
-'Hola es una prueba'# Texto
+'Hola es una prueba curso 1'# Texto
+);
+
+CALL sp_GestionMensaje(
+'I',  		#Operacion
+NULL, 		# Id
+2, 			# User Instructor Id
+3, 			# User Alumno Id
+1, 			# Curso Id
+'Hola es una prueba curso 1'# Texto
+);
+
+CALL sp_GestionMensaje(
+'I',  		#Operacion
+NULL, 		# Id
+2, 			# User Instructor Id
+3, 			# User Alumno Id
+2, 			# Curso Id
+'Hola es una prueba curso 2'# Texto
+);
+
+CALL sp_GestionMensaje(
+'I',  		#Operacion
+NULL, 		# Id
+2, 			# User Instructor Id
+1, 			# User Alumno Id
+2, 			# Curso Id
+'Hola es una prueba curso 2'# Texto
 );
 
 CALL sp_GestionMensaje(
 'D',    #Operacion
-1, 		# Id
-NULL,   # Instructor Id
-NULL, 	# Alumno Id
-NULL,	# Curso Id
-NULL    # Texto
-);
-
-CALL sp_GestionComentario(
-'D',    #Operacion
-1, 		# Id
+6, 		# Id
 NULL,   # Instructor Id
 NULL, 	# Alumno Id
 NULL,	# Curso Id
@@ -303,13 +332,23 @@ NULL    # Texto
 );
 
 
-CALL sp_GestionComentario(
+CALL sp_GestionMensaje(
+'A', # Operacion
+NULL, 		# Id
+2,   #  User Instructor Id
+NULL, 	# User Alumno Id
+NULL,	# Curso Id
+NULL    # Texto
+);
+
+
+CALL sp_GestionMensaje(
 'G', # Operacion
-1, # Id
-NULL, # User Id
-NULL, #Curso Id
-NULL, # is Like
-NULL # texto
+NULL, 		# Id
+2,   #  User Instructor Id
+3, 	# User Alumno Id
+1,	# Curso Id
+NULL    # Texto
 );
 
 /*--------------------------------------------------------------------------------CURSO CATEGORIA-------------------------------------------------------------------------*/

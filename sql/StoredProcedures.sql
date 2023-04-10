@@ -293,13 +293,16 @@ BEGIN
    END IF;
       IF Operacion = 'A' THEN /*GET ALL MENSAJES INSTRUCTOR*/
 		SELECT Mensaje_id, UsuarioInstructor_id, UsuarioAlumno_id, Curso_id, texto, tiempoRegistro
-        FROM Mensaje
-		WHERE UsuarioInstructor_id = sp_UsuarioInstructor_id;
+        FROM vMensaje
+		WHERE UsuarioInstructor_id = sp_UsuarioInstructor_id
+        GROUP BY Curso_id, UsuarioAlumno_id;
+       
    END IF;
-     IF Operacion = 'G' THEN /*GET ALL MENSAJES ESTUDIANTE*/
+     IF Operacion = 'G' THEN /*GET ALL MENSAJES CURSO ESTUDIANTE*/
 	    SELECT Mensaje_id, UsuarioInstructor_id, UsuarioAlumno_id, Curso_id, texto, tiempoRegistro
-        FROM Mensaje
-		WHERE UsuarioAlumno_id = sp_UsuarioAlumno_id;
+        FROM vMensaje
+		WHERE Curso_id = sp_Curso_id AND UsuarioInstructor_id=sp_UsuarioInstructor_id AND UsuarioAlumno_id=sp_UsuarioAlumno_id
+        ORDER BY tiempoRegistro DESC;
    END IF;
 END //
 
@@ -374,7 +377,7 @@ BEGIN
           DELETE FROM Nivel WHERE Nivel_id = sp_Nivel_id;
    END IF;
     IF Operacion = 'G' THEN /*GET ALL NIVELES DEL CURSO*/
-		SELECT Nivel_id, noNivel, nombreNivel, costoNivel, Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombreCurso, descripcion, isBaja
+		SELECT Nivel_id, noNivel, nombreNivel, costoNivel, Curso_id,imagenCurso, nombreCurso
         FROM vObtenerTodosLosNivelesDeUnCurso
         WHERE Curso_id = sp_Curso_id;
    END IF;
@@ -405,7 +408,7 @@ BEGIN
    END IF;
    
       IF Operacion = 'G' THEN /*GET ALL MULTIMEDIA DEL NIVEL*/
-		SELECT Nivel_id, Multimedia_id, multimedia, texto, tipoMultimedia
+		SELECT Multimedia_id, multimedia, texto, tipoMultimedia
         FROM vObtenerTodaMultimediaDeUnNivel
         WHERE Nivel_id = sp_Nivel_id;
    END IF;

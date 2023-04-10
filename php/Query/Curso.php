@@ -136,7 +136,7 @@ class Curso extends DB
 
 
        // ---------------------------------------INSERTAR INFORMACION------------------------------------------
-    // QUERY Insertar Curso
+    // QUERY Insertar Curso Categoria
 
     function insertarCursoCategoria($Curso_id, $Categoria_id)
     {
@@ -151,7 +151,7 @@ class Curso extends DB
     }
 
      // ---------------------------------------ELIMINAR INFORMACION------------------------------------------
-
+     // QUERY Eliminar Curso Categoria
     function eliminarCursoCategoria($CursoCategoria_id)
     {
         $delete = "CALL sp_GestionMensaje(
