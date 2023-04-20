@@ -94,7 +94,7 @@ class User extends DB
             '$email', #Correo
             '$password', #Contraseña
             $user_Type, #Rol de usuario
-            $user_IMG, #PFP
+            '$user_IMG', #PFP
             NULL, #Descripción
             '$names', # Nombre(s)
             '$lastNameP', # Apellido Paterno
@@ -120,7 +120,7 @@ class User extends DB
             NULL, #Correo
             NULL, #Contraseña
             NULL, #Rol de usuario
-            $user_IMG, #PFP
+            '$user_IMG', #PFP
             '$descripcion', #Descripción
             '$names', # Nombre(s)
             '$lastNameP', # Apellido Paterno

@@ -34,7 +34,7 @@ NULL); # Flag Perfil Bloqueado
 CALL sp_GestionUsuario('I', #Operacion
 NULL, #Id Usuario
 NULL, #Id Metodo Pago
-'roberto_gmz@hotmail.com', #Correo
+'roberto_gmz2@hotmail.com', #Correo
 '123', #Contraseña
 3, #Rol de usuario
 NULL, #PFP
@@ -61,7 +61,7 @@ NULL, # Fecha de nacimiento
 NULL, # Genero
 NULL); # Flag Perfil Bloqueado
 
-CALL sp_GestionUsuario('A', #Operacion
+CALL sp_GestionUsuario('G', #Operacion
 NULL, #Id Usuario
 NULL, #Correo
 NULL, #Nickname
@@ -77,7 +77,7 @@ NULL, # Genero
 NULL); # Flag Perfil Bloqueado
 
 CALL sp_GestionUsuario('G', #Operacion
-1, #Id Usuario
+7, #Id Usuario
 NULL, #Correo
 NULL, #Nickname
 NULL, #Contraseña
@@ -91,6 +91,7 @@ NULL, # Fecha de nacimiento
 NULL, # Genero
 NULL); # Flag Perfil Bloqueado
 
+SELECT * FROM Usuario;
 
 /*--------------------------------------------------------------------------------METODOS DE PAGO--------------------------------------------------------------------------*/
 CALL sp_GestionMetodoPago(

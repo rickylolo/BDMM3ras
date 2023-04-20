@@ -15,10 +15,10 @@ CREATE PROCEDURE sp_GestionUsuario
 	sp_rolUsuario 		TINYINT,
 	sp_fotoPerfil 		MEDIUMBLOB,
 	sp_descripcion 		TINYTEXT, 
-	sp_nombre 			VARCHAR(30),
+	sp_nombre 			VARCHAR(50),
 	sp_apellidoPaterno  VARCHAR(30),
 	sp_apellidoMaterno  VARCHAR(30),
-	sp_fechaNacimiento 	VARCHAR(30),
+	sp_fechaNacimiento 	DATE,
 	sp_sexo 			VARCHAR(10),
 	sp_esBloqueado 		BIT
 )
