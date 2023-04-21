@@ -27,13 +27,13 @@ $(document).ready(function () {
         }
         switch (items[0].rolUsuario) {
           case 1:
-            window.location.replace('paginaAdmin.html')
+            window.location.replace('paginaAdmin.php')
             break
           case 2:
-            window.location.replace('paginaInstructor.html')
+            window.location.replace('paginaInstructor.php')
             break
           case 3:
-            window.location.replace('index.html')
+            window.location.replace('index.php')
             break
         }
       })

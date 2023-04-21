@@ -1,6 +1,6 @@
 
 <?php
-include_once '../DB/db.php';
+include_once 'db.php';
 
 class Categoria extends DB
 {

@@ -1,5 +1,5 @@
 <?php
-include_once '../Query/Usuario.php';
+include_once 'UsuarioQuery.php';
 
 
 

@@ -1,5 +1,5 @@
 <?php
-include_once '../Query/Multimedia.php';
+include_once 'MultimediaQuery.php';
 
 
 class multimediaAPI

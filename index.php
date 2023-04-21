@@ -1,3 +1,10 @@
+<?php
+include_once 'php\API\Usuario.php';
+session_start(); // Inicio mi sesion PHP
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -15,11 +22,14 @@
 </head>
 
 <body>
+
+   
+
     <!--                 NAVBAR                 -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-light">
         <div class="container">
             <img src="img/cripto.png" width="70px">
-            <a class="navbar-brand fs-4 p-4" href="index.html">CryptCourse</a>
+            <a class="navbar-brand fs-4 p-4" href="index.php">CryptCourse</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -35,13 +45,13 @@
                             Categorías
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="search.html">Desarrollo</a></li>
-                            <li><a class="dropdown-item" href="search.html">Negocios</a></li>
-                            <li><a class="dropdown-item" href="search.html">Finanzas</a></li>
-                            <li><a class="dropdown-item" href="search.html">Cocina</a></li>
-                            <li><a class="dropdown-item" href="search.html">Productividad</a></li>
-                            <li><a class="dropdown-item" href="search.html">Diseño</a></li>
-                            <li><a class="dropdown-item" href="search.html">Marketing</a></li>
+                            <li><a class="dropdown-item" href="search.php">Desarrollo</a></li>
+                            <li><a class="dropdown-item" href="search.php">Negocios</a></li>
+                            <li><a class="dropdown-item" href="search.php">Finanzas</a></li>
+                            <li><a class="dropdown-item" href="search.php">Cocina</a></li>
+                            <li><a class="dropdown-item" href="search.php">Productividad</a></li>
+                            <li><a class="dropdown-item" href="search.php">Diseño</a></li>
+                            <li><a class="dropdown-item" href="search.php">Marketing</a></li>
 
                         </ul>
                     </li>
@@ -53,12 +63,69 @@
 
                 </form>
                 <div class="p-2">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalLogin">
-                        Iniciar Sesión
-                    </button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModal">
-                        Registrarse
-                    </button>
+                     <?php
+                        if ($_SESSION == NULL) { 
+                        echo ' 
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalLogin">
+                                      Iniciar Sesión
+                                    </button>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModal">
+                                      Registrarse
+                                    </button>'; 
+                         }
+                         else{
+                             echo ' 
+                                    <div id="perfil">
+                                    <div class="d-flex flex-column dropstart misDatosUsuario">
+                                    <div class="miImagen dropdown p-2 mx-auto" id="DatosUser" data-bs-toggle="dropdown"
+                                                  aria-expanded="false"><img src="img/avatar.jpg" class="pfp rounded-circle">
+                                    </div>
+                                    <ul class="dropdown-menu " aria-labelledby="DatosUser">
+                                    <li class="misDatosUser">
+                                    <div class="d-flex flex-row miImagen">
+                                    <div class="p-2"><img src="img/avatar.jpg" class="pfp rounded-circle">
+                                    </div>
+                                    <div class="p-2">
+                                        <div class="d-flex flex-column">
+
+                                            <p class="fs-5 p-1 fw-bold">rickylolo</p>
+
+                                            <p class="text-muted fs-6" id="correo">ricky_lolo29@hotmail.com</p>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="" data-bs-toggle="modal"
+                                    data-bs-target="#miModalEditUser">Editar
+                                    Perfil</a>
+                            </li>
+                            ';
+                              if($_SESSION["rolUsuario"] == 1){
+                                echo '<li><a class="dropdown-item" href="paginaAdmin.php">Página Admin</a></li>';
+                              }
+                              if($_SESSION["rolUsuario"] == 2){
+                                echo '<li><a class="dropdown-item" href="paginaInstructor.php">Página Instructor</a></li>
+                                 <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#miModalMensaje">Ver Mensajes</a></li>';
+                              }
+                              if($_SESSION["rolUsuario"] == 3){
+                                echo ' <li><a class="dropdown-item" href="misCursos.php">Mis cursos</a></li>
+                            <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#miModalMensaje">Ver Mensajes</a></li>';
+                              }
+                            echo ' 
+                            <div class="dropdown-divider"></div>
+                            <li><a class="dropdown-item" href="index.php?logout=true">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>';
+                         }
+                        ?>
+                   
+                  
                 </div>
             </div>
         </div>
@@ -73,7 +140,7 @@
             <div class="content">
                 <article class="post">
                     <div class="post-header">
-                        <a href="curso.html">
+                        <a href="curso.php">
                             <img src="img/html.jpg" class="post-img">
                         </a>
                     </div>
@@ -86,7 +153,7 @@
 
                 <article class="post">
                     <div class="post-header">
-                        <a href="curso.html">
+                        <a href="curso.php">
                             <img src="img/css.png" class="post-img">
                         </a>
                     </div>
@@ -99,7 +166,7 @@
 
                 <article class="post">
                     <div class="post-header">
-                        <a href="curso.html">
+                        <a href="curso.php">
                             <img src="img/javascript.jpg" class="post-img">
                         </a>
                     </div>
@@ -112,7 +179,7 @@
 
                 <article class="post">
                     <div class="post-header">
-                        <a href="curso.html">
+                        <a href="curso.php">
                             <img src="img/react.png" class="post-img">
                         </a>
                     </div>
@@ -136,7 +203,7 @@
             <div class="content">
                 <article class="post">
                     <div class="post-header">
-                        <a href="curso.html">
+                        <a href="curso.php">
                             <img src="img/html.jpg" class="post-img">
                         </a>
                     </div>
@@ -149,7 +216,7 @@
 
                 <article class="post">
                     <div class="post-header">
-                        <a href="curso.html">
+                        <a href="curso.php">
                             <img src="img/css.png" class="post-img">
                         </a>
                     </div>
@@ -162,7 +229,7 @@
 
                 <article class="post">
                     <div class="post-header">
-                        <a href="curso.html">
+                        <a href="curso.php">
                             <img src="img/javascript.jpg" class="post-img">
                         </a>
                     </div>
@@ -175,7 +242,7 @@
 
                 <article class="post">
                     <div class="post-header">
-                        <a href="curso.html">
+                        <a href="curso.php">
                             <img src="img/react.png" class="post-img">
                         </a>
                     </div>
@@ -199,7 +266,7 @@
             <div class="content">
                 <article class="post">
                     <div class="post-header">
-                        <a href="curso.html">
+                        <a href="curso.php">
                             <img src="img/html.jpg" class="post-img">
                         </a>
                     </div>
@@ -212,7 +279,7 @@
 
                 <article class="post">
                     <div class="post-header">
-                        <a href="curso.html">
+                        <a href="curso.php">
                             <img src="img/css.png" class="post-img">
                         </a>
                     </div>
@@ -225,7 +292,7 @@
 
                 <article class="post">
                     <div class="post-header">
-                        <a href="curso.html">
+                        <a href="curso.php">
                             <img src="img/javascript.jpg" class="post-img">
                         </a>
                     </div>
@@ -238,7 +305,7 @@
 
                 <article class="post">
                     <div class="post-header">
-                        <a href="curso.html">
+                        <a href="curso.php">
                             <img src="img/react.png" class="post-img">
                         </a>
                     </div>
@@ -444,6 +511,124 @@
             </div>
         </div>
     </div>
+
+       <!--  >MODAL EDIT USER<-->
+    <div class="modal fade" id="miModalEditUser" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+        data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Edita tus datos</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form method="" action="" enctype="multipart/form-data">
+                    <div class="modal-body">
+
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-12">
+                                <h5>Ingresa los siguientes datos:</h5>
+                            </div>
+                        </div>
+                        <div class="row modalTexto">
+                            Correo Electrónico
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">@</span>
+
+                            <input type="text" class="form-control" id="E_email" name="E_email"
+                                placeholder="Correo Electrónico" aria-label="Username" aria-describedby="basic-addon1"
+                                value="">
+
+                        </div>
+
+                        <div class="row modalTexto">
+                            Nombre de usuario
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-person"></i></span>
+
+                            <input type="text" class="form-control" id="E_usuario" name="E_usuario"
+                                placeholder="Nombre de usuario" aria-label="Username" aria-describedby="basic-addon1"
+                                value="">
+
+                        </div>
+
+                        <div class="row modalTexto">
+                            Nombre(s)
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-person"></i></span>
+                            <input type="text" class="form-control" id="E_names" name="E_names" placeholder="Nombre(s)"
+                                aria-label="Username" aria-describedby="basic-addon1" value="">
+
+                        </div>
+
+
+                        <div class="row modalTexto">
+                            Apellido(s)
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i
+                                    class="bi bi-file-person-fill"></i></span>
+
+                            <input type="text" class="form-control" id="E_lastName" name="E_lastName"
+                                placeholder="Apellido(s)" aria-label="Username" aria-describedby="basic-addon1"
+                                value="">
+
+                        </div>
+
+                        <div class="row modalTexto">
+                            Contraseña
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-key"></i></span>
+                            <input type="password" class="form-control" id="E_contrasenia" name="E_contrasenia"
+                                placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" value="">
+
+                        </div>
+                        <p style="font-size: small;">Contraseña con un mínimo de 8 caracteres, una
+                            mayúscula, una minúscula, un número y un carácter
+                            especial.
+                        <p>
+
+
+                        <div class="row modalTexto">
+                            Fecha de nacimiento
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i
+                                    class="bi bi-file-person-fill"></i></span>
+
+                            <input type="date" class="form-control" id="E_FechaNacimiento" name="E_FechaNacimiento"
+                                placeholder="Fecha de Nacimiento" aria-label="Fecha Nacimiento"
+                                aria-describedby="basic-addon1" value="">
+
+                        </div>
+
+                        <div class="row modalTexto">
+                            Foto de perfil
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-camera"> </i></span>
+                            <input type="file" onchange="vista_preliminar(event)" class="form-control" id="E_userIMG"
+                                name="E_userIMG" placeholder="Foto de perfil" aria-label="Username"
+                                aria-describedby="basic-addon1">
+
+
+                        </div>
+                        <div class="d-flex justify-content-center"><img src="" alt="" id="img-foto" width="250px"
+                                height="250px"></div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" name="EditUser">Actualizar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <!--FOOTER<-->
     <footer class="w-100 d-flex align-items justify-content-center flex-wrap">

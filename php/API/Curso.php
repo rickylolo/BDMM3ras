@@ -1,5 +1,5 @@
 <?php
-include_once '../Query/Curso.php';
+include_once 'CursoQuery.php';
 
 
 class cursoAPI

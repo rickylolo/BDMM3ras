@@ -1,5 +1,5 @@
 <?php
-include_once '../Query/Mensaje.php';
+include_once 'MensajeQuery.php';
 
 
 class mensajeAPI

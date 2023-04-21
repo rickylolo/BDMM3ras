@@ -1,5 +1,5 @@
 <?php
-include_once '../Query/Comentario.php';
+include_once 'ComentarioQuery.php';
 
 
 

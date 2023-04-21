@@ -19,7 +19,7 @@
     <nav class="navbar sticky-top navbar-expand-lg navbar-light">
         <div class="container">
             <img src="img/cripto.png" width="70px">
-            <a class="navbar-brand fs-4 p-4" href="index.html">CryptCourse</a>
+            <a class="navbar-brand fs-4 p-4" href="index.php">CryptCourse</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -35,13 +35,13 @@
                             Categorías
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="search.html">Desarrollo</a></li>
-                            <li><a class="dropdown-item" href="search.html">Negocios</a></li>
-                            <li><a class="dropdown-item" href="search.html">Finanzas</a></li>
-                            <li><a class="dropdown-item" href="search.html">Cocina</a></li>
-                            <li><a class="dropdown-item" href="search.html">Productividad</a></li>
-                            <li><a class="dropdown-item" href="search.html">Diseño</a></li>
-                            <li><a class="dropdown-item" href="search.html">Marketing</a></li>
+                            <li><a class="dropdown-item" href="search.php">Desarrollo</a></li>
+                            <li><a class="dropdown-item" href="search.php">Negocios</a></li>
+                            <li><a class="dropdown-item" href="search.php">Finanzas</a></li>
+                            <li><a class="dropdown-item" href="search.php">Cocina</a></li>
+                            <li><a class="dropdown-item" href="search.php">Productividad</a></li>
+                            <li><a class="dropdown-item" href="search.php">Diseño</a></li>
+                            <li><a class="dropdown-item" href="search.php">Marketing</a></li>
 
                         </ul>
                     </li>
@@ -81,14 +81,14 @@
                                     data-bs-target="#miModalEditUser">Editar
                                     Perfil</a>
                             </li>
-                            <li><a class="dropdown-item" href="misCursos.html">Mis cursos</a></li>
+                            <li><a class="dropdown-item" href="misCursos.php">Mis cursos</a></li>
                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#miModalMensaje">Ver
                                     Mensajes</a></li>
 
-                            <li><a class="dropdown-item" href="paginaAdmin.html">Página Admin</a></li>
-                            <li><a class="dropdown-item" href="paginaInstructor.html">Página Instructor</a></li>
+                            <li><a class="dropdown-item" href="paginaAdmin.php">Página Admin</a></li>
+                            <li><a class="dropdown-item" href="paginaInstructor.php">Página Instructor</a></li>
                             <div class="dropdown-divider"></div>
-                            <li><a class="dropdown-item" href="index.html">Cerrar Sesión</a></li>
+                            <li><a class="dropdown-item" href="index.php">Cerrar Sesión</a></li>
                         </ul>
                     </div>
                 </div>

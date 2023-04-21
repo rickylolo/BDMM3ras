@@ -1,5 +1,5 @@
 <?php
-include_once '../Query/Nivel.php';
+include_once 'NivelQuery.php';
 
 
 class nivelAPI

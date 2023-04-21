@@ -1,5 +1,5 @@
 <?php
-include_once '../Query/MetodoPago.php';
+include_once 'MetodoPagoQuery.php';
 
 
 

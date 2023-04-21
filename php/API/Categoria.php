@@ -1,5 +1,5 @@
 <?php
-include_once '../Query/Categoria.php';
+include_once 'CategoriaQuery.php';
 
 
 
