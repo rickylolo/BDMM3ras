@@ -56,7 +56,7 @@ class User extends DB
 
 
 
-     // QUERY Get Datos Usuarios Bloqueados
+    // QUERY Get Datos Usuarios Bloqueados
 
     function getBlockedUserData()
     {
@@ -107,19 +107,19 @@ class User extends DB
         return $query;
     }
 
-   // ---------------------------------------ACTUALIZAR INFORMACION------------------------------------------
-   // QUERY Actualizar Usuario
+    // ---------------------------------------ACTUALIZAR INFORMACION------------------------------------------
+    // QUERY Actualizar Usuario
 
-    function actualizarUser($Usuario_id,$MetodoPago_id,$user_IMG,$descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero)
+    function actualizarUser($Usuario_id, $MetodoPago_id, $correo, $contraseña, $rol, $user_IMG, $descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero)
     {
         $user_IMG = mysqli_escape_string($this->myCon(), $user_IMG); //IMAGEN
         $update = "CALL sp_GestionUsuario(
             'E', #Operacion
             $Usuario_id, #Id Usuario
             $MetodoPago_id, #Id Metodo Pago
-            NULL, #Correo
-            NULL, #Contraseña
-            NULL, #Rol de usuario
+            '$correo', #Correo
+            '$contraseña', #Contraseña
+            $rol, #Rol de usuario
             '$user_IMG', #PFP
             '$descripcion', #Descripción
             '$names', # Nombre(s)
@@ -135,7 +135,7 @@ class User extends DB
 
 
 
-   // QUERY Actualizar Bloqueo
+    // QUERY Actualizar Bloqueo
 
     function actualizarBloqueo($Usuario_id, $isBloqueado)
     {
@@ -160,9 +160,9 @@ class User extends DB
         return $query;
     }
 
-     // ---------------------------------------ELIMINAR INFORMACION------------------------------------------
+    // ---------------------------------------ELIMINAR INFORMACION------------------------------------------
 
-     
+
 }
 
 ?>

@@ -16,6 +16,21 @@ NULL, #PFP
 'Hombre', # Genero
 NULL); # Flag Perfil Bloqueado
 
+CALL sp_GestionUsuario('E', #Operacion
+1, #Id Usuario
+NULL, #Id Metodo Pago
+'ricky_lolo29@hotmail.com', #Correo
+'123', #Contraseña
+1, #Rol de usuario
+NULL, #PFP
+'ADMIN', #Descripción
+'Ricardo', # Nombre(s)
+'Grimaldo', # Apellido Paterno
+'Estévez', # Apellido Materno
+'2001-06-20', # Fecha de nacimiento
+'Hombre', # Genero
+NULL); # Flag Perfil Bloqueado
+
 CALL sp_GestionUsuario('I', #Operacion
 NULL, #Id Usuario
 NULL, #Id Metodo Pago

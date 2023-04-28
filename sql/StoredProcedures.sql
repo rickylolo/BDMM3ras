@@ -18,7 +18,7 @@ CREATE PROCEDURE sp_GestionUsuario
 	sp_nombre 			VARCHAR(50),
 	sp_apellidoPaterno  VARCHAR(30),
 	sp_apellidoMaterno  VARCHAR(30),
-	sp_fechaNacimiento 	DATE,
+	sp_fechaNacimiento 	VARCHAR(30),
 	sp_sexo 			VARCHAR(10),
 	sp_esBloqueado 		BIT
 )
@@ -39,21 +39,22 @@ BEGIN
 			sp_rolUsuario=IF(sp_rolUsuario='',NULL,sp_rolUsuario),
             sp_fotoPerfil=IF(sp_fotoPerfil='',NULL,sp_fotoPerfil),
 			sp_nombre=IF(sp_nombre='',NULL,sp_nombre),
+            sp_sexo=IF(sp_sexo='',NULL,sp_sexo),
             sp_descripcion=IF(sp_descripcion='',NULL,sp_descripcion),
 			sp_apellidoMaterno=IF(sp_apellidoMaterno='',NULL,sp_apellidoMaterno),
             sp_apellidoPaterno=IF(sp_apellidoPaterno='',NULL,sp_apellidoPaterno),
-            sp_fechaNacimiento=IF(sp_fechaNacimiento='',NULL,sp_fechaNacimiento),
-            sp_ultimoCambio=IF(sp_ultimoCambio='',NULL,sp_ultimoCambio);
+            sp_fechaNacimiento=IF(sp_fechaNacimiento='',NULL,sp_fechaNacimiento);
 		UPDATE Usuario 
 			SET correo = IFNULL(sp_correo,correo), 
 				userPassword= IFNULL(sp_userPassword,userPassword), 
 				descripcion=  IFNULL(sp_descripcion,descripcion), 
 				rolUsuario= IFNULL(sp_rolUsuario,rolUsuario), 
 				fotoPerfil= IFNULL(sp_fotoPerfil,fotoPerfil), 
-				nombre= IFNULL(sp_nombreUsuario,nombre), 
+				nombre= IFNULL(sp_nombre,nombre), 
 				apellidoMaterno= IFNULL(sp_apellidoMaterno,apellidoMaterno),
 				apellidoPaterno= IFNULL(sp_apellidoPaterno,apellidoPaterno),
 				fechaNacimiento= IFNULL(sp_fechaNacimiento,fechaNacimiento),
+                sexo= IFNULL(sp_sexo,sexo), 
 				ultimoCambio= IFNULL(sp_ultimoCambio,ultimoCambio)
      
 		WHERE Usuario_id=sp_Usuario_id;

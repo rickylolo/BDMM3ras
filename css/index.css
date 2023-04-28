@@ -24,6 +24,18 @@
   top: -1rem;
 }
 
+#img-foto2,
+#E_imgFoto {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.image-upload>input {
+  display: none;
+}
+
 #navbarCursosInstructor {
   background: white;
 }
@@ -35,6 +47,7 @@
   align-items: center;
   transform: scale(0.8);
   transition: 0.15s;
+  border-radius: 15px;
 }
 
 .post {
@@ -43,7 +56,7 @@
   transition: 0.15s;
 }
 
-.post .miCarrito {
+.post .verCurso {
   opacity: 0;
   transition: 0.15s;
   margin-bottom: 0.3rem;
@@ -52,7 +65,7 @@
   border-radius: 9px;
 }
 
-.post:hover .miCarrito {
+.post:hover .verCurso {
   opacity: 1;
 }
 

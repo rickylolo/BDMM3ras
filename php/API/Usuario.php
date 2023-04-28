@@ -7,7 +7,7 @@ include_once 'UsuarioQuery.php';
 
 class usuarioAPI
 {
-     function seleccionLoggeo($email, $password)
+    function seleccionLoggeo($email, $password)
     {
 
         $user = new User();
@@ -28,7 +28,7 @@ class usuarioAPI
                 $_SESSION['rolUsuario'] = $obj["rolUsuario"];
                 array_push($arrUsers["Datos"], $obj);
             }
-           echo json_encode($arrUsers["Datos"]);
+            echo json_encode($arrUsers["Datos"]);
         } else {
             header("Location:../index.php");
             exit();
@@ -68,7 +68,7 @@ class usuarioAPI
         }
     }
 
-    
+
     function getUserBloqueadosData()
     {
 
@@ -109,10 +109,10 @@ class usuarioAPI
     }
 
 
-    function actualizarUser($Usuario_id,$MetodoPago_id,$user_IMG,$descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero)
+    function actualizarUser($Usuario_id, $MetodoPago_id, $correo, $contraseña, $rol, $user_IMG, $descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero)
     {
         $user = new User();
-        $user->actualizarUser($Usuario_id,$MetodoPago_id,$user_IMG,$descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero);
+        $user->actualizarUser($Usuario_id, $MetodoPago_id, $correo, $contraseña, $rol, $user_IMG, $descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero);
     }
 
     function cerrarSesion()
@@ -139,18 +139,22 @@ if (isset($_POST['funcion'])) {
             $imagenSubida = fopen($_FILES['file']['tmp_name'], 'r');
             $binariosImagen = fread($imagenSubida, $tamanoArchivo);
             $var = new usuarioAPI();
-            $var->insertarUser($_POST['email'], $_POST['password'], $_POST['user_Type'],$binariosImagen, $_POST['names'], $_POST['lastNameP'], $_POST['lastNameM'], $_POST['fechaNac'], $_POST['genero']);
+            $var->insertarUser($_POST['email'], $_POST['password'], $_POST['user_Type'], $binariosImagen, $_POST['names'], $_POST['lastNameP'], $_POST['lastNameM'], $_POST['fechaNac'], $_POST['genero']);
             break;
         case "actualizarUser":
+            $binariosImagen = '';
+            if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != NULL) {
+                $tipoArchivo = $_FILES['file']['type'];
+                $nombreArchivo = $_FILES['file']['name'];
+                $tamanoArchivo = $_FILES['file']['size'];
+                $imagenSubida = fopen($_FILES['file']['tmp_name'], 'r');
+                $binariosImagen = fread($imagenSubida, $tamanoArchivo);
+            }
             session_start();
             $id = $_SESSION['Usuario_id'];
-            $tipoArchivo = $_FILES['file']['type'];
-            $nombreArchivo = $_FILES['file']['name'];
-            $tamanoArchivo = $_FILES['file']['size'];
-            $imagenSubida = fopen($_FILES['file']['tmp_name'], 'r');
-            $binariosImagen = fread($imagenSubida, $tamanoArchivo);
+            $rol = $_SESSION['rolUsuario'];
             $var = new usuarioAPI();
-            $var->actualizarUser($id,$_POST['email'], $_POST['password'], $_POST['user_Type'],$binariosImagen, $_POST['names'], $_POST['lastNameP'], $_POST['lastNameM'], $_POST['fechaNac'], $_POST['genero']);
+            $var->actualizarUser($id, $_POST['MetodoPago_id'], $_POST['email'], $_POST['password'], $rol, $binariosImagen, $_POST['descripcion'], $_POST['names'], $_POST['lastNameP'], $_POST['lastNameM'], $_POST['fechaNac'], $_POST['genero']);
             break;
         case "obtenerDataUsuario":
             session_start();
@@ -166,4 +170,3 @@ if (isset($_GET['logout'])) {
     $var = new usuarioAPI();
     $var->cerrarSesion();
 }
-

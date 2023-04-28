@@ -24,6 +24,23 @@
   height: 8.1rem;
 }
 
+#correo {
+  position: relative;
+  top: -1rem;
+}
+
+#img-foto2,
+#E_imgFoto {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.image-upload>input {
+  display: none;
+}
+
 footer {
   background-image: linear-gradient(rgb(255, 255, 255), rgb(168, 168, 168));
   max-height: 7.5rem;
