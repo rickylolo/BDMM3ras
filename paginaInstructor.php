@@ -36,14 +36,8 @@ session_start(); // Inicio mi sesion PHP
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i class="bi bi-list"></i> Categorías
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="search.php">Desarrollo</a></li>
-                            <li><a class="dropdown-item" href="search.php">Negocios</a></li>
-                            <li><a class="dropdown-item" href="search.php">Finanzas</a></li>
-                            <li><a class="dropdown-item" href="search.php">Cocina</a></li>
-                            <li><a class="dropdown-item" href="search.php">Productividad</a></li>
-                            <li><a class="dropdown-item" href="search.php">Diseño</a></li>
-                            <li><a class="dropdown-item" href="search.php">Marketing</a></li>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="misCategoriasNav">
+
 
                         </ul>
                     </li>
@@ -118,202 +112,202 @@ session_start(); // Inicio mi sesion PHP
             </div>
         </div>
     </nav>
-
-    <div class="container">
-        <hr class="solid">
-        <ul class="nav nav-pills justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" id="mostrarUsuarios">Reporte</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Curso</a>
-                <ul class="dropdown-menu" data-bs-toggle="modal" data-bs-target="#miModalCurso">
-                    <li><a class="dropdown-item">Agregar</a>
-                    </li>
-                </ul>
-            </li>
-
-
-
-        </ul>
-
-        <nav class="navbar navbar-light" id="navbarCursosInstructor">
-            <div class="container-fluid">
-                <a class="navbar-brand fs-3 fw-bold p-2">Cursos</a>
-                <form class="d-flex">
-
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categorias
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="">Desarrollo</a></li>
-                            <li><a class="dropdown-item" href="">Negocios</a></li>
-                            <li><a class="dropdown-item" href="">Finanzas</a></li>
-                            <li><a class="dropdown-item" href="">Cocina</a></li>
-                            <li><a class="dropdown-item" href="">Productividad</a></li>
-                            <li><a class="dropdown-item" href="">Diseño</a></li>
-                            <li><a class="dropdown-item" href="">Marketing</a></li>
-                        </ul>
-                    </div>
-                    <input class="form-control" type="search" placeholder="Buscar curso" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-                </form>
-
-            </div>
-
-            <div class="container-fluid">
-                <div class="input-group">
-                    <span class="input-group-text">Rango de fechas</span>
-                    <input type="date" aria-label="First name" class="form-control">
-                    <input type="date" aria-label="Last name" class="form-control">
-                    <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-                </div>
-            </div>
-        </nav>
-        <div class="list-group">
-            <hr class="solid">
-            <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                <div class="d-flex flex-row miImagen justify-content-between">
-                    <div class="d-flex align-items-start">
-                        <img src="img/html.jpg" class="pfp">
-                        <div class="p-1 d-flex flex-column">
-                            <p class="fs-5 fw-bold">Curso de HTML 5</p>
-                            <p class="text-muted fs-6">Desarrollo
-                        </div>
-                        <div class="ps-4 d-flex flex-row">
-                            </p>
-                            <p class="ps-4 pt-4 text-muted fs-6 fw-light">Alumnos: <b>15</b>
-                            </p>
-                            <p class="ps-4 pt-4 text-muted fs-6 fw-light">Promedio nivel: <b>3</b>
-                            </p>
-                            <p class="ps-4 pt-4  text-muted fs-6 fw-light">Total ingresos: <b>2350.00 MXN</b>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <p class="mb-1" data-bs-toggle="modal" data-bs-target="#miModalCursoDetalle"><button type="button" class="btn btn-success"><i class="bi bi-search"></i></button>
-                        </p>
-                        <p class="mb-1"><button type="button" class="btn btn-primary"><i class="bi bi-pen" data-bs-toggle="modal" data-bs-target="#miModalCurso"></i></button>
-                        </p>
-                        <p class="mb-1"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></p>
-
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                <div class="d-flex flex-row miImagen justify-content-between">
-                    <div class="d-flex align-items-start">
-                        <img src="img/javascript.jpg" class="pfp">
-                        <div class="p-1 d-flex flex-column">
-                            <p class="fs-5 fw-bold">Curso de Javascript</p>
-                            <p class="text-muted fs-6">Desarrollo
-                        </div>
-                        <div class="ps-4 d-flex flex-row">
-                            </p>
-                            <p class="ps-4 pt-4 text-muted fs-6 fw-light">Alumnos: <b>15</b>
-                            </p>
-                            <p class="ps-4 pt-4 text-muted fs-6 fw-light">Promedio nivel: <b>3</b>
-                            </p>
-                            <p class="ps-4 pt-4  text-muted fs-6 fw-light">Total ingresos: <b>2350.00 MXN</b>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <p class="mb-1" data-bs-toggle="modal" data-bs-target="#miModalCursoDetalle"><button type="button" class="btn btn-success"><i class="bi bi-search"></i></button>
-                        </p>
-                        <p class="mb-1"><button type="button" class="btn btn-primary"><i class="bi bi-pen"></i></button>
-                        </p>
-                        <p class="mb-1"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></p>
-
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                <div class="d-flex flex-row miImagen justify-content-between">
-                    <div class="d-flex align-items-start">
-                        <img src="img/css.png" class="pfp">
-                        <div class="p-1 d-flex flex-column">
-                            <p class="fs-5 fw-bold">Curso de CSS 3</p>
-                            <p class="text-muted fs-6">Desarrollo
-                        </div>
-                        <div class="ps-4 d-flex flex-row">
-                            </p>
-                            <p class="ps-4 pt-4 text-muted fs-6 fw-light">Alumnos: <b>15</b>
-                            </p>
-                            <p class="ps-4 pt-4 text-muted fs-6 fw-light">Promedio nivel: <b>3</b>
-                            </p>
-                            <p class="ps-4 pt-4  text-muted fs-6 fw-light">Total ingresos: <b>2350.00 MXN</b>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <p class="mb-1" data-bs-toggle="modal" data-bs-target="#miModalCursoDetalle"><button type="button" class="btn btn-success"><i class="bi bi-search"></i></button>
-                        </p>
-                        <p class="mb-1"><button type="button" class="btn btn-primary"><i class="bi bi-pen"></i></button>
-                        </p>
-                        <p class="mb-1"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></p>
-
-                    </div>
-                </div>
-            </a>
-
-            <hr class="solid">
-
-        </div>
+    <div id="miPagina" class="pb-4">
         <div class="container">
-            <div class="fs-4 fw-bolder p-2">Total ingresos</div>
-            <div id="misMetodosPago">
-                <hr class="solid">
-                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                    <div class="misMetodosImgs d-flex w-100 justify-content-between">
-                        <div class="d-flex flex-fill">
-                            <img src="img/paypal.jpg">
-                            <p class="fs-5 p-3 fw-bold align-middle">Paypal</p>
+            <hr class="solid">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" id="mostrarUsuarios">Reporte</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Curso</a>
+                    <ul class="dropdown-menu" data-bs-toggle="modal" data-bs-target="#miModalCurso">
+                        <li><a class="dropdown-item">Agregar</a>
+                        </li>
+                    </ul>
+                </li>
 
+
+
+            </ul>
+
+            <nav class="navbar navbar-light" id="navbarCursosInstructor">
+                <div class="container-fluid">
+                    <a class="navbar-brand fs-3 fw-bold p-2">Cursos</a>
+                    <form class="d-flex">
+
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categorias
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="">Desarrollo</a></li>
+                                <li><a class="dropdown-item" href="">Negocios</a></li>
+                                <li><a class="dropdown-item" href="">Finanzas</a></li>
+                                <li><a class="dropdown-item" href="">Cocina</a></li>
+                                <li><a class="dropdown-item" href="">Productividad</a></li>
+                                <li><a class="dropdown-item" href="">Diseño</a></li>
+                                <li><a class="dropdown-item" href="">Marketing</a></li>
+                            </ul>
                         </div>
-                        <p class="fs-6 p-3 fw-bold align-middle">5070.00 MXN</p>
-                    </div>
+                        <input class="form-control" type="search" placeholder="Buscar curso" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
 
-
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                    <div class="misMetodosImgs d-flex w-100 justify-content-between">
-                        <div class="d-flex flex-fill">
-                            <img src="img/tarjeta.png">
-                            <p class="fs-5 p-3 fw-bold align-middle">Tarjeta Credito</p>
-
-                        </div>
-                        <p class="fs-6 p-3 fw-bold align-middle">752.20 MXN</p>
-
-                    </div>
-
-
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                    <div class="misMetodosImgs d-flex w-100 justify-content-between">
-                        <div class="d-flex">
-                            <img src="img/tarjeta.png">
-                            <p class="fs-5 p-3 fw-bold align-middle">Tarjeta Debito</p>
-
-                        </div>
-                        <p class="fs-6 p-3 fw-bold align-middle">570.00 MXN</p>
-
-                    </div>
-
-
-                </a>
-                <div class="d-flex flex-row justify-content-between">
-                    <div class="fs-6 fw-bold p-4">Total</div>
-                    <div class="fs-6 fw-bold p-4">6392.20 MXN</div>
                 </div>
+
+                <div class="container-fluid">
+                    <div class="input-group">
+                        <span class="input-group-text">Rango de fechas</span>
+                        <input type="date" aria-label="First name" class="form-control">
+                        <input type="date" aria-label="Last name" class="form-control">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </nav>
+            <div class="list-group">
                 <hr class="solid">
+                <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
+                    <div class="d-flex flex-row miImagen justify-content-between">
+                        <div class="d-flex align-items-start">
+                            <img src="img/html.jpg" class="pfp">
+                            <div class="p-1 d-flex flex-column">
+                                <p class="fs-5 fw-bold">Curso de HTML 5</p>
+                                <p class="text-muted fs-6">Desarrollo
+                            </div>
+                            <div class="ps-4 d-flex flex-row">
+                                </p>
+                                <p class="ps-4 pt-4 text-muted fs-6 fw-light">Alumnos: <b>15</b>
+                                </p>
+                                <p class="ps-4 pt-4 text-muted fs-6 fw-light">Promedio nivel: <b>3</b>
+                                </p>
+                                <p class="ps-4 pt-4  text-muted fs-6 fw-light">Total ingresos: <b>2350.00 MXN</b>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <p class="mb-1" data-bs-toggle="modal" data-bs-target="#miModalCursoDetalle"><button type="button" class="btn btn-success"><i class="bi bi-search"></i></button>
+                            </p>
+                            <p class="mb-1"><button type="button" class="btn btn-primary"><i class="bi bi-pen" data-bs-toggle="modal" data-bs-target="#miModalCurso"></i></button>
+                            </p>
+                            <p class="mb-1"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></p>
+
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
+                    <div class="d-flex flex-row miImagen justify-content-between">
+                        <div class="d-flex align-items-start">
+                            <img src="img/javascript.jpg" class="pfp">
+                            <div class="p-1 d-flex flex-column">
+                                <p class="fs-5 fw-bold">Curso de Javascript</p>
+                                <p class="text-muted fs-6">Desarrollo
+                            </div>
+                            <div class="ps-4 d-flex flex-row">
+                                </p>
+                                <p class="ps-4 pt-4 text-muted fs-6 fw-light">Alumnos: <b>15</b>
+                                </p>
+                                <p class="ps-4 pt-4 text-muted fs-6 fw-light">Promedio nivel: <b>3</b>
+                                </p>
+                                <p class="ps-4 pt-4  text-muted fs-6 fw-light">Total ingresos: <b>2350.00 MXN</b>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <p class="mb-1" data-bs-toggle="modal" data-bs-target="#miModalCursoDetalle"><button type="button" class="btn btn-success"><i class="bi bi-search"></i></button>
+                            </p>
+                            <p class="mb-1"><button type="button" class="btn btn-primary"><i class="bi bi-pen"></i></button>
+                            </p>
+                            <p class="mb-1"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></p>
+
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
+                    <div class="d-flex flex-row miImagen justify-content-between">
+                        <div class="d-flex align-items-start">
+                            <img src="img/css.png" class="pfp">
+                            <div class="p-1 d-flex flex-column">
+                                <p class="fs-5 fw-bold">Curso de CSS 3</p>
+                                <p class="text-muted fs-6">Desarrollo
+                            </div>
+                            <div class="ps-4 d-flex flex-row">
+                                </p>
+                                <p class="ps-4 pt-4 text-muted fs-6 fw-light">Alumnos: <b>15</b>
+                                </p>
+                                <p class="ps-4 pt-4 text-muted fs-6 fw-light">Promedio nivel: <b>3</b>
+                                </p>
+                                <p class="ps-4 pt-4  text-muted fs-6 fw-light">Total ingresos: <b>2350.00 MXN</b>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <p class="mb-1" data-bs-toggle="modal" data-bs-target="#miModalCursoDetalle"><button type="button" class="btn btn-success"><i class="bi bi-search"></i></button>
+                            </p>
+                            <p class="mb-1"><button type="button" class="btn btn-primary"><i class="bi bi-pen"></i></button>
+                            </p>
+                            <p class="mb-1"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></p>
+
+                        </div>
+                    </div>
+                </a>
+
+                <hr class="solid">
+
+            </div>
+            <div class="container">
+                <div class="fs-4 fw-bolder p-2">Total ingresos</div>
+                <div id="misMetodosPago">
+                    <hr class="solid">
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="misMetodosImgs d-flex w-100 justify-content-between">
+                            <div class="d-flex flex-fill">
+                                <img src="img/paypal.jpg">
+                                <p class="fs-5 p-3 fw-bold align-middle">Paypal</p>
+
+                            </div>
+                            <p class="fs-6 p-3 fw-bold align-middle">5070.00 MXN</p>
+                        </div>
+
+
+                    </a>
+
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="misMetodosImgs d-flex w-100 justify-content-between">
+                            <div class="d-flex flex-fill">
+                                <img src="img/tarjeta.png">
+                                <p class="fs-5 p-3 fw-bold align-middle">Tarjeta Credito</p>
+
+                            </div>
+                            <p class="fs-6 p-3 fw-bold align-middle">752.20 MXN</p>
+
+                        </div>
+
+
+                    </a>
+
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="misMetodosImgs d-flex w-100 justify-content-between">
+                            <div class="d-flex">
+                                <img src="img/tarjeta.png">
+                                <p class="fs-5 p-3 fw-bold align-middle">Tarjeta Debito</p>
+
+                            </div>
+                            <p class="fs-6 p-3 fw-bold align-middle">570.00 MXN</p>
+
+                        </div>
+
+
+                    </a>
+                    <div class="d-flex flex-row justify-content-between">
+                        <div class="fs-6 fw-bold p-4">Total</div>
+                        <div class="fs-6 fw-bold p-4">6392.20 MXN</div>
+                    </div>
+                    <hr class="solid">
+                </div>
             </div>
         </div>
     </div>
-
 
 
     <!--  >MODAL WINDOW MENSAJES<-->
@@ -789,7 +783,7 @@ session_start(); // Inicio mi sesion PHP
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"> <i class="bi bi-camera"> </i></span>
-                                <input type="file" onchange="vista_preliminar(event)" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="file" onchange="vista_preliminar(event)" accept="image/jpeg" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
 
 
                             </div>
@@ -867,7 +861,7 @@ session_start(); // Inicio mi sesion PHP
                         <label for="userIMG">
                             <img src="img/avatar.png" alt="" id="img-foto2" width="250px" height="250px">
                         </label>
-                        <input type="file" onchange="vista_preliminar2(event)" class="form-control" id="userIMG" name="userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="file" onchange="vista_preliminar2(event)" accept="image/jpeg" class="form-control" id="userIMG" name="userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
 
                     </div>
 
@@ -993,7 +987,7 @@ session_start(); // Inicio mi sesion PHP
                             <label for="E_userIMG">
                                 <img src="" alt="" id="E_imgFoto" width="250px" height="250px">
                             </label>
-                            <input type="file" onchange="vista_preliminarEdit(event)" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="file" onchange="vista_preliminarEdit(event)" accept="image/jpeg" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
 
 
                         </div>

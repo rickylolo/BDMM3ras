@@ -21,7 +21,7 @@ class MetodoPago extends DB
         return $query;
     }
 
-     // QUERY Get Datos Todos MetodoPago 
+    // QUERY Get Datos Todos MetodoPago 
 
     function getAllMetodoPagoData()
     {
@@ -45,16 +45,16 @@ class MetodoPago extends DB
            'I', #Operacion
             NULL, #MetodoPago_Id	 
             '$NombreMetodo',  #Nombre Metodo	
-            $ImagenMetodo   #Imagen Metodo
+            '$ImagenMetodo'   #Imagen Metodo
         ); ";
         $query = $this->connect()->query($insert);
         return $query;
     }
 
-   // ---------------------------------------ACTUALIZAR INFORMACION------------------------------------------
-   // QUERY Actualizar MetodoPago
+    // ---------------------------------------ACTUALIZAR INFORMACION------------------------------------------
+    // QUERY Actualizar MetodoPago
 
-    function actualizarMetodoPago($MetodoPago_id,$NombreMetodo, $ImagenMetodo)
+    function actualizarMetodoPago($MetodoPago_id, $NombreMetodo, $ImagenMetodo)
     {
         $ImagenMetodo = mysqli_escape_string($this->myCon(), $ImagenMetodo); //IMAGEN
         $update = "CALL sp_GestionMetodoPago(
@@ -68,8 +68,8 @@ class MetodoPago extends DB
     }
 
 
-     // ---------------------------------------ELIMINAR INFORMACION------------------------------------------
-      // QUERY Eliminar MetodoPago
+    // ---------------------------------------ELIMINAR INFORMACION------------------------------------------
+    // QUERY Eliminar MetodoPago
 
     function eliminarMetodoPago($MetodoPago_id)
     {
@@ -82,7 +82,6 @@ class MetodoPago extends DB
         $query = $this->connect()->query($delete);
         return $query;
     }
-     
 }
 
 ?>

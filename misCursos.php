@@ -21,49 +21,44 @@ session_start(); // Inicio mi sesion PHP
 </head>
 
 <body>
-    <!--                 NAVBAR                 -->
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light">
-        <div class="container">
-            <img src="img/cripto.png" width="70px">
-            <a class="navbar-brand fs-4 p-4 fw-bold" href="index.php">CryptCourse</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <div id="miPagina" class="pb-4">
+        <!--                 NAVBAR                 -->
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light">
+            <div class="container">
+                <img src="img/cripto.png" width="70px">
+                <a class="navbar-brand fs-4 p-4 fw-bold" href="index.php">CryptCourse</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-list"></i> Categorías
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="search.php">Desarrollo</a></li>
-                            <li><a class="dropdown-item" href="search.php">Negocios</a></li>
-                            <li><a class="dropdown-item" href="search.php">Finanzas</a></li>
-                            <li><a class="dropdown-item" href="search.php">Cocina</a></li>
-                            <li><a class="dropdown-item" href="search.php">Productividad</a></li>
-                            <li><a class="dropdown-item" href="search.php">Diseño</a></li>
-                            <li><a class="dropdown-item" href="search.php">Marketing</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-list"></i> Categorías
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="misCategoriasNav">
 
-                        </ul>
-                    </li>
 
-                </ul>
-                <form class="d-flex me-2" role="search">
-                    <input class="form-control " type="search" placeholder="Buscar" aria-label="Buscar">
-                    <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+                            </ul>
+                        </li>
 
-                </form>
-                <div class="p-2">
-                    <?php
-                    if ($_SESSION == NULL) {
-                        echo ' 
+                    </ul>
+                    <form class="d-flex me-2" role="search">
+                        <input class="form-control " type="search" placeholder="Buscar" aria-label="Buscar">
+                        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+
+                    </form>
+                    <div class="p-2">
+                        <?php
+                        if ($_SESSION == NULL) {
+                            echo ' 
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalLogin">
                                       Iniciar Sesión
                                     </button>';
-                    } else {
-                        echo ' 
+                        } else {
+                            echo ' 
                                     <div id="perfil">
                                     <div class="d-flex flex-column dropstart misDatosUsuario">
                                     <div class="miImagen dropdown p-2 mx-auto" id="DatosUser" data-bs-toggle="dropdown"
@@ -94,367 +89,369 @@ session_start(); // Inicio mi sesion PHP
                                     Perfil</a>
                             </li>
                             ';
-                        if ($_SESSION["rolUsuario"] == 1) {
-                            echo '<li><a class="dropdown-item" href="paginaAdmin.php"><i class="pe-1 bi bi-file-earmark"></i> Página Admin</a></li>';
-                        }
-                        if ($_SESSION["rolUsuario"] == 2) {
-                            echo '<li><a class="dropdown-item" href="paginaInstructor.php"><i class="pe-1 bi bi-file-earmark"></i> Página Instructor</a></li>
+                            if ($_SESSION["rolUsuario"] == 1) {
+                                echo '<li><a class="dropdown-item" href="paginaAdmin.php"><i class="pe-1 bi bi-file-earmark"></i> Página Admin</a></li>';
+                            }
+                            if ($_SESSION["rolUsuario"] == 2) {
+                                echo '<li><a class="dropdown-item" href="paginaInstructor.php"><i class="pe-1 bi bi-file-earmark"></i> Página Instructor</a></li>
                                  <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#miModalMensaje"><i class="pe-1 bi bi-chat-left-text"></i> Ver Mensajes</a></li>';
-                        }
-                        if ($_SESSION["rolUsuario"] == 3) {
-                            echo ' <li><a class="dropdown-item" href="misCursos.php"><i class="pe-1 bi bi-mortarboard"></i> Mis cursos</a></li>
+                            }
+                            if ($_SESSION["rolUsuario"] == 3) {
+                                echo ' <li><a class="dropdown-item" href="misCursos.php"><i class="pe-1 bi bi-mortarboard"></i> Mis cursos</a></li>
                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#miModalMensaje"><i class="pe-1 bi bi-chat-left-text"></i> Ver Mensajes</a></li>';
-                        }
-                        echo ' 
+                            }
+                            echo ' 
                             <div class="dropdown-divider"></div>
                             <li><a class="dropdown-item" href="index.php?logout=true"><i class="pe-1 bi bi-box-arrow-right"></i> Cerrar Sesión</a></li>
                         </ul>
                     </div>
                 </div>';
-                    }
-                    ?>
+                        }
+                        ?>
 
 
-                </div>
-            </div>
-        </div>
-    </nav>
-    <!--                 CURSOS                 -->
-    <!--                 CURSOS MEJORES CALIFICADOS                 -->
-    <div class="container" id="misCursos">
-        <hr class="solid">
-        <div class="row fs-4 product-title"><b>Mis cursos</b></div>
-        <hr class="solid">
-        <ul class="nav nav-tabs justify-content-end">
-
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="">Todos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">En progreso</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="mostrarKardex">Kardex</a>
-            </li>
-
-        </ul>
-        <section class="post-list">
-            <div class="content">
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.html">
-                            <img src="img/html.jpg" class="post-img">
-                        </a>
                     </div>
-                    <div class="post-body">
-                        <h4><b>Curso de HTML 5</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn miCarrito">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.html">
-                            <img src="img/css.png" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>CSS 3 para principiantes</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn miCarrito">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.html">
-                            <img src="img/javascript.jpg" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>Javascript elemental</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn miCarrito">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="producto.html">
-                            <img src="img/react.png" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>React desde Cero a Experto</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn miCarrito">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.html">
-                            <img src="img/html.jpg" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>Curso de HTML 5</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn miCarrito">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.html">
-                            <img src="img/css.png" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>CSS 3 para principiantes</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn miCarrito">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.html">
-                            <img src="img/javascript.jpg" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>Javascript elemental</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn miCarrito">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="producto.html">
-                            <img src="img/react.png" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>React desde Cero a Experto</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn miCarrito">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.html">
-                            <img src="img/html.jpg" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>Curso de HTML 5</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn miCarrito">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.html">
-                            <img src="img/css.png" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>CSS 3 para principiantes</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn miCarrito">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.html">
-                            <img src="img/javascript.jpg" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>Javascript elemental</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn miCarrito">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="producto.html">
-                            <img src="img/react.png" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>React desde Cero a Experto</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn miCarrito">Ver Curso</div>
-                    </div>
-                </article>
-            </div>
-
-
-        </section>
-
-
-    </div>
-
-    <div class="container" id="miKardex">
-        <hr class="solid">
-        <div class="row fs-4 product-title"><b>Kardex</b></div>
-        <hr class="solid">
-        <ul class="nav nav-tabs justify-content-end">
-
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="">Ver Cursos</a>
-            </li>
-
-
-        </ul>
-        <nav class="navbar navbar-light" id="navbarCursosInstructor">
-            <div class="container-fluid">
-                <a class="navbar-brand fs-5 p-2">Filtros</a>
-                <form class="d-flex">
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Cursos
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="">Terminados</a></li>
-                            <li><a class="dropdown-item" href="">Activos</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="">Todos</a></li>
-
-                        </ul>
-                    </div>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            Categorias
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="">Desarrollo</a></li>
-                            <li><a class="dropdown-item" href="">Negocios</a></li>
-                            <li><a class="dropdown-item" href="">Finanzas</a></li>
-                            <li><a class="dropdown-item" href="">Cocina</a></li>
-                            <li><a class="dropdown-item" href="">Productividad</a></li>
-                            <li><a class="dropdown-item" href="">Diseño</a></li>
-                            <li><a class="dropdown-item" href="">Marketing</a></li>
-                        </ul>
-                    </div>
-                    <input class="form-control" type="search" placeholder="Buscar curso" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-                </form>
-
-            </div>
-
-            <div class="container-fluid">
-                <div class="input-group">
-                    <span class="input-group-text">Rango de fechas</span>
-                    <input type="date" aria-label="First name" class="form-control">
-                    <input type="date" aria-label="Last name" class="form-control">
-                    <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
                 </div>
             </div>
         </nav>
-        <div class="list-group">
-            <div class="d-flex pt-4 pe-4 justify-content-end">Total de cursos: 3</div>
+        <!--                 CURSOS                 -->
+        <!--                 CURSOS MEJORES CALIFICADOS                 -->
+        <div class="container" id="misCursos">
             <hr class="solid">
-            <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                <div class="d-flex flex-row miImagen justify-content-between">
-                    <div class="d-flex">
-                        <img src="img/html.jpg" class="pfp">
-                        <div class="p-1 d-flex flex-column">
-                            <p class="fs-6 fw-bold">Curso de HTML 5</p>
-                            <p class="text-muted fs-6 fw-light">Desarrollo</p>
-                        </div>
-                        <div class="ps-4 d-flex flex-row">
-                            <p class="ps-4 pt-3 text-muted fs-6 fw-light">Progreso: <b>3/4</b>
-                            </p>
-                            <p class="ps-4 pt-3 text-muted fs-6 fw-light">Fecha de ingreso: <b>3/Feb/2023</b>
-                            </p>
-                            <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha ultimo nivel: <b>5/Feb/2023</b>
-                            </p>
-                            <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha finalizado: <b>7/Feb/2023</b>
-                            </p>
-                            <p class="ps-4 pt-3  text-muted fs-6 fw-light">Estado: <b>Incompleto</b>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end pt-4">
-                        <p class="mb-1"><button type="button" class="btn btn-success"><i class="bi bi-bookmark-star-fill"></i></button>
-                        </p>
-
-
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                <div class="d-flex flex-row miImagen justify-content-between">
-                    <div class="d-flex align-items-start">
-                        <img src="img/javascript.jpg" class="pfp">
-                        <div class="p-1 d-flex flex-column">
-                            <p class="fs-6 fw-bold">Curso de Javascript</p>
-                            <p class="text-muted fs-6 fw-light">Desarrollo</p>
-                        </div>
-                        <div class="ps-4 d-flex flex-row">
-                            <p class="ps-4 pt-3 text-muted fs-6 fw-light">Progreso: <b>3/4</b>
-                            </p>
-                            <p class="ps-4 pt-3 text-muted fs-6 fw-light">Fecha de ingreso: <b>3/Feb/2023</b>
-                            </p>
-                            <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha ultimo nivel: <b>5/Feb/2023</b>
-                            </p>
-                            <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha finalizado: <b>7/Feb/2023</b>
-                            </p>
-                            <p class="ps-4 pt-3  text-muted fs-6 fw-light">Estado: <b>Incompleto</b>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <p class="mb-1"><button type="button" class="btn btn-success"><i class="bi bi-bookmark-star-fill"></i></button>
-                        </p>
-                    </div>
-                </div>
-            </a>
-            <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                <div class="d-flex flex-row miImagen justify-content-between">
-                    <div class="d-flex align-items-start">
-                        <img src="img/css.png" class="pfp">
-                        <div class="p-1 d-flex flex-column">
-                            <p class="fs-6 fw-bold">Curso de CSS 3</p>
-                            <p class="text-muted fs-6 fw-light">Desarrollo</p>
-                        </div>
-                        <div class="ps-4 d-flex flex-row">
-                            <p class="ps-4 pt-3 text-muted fs-6 fw-light">Progreso: <b>3/4</b>
-                            </p>
-                            <p class="ps-4 pt-3 text-muted fs-6 fw-light">Fecha de ingreso: <b>3/Feb/2023</b>
-                            </p>
-                            <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha ultimo nivel: <b>5/Feb/2023</b>
-                            </p>
-                            <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha finalizado: <b>7/Feb/2023</b>
-                            </p>
-                            <p class="ps-4 pt-3  text-muted fs-6 fw-light">Estado: <b>Incompleto</b>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <p class="mb-1"><button type="button" class="btn btn-success"><i class="bi bi-bookmark-star-fill"></i></button>
-                        </p>
-
-                    </div>
-                </div>
-            </a>
-
+            <div class="row fs-4 product-title"><b>Mis cursos</b></div>
             <hr class="solid">
+            <ul class="nav nav-tabs justify-content-end">
+
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="">Todos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">En progreso</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="mostrarKardex">Kardex</a>
+                </li>
+
+            </ul>
+            <section class="post-list">
+                <div class="content">
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.html">
+                                <img src="img/html.jpg" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>Curso de HTML 5</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn miCarrito">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.html">
+                                <img src="img/css.png" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>CSS 3 para principiantes</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn miCarrito">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.html">
+                                <img src="img/javascript.jpg" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>Javascript elemental</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn miCarrito">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="producto.html">
+                                <img src="img/react.png" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>React desde Cero a Experto</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn miCarrito">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.html">
+                                <img src="img/html.jpg" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>Curso de HTML 5</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn miCarrito">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.html">
+                                <img src="img/css.png" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>CSS 3 para principiantes</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn miCarrito">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.html">
+                                <img src="img/javascript.jpg" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>Javascript elemental</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn miCarrito">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="producto.html">
+                                <img src="img/react.png" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>React desde Cero a Experto</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn miCarrito">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.html">
+                                <img src="img/html.jpg" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>Curso de HTML 5</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn miCarrito">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.html">
+                                <img src="img/css.png" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>CSS 3 para principiantes</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn miCarrito">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.html">
+                                <img src="img/javascript.jpg" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>Javascript elemental</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn miCarrito">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="producto.html">
+                                <img src="img/react.png" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>React desde Cero a Experto</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn miCarrito">Ver Curso</div>
+                        </div>
+                    </article>
+                </div>
+
+
+            </section>
+
 
         </div>
 
+        <div class="container" id="miKardex">
+            <hr class="solid">
+            <div class="row fs-4 product-title"><b>Kardex</b></div>
+            <hr class="solid">
+            <ul class="nav nav-tabs justify-content-end">
 
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="">Ver Cursos</a>
+                </li>
+
+
+            </ul>
+            <nav class="navbar navbar-light" id="navbarCursosInstructor">
+                <div class="container-fluid">
+                    <a class="navbar-brand fs-5 p-2">Filtros</a>
+                    <form class="d-flex">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Cursos
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="">Terminados</a></li>
+                                <li><a class="dropdown-item" href="">Activos</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="">Todos</a></li>
+
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categorias
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="">Desarrollo</a></li>
+                                <li><a class="dropdown-item" href="">Negocios</a></li>
+                                <li><a class="dropdown-item" href="">Finanzas</a></li>
+                                <li><a class="dropdown-item" href="">Cocina</a></li>
+                                <li><a class="dropdown-item" href="">Productividad</a></li>
+                                <li><a class="dropdown-item" href="">Diseño</a></li>
+                                <li><a class="dropdown-item" href="">Marketing</a></li>
+                            </ul>
+                        </div>
+                        <input class="form-control" type="search" placeholder="Buscar curso" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+
+                </div>
+
+                <div class="container-fluid">
+                    <div class="input-group">
+                        <span class="input-group-text">Rango de fechas</span>
+                        <input type="date" aria-label="First name" class="form-control">
+                        <input type="date" aria-label="Last name" class="form-control">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </nav>
+            <div class="list-group">
+                <div class="d-flex pt-4 pe-4 justify-content-end">Total de cursos: 3</div>
+                <hr class="solid">
+                <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
+                    <div class="d-flex flex-row miImagen justify-content-between">
+                        <div class="d-flex">
+                            <img src="img/html.jpg" class="pfp">
+                            <div class="p-1 d-flex flex-column">
+                                <p class="fs-6 fw-bold">Curso de HTML 5</p>
+                                <p class="text-muted fs-6 fw-light">Desarrollo</p>
+                            </div>
+                            <div class="ps-4 d-flex flex-row">
+                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Progreso: <b>3/4</b>
+                                </p>
+                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Fecha de ingreso: <b>3/Feb/2023</b>
+                                </p>
+                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha ultimo nivel: <b>5/Feb/2023</b>
+                                </p>
+                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha finalizado: <b>7/Feb/2023</b>
+                                </p>
+                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Estado: <b>Incompleto</b>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end pt-4">
+                            <p class="mb-1"><button type="button" class="btn btn-success"><i class="bi bi-bookmark-star-fill"></i></button>
+                            </p>
+
+
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
+                    <div class="d-flex flex-row miImagen justify-content-between">
+                        <div class="d-flex align-items-start">
+                            <img src="img/javascript.jpg" class="pfp">
+                            <div class="p-1 d-flex flex-column">
+                                <p class="fs-6 fw-bold">Curso de Javascript</p>
+                                <p class="text-muted fs-6 fw-light">Desarrollo</p>
+                            </div>
+                            <div class="ps-4 d-flex flex-row">
+                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Progreso: <b>3/4</b>
+                                </p>
+                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Fecha de ingreso: <b>3/Feb/2023</b>
+                                </p>
+                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha ultimo nivel: <b>5/Feb/2023</b>
+                                </p>
+                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha finalizado: <b>7/Feb/2023</b>
+                                </p>
+                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Estado: <b>Incompleto</b>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <p class="mb-1"><button type="button" class="btn btn-success"><i class="bi bi-bookmark-star-fill"></i></button>
+                            </p>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
+                    <div class="d-flex flex-row miImagen justify-content-between">
+                        <div class="d-flex align-items-start">
+                            <img src="img/css.png" class="pfp">
+                            <div class="p-1 d-flex flex-column">
+                                <p class="fs-6 fw-bold">Curso de CSS 3</p>
+                                <p class="text-muted fs-6 fw-light">Desarrollo</p>
+                            </div>
+                            <div class="ps-4 d-flex flex-row">
+                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Progreso: <b>3/4</b>
+                                </p>
+                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Fecha de ingreso: <b>3/Feb/2023</b>
+                                </p>
+                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha ultimo nivel: <b>5/Feb/2023</b>
+                                </p>
+                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha finalizado: <b>7/Feb/2023</b>
+                                </p>
+                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Estado: <b>Incompleto</b>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <p class="mb-1"><button type="button" class="btn btn-success"><i class="bi bi-bookmark-star-fill"></i></button>
+                            </p>
+
+                        </div>
+                    </div>
+                </a>
+
+                <hr class="solid">
+
+            </div>
+
+
+
+        </div>
 
     </div>
     <!--  >MODAL WINDOW LOGIN<-->
@@ -518,7 +515,7 @@ session_start(); // Inicio mi sesion PHP
                         <label for="userIMG">
                             <img src="img/avatar.png" alt="" id="img-foto2" width="250px" height="250px">
                         </label>
-                        <input type="file" onchange="vista_preliminar2(event)" class="form-control" id="userIMG" name="userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="file" onchange="vista_preliminar2(event)" accept="image/jpeg" class="form-control" id="userIMG" name="userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
 
                     </div>
 
@@ -644,7 +641,7 @@ session_start(); // Inicio mi sesion PHP
                             <label for="E_userIMG">
                                 <img src="" alt="" id="E_imgFoto" width="250px" height="250px">
                             </label>
-                            <input type="file" onchange="vista_preliminarEdit(event)" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="file" onchange="vista_preliminarEdit(event)" accept="image/jpeg" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
 
 
                         </div>

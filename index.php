@@ -29,49 +29,44 @@ session_start(); // Inicio mi sesion PHP
     }
     ?>
 
-    <!--                 NAVBAR                 -->
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light">
-        <div class="container">
-            <img src="img/cripto.png" width="70px">
-            <a class="navbar-brand fs-4 p-4 fw-bold" href="index.php">CryptCourse</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <div id="miPagina" class="pb-4">
+        <!--                 NAVBAR                 -->
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light">
+            <div class="container">
+                <img src="img/cripto.png" width="70px">
+                <a class="navbar-brand fs-4 p-4 fw-bold" href="index.php">CryptCourse</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-list"></i> Categorías
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="search.php">Desarrollo</a></li>
-                            <li><a class="dropdown-item" href="search.php">Negocios</a></li>
-                            <li><a class="dropdown-item" href="search.php">Finanzas</a></li>
-                            <li><a class="dropdown-item" href="search.php">Cocina</a></li>
-                            <li><a class="dropdown-item" href="search.php">Productividad</a></li>
-                            <li><a class="dropdown-item" href="search.php">Diseño</a></li>
-                            <li><a class="dropdown-item" href="search.php">Marketing</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-list"></i> Categorías
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="misCategoriasNav">
 
-                        </ul>
-                    </li>
 
-                </ul>
-                <form class="d-flex me-2" role="search">
-                    <input class="form-control " type="search" placeholder="Buscar" aria-label="Buscar">
-                    <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+                            </ul>
+                        </li>
 
-                </form>
-                <div class="p-2">
-                    <?php
-                    if ($_SESSION == NULL) {
-                        echo ' 
+                    </ul>
+                    <form class="d-flex me-2" role="search">
+                        <input class="form-control " type="search" placeholder="Buscar" aria-label="Buscar">
+                        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
+
+                    </form>
+                    <div class="p-2">
+                        <?php
+                        if ($_SESSION == NULL) {
+                            echo ' 
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalLogin">
                                       Iniciar Sesión
                                     </button>';
-                    } else {
-                        echo ' 
+                        } else {
+                            echo ' 
                                     <div id="perfil">
                                     <div class="d-flex flex-column dropstart misDatosUsuario">
                                     <div class="miImagen dropdown p-2 mx-auto" id="DatosUser" data-bs-toggle="dropdown"
@@ -102,223 +97,223 @@ session_start(); // Inicio mi sesion PHP
                                     Perfil</a>
                             </li>
                             ';
-                        if ($_SESSION["rolUsuario"] == 1) {
-                            echo '<li><a class="dropdown-item" href="paginaAdmin.php"><i class="pe-1 bi bi-file-earmark"></i> Página Admin</a></li>';
-                        }
-                        if ($_SESSION["rolUsuario"] == 2) {
-                            echo '<li><a class="dropdown-item" href="paginaInstructor.php"><i class="pe-1 bi bi-file-earmark"></i> Página Instructor</a></li>
+                            if ($_SESSION["rolUsuario"] == 1) {
+                                echo '<li><a class="dropdown-item" href="paginaAdmin.php"><i class="pe-1 bi bi-file-earmark"></i> Página Admin</a></li>';
+                            }
+                            if ($_SESSION["rolUsuario"] == 2) {
+                                echo '<li><a class="dropdown-item" href="paginaInstructor.php"><i class="pe-1 bi bi-file-earmark"></i> Página Instructor</a></li>
                                  <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#miModalMensaje"><i class="pe-1 bi bi-chat-left-text"></i> Ver Mensajes</a></li>';
-                        }
-                        if ($_SESSION["rolUsuario"] == 3) {
-                            echo ' <li><a class="dropdown-item" href="misCursos.php"><i class="pe-1 bi bi-mortarboard"></i> Mis cursos</a></li>
+                            }
+                            if ($_SESSION["rolUsuario"] == 3) {
+                                echo ' <li><a class="dropdown-item" href="misCursos.php"><i class="pe-1 bi bi-mortarboard"></i> Mis cursos</a></li>
                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#miModalMensaje"><i class="pe-1 bi bi-chat-left-text"></i> Ver Mensajes</a></li>';
-                        }
-                        echo ' 
+                            }
+                            echo ' 
                             <div class="dropdown-divider"></div>
                             <li><a class="dropdown-item" href="index.php?logout=true"><i class="pe-1 bi bi-box-arrow-right"></i> Cerrar Sesión</a></li>
                         </ul>
                     </div>
                 </div>';
-                    }
-                    ?>
+                        }
+                        ?>
 
 
+                    </div>
                 </div>
             </div>
+        </nav>
+        <!--                 CURSOS                 -->
+        <!--                 CURSOS MEJORES CALIFICADOS                 -->
+        <div class="container">
+            <hr class="solid">
+            <div class="row fs-4 product-title"><b>Cursos mejores calificados</b></div>
+            <hr class="solid">
+            <section class="post-list">
+                <div class="content">
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="img/html.jpg" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>Curso de HTML 5</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn verCurso">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="img/css.png" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>CSS 3 para principiantes</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn verCurso">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="img/javascript.jpg" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>Javascript elemental</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn verCurso">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="img/react.png" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>React desde Cero a Experto</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn verCurso">Ver Curso</div>
+                        </div>
+                    </article>
+                </div>
+
+
+
+            </section>
+
+            <!--                 CURSOS MAS VENDIDOS                 -->
+            <hr class="solid">
+            <div class="row fs-4 product-title"><b>Cursos mas vendidos</b></div>
+            <hr class="solid">
+            <section class="post-list">
+                <div class="content">
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="img/html.jpg" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>Curso de HTML 5</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn verCurso">Ver curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="img/css.png" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>CSS 3 para principiantes</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn verCurso">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="img/javascript.jpg" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>Javascript elemental</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn verCurso">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="img/react.png" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>React desde Cero a Experto</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn verCurso">Ver Curso</div>
+                        </div>
+                    </article>
+                </div>
+
+
+
+            </section>
+
+            <!--                 CURSOS MAS RECIENTES                 -->
+            <hr class="solid">
+            <div class="row fs-4 product-title"><b>Cursos mas recientes</b></div>
+            <hr class="solid">
+            <section class="post-list">
+                <div class="content">
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="img/html.jpg" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>Curso de HTML 5</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn verCurso">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="img/css.png" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>CSS 3 para principiantes</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn verCurso">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="img/javascript.jpg" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>Javascript elemental</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn verCurso">Ver Curso</div>
+                        </div>
+                    </article>
+
+                    <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="img/react.png" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>React desde Cero a Experto</b></h4>
+                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
+                            <div class="btn verCurso">Ver Curso</div>
+                        </div>
+                    </article>
+                </div>
+
+
+
+            </section>
         </div>
-    </nav>
-    <!--                 CURSOS                 -->
-    <!--                 CURSOS MEJORES CALIFICADOS                 -->
-    <div class="container">
-        <hr class="solid">
-        <div class="row fs-4 product-title"><b>Cursos mejores calificados</b></div>
-        <hr class="solid">
-        <section class="post-list">
-            <div class="content">
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.php">
-                            <img src="img/html.jpg" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>Curso de HTML 5</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn verCurso">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.php">
-                            <img src="img/css.png" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>CSS 3 para principiantes</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn verCurso">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.php">
-                            <img src="img/javascript.jpg" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>Javascript elemental</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn verCurso">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.php">
-                            <img src="img/react.png" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>React desde Cero a Experto</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn verCurso">Ver Curso</div>
-                    </div>
-                </article>
-            </div>
-
-
-
-        </section>
-
-        <!--                 CURSOS MAS VENDIDOS                 -->
-        <hr class="solid">
-        <div class="row fs-4 product-title"><b>Cursos mas vendidos</b></div>
-        <hr class="solid">
-        <section class="post-list">
-            <div class="content">
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.php">
-                            <img src="img/html.jpg" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>Curso de HTML 5</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn verCurso">Ver curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.php">
-                            <img src="img/css.png" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>CSS 3 para principiantes</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn verCurso">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.php">
-                            <img src="img/javascript.jpg" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>Javascript elemental</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn verCurso">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.php">
-                            <img src="img/react.png" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>React desde Cero a Experto</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn verCurso">Ver Curso</div>
-                    </div>
-                </article>
-            </div>
-
-
-
-        </section>
-
-        <!--                 CURSOS MAS RECIENTES                 -->
-        <hr class="solid">
-        <div class="row fs-4 product-title"><b>Cursos mas recientes</b></div>
-        <hr class="solid">
-        <section class="post-list">
-            <div class="content">
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.php">
-                            <img src="img/html.jpg" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>Curso de HTML 5</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn verCurso">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.php">
-                            <img src="img/css.png" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>CSS 3 para principiantes</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn verCurso">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.php">
-                            <img src="img/javascript.jpg" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>Javascript elemental</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn verCurso">Ver Curso</div>
-                    </div>
-                </article>
-
-                <article class="post">
-                    <div class="post-header">
-                        <a href="curso.php">
-                            <img src="img/react.png" class="post-img">
-                        </a>
-                    </div>
-                    <div class="post-body">
-                        <h4><b>React desde Cero a Experto</b></h4>
-                        <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                        <div class="btn verCurso">Ver Curso</div>
-                    </div>
-                </article>
-            </div>
-
-
-
-        </section>
     </div>
-
     <!--  >MODAL WINDOW LOGIN<-->
     <div class="modal fade" id="miModalLogin" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -380,7 +375,7 @@ session_start(); // Inicio mi sesion PHP
                         <label for="userIMG">
                             <img src="img/avatar.png" alt="" id="img-foto2" width="250px" height="250px">
                         </label>
-                        <input type="file" onchange="vista_preliminar2(event)" class="form-control" id="userIMG" name="userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="file" onchange="vista_preliminar2(event)" accept="image/jpeg" class="form-control" id="userIMG" name="userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
 
                     </div>
 
@@ -506,7 +501,7 @@ session_start(); // Inicio mi sesion PHP
                             <label for="E_userIMG">
                                 <img src="" alt="" id="E_imgFoto" width="250px" height="250px">
                             </label>
-                            <input type="file" onchange="vista_preliminarEdit(event)" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="file" onchange="vista_preliminarEdit(event)" accept="image/jpeg" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
 
 
                         </div>

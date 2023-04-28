@@ -106,7 +106,7 @@ NULL, # Fecha de nacimiento
 NULL, # Genero
 NULL); # Flag Perfil Bloqueado
 
-SELECT * FROM Usuario;
+SELECT * FROM usuario;
 
 /*--------------------------------------------------------------------------------METODOS DE PAGO--------------------------------------------------------------------------*/
 CALL sp_GestionMetodoPago(

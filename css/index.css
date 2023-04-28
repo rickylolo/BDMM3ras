@@ -13,12 +13,12 @@
 
 .navbar {
   background: linear-gradient(70deg, rgb(223, 223, 223), rgb(255, 255, 255));
-  max-height: 7.5rem;
 }
 
-.misDatosUser {
-  max-height: 5rem;
+#miPagina {
+  min-height: 100vh;
 }
+
 #correo {
   position: relative;
   top: -1rem;
@@ -139,12 +139,6 @@
   margin-bottom: 0.1rem;
 }
 
-.misMetodosImgs img {
-  width: 100%;
-  max-width: 7.5rem;
-  height: 5rem;
-  max-height: 5rem;
-}
 .misVideos {
   width: 100%;
   height: 100%;

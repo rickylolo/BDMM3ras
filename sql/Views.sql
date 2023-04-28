@@ -26,8 +26,11 @@ FROM Curso;
 DROP VIEW IF EXISTS vCategoria;
 
 CREATE VIEW vCategoria AS
-SELECT Categoria_id, Usuario_id, nombre, descripcion, tiempoRegistro
-FROM Categoria;
+SELECT A.Categoria_id, A.Usuario_id, A.nombre, A.descripcion, A.tiempoRegistro,COUNT(B.Curso_id) as noCursos
+FROM Categoria A
+LEFT JOIN CursoCategoria B 
+ON A.Categoria_id = B.Categoria_id
+GROUP BY A.Categoria_id;
 
 
 /*--------------------------------------------------------------------------------COMENTARIO CURSO--------------------------------------------------------------------------*/

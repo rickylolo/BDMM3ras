@@ -214,11 +214,11 @@ BEGIN
           DELETE FROM Categoria WHERE Categoria_id = sp_Categoria_id;
    END IF;
       IF Operacion = 'A' THEN /*GET ALL CATEGORIA*/
-		SELECT Categoria_id, Usuario_id, nombre, descripcion, tiempoRegistro
+		SELECT Categoria_id, Usuario_id, nombre, descripcion, tiempoRegistro, noCursos
         FROM vCategoria;
    END IF;
      IF Operacion = 'G' THEN /*GET CURSO*/
-		SELECT Categoria_id, Usuario_id, nombre, descripcion, tiempoRegistro
+		SELECT Categoria_id, Usuario_id, nombre, descripcion, tiempoRegistro, noCursos
         FROM vCategoria
 		WHERE Categoria_id = sp_Categoria_id;
    END IF;

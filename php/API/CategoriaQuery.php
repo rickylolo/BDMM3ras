@@ -22,7 +22,7 @@ class Categoria extends DB
         return $query;
     }
 
-     // QUERY Get Datos Todos Categoria 
+    // QUERY Get Datos Todos Categoria 
 
     function getAllCategoriasData()
     {
@@ -53,10 +53,10 @@ class Categoria extends DB
         return $query;
     }
 
-   // ---------------------------------------ACTUALIZAR INFORMACION------------------------------------------
-   // QUERY Actualizar Categoria
+    // ---------------------------------------ACTUALIZAR INFORMACION------------------------------------------
+    // QUERY Actualizar Categoria
 
-    function actualizarCategoria($Categoria_id,$nombreCategoria, $descripcionCategoria)
+    function actualizarCategoria($Categoria_id, $nombreCategoria, $descripcionCategoria)
     {
         $update = "CALL sp_GestionCategoria(
             'E',                        # Operacion
@@ -70,8 +70,8 @@ class Categoria extends DB
     }
 
 
-     // ---------------------------------------ELIMINAR INFORMACION------------------------------------------
-      // QUERY Eliminar Categoria
+    // ---------------------------------------ELIMINAR INFORMACION------------------------------------------
+    // QUERY Eliminar Categoria
 
     function eliminarCategoria($Categoria_id)
     {
@@ -85,7 +85,6 @@ class Categoria extends DB
         $query = $this->connect()->query($delete);
         return $query;
     }
-     
 }
 
 ?>

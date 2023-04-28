@@ -21,50 +21,44 @@ session_start(); // Inicio mi sesion PHP
 </head>
 
 <body>
+    <div id="miPagina" class="pb-4">
+        <!--                 NAVBAR                 -->
+        <nav class="navbar sticky-top navbar-expand-lg navbar-light">
+            <div class="container">
+                <img src="img/cripto.png" width="70px">
+                <a class="navbar-brand fs-4 p-4 fw-bold" href="index.php">CryptCourse</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-    <!--                 NAVBAR                 -->
-    <nav class="navbar sticky-top navbar-expand-lg navbar-light">
-        <div class="container">
-            <img src="img/cripto.png" width="70px">
-            <a class="navbar-brand fs-4 p-4 fw-bold" href="index.php">CryptCourse</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-list"></i> Categorías
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="misCategoriasNav">
 
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-list"></i> Categorías
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="search.php">Desarrollo</a></li>
-                            <li><a class="dropdown-item" href="search.php">Negocios</a></li>
-                            <li><a class="dropdown-item" href="search.php">Finanzas</a></li>
-                            <li><a class="dropdown-item" href="search.php">Cocina</a></li>
-                            <li><a class="dropdown-item" href="search.php">Productividad</a></li>
-                            <li><a class="dropdown-item" href="search.php">Diseño</a></li>
-                            <li><a class="dropdown-item" href="search.php">Marketing</a></li>
+                            </ul>
+                        </li>
 
-                        </ul>
-                    </li>
+                    </ul>
+                    <form class="d-flex me-2" role="search">
+                        <input class="form-control " type="search" placeholder="Buscar" aria-label="Buscar">
+                        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
 
-                </ul>
-                <form class="d-flex me-2" role="search">
-                    <input class="form-control " type="search" placeholder="Buscar" aria-label="Buscar">
-                    <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
-
-                </form>
-                <div class="p-2">
-                    <?php
-                    if ($_SESSION == NULL) {
-                        echo ' 
+                    </form>
+                    <div class="p-2">
+                        <?php
+                        if ($_SESSION == NULL) {
+                            echo ' 
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalLogin">
                                       Iniciar Sesión
                                     </button>';
-                    } else {
-                        echo ' 
+                        } else {
+                            echo ' 
                                     <div id="perfil">
                                     <div class="d-flex flex-column dropstart misDatosUsuario">
                                     <div class="miImagen dropdown p-2 mx-auto" id="DatosUser" data-bs-toggle="dropdown"
@@ -95,324 +89,324 @@ session_start(); // Inicio mi sesion PHP
                                     Perfil</a>
                             </li>
                             ';
-                        if ($_SESSION["rolUsuario"] == 1) {
-                            echo '<li><a class="dropdown-item" href="paginaAdmin.php"><i class="pe-1 bi bi-file-earmark"></i> Página Admin</a></li>';
-                        }
-                        if ($_SESSION["rolUsuario"] == 2) {
-                            echo '<li><a class="dropdown-item" href="paginaInstructor.php"><i class="pe-1 bi bi-file-earmark"></i> Página Instructor</a></li>
+                            if ($_SESSION["rolUsuario"] == 1) {
+                                echo '<li><a class="dropdown-item" href="paginaAdmin.php"><i class="pe-1 bi bi-file-earmark"></i> Página Admin</a></li>';
+                            }
+                            if ($_SESSION["rolUsuario"] == 2) {
+                                echo '<li><a class="dropdown-item" href="paginaInstructor.php"><i class="pe-1 bi bi-file-earmark"></i> Página Instructor</a></li>
                                  <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#miModalMensaje"><i class="pe-1 bi bi-chat-left-text"></i> Ver Mensajes</a></li>';
-                        }
-                        if ($_SESSION["rolUsuario"] == 3) {
-                            echo ' <li><a class="dropdown-item" href="misCursos.php"><i class="pe-1 bi bi-mortarboard"></i> Mis cursos</a></li>
+                            }
+                            if ($_SESSION["rolUsuario"] == 3) {
+                                echo ' <li><a class="dropdown-item" href="misCursos.php"><i class="pe-1 bi bi-mortarboard"></i> Mis cursos</a></li>
                             <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#miModalMensaje"><i class="pe-1 bi bi-chat-left-text"></i> Ver Mensajes</a></li>';
-                        }
-                        echo ' 
+                            }
+                            echo ' 
                             <div class="dropdown-divider"></div>
                             <li><a class="dropdown-item" href="index.php?logout=true"><i class="pe-1 bi bi-box-arrow-right"></i> Cerrar Sesión</a></li>
                         </ul>
                     </div>
                 </div>';
-                    }
-                    ?>
-
-
-                </div>
-            </div>
-        </div>
-    </nav>
-
-
-    <div class="container mainPage">
-        <div class="container">
-            <div class="d-flex flex-row">
-                <div class="p-2">
-                    <div class="card" style="width: 22rem;">
-                        <img src="img/html.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Curso de HTML 5</h5>
-                            <p class="card-text text-end text-primary">
-                                255.50 MXN
-
-                            </p>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#miModalMetodoPago" class="btn btn-primary d-flex justify-content-center">Comprar curso</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-2 flex-fill shadow-sm">
-                    <div class="d-flex flex-column">
-                        <div class="d-flex flex-row ">
-                            <p class="fs-4 p-1 fw-bold me-auto ">Curso de HTML 5</p>
-                            <p class="fs-6 p-2 fw-light text-primary">Desarrollo</p>
-
-                        </div>
-
-                        <p class="text-muted fs-6 p-4" id="correo">Conviértete en un experto en HTML con este curso que
-                            te
-                            enseña a programar desde cero
-
-                            Conocimientos previos? Para tomar este curso no necesitas ningún conocimiento previo, basta
-                            con que sepas prender el
-                            computador e instalar programas que descargues de internet ya que todos los conocimientos
-                            básicos los iremos aprendiendo
-                            y practicando a lo largo del curso. Este curso tiene tecnologías modernas que son utilizadas
-                            por todos los
-                            desarrolladores web del mundo en el día a día. Aprovecha esta oportunidad para que podamos
-                            encaminarte de una manera
-                            eficiente a convertirte en un desarrollador web.</p>
-                        <div class="d-flex flex-row justify-content-end p-2">
-                            <span class="badge rounded-pill bg-success p-2">Recomendaciones: 1</span>
-                            <span class="badge rounded-pill bg-danger p-2">No Recomendaciones: 1</span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <hr class="solid">
-        <ul class="nav nav-tabs justify-content-center">
-            <li class="nav-item" id="mostrarContenido">
-                <a class="nav-link active" aria-current="page">Contenido</a>
-            </li>
-            <li class="nav-item" id="mostrarDescripcion">
-                <a class="nav-link" aria-current="page">Descripción</a>
-            </li>
-            <li class="nav-item" id="mostrarValoracion">
-                <a class="nav-link" aria-current="page">Valoraciones</a>
-            </li>
-            <li class="nav-item" id="mostrarInstructor">
-                <a class="nav-link" aria-current="page">Instructor</a>
-            </li>
-        </ul>
-        <!-- MI ACORDEON -->
-        <div class="accordion accordion-flush" id="miContenido">
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingOne">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                        Nivel 1: Introducción
-
-                    </button>
-
-                </h2>
-                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#miContenido">
-                    <div class="accordion-body">
-                        <div class="card">
-                            <div class="card-header text-end">
-                                <span class="badge rounded-pill bg-success">Adquirido</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Introducción</h5>
-                                <p class="card-text">¿Qué es HTML y para qué sirve?
-                                    El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para
-                                    estructurar y desplegar una página web y
-                                    sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista con
-                                    viñetas, o imágenes y tablas de datos.</p>
-                                <div class="d-flex justify-content-end">
-                                    <a href="#" class="btn btn-primary">Marcar como finalizado</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                        Nivel 2: Conceptos Básicos
-                    </button>
-                </h2>
-                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#miContenido">
-                    <div class="accordion-body">
-                        <div class="card">
-                            <div class="card-header text-end">
-                                <span class="badge rounded-pill bg-primary">50.50 MXN</span>
-                                <span class="badge rounded-pill bg-secondary">No Adquirido</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Conceptos Básicos</h5>
-                                <p class="card-text"></p>
-                                Sigue aprendiendo adquiriendo este nivel
-                                <div class="d-flex justify-content-end">
-                                    <a href="#" class="btn btn-success">Comprar nivel</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingThree">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                        <i class="bi bi-check-lg text-success"></i>Nivel 3: Formularios
-                    </button>
-                </h2>
-                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#miContenido">
-                    <div class="accordion-body">
-                        <div class="card">
-                            <div class="card-header text-end">
-                                <span class="badge rounded-pill bg-success">Adquirido</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title text-center text-muted">Formularios.</h5>
-                                <video controls class="misVideos mx-auto">
-                                    <source class="misVideos" src="" type="video/mp4">
-                                </video>
-                                <hr class="solid">
-                                <div class="d-flex justify-content-end">
-                                    <a href="#" class="btn btn-primary">Marcar como finalizado</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="flush-headingFour">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                        Nivel 4: Imagenes, links, listas y tablas.
-                    </button>
-                </h2>
-
-                <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#miContenido">
-                    <div class="accordion-body">
-                        <div class="card">
-                            <div class="card-header text-end">
-                                <span class="badge rounded-pill bg-success">Adquirido</span>
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title text-center text-muted">Imagenes, links, listas y tablas.</h5>
-                                <video controls class="misVideos mx-auto">
-                                    <source class="misVideos" src="" type="video/mp4">
-                                </video>
-                                <hr class="solid">
-                                <div class="d-flex justify-content-end">
-                                    <a href="#" class="btn btn-primary">Marcar como finalizado</a>
-                                </div>
-                            </div>
-                        </div>
+                        }
+                        ?>
 
 
                     </div>
                 </div>
             </div>
+        </nav>
 
 
-
-        </div>
-
-        <!-- MI DESCRIPCION -->
-        <div id="CursoDescripcion" class="course-description container">
-            <hr class="solid">
-            <h4>Acerca de este curso </h4>
-            <hr class="solid">
-            <p>
-                Conviértete en un experto en HTML con este curso que te enseña a programar
-                desde
-                cero
-            </p>
-            <p>
-                Conocimientos previos?
-
-                Para tomar este curso no necesitas ningún conocimiento previo, basta con que sepas prender el computador
-                e instalar
-                programas que descargues de internet ya que todos los conocimientos básicos los iremos aprendiendo y
-                practicando a lo
-                largo del curso.
-
-                Este curso tiene tecnologías modernas que son utilizadas por todos los desarrolladores web del mundo en
-                el día a día.
-                Aprovecha esta oportunidad para que podamos encaminarte de una manera eficiente a convertirte en un
-                desarrollador web.
-            </p>
-
-        </div>
-
-        <!-- MIS VALORACIONES -->
-        <div id="Valoraciones" class="container">
-            <hr class="solid">
-            <h4>Comentarios y valoraciones de los estudiantes </h4>
-            <hr class="solid">
-            <div id="misValoraciones" class="list-group p-2">
-                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                    <div class="miImagen misMensajes d-flex w-100 justify-content-between">
-
-                        <div class="d-flex">
-                            <img src="img/avatar.jpg" class="pfp rounded-circle">
-                            <div class="align-self-center">
-                                <p class="fs-5 p-3 fw-bold align-middle">rickylolo</p>
-                            </div>
-                        </div>
-                        <div class="align-self-start">
-                            <span class="badge rounded-pill bg-success">Recomendado</span>
-                        </div>
-                    </div>
-                    <hr class="solid">
-                    <p class="mb-1">Recomiendo el curso, es facil para principiantes</p>
-
-                </a>
-                <hr class="solid">
-                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                    <div class="miImagen misMensajes d-flex w-100 justify-content-between">
-                        <div class="d-flex">
-                            <img src="img/avatar3.jpg" class="pfp rounded-circle">
-                            <div class="align-self-center">
-                                <p class="fs-5 p-3 fw-bold align-middle">Robertin123</p>
-                            </div>
-                        </div>
-                        <div class="align-self-start">
-                            <span class="badge rounded-pill bg-danger">No Recomendado</span>
-                        </div>
-                    </div>
-                    <hr class="solid">
-                    <p class="mb-1">Este curso es muy facil</p>
-
-                </a>
-
-
-            </div>
-        </div>
-
-        <!-- MI INSTRUCTOR -->
-        <div id="Instructor" class="container">
-            <hr class="solid">
-            <h4>Instructor</h4>
+        <div class="container mainPage">
             <div class="container">
-                <hr class="solid">
-                <div class="d-flex flex-row pfpInstructor">
-                    <div class="p-2"><img src="img/avatar2.jpg" class="rounded-circle">
-                    </div>
+                <div class="d-flex flex-row">
                     <div class="p-2">
+                        <div class="card" style="width: 22rem;">
+                            <img src="img/html.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Curso de HTML 5</h5>
+                                <p class="card-text text-end text-primary">
+                                    255.50 MXN
+
+                                </p>
+                                <a href="" data-bs-toggle="modal" data-bs-target="#miModalMetodoPago" class="btn btn-primary d-flex justify-content-center">Comprar curso</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-2 flex-fill shadow-sm">
                         <div class="d-flex flex-column">
+                            <div class="d-flex flex-row ">
+                                <p class="fs-4 p-1 fw-bold me-auto ">Curso de HTML 5</p>
+                                <p class="fs-6 p-2 fw-light text-primary">Desarrollo</p>
 
-                            <p class="fs-5 p-3 fw-bold">Nicholas Schaufrman</p>
+                            </div>
 
-                            <p class="text-muted fs-6 p-3" id="correo">nicky_Schauffy@gmail.com</p>
-                            <hr class="solid">
-                            <p class="fs-6 p-3" id="descipcion">He sido CTO y CEO de varias compañías de tecnología,
-                                relacionadas con cryptomonedas, geolocalización y comercio
-                                electrónico. Algunas hoy tienen premios internacionales y otros son lindos recuerdos.
-                                Fui contratado en Nueva Zelanda
-                                cuando aún vivía en Chile, Actualmente soy desarrollador de software senior, instructor
-                                de tecnologías para el
-                                desarrollo web y móvil. A lo largo de mi vida he logrado construir mucho software con
-                                herramientas y formas que han dado
-                                un éxito rotundo y otras un terrible fracaso. Por lo que me enfoco en entregar
-                                conocimientos con lo que se pueda
-                                construir software de calidad mundial y fácil de escalar.</p>
+                            <p class="text-muted fs-6 p-4" id="correo">Conviértete en un experto en HTML con este curso que
+                                te
+                                enseña a programar desde cero
+
+                                Conocimientos previos? Para tomar este curso no necesitas ningún conocimiento previo, basta
+                                con que sepas prender el
+                                computador e instalar programas que descargues de internet ya que todos los conocimientos
+                                básicos los iremos aprendiendo
+                                y practicando a lo largo del curso. Este curso tiene tecnologías modernas que son utilizadas
+                                por todos los
+                                desarrolladores web del mundo en el día a día. Aprovecha esta oportunidad para que podamos
+                                encaminarte de una manera
+                                eficiente a convertirte en un desarrollador web.</p>
+                            <div class="d-flex flex-row justify-content-end p-2">
+                                <span class="badge rounded-pill bg-success p-2">Recomendaciones: 1</span>
+                                <span class="badge rounded-pill bg-danger p-2">No Recomendaciones: 1</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="solid">
+            <ul class="nav nav-tabs justify-content-center">
+                <li class="nav-item" id="mostrarContenido">
+                    <a class="nav-link active" aria-current="page">Contenido</a>
+                </li>
+                <li class="nav-item" id="mostrarDescripcion">
+                    <a class="nav-link" aria-current="page">Descripción</a>
+                </li>
+                <li class="nav-item" id="mostrarValoracion">
+                    <a class="nav-link" aria-current="page">Valoraciones</a>
+                </li>
+                <li class="nav-item" id="mostrarInstructor">
+                    <a class="nav-link" aria-current="page">Instructor</a>
+                </li>
+            </ul>
+            <!-- MI ACORDEON -->
+            <div class="accordion accordion-flush" id="miContenido">
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            Nivel 1: Introducción
+
+                        </button>
+
+                    </h2>
+                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#miContenido">
+                        <div class="accordion-body">
+                            <div class="card">
+                                <div class="card-header text-end">
+                                    <span class="badge rounded-pill bg-success">Adquirido</span>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Introducción</h5>
+                                    <p class="card-text">¿Qué es HTML y para qué sirve?
+                                        El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para
+                                        estructurar y desplegar una página web y
+                                        sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista con
+                                        viñetas, o imágenes y tablas de datos.</p>
+                                    <div class="d-flex justify-content-end">
+                                        <a href="#" class="btn btn-primary">Marcar como finalizado</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            Nivel 2: Conceptos Básicos
+                        </button>
+                    </h2>
+                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#miContenido">
+                        <div class="accordion-body">
+                            <div class="card">
+                                <div class="card-header text-end">
+                                    <span class="badge rounded-pill bg-primary">50.50 MXN</span>
+                                    <span class="badge rounded-pill bg-secondary">No Adquirido</span>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Conceptos Básicos</h5>
+                                    <p class="card-text"></p>
+                                    Sigue aprendiendo adquiriendo este nivel
+                                    <div class="d-flex justify-content-end">
+                                        <a href="#" class="btn btn-success">Comprar nivel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                            <i class="bi bi-check-lg text-success"></i>Nivel 3: Formularios
+                        </button>
+                    </h2>
+                    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#miContenido">
+                        <div class="accordion-body">
+                            <div class="card">
+                                <div class="card-header text-end">
+                                    <span class="badge rounded-pill bg-success">Adquirido</span>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title text-center text-muted">Formularios.</h5>
+                                    <video controls class="misVideos mx-auto">
+                                        <source class="misVideos" src="" type="video/mp4">
+                                    </video>
+                                    <hr class="solid">
+                                    <div class="d-flex justify-content-end">
+                                        <a href="#" class="btn btn-primary">Marcar como finalizado</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                            Nivel 4: Imagenes, links, listas y tablas.
+                        </button>
+                    </h2>
+
+                    <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#miContenido">
+                        <div class="accordion-body">
+                            <div class="card">
+                                <div class="card-header text-end">
+                                    <span class="badge rounded-pill bg-success">Adquirido</span>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title text-center text-muted">Imagenes, links, listas y tablas.</h5>
+                                    <video controls class="misVideos mx-auto">
+                                        <source class="misVideos" src="" type="video/mp4">
+                                    </video>
+                                    <hr class="solid">
+                                    <div class="d-flex justify-content-end">
+                                        <a href="#" class="btn btn-primary">Marcar como finalizado</a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
 
 
 
+            </div>
+
+            <!-- MI DESCRIPCION -->
+            <div id="CursoDescripcion" class="course-description container">
+                <hr class="solid">
+                <h4>Acerca de este curso </h4>
+                <hr class="solid">
+                <p>
+                    Conviértete en un experto en HTML con este curso que te enseña a programar
+                    desde
+                    cero
+                </p>
+                <p>
+                    Conocimientos previos?
+
+                    Para tomar este curso no necesitas ningún conocimiento previo, basta con que sepas prender el computador
+                    e instalar
+                    programas que descargues de internet ya que todos los conocimientos básicos los iremos aprendiendo y
+                    practicando a lo
+                    largo del curso.
+
+                    Este curso tiene tecnologías modernas que son utilizadas por todos los desarrolladores web del mundo en
+                    el día a día.
+                    Aprovecha esta oportunidad para que podamos encaminarte de una manera eficiente a convertirte en un
+                    desarrollador web.
+                </p>
+
+            </div>
+
+            <!-- MIS VALORACIONES -->
+            <div id="Valoraciones" class="container">
+                <hr class="solid">
+                <h4>Comentarios y valoraciones de los estudiantes </h4>
+                <hr class="solid">
+                <div id="misValoraciones" class="list-group p-2">
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+
+                            <div class="d-flex">
+                                <img src="img/avatar.jpg" class="pfp rounded-circle">
+                                <div class="align-self-center">
+                                    <p class="fs-5 p-3 fw-bold align-middle">rickylolo</p>
+                                </div>
+                            </div>
+                            <div class="align-self-start">
+                                <span class="badge rounded-pill bg-success">Recomendado</span>
+                            </div>
                         </div>
                         <hr class="solid">
-                    </div>
+                        <p class="mb-1">Recomiendo el curso, es facil para principiantes</p>
+
+                    </a>
+                    <hr class="solid">
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                            <div class="d-flex">
+                                <img src="img/avatar3.jpg" class="pfp rounded-circle">
+                                <div class="align-self-center">
+                                    <p class="fs-5 p-3 fw-bold align-middle">Robertin123</p>
+                                </div>
+                            </div>
+                            <div class="align-self-start">
+                                <span class="badge rounded-pill bg-danger">No Recomendado</span>
+                            </div>
+                        </div>
+                        <hr class="solid">
+                        <p class="mb-1">Este curso es muy facil</p>
+
+                    </a>
+
 
                 </div>
             </div>
-        </div>
 
+            <!-- MI INSTRUCTOR -->
+            <div id="Instructor" class="container">
+                <hr class="solid">
+                <h4>Instructor</h4>
+                <div class="container">
+                    <hr class="solid">
+                    <div class="d-flex flex-row pfpInstructor">
+                        <div class="p-2"><img src="img/avatar2.jpg" class="rounded-circle">
+                        </div>
+                        <div class="p-2">
+                            <div class="d-flex flex-column">
+
+                                <p class="fs-5 p-3 fw-bold">Nicholas Schaufrman</p>
+
+                                <p class="text-muted fs-6 p-3" id="correo">nicky_Schauffy@gmail.com</p>
+                                <hr class="solid">
+                                <p class="fs-6 p-3" id="descipcion">He sido CTO y CEO de varias compañías de tecnología,
+                                    relacionadas con cryptomonedas, geolocalización y comercio
+                                    electrónico. Algunas hoy tienen premios internacionales y otros son lindos recuerdos.
+                                    Fui contratado en Nueva Zelanda
+                                    cuando aún vivía en Chile, Actualmente soy desarrollador de software senior, instructor
+                                    de tecnologías para el
+                                    desarrollo web y móvil. A lo largo de mi vida he logrado construir mucho software con
+                                    herramientas y formas que han dado
+                                    un éxito rotundo y otras un terrible fracaso. Por lo que me enfoco en entregar
+                                    conocimientos con lo que se pueda
+                                    construir software de calidad mundial y fácil de escalar.</p>
+
+
+
+                            </div>
+                            <hr class="solid">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <hr class="solid">
 
     <!--  >MODAL WINDOW MENSAJES<-->
     <div class="modal fade" id="miModalMensaje" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
@@ -675,7 +669,7 @@ session_start(); // Inicio mi sesion PHP
                         <label for="userIMG">
                             <img src="img/avatar.png" alt="" id="img-foto2" width="250px" height="250px">
                         </label>
-                        <input type="file" onchange="vista_preliminar2(event)" class="form-control" id="userIMG" name="userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
+                        <input type="file" onchange="vista_preliminar2(event)" accept="image/jpeg" class="form-control" id="userIMG" name="userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
 
                     </div>
 
@@ -801,7 +795,7 @@ session_start(); // Inicio mi sesion PHP
                             <label for="E_userIMG">
                                 <img src="" alt="" id="E_imgFoto" width="250px" height="250px">
                             </label>
-                            <input type="file" onchange="vista_preliminarEdit(event)" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="file" onchange="vista_preliminarEdit(event)" accept="image/jpeg" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
 
 
                         </div>

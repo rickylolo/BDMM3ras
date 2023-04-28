@@ -19,12 +19,13 @@ class categoriaAPI
         $res = $Categoria->getCategoriaData($Categoria_id);
         if ($res) { // Entra si hay información
             while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-                $obj = array( 
+                $obj = array(
                     "Categoria_id" => $row['Categoria_id'],
                     "Usuario_id" => $row['Usuario_id'],
                     "nombre" => $row['nombre'],
                     "descripcion" => $row['descripcion'],
-                    "tiempoRegistro" => $row['tiempoRegistro']
+                    "tiempoRegistro" => $row['tiempoRegistro'],
+                    "noCursos" => $row['noCursos']
                 );
                 array_push($arrCategorias["Datos"], $obj);
             }
@@ -34,7 +35,7 @@ class categoriaAPI
             exit();
         }
     }
-    
+
     function getAllCategoriasData()
     {
 
@@ -50,7 +51,8 @@ class categoriaAPI
                     "Usuario_id" => $row['Usuario_id'],
                     "nombre" => $row['nombre'],
                     "descripcion" => $row['descripcion'],
-                    "tiempoRegistro" => $row['tiempoRegistro']
+                    "tiempoRegistro" => $row['tiempoRegistro'],
+                    "noCursos" => $row['noCursos']
                 );
                 array_push($arrCategorias["Datos"], $obj);
             }
@@ -68,10 +70,10 @@ class categoriaAPI
     }
 
 
-    function actualizarCategoria($Categoria_id,$nombreCategoria, $descripcionCategoria)
+    function actualizarCategoria($Categoria_id, $nombreCategoria, $descripcionCategoria)
     {
         $Categoria = new Categoria();
-        $Categoria->actualizarCategoria($Categoria_id,$nombreCategoria, $descripcionCategoria);
+        $Categoria->actualizarCategoria($Categoria_id, $nombreCategoria, $descripcionCategoria);
     }
 
     function eliminarCategoria($Categoria_id)
@@ -86,12 +88,14 @@ if (isset($_POST['funcion'])) {
     $funcion = $_POST['funcion'];
     switch ($funcion) {
         case "registrarCategoria":
+            session_start();
+            $id = $_SESSION['Usuario_id'];
             $var = new categoriaAPI();
-            $var->insertarCategoria($_POST['Usuario_id'],$_POST['nombreCategoria'],$_POST['descripcionCategoria']);
+            $var->insertarCategoria($id, $_POST['nombreCategoria'], $_POST['descripcionCategoria']);
             break;
         case "actualizarCategoria":
             $var = new categoriaAPI();
-            $var->actualizarCategoria($_POST['Categoria_id'],$_POST['nombreCategoria'],$_POST['descripcionCategoria']);
+            $var->actualizarCategoria($_POST['Categoria_id'], $_POST['nombreCategoria'], $_POST['descripcionCategoria']);
             break;
         case "eliminarCategoria":
             $var = new categoriaAPI();
@@ -107,4 +111,3 @@ if (isset($_POST['funcion'])) {
             break;
     }
 }
-
