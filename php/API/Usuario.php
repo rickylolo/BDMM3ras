@@ -91,6 +91,7 @@ class usuarioAPI
                     "apellidoMaterno" => $row['apellidoMaterno'],
                     "apellidoPaterno" => $row['apellidoPaterno'],
                     "fechaNacimiento" => $row['fechaNacimiento'],
+                    "ultimoCambio" => $row['ultimoCambio'],
                     "sexo" => $row['sexo']
                 );
                 array_push($arrUsers["Datos"], $obj);
@@ -113,6 +114,12 @@ class usuarioAPI
     {
         $user = new User();
         $user->actualizarUser($Usuario_id, $MetodoPago_id, $correo, $contraseña, $rol, $user_IMG, $descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero);
+    }
+
+    function actualizarBloqueo($Usuario_id, $isBloqueado)
+    {
+        $user = new User();
+        $user->actualizarBloqueo($Usuario_id, $isBloqueado);
     }
 
     function cerrarSesion()
@@ -161,6 +168,15 @@ if (isset($_POST['funcion'])) {
             $id = $_SESSION['Usuario_id'];
             $var = new usuarioAPI();
             $var->getUserData($id);
+            break;
+        case "obtenerDataUsuariosBloqueados":
+            $var = new usuarioAPI();
+            $var->getUserBloqueadosData();
+            break;
+
+        case "actualizarBloqueo":
+            $var = new usuarioAPI();
+            $var->actualizarBloqueo($_POST['Usuario_id'], $_POST['isBloqueado']);
             break;
     }
 }

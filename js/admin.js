@@ -83,6 +83,47 @@ $(document).ready(function () {
       });
   }
   
+  cargarUsuariosAdmin()
+  function cargarUsuariosAdmin() {
+    $.ajax({
+      type: "POST",
+      data: { funcion: "obtenerDataUsuariosBloqueados" },
+      url: "php/API/Usuario.php",
+    })
+      .done(function (data) {
+        var items = JSON.parse(data);
+        $("#usuariosBloqueadosDashboard").empty();
+        for (let i = 0; i < items.length; i++) {
+
+          $("#usuariosBloqueadosDashboard").append(
+            `
+         <a class="list-group-item list-group-item-action" aria-current="true">
+                    <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                        <div class="d-flex">
+                            <img src="data:image/jpeg;base64,` + items[i].fotoPerfil + `"  class="pfp rounded-circle">
+                            <div class="align-self-center">
+                                <p class="fs-5 ps-3 pt-3 fw-bold align-middle">`+ items[i].correo +`</p>
+                            </div>
+                        </div>
+                        <div class="align-self-start">
+                            <small class="text-muted p-3">Fecha Bloqueo: `+ items[i].ultimoCambio +`</small>
+                        </div>
+                    </div>
+                    <hr class="solid">
+                    <div class="d-flex justify-content-end">
+                        <p class="mb-1"><button type="button" class="btn btn-success desbloquearUsuario" id="`+ items[i].Usuario_id + `">Desbloquear</button></p>
+                    </div>
+
+                </a>
+          `
+          );
+        }
+      })
+      .fail(function (data) {
+        console.error(data);
+      });
+  }
+
   cargarMetodosPago()
   function cargarMetodosPago() {
     $.ajax({
@@ -234,6 +275,30 @@ $("#misCategoriasDashboard").on("click", ".editarCategoria", funcGetMiIDCategori
       .fail(function (data) {
         console.error(data);
       });
+  }
+
+   // -- USUARIO / DESBLOQUEAR --
+  $("#usuariosBloqueadosDashboard").on(
+    "click",
+    ".desbloquearUsuario",
+    funcDesbloquearUsuario
+  );
+  function funcDesbloquearUsuario() {
+    let miIdUsuario = $(this).attr("id");
+    if (confirm("¿Seguro que deseas desbloquear este usuario?")) {
+      $.ajax({
+        type: "POST",
+        data: { funcion: "actualizarBloqueo", Usuario_id: miIdUsuario, isBloqueado : 0 },
+        url: "php/API/Usuario.php",
+      })
+        .done(function () {
+          cargarUsuariosAdmin();
+          alert("Usuario Desbloqueado Correctamente");
+        })
+        .fail(function (data) {
+          console.error(data);
+        });
+    }
   }
 
   // ----------------------------- ELIMINAR DATOS -----------------

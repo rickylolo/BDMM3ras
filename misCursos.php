@@ -480,7 +480,7 @@ session_start(); // Inicio mi sesion PHP
 
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" aria-label="password" aria-describedby="basic-addon1">
+                        <input type="password" class="form-control" id="login_password" name="password" placeholder="Contraseña" aria-label="password" aria-describedby="basic-addon1">
                     </div>
                     <div class="row d-flex text-end">
                         <a href="miModal" data-bs-toggle="modal" data-bs-target="#miModal" data-bs-dismiss="modal">¿Aún

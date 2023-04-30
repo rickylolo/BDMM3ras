@@ -106,47 +106,65 @@ NULL, # Fecha de nacimiento
 NULL, # Genero
 NULL); # Flag Perfil Bloqueado
 
-SELECT * FROM usuario;
+CALL sp_GestionUsuario('P', #Operacion
+8, #Id Usuario
+NULL, #Correo
+NULL, #Nickname
+NULL, #Contraseña
+NULL, #Rol de usuario
+NULL, #PFP
+NULL, #Descripcion
+NULL, # Nombre(s)
+NULL, # Apellido Paterno
+NULL, # Apellido Materno
+NULL, # Fecha de nacimiento
+NULL, # Genero
+1); # Flag Perfil Bloqueado
 
+CALL sp_GestionUsuario('B', #Operacion
+NULL, #Id Usuario
+NULL, #Correo
+NULL, #Nickname
+NULL, #Contraseña
+NULL, #Rol de usuario
+NULL, #PFP
+NULL, #Descripcion
+NULL, # Nombre(s)
+NULL, # Apellido Paterno
+NULL, # Apellido Materno
+NULL, # Fecha de nacimiento
+NULL, # Genero
+NULL); # Flag Perfil Bloqueado
 /*--------------------------------------------------------------------------------METODOS DE PAGO--------------------------------------------------------------------------*/
-CALL sp_GestionMetodoPago(
-'I', #Operacion
+CALL sp_GestionMetodoPago('I', #Operacion
 NULL, #MetodoPago_Id	 
 'VISA',  #Nombre Metodo	
 1   #Imagen Metodo
 ); 
 
-CALL sp_GestionMetodoPago(
-'A', #Operacion
+CALL sp_GestionMetodoPago('A', #Operacion
 NULL, #MetodoPago_Id	 
 NULL,  #Nombre Metodo	
 NULL   #Imagen Metodo
 ); 
 
-CALL sp_GestionMetodoPago(
-'G', #Operacion
+CALL sp_GestionMetodoPago('G', #Operacion
 1, #MetodoPago_Id	 
 NULL,  #Nombre Metodo	
 NULL   #Imagen Metodo
 ); 
 
-CALL sp_GestionMetodoPago(
-'E', #Operacion
+CALL sp_GestionMetodoPago('E', #Operacion
 1, #MetodoPago_Id	 
 'VISA',  #Nombre Metodo	
 1   #Imagen Metodo
 ); 
 
-
-CALL sp_GestionMetodoPago(
-'D', #Operacion
+CALL sp_GestionMetodoPago('D', #Operacion
 1, #MetodoPago_Id	 
 NULL,  #Nombre Metodo	
 NULL   #Imagen Metodo
 ); 
-
-
-
 /*--------------------------------------------------------------------------------CURSO--------------------------------------------------------------------------*/
 CALL sp_GestionCurso(
 'I', 	#Operacion
@@ -165,8 +183,8 @@ NULL, 	# Curso Id
 1, 	# Usuario Id
 150.00,  	# Curso Costo
 2,	# Curso Imagen
-'JavaScript',	# Curso Nombre
-'Curso de JavaScript para principiantes', 	# Curso Descripcion
+'NodeJS',	# Curso Nombre
+'Curso de NodeJS para principiantes', 	# Curso Descripcion
 NULL 		# Curso isBaja
 ); 
 

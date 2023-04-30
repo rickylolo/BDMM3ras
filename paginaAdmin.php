@@ -155,61 +155,10 @@ session_start(); // Inicio mi sesion PHP
                     </div>
                 </nav>
                 <hr class="solid">
-                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                    <div class="miImagen misMensajes d-flex w-100 justify-content-between">
-                        <div class="d-flex">
-                            <img src="img/avatar.jpg" class="pfp rounded-circle">
-                            <div class="align-self-center">
-                                <p class="fs-5 p-3 fw-bold align-middle">rickylolo</p>
-                            </div>
-                        </div>
-                        <div class="align-self-start">
-                            <small class="text-muted p-3">8:35pm 22/Feb/2023</small>
-                        </div>
-                    </div>
-                    <hr class="solid">
-                    <div class="d-flex justify-content-end">
-                        <p class="mb-1"><button type="button" class="btn btn-success">Desbloquear</button></p>
-                    </div>
+                <div id="usuariosBloqueadosDashboard">
+                </div>
 
-                </a>
-                <hr class="solid">
-                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                    <div class="miImagen misMensajes d-flex w-100 justify-content-between">
-                        <div class="d-flex">
-                            <img src="img/avatar2.jpg" class="pfp rounded-circle">
-                            <div class="align-self-center">
-                                <p class="fs-5 p-3 fw-bold align-middle">Nicholas Schaufrman</p>
-                            </div>
-                        </div>
-                        <div class="align-self-start">
-                            <small class="text-muted p-3">9:17pm 23/Feb/2023</small>
-                        </div>
-                    </div>
-                    <hr class="solid">
-                    <div class="d-flex justify-content-end">
-                        <p class="mb-1"><button type="button" class="btn btn-success">Desbloquear</button></p>
-                    </div>
-                </a>
-                <hr class="solid">
-                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                    <div class="miImagen misMensajes d-flex w-100 justify-content-between">
-                        <div class="d-flex">
-                            <img src="img/avatar3.jpg" class="pfp rounded-circle">
-                            <div class="align-self-center">
-                                <p class="fs-5 p-3 fw-bold align-middle">Robertin123</p>
-                            </div>
-                        </div>
-                        <div class="align-self-start">
-                            <small class="text-muted p-3">8:35pm 23/Feb/2023</small>
-                        </div>
-                    </div>
-                    <hr class="solid">
-                    <div class="d-flex justify-content-end">
-                        <p class="mb-1"><button type="button" class="btn btn-success">Desbloquear</button></p>
-                    </div>
-                </a>
-                <hr class="solid">
+
             </div>
             <div id="misCategoriasAdmin">
                 <nav class="navbar navbar-light" id="buscarUsersBlock">
@@ -221,6 +170,7 @@ session_start(); // Inicio mi sesion PHP
                         </form>
                     </div>
                 </nav>
+                <hr class="solid">
                 <div id="misCategoriasDashboard">
 
 
@@ -236,6 +186,7 @@ session_start(); // Inicio mi sesion PHP
                         </form>
                     </div>
                 </nav>
+                <hr class="solid">
                 <div id="misMetodosPagoDashboard">
 
 
@@ -539,7 +490,7 @@ session_start(); // Inicio mi sesion PHP
 
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" aria-label="password" aria-describedby="basic-addon1">
+                        <input type="password" class="form-control" id="login_password" name="password" placeholder="Contraseña" aria-label="password" aria-describedby="basic-addon1">
                     </div>
                     <div class="row d-flex text-end">
                         <a href="miModal" data-bs-toggle="modal" data-bs-target="#miModal" data-bs-dismiss="modal">¿Aún
@@ -614,7 +565,7 @@ session_start(); // Inicio mi sesion PHP
                     </div>
 
                     <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Nombre de usuario
+                        Nombre de usuario"
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1"> <i class="bi bi-person"></i></span>

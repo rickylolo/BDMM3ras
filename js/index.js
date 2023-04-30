@@ -143,7 +143,7 @@ $(document).ready(function () {
   $('#ButtonLogIn').click(funcIniciarSesion)
   function funcIniciarSesion() {
     var usuarioCorreo = $('#correoLogin').val()
-    var pass = $('#password').val()
+    var pass = $('#login_password').val()
     $.ajax({
       url: 'php/API/Usuario.php',
       type: 'POST',

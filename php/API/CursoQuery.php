@@ -1,6 +1,6 @@
 
 <?php
-include_once '../DB/db.php';
+include_once 'db.php';
 
 class Curso extends DB
 {
@@ -25,7 +25,7 @@ class Curso extends DB
         return $query;
     }
 
-     // QUERY Get Datos Todos Curso 
+    // QUERY Get Datos Todos Curso 
 
     function getAllCursoData()
     {
@@ -43,6 +43,23 @@ class Curso extends DB
         return $query;
     }
 
+    // QUERY REPORTE INSTRUCTOR
+
+    function getReporteInstructor($Usuario_id)
+    {
+        $get = "CALL sp_GestionCurso(
+            'R', 	#Operacion
+            NULL, 	# Curso Id
+            $Usuario_id, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            NULL,	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
     // ---------------------------------------INSERTAR INFORMACION------------------------------------------
     // QUERY Insertar Curso
 
@@ -54,7 +71,7 @@ class Curso extends DB
             NULL, 	# Curso Id
             $Usuario_id, 	# Usuario Id
             $costoCurso,  	# Curso Costo
-            $imagenCurso,	# Curso Imagen
+            '$imagenCurso',	# Curso Imagen
             '$nombreCurso',	# Curso Nombre
             '$descripcionCurso', 	# Curso Descripcion
             NULL 		# Curso isBaja
@@ -63,8 +80,8 @@ class Curso extends DB
         return $query;
     }
 
-   // ---------------------------------------ACTUALIZAR INFORMACION------------------------------------------
-   // QUERY Actualizar Curso
+    // ---------------------------------------ACTUALIZAR INFORMACION------------------------------------------
+    // QUERY Actualizar Curso
 
     function actualizarCurso($Curso_id, $costoCurso, $imagenCurso, $nombreCurso, $descripcionCurso)
     {
@@ -83,7 +100,7 @@ class Curso extends DB
         return $query;
     }
 
-       // QUERY Baja Curso
+    // QUERY Baja Curso
 
     function bajaCurso($Curso_id)
     {
@@ -100,10 +117,10 @@ class Curso extends DB
         $query = $this->connect()->query($update);
         return $query;
     }
-     
+
     // ---------------------------------------                                     <--   CURSO - CATEGORIA  -->                                    ------------------------------------------
 
-      
+
     // ---------------------------------------CONSULTA DE INFORMACION------------------------------------------
 
     // QUERY Get Datos Cursos de una Categoria
@@ -135,7 +152,7 @@ class Curso extends DB
     }
 
 
-       // ---------------------------------------INSERTAR INFORMACION------------------------------------------
+    // ---------------------------------------INSERTAR INFORMACION------------------------------------------
     // QUERY Insertar Curso Categoria
 
     function insertarCursoCategoria($Curso_id, $Categoria_id)
@@ -150,8 +167,8 @@ class Curso extends DB
         return $query;
     }
 
-     // ---------------------------------------ELIMINAR INFORMACION------------------------------------------
-     // QUERY Eliminar Curso Categoria
+    // ---------------------------------------ELIMINAR INFORMACION------------------------------------------
+    // QUERY Eliminar Curso Categoria
     function eliminarCursoCategoria($CursoCategoria_id)
     {
         $delete = "CALL sp_GestionMensaje(
@@ -163,11 +180,11 @@ class Curso extends DB
         $query = $this->connect()->query($delete);
         return $query;
     }
-     
 
-     // ---------------------------------------                                     <--   USUARIO - CURSO  -->                                    ------------------------------------------
 
-      
+    // ---------------------------------------                                     <--   USUARIO - CURSO  -->                                    ------------------------------------------
+
+
     // ---------------------------------------CONSULTA DE INFORMACION------------------------------------------
 
     // QUERY Get Datos Cursos de un Usuario
@@ -185,7 +202,7 @@ class Curso extends DB
         return $query;
     }
 
-    function insertarCursoAUsuario($MetodoPago_id, $Curso_id,$Usuario_id,$costoCurso)
+    function insertarCursoAUsuario($MetodoPago_id, $Curso_id, $Usuario_id, $costoCurso)
     {
         $insert = "CALL sp_GestionCurso(
                   'I',  #Operacion
@@ -198,9 +215,6 @@ class Curso extends DB
         $query = $this->connect()->query($insert);
         return $query;
     }
-
-
-
 }
 
 ?>

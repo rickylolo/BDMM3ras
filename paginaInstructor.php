@@ -14,7 +14,9 @@ session_start(); // Inicio mi sesion PHP
     <link rel="shortcut icon" href="img\cripto.png">
     <script src="js/jquery-3.6.0.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/instructor.js"></script>
     <link href="css/index.css" rel="stylesheet">
+    <link href="css/instructor.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
@@ -59,7 +61,7 @@ session_start(); // Inicio mi sesion PHP
                         echo ' 
                                     <div id="perfil">
                                     <div class="d-flex flex-column dropstart misDatosUsuario">
-                                    <div class="miImagen dropdown p-2 mx-auto" id="DatosUser" data-bs-toggle="dropdown"
+                                    <div class="miImagen p-2 mx-auto" id="DatosUser" data-bs-toggle="dropdown"
                                                   aria-expanded="false"><img src="" id="pfp" class="pfp rounded-circle">
                                     </div>
                                     <ul class="dropdown-menu p-3" aria-labelledby="DatosUser">
@@ -140,14 +142,7 @@ session_start(); // Inicio mi sesion PHP
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 Categorias
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="">Desarrollo</a></li>
-                                <li><a class="dropdown-item" href="">Negocios</a></li>
-                                <li><a class="dropdown-item" href="">Finanzas</a></li>
-                                <li><a class="dropdown-item" href="">Cocina</a></li>
-                                <li><a class="dropdown-item" href="">Productividad</a></li>
-                                <li><a class="dropdown-item" href="">Diseño</a></li>
-                                <li><a class="dropdown-item" href="">Marketing</a></li>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="searchCategoria">
                             </ul>
                         </div>
                         <input class="form-control" type="search" placeholder="Buscar curso" aria-label="Search">
@@ -166,93 +161,14 @@ session_start(); // Inicio mi sesion PHP
                 </div>
             </nav>
             <div class="list-group">
-                <hr class="solid">
-                <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                    <div class="d-flex flex-row miImagen justify-content-between">
-                        <div class="d-flex align-items-start">
-                            <img src="img/html.jpg" class="pfp">
-                            <div class="p-1 d-flex flex-column">
-                                <p class="fs-5 fw-bold">Curso de HTML 5</p>
-                                <p class="text-muted fs-6">Desarrollo
-                            </div>
-                            <div class="ps-4 d-flex flex-row">
-                                </p>
-                                <p class="ps-4 pt-4 text-muted fs-6 fw-light">Alumnos: <b>15</b>
-                                </p>
-                                <p class="ps-4 pt-4 text-muted fs-6 fw-light">Promedio nivel: <b>3</b>
-                                </p>
-                                <p class="ps-4 pt-4  text-muted fs-6 fw-light">Total ingresos: <b>2350.00 MXN</b>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <p class="mb-1" data-bs-toggle="modal" data-bs-target="#miModalCursoDetalle"><button type="button" class="btn btn-success"><i class="bi bi-search"></i></button>
-                            </p>
-                            <p class="mb-1"><button type="button" class="btn btn-primary"><i class="bi bi-pen" data-bs-toggle="modal" data-bs-target="#miModalCurso"></i></button>
-                            </p>
-                            <p class="mb-1"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></p>
 
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                    <div class="d-flex flex-row miImagen justify-content-between">
-                        <div class="d-flex align-items-start">
-                            <img src="img/javascript.jpg" class="pfp">
-                            <div class="p-1 d-flex flex-column">
-                                <p class="fs-5 fw-bold">Curso de Javascript</p>
-                                <p class="text-muted fs-6">Desarrollo
-                            </div>
-                            <div class="ps-4 d-flex flex-row">
-                                </p>
-                                <p class="ps-4 pt-4 text-muted fs-6 fw-light">Alumnos: <b>15</b>
-                                </p>
-                                <p class="ps-4 pt-4 text-muted fs-6 fw-light">Promedio nivel: <b>3</b>
-                                </p>
-                                <p class="ps-4 pt-4  text-muted fs-6 fw-light">Total ingresos: <b>2350.00 MXN</b>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <p class="mb-1" data-bs-toggle="modal" data-bs-target="#miModalCursoDetalle"><button type="button" class="btn btn-success"><i class="bi bi-search"></i></button>
-                            </p>
-                            <p class="mb-1"><button type="button" class="btn btn-primary"><i class="bi bi-pen"></i></button>
-                            </p>
-                            <p class="mb-1"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></p>
+                <div id="miReporteInstructor" class="mt-4 mb-4">
 
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                    <div class="d-flex flex-row miImagen justify-content-between">
-                        <div class="d-flex align-items-start">
-                            <img src="img/css.png" class="pfp">
-                            <div class="p-1 d-flex flex-column">
-                                <p class="fs-5 fw-bold">Curso de CSS 3</p>
-                                <p class="text-muted fs-6">Desarrollo
-                            </div>
-                            <div class="ps-4 d-flex flex-row">
-                                </p>
-                                <p class="ps-4 pt-4 text-muted fs-6 fw-light">Alumnos: <b>15</b>
-                                </p>
-                                <p class="ps-4 pt-4 text-muted fs-6 fw-light">Promedio nivel: <b>3</b>
-                                </p>
-                                <p class="ps-4 pt-4  text-muted fs-6 fw-light">Total ingresos: <b>2350.00 MXN</b>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <p class="mb-1" data-bs-toggle="modal" data-bs-target="#miModalCursoDetalle"><button type="button" class="btn btn-success"><i class="bi bi-search"></i></button>
-                            </p>
-                            <p class="mb-1"><button type="button" class="btn btn-primary"><i class="bi bi-pen"></i></button>
-                            </p>
-                            <p class="mb-1"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></p>
+                </div>
 
-                        </div>
-                    </div>
-                </a>
 
-                <hr class="solid">
+
+
 
             </div>
             <div class="container">
@@ -543,199 +459,253 @@ session_start(); // Inicio mi sesion PHP
         </div>
     </div>
 
-    <!--  >MODAL WINDOW CURSO<-->
-    <div class="modal fade" id="miModalCurso" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+    <!--  >MODAL WINDOW EDITAR CURSO<-->
+    <div class="modal fade" id="miModalEditarCurso" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex miImagen align-items-start">
-                        <img src="img/html.jpg" class="pfp">
+                        <img src="" id="miImagenCursoSelected" class="pfp">
                         <div class="p-1 d-flex flex-column">
-                            <p class="fs-5 fw-bold">Curso de HTML 5</p>
+                            <p class="fs-5 fw-bold" id="nombreCursoSelected"></p>
                         </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
+                    <input type="text" id="miCursoSelectedEdit">
                     <ul class="nav nav-tabs justify-content-center">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Categorias</a>
+                            <a class="nav-link active" aria-current="page" id="VerMiCurso">Curso</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Niveles</a>
+                            <a class="nav-link" id="VerMisCategoriasCurso">Categorias</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="VerMisNivelesCurso">Niveles</a>
                         </li>
                     </ul>
-                    <div class="container-fluid">
-                        <div class="d-flex flex-row justify-content-between">
-                            <div class="fs-5 fw-bold p-2">Categorias</div>
-                            <p class="mb-1 pt-2"><button type="button" class="btn btn-success">Agregar <i class="bi bi-plus-lg"></i></button>
-                            </p>
+
+
+                    <div id="editarMiCursoSelected" class="mt-4">
+                        <div class="row d-flex text-center">
+
+                            <h4>Ingresa los siguientes datos:</h4>
 
                         </div>
+
+                        <div class="image-upload d-flex justify-content-center p-2">
+                            <label for="cursoIMG">
+                                <img src="img/camera.jpg" alt="" id="img_cursoIMG" width="250px" height="250px">
+                            </label>
+                            <input type="file" onchange="vista_preliminarCurso(event)" accept="image/jpeg" class="form-control" id="cursoIMG" name="cursoIMG" aria-describedby="basic-addon1">
+
+                        </div>
+
+                        <div class="row fw-bold fs-6 ms-3 mb-2">
+                            Nombre:
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
+                            <input type="text" class="form-control" id="E_nombreCurso" name="E_nombreCurso" placeholder="Nombre del curso" aria-label="Username" aria-describedby="basic-addon1" required>
+                        </div>
+
+                        <div class="row fw-bold fs-6 ms-3 mb-2">
+                            Descripción
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
+
+                            <textarea row="8" class="form-control" id="E_descCurso" name="E_descCurso" placeholder="Descripción del curso" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
+
+                        </div>
+
+                        <div class="row fw-bold fs-6 ms-3 mb-2">
+                            Costo:
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-list"></i></span>
+                            <input type="number" class="form-control" id="costoCurso" name="costoCurso" placeholder="Costo" aria-label="Username" aria-describedby="basic-addon1" required>
+                        </div>
+
+
                     </div>
 
-                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                        <div class="miImagen misMensajes d-flex w-100 justify-content-between">
-                            <div class="container">
-
-                                <div class="d-flex flex-row">
-
-                                    <div class="flex-fill">
-                                        <p class="fs-6 pt-2">Desarrollo</p>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-
-                                        <p class="mb-1 pt-2"><button type="button" class="btn btn-danger"><i class="bi bi-x-lg"></i></button>
-                                        </p>
-
-                                    </div>
-                                </div>
+                    <div id="categoriasCursoSelected">
+                        <div class="container-fluid">
+                            <div class="d-flex flex-row justify-content-between">
+                                <div class="fs-5 fw-bold p-2">Categorias</div>
+                                <p class="mb-1 pt-2"><button type="button" class="btn btn-success">Agregar <i class="bi bi-plus-lg"></i></button>
+                                </p>
 
                             </div>
                         </div>
 
-                    </a>
-                    <hr class="solid">
-                    <div class="container-fluid">
-                        <div class="d-flex flex-row justify-content-between">
-                            <div class="fs-5 fw-bold p-2">Niveles</div>
-                            <p class="mb-1 pt-2" data-bs-toggle="modal" data-bs-target="#miModalNivel"><button type="button" class="btn btn-success">Agregar <i class="bi bi-plus-lg"></i></button>
-                            </p>
 
-                        </div>
-                    </div>
-                    <div class="accordion accordion-flush" id="miContenido">
 
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                    Nivel 1: Introducción
+                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                            <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                                <div class="container">
 
-                                </button>
+                                    <div class="d-flex flex-row">
 
-                            </h2>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#miContenido">
-                                <div class="accordion-body">
-                                    <div class="card">
-                                        <div class="card-header text-end">
-                                            <span class="badge rounded-pill bg-primary">Editar</span>
-                                            <span class="badge rounded-pill bg-danger">Borrar</span>
+                                        <div class="flex-fill">
+                                            <p class="fs-6 pt-2">Desarrollo</p>
                                         </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title">Introducción</h5>
-                                            <p class="card-text">¿Qué es HTML y para qué sirve?
-                                                El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza
-                                                para
+                                        <div class="d-flex justify-content-end">
+
+                                            <p class="mb-1 pt-2"><button type="button" class="btn btn-danger"><i class="bi bi-x-lg"></i></button>
+                                            </p>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </a>
+                    </div>
+
+                    <div id="nivelesCursoSelected">
+                        <div class="container-fluid">
+                            <div class="d-flex flex-row justify-content-between">
+                                <div class="fs-5 fw-bold p-2">Niveles</div>
+                                <p class="mb-1 pt-2" data-bs-toggle="modal" data-bs-target="#miModalNivel"><button type="button" class="btn btn-success">Agregar <i class="bi bi-plus-lg"></i></button>
+                                </p>
+
+                            </div>
+                        </div>
+                        <div class="accordion accordion-flush" id="miContenido">
+
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        Nivel 1: Introducción
+
+                                    </button>
+
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#miContenido">
+                                    <div class="accordion-body">
+                                        <div class="card">
+                                            <div class="card-header text-end">
+                                                <span class="badge rounded-pill bg-primary">Editar</span>
+                                                <span class="badge rounded-pill bg-danger">Borrar</span>
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Introducción</h5>
+                                                <p class="card-text">¿Qué es HTML y para qué sirve?
+                                                    El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza
+                                                    para
+                                                    estructurar y desplegar una página web y
+                                                    sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una
+                                                    lista con
+                                                    viñetas, o imágenes y tablas de datos.</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                        Nivel 2: Conceptos Básicos
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#miContenido">
+                                    <div class="accordion-body">
+                                        <div class="card">
+                                            <div class="card-header text-end">
+                                                <span class="badge rounded-pill bg-primary">Editar</span>
+                                                <span class="badge rounded-pill bg-danger">Borrar</span>
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title">Conceptos Básicos</h5>
+                                                <p class="card-text"></p>
+                                                El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para
                                                 estructurar y desplegar una página web y
-                                                sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una
-                                                lista con
-                                                viñetas, o imágenes y tablas de datos.</p>
+                                                sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista
+                                                con viñetas, o imágenes y tablas de datos.
+                                                Como lo sugiere el título, este artículo te dará una comprensión básica de
+                                                HTML y cúal es su función.
 
+                                                Entonces, ¿qué es HTML en realidad?
+                                                HTML no es un lenguaje de programación; es un lenguaje de marcado que define
+                                                la estructura de tu contenido. HTML
+                                                consiste en una serie de elementos que usarás para encerrar diferentes
+                                                partes del contenido para que se vean o comporten
+                                                de una determinada manera. Las etiquetas de encierre pueden hacer de una
+                                                palabra o una imagen un hipervínculo a otro
+                                                sitio, se pueden cambiar palabras a cursiva, agrandar o achicar la letra,
+                                                etc.
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                    Nivel 2: Conceptos Básicos
-                                </button>
-                            </h2>
-                            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#miContenido">
-                                <div class="accordion-body">
-                                    <div class="card">
-                                        <div class="card-header text-end">
-                                            <span class="badge rounded-pill bg-primary">Editar</span>
-                                            <span class="badge rounded-pill bg-danger">Borrar</span>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title">Conceptos Básicos</h5>
-                                            <p class="card-text"></p>
-                                            El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para
-                                            estructurar y desplegar una página web y
-                                            sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista
-                                            con viñetas, o imágenes y tablas de datos.
-                                            Como lo sugiere el título, este artículo te dará una comprensión básica de
-                                            HTML y cúal es su función.
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                        Nivel 3: Formularios
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#miContenido">
+                                    <div class="accordion-body">
+                                        <div class="card">
+                                            <div class="card-header text-end">
+                                                <span class="badge rounded-pill bg-primary">Editar</span>
+                                                <span class="badge rounded-pill bg-danger">Borrar</span>
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title text-center text-muted">Formularios.</h5>
+                                                <video controls class="misVideos mx-auto">
+                                                    <source class="misVideos" src="" type="video/mp4">
+                                                </video>
+                                                <hr class="solid">
 
-                                            Entonces, ¿qué es HTML en realidad?
-                                            HTML no es un lenguaje de programación; es un lenguaje de marcado que define
-                                            la estructura de tu contenido. HTML
-                                            consiste en una serie de elementos que usarás para encerrar diferentes
-                                            partes del contenido para que se vean o comporten
-                                            de una determinada manera. Las etiquetas de encierre pueden hacer de una
-                                            palabra o una imagen un hipervínculo a otro
-                                            sitio, se pueden cambiar palabras a cursiva, agrandar o achicar la letra,
-                                            etc.
-
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                    Nivel 3: Formularios
-                                </button>
-                            </h2>
-                            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#miContenido">
-                                <div class="accordion-body">
-                                    <div class="card">
-                                        <div class="card-header text-end">
-                                            <span class="badge rounded-pill bg-primary">Editar</span>
-                                            <span class="badge rounded-pill bg-danger">Borrar</span>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title text-center text-muted">Formularios.</h5>
-                                            <video controls class="misVideos mx-auto">
-                                                <source class="misVideos" src="" type="video/mp4">
-                                            </video>
-                                            <hr class="solid">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="flush-headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                        Nivel 4: Imagenes, links, listas y tablas.
+                                    </button>
+                                </h2>
 
+                                <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#miContenido">
+                                    <div class="accordion-body">
+                                        <div class="card">
+                                            <div class="card-header text-end">
+                                                <span class="badge rounded-pill bg-primary">Editar</span>
+                                                <span class="badge rounded-pill bg-danger">Borrar</span>
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-title text-center text-muted">Imagenes, links, listas y
+                                                    tablas.</h5>
+                                                <video controls class="misVideos mx-auto">
+                                                    <source class="misVideos" src="" type="video/mp4">
+                                                </video>
+                                                <hr class="solid">
+
+                                            </div>
                                         </div>
+
+
                                     </div>
                                 </div>
                             </div>
+
+
+
                         </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="flush-headingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                                    Nivel 4: Imagenes, links, listas y tablas.
-                                </button>
-                            </h2>
-
-                            <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#miContenido">
-                                <div class="accordion-body">
-                                    <div class="card">
-                                        <div class="card-header text-end">
-                                            <span class="badge rounded-pill bg-primary">Editar</span>
-                                            <span class="badge rounded-pill bg-danger">Borrar</span>
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title text-center text-muted">Imagenes, links, listas y
-                                                tablas.</h5>
-                                            <video controls class="misVideos mx-auto">
-                                                <source class="misVideos" src="" type="video/mp4">
-                                            </video>
-                                            <hr class="solid">
-
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                        </div>
-
-
-
                     </div>
 
 
-
-                    <hr class="solid">
 
                 </div>
                 <div class="modal-footer">
@@ -746,6 +716,70 @@ session_start(); // Inicio mi sesion PHP
         </div>
     </div>
 
+
+
+    <!--  >MODAL WINDOW CURSO<-->
+    <div class="modal fade" id="miModalCurso" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="d-flex miImagen align-items-start">
+                        <h4 class="modal-title fw-bold ms-4" id="modalTitle">Registrar curso</h4>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row d-flex text-center">
+
+                        <h4>Ingresa los siguientes datos:</h4>
+
+                    </div>
+
+                    <div class="image-upload d-flex justify-content-center p-2">
+                        <label for="cursoIMG">
+                            <img src="img/camera.jpg" alt="" id="img_cursoIMG" width="250px" height="250px">
+                        </label>
+                        <input type="file" onchange="vista_preliminarCurso(event)" accept="image/jpeg" class="form-control" id="cursoIMG" name="cursoIMG" aria-describedby="basic-addon1">
+
+                    </div>
+
+                    <div class="row fw-bold fs-6 ms-3 mb-2">
+                        Nombre:
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
+                        <input type="text" class="form-control" id="nombreCurso" name="nombreCurso" placeholder="Nombre del curso" aria-label="Username" aria-describedby="basic-addon1" required>
+                    </div>
+
+                    <div class="row fw-bold fs-6 ms-3 mb-2">
+                        Descripción
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
+
+                        <textarea row="8" class="form-control" id="descCurso" name="descCurso" placeholder="Descripción del curso" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
+
+                    </div>
+
+                    <div class="row fw-bold fs-6 ms-3 mb-2">
+                        Costo:
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-list"></i></span>
+                        <input type="number" class="form-control" id="costoCurso" name="costoCurso" placeholder="Costo" aria-label="Username" aria-describedby="basic-addon1" required>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="ButtonRegistrarCurso" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso">Registrar
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
     <!--  >MODAL NIVEL<-->
     <div class="modal fade" id="miModalNivel" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -756,38 +790,38 @@ session_start(); // Inicio mi sesion PHP
                 </div>
                 <form method="post">
                     <div class="modal-body">
-                        <div class="divAltaProducto">
-                            <div class="row">
-                                <div class="col-12">
-                                    <h4>Ingresa los siguientes datos:</h4>
-                                </div>
-                            </div>
-                            <div class="row modalTexto">
-                                Nombre:
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
-                                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Nombre del producto" aria-label="Username" aria-describedby="basic-addon1" required>
-                            </div>
 
-                            <div class="row modalTexto">
-                                Descripción:
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-list"></i></span>
-                                <input type="text" class="form-control" id="product_desc" name="product_desc" placeholder="Descripción" aria-label="Username" aria-describedby="basic-addon1" required>
-                            </div>
-
-                            <div class="row modalTexto">
-                                Multimedia
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-camera"> </i></span>
-                                <input type="file" onchange="vista_preliminar(event)" accept="image/jpeg" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
-
-
+                        <div class="row">
+                            <div class="col-12">
+                                <h4>Ingresa los siguientes datos:</h4>
                             </div>
                         </div>
+                        <div class="row modalTexto">
+                            Nombre:
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
+                            <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Nombre del producto" aria-label="Username" aria-describedby="basic-addon1" required>
+                        </div>
+
+                        <div class="row modalTexto">
+                            Descripción:
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-list"></i></span>
+                            <input type="text" class="form-control" id="product_desc" name="product_desc" placeholder="Descripción" aria-label="Username" aria-describedby="basic-addon1" required>
+                        </div>
+
+                        <div class="row modalTexto">
+                            Multimedia
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-camera"> </i></span>
+                            <input type="file" onchange="vista_preliminar(event)" accept="image/jpeg" class="form-control" id="E_Multimedia" name="E_Multimedia" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
+
+
+                        </div>
+
 
                     </div>
                     <div class="modal-footer">
@@ -826,7 +860,7 @@ session_start(); // Inicio mi sesion PHP
 
                     <div class="input-group mb-3">
                         <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" aria-label="password" aria-describedby="basic-addon1">
+                        <input type="password" class="form-control" id="login_password" name="password" placeholder="Contraseña" aria-label="password" aria-describedby="basic-addon1">
                     </div>
                     <div class="row d-flex text-end">
                         <a href="miModal" data-bs-toggle="modal" data-bs-target="#miModal" data-bs-dismiss="modal">¿Aún

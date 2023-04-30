@@ -74,7 +74,7 @@ BEGIN
             AND esBloqueado = 0;
    END IF;
       IF Operacion = 'B' THEN /*GET DATOS ALL USUARIOS BLOQUEADOS*/
-		SELECT Usuario_id, MetodoPago_id, correo, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo
+		SELECT Usuario_id, MetodoPago_id, correo, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo, ultimoCambio
         FROM vUsuario
         WHERE esBloqueado = 1;
    END IF;
@@ -150,6 +150,8 @@ BEGIN
    THEN  
 		INSERT INTO Curso(Usuario_id,costoCurso,imagenCurso,nombre,descripcion) 
 			VALUES (sp_Usuario_id,sp_costoCurso,sp_imagenCurso,sp_nombre,sp_descripcion);
+           SELECT Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
+        FROM vCurso WHERE Curso_id = last_insert_id();
    END IF;
 	IF Operacion = 'E'  /*EDIT CURSO*/
     THEN 
@@ -179,6 +181,11 @@ BEGIN
 	SELECT Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
         FROM vCurso
         WHERE  Curso_id = sp_Curso_id;
+   END IF;
+	IF Operacion = 'R' THEN /*GET REPORTE INSTRUCTOR*/
+		SELECT Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, cursoNombre, descripcion, isBaja, CursoCategoria_id, categoriaNombre, Ingresos, Promedio, noAlumnos
+        FROM vCursoInstructor
+        WHERE Usuario_id = sp_Usuario_id;
    END IF;
 END //
 

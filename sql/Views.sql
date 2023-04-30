@@ -22,6 +22,18 @@ CREATE VIEW vCurso AS
 SELECT  Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
 FROM Curso;
 
+DROP VIEW IF EXISTS vCursoInstructor;
+
+CREATE VIEW vCursoInstructor AS
+SELECT  A.Curso_id, A.Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, A.nombre cursoNombre, A.descripcion, isBaja, CursoCategoria_id, C.nombre categoriaNombre, ingresosCurso(A.Curso_id) Ingresos, promedioCurso(A.Curso_id) Promedio, contarAlumnos(A.Curso_id) noAlumnos
+FROM Curso A
+LEFT JOIN CursoCategoria B 
+ON A.Curso_id = B.Curso_id
+LEFT JOIN Categoria C 
+ON B.Categoria_id = B.Categoria_id
+GROUP BY A.Curso_id;
+
+
 /*--------------------------------------------------------------------------------CATEGORIA--------------------------------------------------------------------------*/
 DROP VIEW IF EXISTS vCategoria;
 

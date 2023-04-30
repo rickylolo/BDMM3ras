@@ -67,15 +67,39 @@ class cursoAPI
             exit();
         }
     }
-    
+
 
     function insertarCurso($Usuario_id, $costoCurso, $imagenCurso, $nombreCurso, $descripcionCurso)
     {
         $Curso = new Curso();
-        $Curso->insertarCurso($Usuario_id, $costoCurso, $imagenCurso, $nombreCurso, $descripcionCurso);
+        $arrCursos = array();
+        $arrCursos["Datos"] = array();
+
+        $res = $Curso->insertarCurso($Usuario_id, $costoCurso, $imagenCurso, $nombreCurso, $descripcionCurso);
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $obj = array(
+                    "Curso_id" => $row['Curso_id'],
+                    "Usuario_id" => $row['Usuario_id'],
+                    "noNiveles" => $row['noNiveles'],
+                    "noComentarios" => $row['noComentarios'],
+                    "noLikes" => $row['noLikes'],
+                    "noDislikes" => $row['noDislikes'],
+                    "imagenCurso" => base64_encode(($row['imagenCurso'])),
+                    "nombre" => $row['nombre'],
+                    "descripcion" => $row['descripcion'],
+                    "isBaja" => $row['isBaja']
+                );
+                array_push($arrCursos["Datos"], $obj);
+            }
+            echo json_encode($arrCursos["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
     }
 
-    
+
     function actualizarCurso($Curso_id, $costoCurso, $imagenCurso, $nombreCurso, $descripcionCurso)
     {
         $Curso = new Curso();
@@ -129,9 +153,9 @@ class cursoAPI
         $res = $Curso->getCursosDeUnaCategoria($Categoria_id);
         if ($res) { // Entra si hay información
             while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-                $obj = array( //CursoCategoria_id, Categoria_id, Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
+                $obj = array(
                     "CursoCategoria_id" => $row['CursoCategoria_id'],
-                    "Categoria_id" => $row['Categoria_id'], 
+                    "Categoria_id" => $row['Categoria_id'],
                     "Curso_id" => $row['Curso_id'],
                     "Usuario_id" => $row['Usuario_id'],
                     "noNiveles" => $row['noNiveles'],
@@ -143,6 +167,43 @@ class cursoAPI
                     "nombre" => $row['nombre'],
                     "descripcion" => $row['descripcion'],
                     "isBaja" => $row['isBaja']
+                );
+                array_push($arrCursos["Datos"], $obj);
+            }
+            echo json_encode($arrCursos["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
+    }
+
+    function getReporteInstructor($Usuario_id)
+    {
+
+        $Curso = new Curso();
+        $arrCursos = array();
+        $arrCursos["Datos"] = array();
+
+        $res = $Curso->getReporteInstructor($Usuario_id);
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $obj = array(
+                    "Curso_id" => $row['Curso_id'],
+                    "Usuario_id" => $row['Usuario_id'],
+                    "noNiveles" => $row['noNiveles'],
+                    "costoCurso" => $row['costoCurso'],
+                    "noComentarios" => $row['noComentarios'],
+                    "noLikes" => $row['noLikes'],
+                    "noDislikes" => $row['noDislikes'],
+                    "imagenCurso" => base64_encode(($row['imagenCurso'])),
+                    "cursoNombre" => $row['cursoNombre'],
+                    "descripcion" => $row['descripcion'],
+                    "isBaja" => $row['isBaja'],
+                    "CursoCategoria_id" => $row['CursoCategoria_id'],
+                    "categoriaNombre" => $row['categoriaNombre'],
+                    "Ingresos" => $row['Ingresos'],
+                    "Promedio" => $row['Promedio'],
+                    "noAlumnos" => $row['noAlumnos']
                 );
                 array_push($arrCursos["Datos"], $obj);
             }
@@ -181,7 +242,7 @@ class cursoAPI
         $res = $Curso->getCursosDeUnUsuario($Usuario_id);
         if ($res) { // Entra si hay información
             while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-                $obj = array( 
+                $obj = array(
                     "Usuario_id" => $row['Usuario_id'],
                     "usuarioCurso_id" => $row['usuarioCurso_id'],
                     "Curso_id" => $row['Curso_id'],
@@ -203,10 +264,10 @@ class cursoAPI
         }
     }
 
-    function insertarCursoAUsuario($MetodoPago_id, $Curso_id,$Usuario_id,$costoCurso)
+    function insertarCursoAUsuario($MetodoPago_id, $Curso_id, $Usuario_id, $costoCurso)
     {
         $Curso = new Curso();
-        $Curso->insertarCursoAUsuario($MetodoPago_id, $Curso_id,$Usuario_id,$costoCurso);
+        $Curso->insertarCursoAUsuario($MetodoPago_id, $Curso_id, $Usuario_id, $costoCurso);
     }
 }
 
@@ -220,8 +281,10 @@ if (isset($_POST['funcion'])) {
             $tamanoArchivo = $_FILES['file']['size'];
             $imagenSubida = fopen($_FILES['file']['tmp_name'], 'r');
             $binariosImagen = fread($imagenSubida, $tamanoArchivo);
+            session_start();
+            $id = $_SESSION['Usuario_id'];
             $var = new cursoAPI();
-            $var->insertarCurso($_POST['Usuario_id'], $_POST['costoCurso'],$binariosImagen,$_POST['nombreCurso'],$_POST['descripcionCurso']);
+            $var->insertarCurso($id, $_POST['costoCurso'], $binariosImagen, $_POST['nombreCurso'], $_POST['descripcionCurso']);
             break;
         case "actualizarCurso":
             $tipoArchivo = $_FILES['file']['type'];
@@ -230,7 +293,7 @@ if (isset($_POST['funcion'])) {
             $imagenSubida = fopen($_FILES['file']['tmp_name'], 'r');
             $binariosImagen = fread($imagenSubida, $tamanoArchivo);
             $var = new cursoAPI();
-            $var->actualizarCurso($_POST['Curso_id'], $_POST['costoCurso'],$binariosImagen,$_POST['nombreCurso'],$_POST['descripcionCurso']);
+            $var->actualizarCurso($_POST['Curso_id'], $_POST['costoCurso'], $binariosImagen, $_POST['nombreCurso'], $_POST['descripcionCurso']);
             break;
         case "bajaCurso":
             $var = new cursoAPI();
@@ -244,7 +307,7 @@ if (isset($_POST['funcion'])) {
             $var = new cursoAPI();
             $var->getAllCursoData();
             break;
-    // ----------------------------------------------------------------- CURSO - CATEGORIA -----------------------------------------------------------------
+            // ----------------------------------------------------------------- CURSO - CATEGORIA -----------------------------------------------------------------
         case "obtenerCategoriasDeUnCurso":
             $var = new cursoAPI();
             $var->getCategoriasDeUnCurso($_POST['Curso_id']);
@@ -255,21 +318,26 @@ if (isset($_POST['funcion'])) {
             break;
         case "insertarCursoCategoria":
             $var = new cursoAPI();
-            $var->insertarCursoCategoria($_POST['Curso_id'],$_POST['Categoria_id']);
+            $var->insertarCursoCategoria($_POST['Curso_id'], $_POST['Categoria_id']);
             break;
         case "eliminarCursoCategoria":
             $var = new cursoAPI();
             $var->eliminarCursoCategoria($_POST['CursoCategoria_id']);
             break;
-    // ----------------------------------------------------------------- CURSO - USUARIO -----------------------------------------------------------------
+            // ----------------------------------------------------------------- CURSO - USUARIO -----------------------------------------------------------------
         case "obtenerCursosDeUnUsuario":
             $var = new cursoAPI();
             $var->getCursosDeUnUsuario($_POST['Usuario_id']);
             break;
         case "insertarCursoAUsuario":
             $var = new cursoAPI();
-            $var->insertarCursoAUsuario($_POST['MetodoPago_id'],$_POST['Curso_id'],$_POST['Usuario_id'],$_POST['costoCurso']);
+            $var->insertarCursoAUsuario($_POST['MetodoPago_id'], $_POST['Curso_id'], $_POST['Usuario_id'], $_POST['costoCurso']);
+            break;
+        case "getReporteInstructor":
+            session_start();
+            $id = $_SESSION['Usuario_id'];
+            $var = new cursoAPI();
+            $var->getReporteInstructor($id);
             break;
     }
 }
-
