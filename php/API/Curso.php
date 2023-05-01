@@ -20,6 +20,7 @@ class cursoAPI
                     "noNiveles" => $row['noNiveles'],
                     "noComentarios" => $row['noComentarios'],
                     "noLikes" => $row['noLikes'],
+                    "costoCurso" => $row['costoCurso'],
                     "noDislikes" => $row['noDislikes'],
                     "imagenCurso" => base64_encode(($row['imagenCurso'])),
                     "nombre" => $row['nombre'],

@@ -233,7 +233,7 @@ NULL, 	# Curso Descripcion
 NULL 		# Curso isBaja
 ); 
 
-
+SELECT * FROM CursoCategoria;
 /*--------------------------------------------------------------------------------CATEGORIA -------------------------------------------------------------------------*/
 CALL sp_GestionCategoria(
 'I', #Operacion

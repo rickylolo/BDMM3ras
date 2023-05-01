@@ -335,15 +335,15 @@ BEGIN
     IF Operacion = 'D' THEN /*DELETE CURSO CATEGORIA*/
           DELETE FROM CursoCategoria WHERE CursoCategoria_id = sp_CursoCategoria_id;
    END IF;
-      IF Operacion = 'A' THEN /*GET ALL CURSOS DE UNA CATEGORIA*/
+      IF Operacion = 'A' THEN /*GET ALL  CATEGORIAS CURSO*/
 		SELECT CursoCategoria_id, Curso_id, Categoria_id, Usuario_id, nombre, descripcion, tiempoRegistro
         FROM vObtenerTodasCategoriaDeCurso
-		WHERE Categoria_id = sp_Categoria_id;
+		WHERE Curso_id = sp_Curso_id;
    END IF;
-     IF Operacion = 'C' THEN /*GET ALL CATEGORIAS CURSO*/
+     IF Operacion = 'C' THEN /*GET ALL  CURSOS DE UNA CATEGORIA*/
 	    SELECT CursoCategoria_id, Categoria_id, Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
         FROM vObtenerTodosLosCursosDeUnaCategoria
-		WHERE Curso_id = sp_Curso_id;
+		WHERE Categoria_id = sp_Categoria_id;
    END IF;
 END //
 

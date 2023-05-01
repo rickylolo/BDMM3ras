@@ -127,8 +127,8 @@ class Curso extends DB
 
     function getCursosDeUnaCategoria($Categoria_id)
     {
-        $get = "CALL sp_GestionCurso(
-                'A',    #Operacion 
+        $get = "CALL sp_GestionCursoCategoria(
+                'C',    #Operacion 
                 NULL ,  # CursoCategoria id
                 NULL  	,	# Curso id
                 $Categoria_id # Categoria id 
@@ -141,10 +141,10 @@ class Curso extends DB
 
     function getCategoriasDeUnCurso($Curso_id)
     {
-        $get = "CALL sp_GestionCurso(
-                'C',    #Operacion 
+        $get = "CALL sp_GestionCursoCategoria(
+                'A',    #Operacion 
                 NULL ,  # CursoCategoria id
-                $Curso_id  	,	# Curso id
+                $Curso_id,	# Curso id
                 NULL # Categoria id 
         ); ";
         $query = $this->connect()->query($get);
@@ -157,7 +157,7 @@ class Curso extends DB
 
     function insertarCursoCategoria($Curso_id, $Categoria_id)
     {
-        $insert = "CALL sp_GestionCurso(
+        $insert = "CALL sp_GestionCursoCategoria(
                 'I',            # Operacion
                 NULL ,          # CursoCategoria id
                 $Curso_id  	,	# Curso id
@@ -171,7 +171,7 @@ class Curso extends DB
     // QUERY Eliminar Curso Categoria
     function eliminarCursoCategoria($CursoCategoria_id)
     {
-        $delete = "CALL sp_GestionMensaje(
+        $delete = "CALL sp_GestionCursoCategoria(
                 'D',    #Operacion 
                 $CursoCategoria_id ,  # CursoCategoria id
                 NULL  	,	# Curso id

@@ -473,7 +473,7 @@ session_start(); // Inicio mi sesion PHP
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" id="miCursoSelectedEdit">
+                    <input type="hidden" id="miCursoSelectedEdit">
                     <ul class="nav nav-tabs justify-content-center">
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" id="VerMiCurso">Curso</a>
@@ -496,6 +496,240 @@ session_start(); // Inicio mi sesion PHP
 
                         <div class="image-upload d-flex justify-content-center p-2">
                             <label for="cursoIMG">
+                                <img src="img/camera.jpg" alt="" id="E_img_cursoIMG" width="250px" height="250px">
+                            </label>
+                            <input type="file" onchange="vista_preliminarEditarCurso(event)" accept="image/jpeg" class="form-control" id="E_cursoIMG" name="E_cursoIMG" aria-describedby="basic-addon1">
+
+                        </div>
+
+                        <div class="row fw-bold fs-6 ms-3 mb-2">
+                            Nombre:
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
+                            <input type="text" class="form-control" id="E_nombreCurso" name="E_nombreCurso" placeholder="Nombre del curso" aria-describedby="basic-addon1" required>
+                        </div>
+
+                        <div class="row fw-bold fs-6 ms-3 mb-2">
+                            Descripción
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
+
+                            <textarea row="8" class="form-control" id="E_descCurso" name="E_descCurso" placeholder="Descripción del curso" aria-describedby="basic-addon1" value=""></textarea>
+
+                        </div>
+
+                        <div class="row fw-bold fs-6 ms-3 mb-2">
+                            Costo:
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-list"></i></span>
+                            <input type="number" class="form-control" id="E_costoCurso" name="E_costoCurso" placeholder="Costo" aria-describedby="basic-addon1" required>
+                        </div>
+
+
+                    </div>
+
+                    <div id="categoriasCursoSelected">
+
+                        <div class="pb-4 d-flex flex-row justify-content-between">
+                            <div class="fs-3 fw-bold p-2">Categorias</div>
+                            <div class="d-flex">
+                                <div class="mt-3 mb-3">
+                                    <div class="input-group">
+                                        <div class="dropdown input-group-text" id="basic-addon1">
+                                            <button class="btn dropdown-toggle text-black-50" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Selecciona aquí:
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3" id="miDropdownCursosCategoriasEditar">
+
+                                            </ul>
+                                        </div>
+                                        <input type="text" class="form-control" name="E_categoriaCursoEditar" id="E_categoriaCursoEditar" placeholder="Categoría" aria-label="Categoría" aria-describedby="basic-addon1" onlyread required>
+                                        <p class="mb-1 pt-2 "><button type="button" class="btn btn-success p-2" id="ButtonRegistrarCursoCategoria"><i class="bi bi-plus-lg"></i> Agregar </button>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <input type="hidden" id="miCategoriaParaCurso">
+                        <div id="misCategoriasCursoSelectedEditar">
+
+
+                        </div>
+                        <div id="nivelesCursoSelected">
+                            <div class="container-fluid">
+                                <div class="d-flex flex-row justify-content-between">
+                                    <div class="fs-5 fw-bold p-2">Niveles</div>
+                                    <p class="mb-1 pt-2" data-bs-toggle="modal" data-bs-target="#miModalNivel"><button type="button" class="btn btn-success">Agregar <i class="bi bi-plus-lg"></i></button>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div class="accordion accordion-flush" id="miContenido">
+
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingOne">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                            Nivel 1: Introducción
+
+                                        </button>
+
+                                    </h2>
+                                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#miContenido">
+                                        <div class="accordion-body">
+                                            <div class="card">
+                                                <div class="card-header text-end">
+                                                    <span class="badge rounded-pill bg-primary">Editar</span>
+                                                    <span class="badge rounded-pill bg-danger">Borrar</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Introducción</h5>
+                                                    <p class="card-text">¿Qué es HTML y para qué sirve?
+                                                        El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza
+                                                        para
+                                                        estructurar y desplegar una página web y
+                                                        sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una
+                                                        lista con
+                                                        viñetas, o imágenes y tablas de datos.</p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingTwo">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                            Nivel 2: Conceptos Básicos
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#miContenido">
+                                        <div class="accordion-body">
+                                            <div class="card">
+                                                <div class="card-header text-end">
+                                                    <span class="badge rounded-pill bg-primary">Editar</span>
+                                                    <span class="badge rounded-pill bg-danger">Borrar</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Conceptos Básicos</h5>
+                                                    <p class="card-text"></p>
+                                                    El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para
+                                                    estructurar y desplegar una página web y
+                                                    sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista
+                                                    con viñetas, o imágenes y tablas de datos.
+                                                    Como lo sugiere el título, este artículo te dará una comprensión básica de
+                                                    HTML y cúal es su función.
+
+                                                    Entonces, ¿qué es HTML en realidad?
+                                                    HTML no es un lenguaje de programación; es un lenguaje de marcado que define
+                                                    la estructura de tu contenido. HTML
+                                                    consiste en una serie de elementos que usarás para encerrar diferentes
+                                                    partes del contenido para que se vean o comporten
+                                                    de una determinada manera. Las etiquetas de encierre pueden hacer de una
+                                                    palabra o una imagen un hipervínculo a otro
+                                                    sitio, se pueden cambiar palabras a cursiva, agrandar o achicar la letra,
+                                                    etc.
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingThree">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                            Nivel 3: Formularios
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#miContenido">
+                                        <div class="accordion-body">
+                                            <div class="card">
+                                                <div class="card-header text-end">
+                                                    <span class="badge rounded-pill bg-primary">Editar</span>
+                                                    <span class="badge rounded-pill bg-danger">Borrar</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title text-center text-muted">Formularios.</h5>
+                                                    <video controls class="misVideos mx-auto">
+                                                        <source class="misVideos" src="" type="video/mp4">
+                                                    </video>
+                                                    <hr class="solid">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="flush-headingFour">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                            Nivel 4: Imagenes, links, listas y tablas.
+                                        </button>
+                                    </h2>
+
+                                    <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#miContenido">
+                                        <div class="accordion-body">
+                                            <div class="card">
+                                                <div class="card-header text-end">
+                                                    <span class="badge rounded-pill bg-primary">Editar</span>
+                                                    <span class="badge rounded-pill bg-danger">Borrar</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h5 class="card-title text-center text-muted">Imagenes, links, listas y
+                                                        tablas.</h5>
+                                                    <video controls class="misVideos mx-auto">
+                                                        <source class="misVideos" src="" type="video/mp4">
+                                                    </video>
+                                                    <hr class="solid">
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--  >MODAL WINDOW CURSO<-->
+        <div class="modal fade" id="miModalCurso" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="d-flex miImagen align-items-start">
+                            <h4 class="modal-title fw-bold ms-4" id="modalTitle">Registrar curso</h4>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row d-flex text-center">
+
+                            <h4>Ingresa los siguientes datos:</h4>
+
+                        </div>
+
+                        <div class="image-upload d-flex justify-content-center p-2">
+                            <label for="cursoIMG">
                                 <img src="img/camera.jpg" alt="" id="img_cursoIMG" width="250px" height="250px">
                             </label>
                             <input type="file" onchange="vista_preliminarCurso(event)" accept="image/jpeg" class="form-control" id="cursoIMG" name="cursoIMG" aria-describedby="basic-addon1">
@@ -507,7 +741,7 @@ session_start(); // Inicio mi sesion PHP
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
-                            <input type="text" class="form-control" id="E_nombreCurso" name="E_nombreCurso" placeholder="Nombre del curso" aria-label="Username" aria-describedby="basic-addon1" required>
+                            <input type="text" class="form-control" id="nombreCurso" name="nombreCurso" placeholder="Nombre del curso" aria-label="Username" aria-describedby="basic-addon1" required>
                         </div>
 
                         <div class="row fw-bold fs-6 ms-3 mb-2">
@@ -516,7 +750,7 @@ session_start(); // Inicio mi sesion PHP
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
 
-                            <textarea row="8" class="form-control" id="E_descCurso" name="E_descCurso" placeholder="Descripción del curso" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
+                            <textarea row="8" class="form-control" id="descCurso" name="descCurso" placeholder="Descripción del curso" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
 
                         </div>
 
@@ -530,553 +764,149 @@ session_start(); // Inicio mi sesion PHP
 
 
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" id="ButtonRegistrarCurso" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso">Registrar
+                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 
-                    <div id="categoriasCursoSelected">
-                        <div class="container-fluid">
-                            <div class="d-flex flex-row justify-content-between">
-                                <div class="fs-5 fw-bold p-2">Categorias</div>
-                                <p class="mb-1 pt-2"><button type="button" class="btn btn-success">Agregar <i class="bi bi-plus-lg"></i></button>
-                                </p>
-
-                            </div>
-                        </div>
-
-
-
-                        <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                            <div class="miImagen misMensajes d-flex w-100 justify-content-between">
-                                <div class="container">
-
-                                    <div class="d-flex flex-row">
-
-                                        <div class="flex-fill">
-                                            <p class="fs-6 pt-2">Desarrollo</p>
-                                        </div>
-                                        <div class="d-flex justify-content-end">
-
-                                            <p class="mb-1 pt-2"><button type="button" class="btn btn-danger"><i class="bi bi-x-lg"></i></button>
-                                            </p>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </a>
                     </div>
-
-                    <div id="nivelesCursoSelected">
-                        <div class="container-fluid">
-                            <div class="d-flex flex-row justify-content-between">
-                                <div class="fs-5 fw-bold p-2">Niveles</div>
-                                <p class="mb-1 pt-2" data-bs-toggle="modal" data-bs-target="#miModalNivel"><button type="button" class="btn btn-success">Agregar <i class="bi bi-plus-lg"></i></button>
-                                </p>
-
-                            </div>
-                        </div>
-                        <div class="accordion accordion-flush" id="miContenido">
-
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingOne">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                        Nivel 1: Introducción
-
-                                    </button>
-
-                                </h2>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#miContenido">
-                                    <div class="accordion-body">
-                                        <div class="card">
-                                            <div class="card-header text-end">
-                                                <span class="badge rounded-pill bg-primary">Editar</span>
-                                                <span class="badge rounded-pill bg-danger">Borrar</span>
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">Introducción</h5>
-                                                <p class="card-text">¿Qué es HTML y para qué sirve?
-                                                    El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza
-                                                    para
-                                                    estructurar y desplegar una página web y
-                                                    sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una
-                                                    lista con
-                                                    viñetas, o imágenes y tablas de datos.</p>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingTwo">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                        Nivel 2: Conceptos Básicos
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#miContenido">
-                                    <div class="accordion-body">
-                                        <div class="card">
-                                            <div class="card-header text-end">
-                                                <span class="badge rounded-pill bg-primary">Editar</span>
-                                                <span class="badge rounded-pill bg-danger">Borrar</span>
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">Conceptos Básicos</h5>
-                                                <p class="card-text"></p>
-                                                El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para
-                                                estructurar y desplegar una página web y
-                                                sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista
-                                                con viñetas, o imágenes y tablas de datos.
-                                                Como lo sugiere el título, este artículo te dará una comprensión básica de
-                                                HTML y cúal es su función.
-
-                                                Entonces, ¿qué es HTML en realidad?
-                                                HTML no es un lenguaje de programación; es un lenguaje de marcado que define
-                                                la estructura de tu contenido. HTML
-                                                consiste en una serie de elementos que usarás para encerrar diferentes
-                                                partes del contenido para que se vean o comporten
-                                                de una determinada manera. Las etiquetas de encierre pueden hacer de una
-                                                palabra o una imagen un hipervínculo a otro
-                                                sitio, se pueden cambiar palabras a cursiva, agrandar o achicar la letra,
-                                                etc.
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingThree">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                        Nivel 3: Formularios
-                                    </button>
-                                </h2>
-                                <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#miContenido">
-                                    <div class="accordion-body">
-                                        <div class="card">
-                                            <div class="card-header text-end">
-                                                <span class="badge rounded-pill bg-primary">Editar</span>
-                                                <span class="badge rounded-pill bg-danger">Borrar</span>
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title text-center text-muted">Formularios.</h5>
-                                                <video controls class="misVideos mx-auto">
-                                                    <source class="misVideos" src="" type="video/mp4">
-                                                </video>
-                                                <hr class="solid">
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header" id="flush-headingFour">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                                        Nivel 4: Imagenes, links, listas y tablas.
-                                    </button>
-                                </h2>
-
-                                <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#miContenido">
-                                    <div class="accordion-body">
-                                        <div class="card">
-                                            <div class="card-header text-end">
-                                                <span class="badge rounded-pill bg-primary">Editar</span>
-                                                <span class="badge rounded-pill bg-danger">Borrar</span>
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title text-center text-muted">Imagenes, links, listas y
-                                                    tablas.</h5>
-                                                <video controls class="misVideos mx-auto">
-                                                    <source class="misVideos" src="" type="video/mp4">
-                                                </video>
-                                                <hr class="solid">
-
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </div>
-
-
-
-                </div>
-                <div class="modal-footer">
-
-
                 </div>
             </div>
         </div>
-    </div>
-
-
-
-    <!--  >MODAL WINDOW CURSO<-->
-    <div class="modal fade" id="miModalCurso" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div class="d-flex miImagen align-items-start">
-                        <h4 class="modal-title fw-bold ms-4" id="modalTitle">Registrar curso</h4>
+        <!--  >MODAL NIVEL<-->
+        <div class="modal fade" id="miModalNivel" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalTitle">Nivel</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row d-flex text-center">
+                    <form method="post">
+                        <div class="modal-body">
 
-                        <h4>Ingresa los siguientes datos:</h4>
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>Ingresa los siguientes datos:</h4>
+                                </div>
+                            </div>
+                            <div class="row modalTexto">
+                                Nombre:
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
+                                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Nombre del producto" aria-label="Username" aria-describedby="basic-addon1" required>
+                            </div>
 
-                    </div>
+                            <div class="row modalTexto">
+                                Descripción:
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-list"></i></span>
+                                <input type="text" class="form-control" id="product_desc" name="product_desc" placeholder="Descripción" aria-label="Username" aria-describedby="basic-addon1" required>
+                            </div>
 
-                    <div class="image-upload d-flex justify-content-center p-2">
-                        <label for="cursoIMG">
-                            <img src="img/camera.jpg" alt="" id="img_cursoIMG" width="250px" height="250px">
-                        </label>
-                        <input type="file" onchange="vista_preliminarCurso(event)" accept="image/jpeg" class="form-control" id="cursoIMG" name="cursoIMG" aria-describedby="basic-addon1">
-
-                    </div>
-
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Nombre:
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
-                        <input type="text" class="form-control" id="nombreCurso" name="nombreCurso" placeholder="Nombre del curso" aria-label="Username" aria-describedby="basic-addon1" required>
-                    </div>
-
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Descripción
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
-
-                        <textarea row="8" class="form-control" id="descCurso" name="descCurso" placeholder="Descripción del curso" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
-
-                    </div>
-
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Costo:
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-list"></i></span>
-                        <input type="number" class="form-control" id="costoCurso" name="costoCurso" placeholder="Costo" aria-label="Username" aria-describedby="basic-addon1" required>
-                    </div>
+                            <div class="row modalTexto">
+                                Multimedia
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-camera"> </i></span>
+                                <input type="file" onchange="vista_preliminar(event)" accept="image/jpeg" class="form-control" id="E_Multimedia" name="E_Multimedia" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
 
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" id="ButtonRegistrarCurso" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso">Registrar
-                    </button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            </div>
 
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" id="ButtonRegistrarProducto" data-bs-dismiss="modal">Crear
+                                Nivel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-    </div>
-    <!--  >MODAL NIVEL<-->
-    <div class="modal fade" id="miModalNivel" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalTitle">Nivel</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="post">
+
+        <!--  >MODAL WINDOW LOGIN<-->
+        <div class="modal fade" id="miModalLogin" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content p-4">
+                    <div class="modal-header">
+                        <h4 class="modal-title fw-bold ms-4" id="modalTitle">Inicia sesión</h4>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
                     <div class="modal-body">
+                        <div class="separador"></div>
+                        <div class="row fw-bold fs-6 ms-3 mb-2">
+                            Correo Electrónico
+                        </div>
 
-                        <div class="row">
-                            <div class="col-12">
-                                <h4>Ingresa los siguientes datos:</h4>
-                            </div>
-                        </div>
-                        <div class="row modalTexto">
-                            Nombre:
-                        </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
-                            <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Nombre del producto" aria-label="Username" aria-describedby="basic-addon1" required>
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope"></i></span>
+                            <input type="text" class="form-control" id="correoLogin" name="correoLogin" placeholder="Correo" aria-label="correo" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="separador"></div>
+                        <div class="row fw-bold fs-6 ms-3 mb-2">
+                            Contraseña
                         </div>
 
-                        <div class="row modalTexto">
-                            Descripción:
-                        </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-list"></i></span>
-                            <input type="text" class="form-control" id="product_desc" name="product_desc" placeholder="Descripción" aria-label="Username" aria-describedby="basic-addon1" required>
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
+                            <input type="password" class="form-control" id="login_password" name="password" placeholder="Contraseña" aria-label="password" aria-describedby="basic-addon1">
                         </div>
-
-                        <div class="row modalTexto">
-                            Multimedia
+                        <div class="row d-flex text-end">
+                            <a href="miModal" data-bs-toggle="modal" data-bs-target="#miModal" data-bs-dismiss="modal">¿Aún
+                                no tienes una cuenta? Registrate Aquí</a>
                         </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-camera"> </i></span>
-                            <input type="file" onchange="vista_preliminar(event)" accept="image/jpeg" class="form-control" id="E_Multimedia" name="E_Multimedia" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
-
-
-                        </div>
-
-
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" id="ButtonRegistrarProducto" data-bs-dismiss="modal">Crear
-                            Nivel</button>
+                        <button type="submit" class="btn btn-success" id="ButtonLogIn">Iniciar Sesión</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
-    <!--  >MODAL WINDOW LOGIN<-->
-    <div class="modal fade" id="miModalLogin" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content p-4">
-                <div class="modal-header">
-                    <h4 class="modal-title fw-bold ms-4" id="modalTitle">Inicia sesión</h4>
-
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="separador"></div>
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Correo Electrónico
                     </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope"></i></span>
-                        <input type="text" class="form-control" id="correoLogin" name="correoLogin" placeholder="Correo" aria-label="correo" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="separador"></div>
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Contraseña
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-key"></i></span>
-                        <input type="password" class="form-control" id="login_password" name="password" placeholder="Contraseña" aria-label="password" aria-describedby="basic-addon1">
-                    </div>
-                    <div class="row d-flex text-end">
-                        <a href="miModal" data-bs-toggle="modal" data-bs-target="#miModal" data-bs-dismiss="modal">¿Aún
-                            no tienes una cuenta? Registrate Aquí</a>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" id="ButtonLogIn">Iniciar Sesión</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-
                 </div>
             </div>
+
         </div>
 
-    </div>
-
-    <!--  >MODAL WINDOW REGISTER<-->
-    <div class="modal fade" id="miModal" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content p-4">
-                <div class="modal-header">
-                    <h4 class="modal-title fw-bold ms-4" id="modalTitle">Registro de usuario</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-
-                    <div class="row d-flex text-center">
-                        <h5>Ingresa los siguientes datos</h5>
+        <!--  >MODAL WINDOW REGISTER<-->
+        <div class="modal fade" id="miModal" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content p-4">
+                    <div class="modal-header">
+                        <h4 class="modal-title fw-bold ms-4" id="modalTitle">Registro de usuario</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-
-                    <div class="image-upload d-flex justify-content-center p-2">
-                        <label for="userIMG">
-                            <img src="img/avatar.png" alt="" id="img-foto2" width="250px" height="250px">
-                        </label>
-                        <input type="file" onchange="vista_preliminar2(event)" accept="image/jpeg" class="form-control" id="userIMG" name="userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
-
-                    </div>
-
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Correo Electrónico
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Correo Electrónico" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-
-
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Nombre(s)
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-person"></i></span>
-                        <input type="text" class="form-control" id="names" name="names" placeholder="Nombre(s)" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-
-
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Apellido Paterno
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
-                        <input type="text" class="form-control" id="lastNameP" name="lastNameP" placeholder="Apellido Paterno" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-
-
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Apellido Materno
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
-                        <input type="text" class="form-control" id="lastNameM" name="lastNameM" placeholder="Apellido Materno" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Nombre de usuario
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"> <i class="bi bi-person"></i></span>
-                        <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
-                    </div>
-
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Contraseña
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"> <i class="bi bi-key"></i></span>
-                        <input type="password" class="form-control" id="password" name="contrasenia" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" required>
-                    </div>
-                    <p style="font-size: small;">La contraseña debe de incluir 8 caracteres al menos, y debe incluir
-                        una mayúscula, un carácter especial, y un número al menos.
-                    <p>
-
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Confirmar Contraseña
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"> <i class="bi bi-key"></i></span>
-                        <input type="password" class="form-control" id="confirmar_password" name="confirmar_password" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" required>
-                    </div>
-
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Fecha de nacimiento
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1"> <i class="bi bi-calendar"></i></span>
-                        <input type="date" class="form-control" id="Birthday" name="Birthday" placeholder="Fecha de nacimiento" aria-label="Fecha de nacimiento" aria-describedby="basic-addon1">
-                    </div>
-
-                    <div class="row fw-bold fs-6 ms-3 mb-2">
-                        Sexo:
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="dropdown input-group-text" id="basic-addon1">
-                            <button class="btn dropdown-toggle text-black-50" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Selecciona aquí:
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a href=" " class="dropdown-item SexoUsuario">Hombre</a></li>
-                                <li><a href=" " class="dropdown-item SexoUsuario">Mujer</a></li>
-                                <li><a href=" " class="dropdown-item SexoUsuario">Otro</a></li>
-                            </ul>
-                        </div>
-                        <input type="text" class="form-control" name="gender-user" id="gender-user" placeholder="Sexo" aria-label="Sexo" aria-describedby="basic-addon1" required>
-                    </div>
-
-
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" id="ButtonRegistroEstudiante" data-bs-dismiss="modal">Registrar
-                        Alumno</button>
-                    <button type="button" class="btn btn-success" id="ButtonRegistroInstructor" data-bs-dismiss="modal">Registrar
-                        Instructor</button>
-                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#miModalLogin">Regresar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--  >MODAL EDIT USER<-->
-    <div class="modal fade" id="miModalEditUser" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content p-3">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modalTitle">Edita tus datos</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form method="" action="" enctype="multipart/form-data">
                     <div class="modal-body">
 
-                        <div class="row d-flex justify-content-center">
-
-                            <h5>Ingresa los siguientes datos:</h5>
-
+                        <div class="row d-flex text-center">
+                            <h5>Ingresa los siguientes datos</h5>
                         </div>
 
                         <div class="image-upload d-flex justify-content-center p-2">
-                            <label for="E_userIMG">
-                                <img src="" alt="" id="E_imgFoto" width="250px" height="250px">
+                            <label for="userIMG">
+                                <img src="img/avatar.png" alt="" id="img-foto2" width="250px" height="250px">
                             </label>
-                            <input type="file" onchange="vista_preliminarEdit(event)" accept="image/jpeg" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
-
+                            <input type="file" onchange="vista_preliminar2(event)" accept="image/jpeg" class="form-control" id="userIMG" name="userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
 
                         </div>
-
 
                         <div class="row fw-bold fs-6 ms-3 mb-2">
                             Correo Electrónico
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">@</span>
-
-                            <input type="text" class="form-control" id="E_email" name="E_email" placeholder="Correo Electrónico" aria-label="Username" aria-describedby="basic-addon1" value="">
-
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Correo Electrónico" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
 
-                        <div class="row fw-bold fs-6 ms-3 mb-2">
-                            Contraseña
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-key"></i></span>
-                            <input type="password" class="form-control" id="E_contrasenia" name="E_contrasenia" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" value="">
-
-                        </div>
-                        <p style="font-size: small;">Contraseña con un mínimo de 8 caracteres, una
-                            mayúscula, una minúscula, un número y un carácter
-                            especial.
-                        <p>
-
-                        <div class="row fw-bold fs-6 ms-3 mb-2">
-                            Confirmar contraseña
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-key"></i></span>
-                            <input type="password" class="form-control" id="E_confirmarContrasenia" name="E_confirmarContrasenia" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" value="">
-
-                        </div>
-
-
-                        <div class="row fw-bold fs-6 ms-3 mb-2">
-                            Descripción
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
-
-                            <textarea row="8" class="form-control" id="E_descripcion" name="E_descripcion" placeholder="Describete" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
-
-                        </div>
 
                         <div class="row fw-bold fs-6 ms-3 mb-2">
                             Nombre(s)
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-person"></i></span>
-                            <input type="text" class="form-control" id="E_names" name="E_names" placeholder="Nombre(s)" aria-label="Username" aria-describedby="basic-addon1" value="">
-
+                            <input type="text" class="form-control" id="names" name="names" placeholder="Nombre(s)" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
 
 
@@ -1085,11 +915,8 @@ session_start(); // Inicio mi sesion PHP
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
-
-                            <input type="text" class="form-control" id="E_lastNameP" name="E_lastNameP" placeholder="Apellido Paterno" aria-label="Username" aria-describedby="basic-addon1" value="">
-
+                            <input type="text" class="form-control" id="lastNameP" name="lastNameP" placeholder="Apellido Paterno" aria-label="Username" aria-describedby="basic-addon1">
                         </div>
-
 
 
                         <div class="row fw-bold fs-6 ms-3 mb-2">
@@ -1097,9 +924,42 @@ session_start(); // Inicio mi sesion PHP
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
+                            <input type="text" class="form-control" id="lastNameM" name="lastNameM" placeholder="Apellido Materno" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
 
-                            <input type="text" class="form-control" id="E_lastNameM" name="E_lastNameM" placeholder="Apellido Materno" aria-label="Username" aria-describedby="basic-addon1" value="">
+                        <div class="row fw-bold fs-6 ms-3 mb-2">
+                            Nombre de usuario
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control" id="usuario" name="usuario" placeholder="Nombre de usuario" aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
 
+                        <div class="row fw-bold fs-6 ms-3 mb-2">
+                            Contraseña
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-key"></i></span>
+                            <input type="password" class="form-control" id="password" name="contrasenia" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" required>
+                        </div>
+                        <p style="font-size: small;">La contraseña debe de incluir 8 caracteres al menos, y debe incluir
+                            una mayúscula, un carácter especial, y un número al menos.
+                        <p>
+
+                        <div class="row fw-bold fs-6 ms-3 mb-2">
+                            Confirmar Contraseña
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-key"></i></span>
+                            <input type="password" class="form-control" id="confirmar_password" name="confirmar_password" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" required>
+                        </div>
+
+                        <div class="row fw-bold fs-6 ms-3 mb-2">
+                            Fecha de nacimiento
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-calendar"></i></span>
+                            <input type="date" class="form-control" id="Birthday" name="Birthday" placeholder="Fecha de nacimiento" aria-label="Fecha de nacimiento" aria-describedby="basic-addon1">
                         </div>
 
                         <div class="row fw-bold fs-6 ms-3 mb-2">
@@ -1107,55 +967,188 @@ session_start(); // Inicio mi sesion PHP
                         </div>
                         <div class="input-group mb-3">
                             <div class="dropdown input-group-text" id="basic-addon1">
-                                <button class="btn dropdown-toggle text-black-50" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn dropdown-toggle text-black-50" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                     Selecciona aquí:
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                    <li><a href=" " class="dropdown-item E_SexoUsuario">Hombre</a></li>
-                                    <li><a href=" " class="dropdown-item E_SexoUsuario">Mujer</a></li>
-                                    <li><a href=" " class="dropdown-item E_SexoUsuario">Otro</a></li>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a href=" " class="dropdown-item SexoUsuario">Hombre</a></li>
+                                    <li><a href=" " class="dropdown-item SexoUsuario">Mujer</a></li>
+                                    <li><a href=" " class="dropdown-item SexoUsuario">Otro</a></li>
                                 </ul>
                             </div>
-                            <input type="text" class="form-control" name="gender-user" id="E_generoUsuario" placeholder="Sexo" aria-label="Sexo" aria-describedby="basic-addon1" required>
-                        </div>
-
-                        <div class="row fw-bold fs-6 ms-3 mb-2">
-                            Fecha de nacimiento
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
-
-                            <input type="date" class="form-control" id="E_FechaNacimiento" name="E_FechaNacimiento" placeholder="Fecha de Nacimiento" aria-label="Fecha Nacimiento" aria-describedby="basic-addon1" value="">
-
+                            <input type="text" class="form-control" name="gender-user" id="gender-user" placeholder="Sexo" aria-label="Sexo" aria-describedby="basic-addon1" required>
                         </div>
 
 
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="EditUser" data-bs-dismiss="modal">Actualizar</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-success" id="ButtonRegistroEstudiante" data-bs-dismiss="modal">Registrar
+                            Alumno</button>
+                        <button type="button" class="btn btn-success" id="ButtonRegistroInstructor" data-bs-dismiss="modal">Registrar
+                            Instructor</button>
+                        <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#miModalLogin">Regresar</button>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!--FOOTER<-->
-    <footer class="w-100 d-flex justify-content-center flex-wrap">
-        <p class="fs-5 px-3 pt-3 PCELText"><img src="img/cripto.png" class="" width="40" height="40">
-        <p class="fs-5 px-3 pt-3">&copy; Todos los derechos reservados</p>
-        </p>
-        <div id="iconos">
-            <a href="" data-bs-toggle="modal" data-bs-target="#miModalContacto"><i class="bi bi-shop"></i></a>
-            <a href="https://www.facebook.com/RicardoGrimaldo29/"><i class="bi bi-facebook"></i></a>
-            <a href="https://twitter.com/rickylolo29"><i class="bi bi-twitter"></i></a>
-            <a href="https://www.instagram.com/rickylolo29/"><i class="bi bi-instagram"></i></a>
+        <!--  >MODAL EDIT USER<-->
+        <div class="modal fade" id="miModalEditUser" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content p-3">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="modalTitle">Edita tus datos</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="" action="" enctype="multipart/form-data">
+                        <div class="modal-body">
+
+                            <div class="row d-flex justify-content-center">
+
+                                <h5>Ingresa los siguientes datos:</h5>
+
+                            </div>
+
+                            <div class="image-upload d-flex justify-content-center p-2">
+                                <label for="E_userIMG">
+                                    <img src="" alt="" id="E_imgFoto" width="250px" height="250px">
+                                </label>
+                                <input type="file" onchange="vista_preliminarEdit(event)" accept="image/jpeg" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
+
+
+                            </div>
+
+
+                            <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Correo Electrónico
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">@</span>
+
+                                <input type="text" class="form-control" id="E_email" name="E_email" placeholder="Correo Electrónico" aria-label="Username" aria-describedby="basic-addon1" value="">
+
+                            </div>
+
+                            <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Contraseña
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-key"></i></span>
+                                <input type="password" class="form-control" id="E_contrasenia" name="E_contrasenia" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" value="">
+
+                            </div>
+                            <p style="font-size: small;">Contraseña con un mínimo de 8 caracteres, una
+                                mayúscula, una minúscula, un número y un carácter
+                                especial.
+                            <p>
+
+                            <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Confirmar contraseña
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-key"></i></span>
+                                <input type="password" class="form-control" id="E_confirmarContrasenia" name="E_confirmarContrasenia" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" value="">
+
+                            </div>
+
+
+                            <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Descripción
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
+
+                                <textarea row="8" class="form-control" id="E_descripcion" name="E_descripcion" placeholder="Describete" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
+
+                            </div>
+
+                            <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Nombre(s)
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-person"></i></span>
+                                <input type="text" class="form-control" id="E_names" name="E_names" placeholder="Nombre(s)" aria-label="Username" aria-describedby="basic-addon1" value="">
+
+                            </div>
+
+
+                            <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Apellido Paterno
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
+
+                                <input type="text" class="form-control" id="E_lastNameP" name="E_lastNameP" placeholder="Apellido Paterno" aria-label="Username" aria-describedby="basic-addon1" value="">
+
+                            </div>
+
+
+
+                            <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Apellido Materno
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
+
+                                <input type="text" class="form-control" id="E_lastNameM" name="E_lastNameM" placeholder="Apellido Materno" aria-label="Username" aria-describedby="basic-addon1" value="">
+
+                            </div>
+
+                            <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Sexo:
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="dropdown input-group-text" id="basic-addon1">
+                                    <button class="btn dropdown-toggle text-black-50" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Selecciona aquí:
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                                        <li><a href=" " class="dropdown-item E_SexoUsuario">Hombre</a></li>
+                                        <li><a href=" " class="dropdown-item E_SexoUsuario">Mujer</a></li>
+                                        <li><a href=" " class="dropdown-item E_SexoUsuario">Otro</a></li>
+                                    </ul>
+                                </div>
+                                <input type="text" class="form-control" name="gender-user" id="E_generoUsuario" placeholder="Sexo" aria-label="Sexo" aria-describedby="basic-addon1" required>
+                            </div>
+
+                            <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Fecha de nacimiento
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
+
+                                <input type="date" class="form-control" id="E_FechaNacimiento" name="E_FechaNacimiento" placeholder="Fecha de Nacimiento" aria-label="Fecha Nacimiento" aria-describedby="basic-addon1" value="">
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="EditUser" data-bs-dismiss="modal">Actualizar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+        <!--FOOTER<-->
+        <footer class="w-100 d-flex justify-content-center flex-wrap">
+            <p class="fs-5 px-3 pt-3 PCELText"><img src="img/cripto.png" class="" width="40" height="40">
+            <p class="fs-5 px-3 pt-3">&copy; Todos los derechos reservados</p>
+            </p>
+            <div id="iconos">
+                <a href="" data-bs-toggle="modal" data-bs-target="#miModalContacto"><i class="bi bi-shop"></i></a>
+                <a href="https://www.facebook.com/RicardoGrimaldo29/"><i class="bi bi-facebook"></i></a>
+                <a href="https://twitter.com/rickylolo29"><i class="bi bi-twitter"></i></a>
+                <a href="https://www.instagram.com/rickylolo29/"><i class="bi bi-instagram"></i></a>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>
 
 </html>

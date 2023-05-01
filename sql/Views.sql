@@ -64,7 +64,7 @@ FROM Mensaje;
 DROP VIEW IF EXISTS vObtenerTodasCategoriaDeCurso;
 
 CREATE VIEW vObtenerTodasCategoriaDeCurso AS
-SELECT CursoCategoria_id, Curso_id, A.Categoria_id, Usuario_id, nombre, descripcion, tiempoRegistro
+SELECT CursoCategoria_id, Curso_id, A.Categoria_id, Usuario_id, B.nombre, descripcion, tiempoRegistro
 FROM CursoCategoria A
 LEFT JOIN Categoria B
 ON A.Categoria_id = B.Categoria_id;
