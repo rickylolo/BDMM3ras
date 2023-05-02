@@ -33,7 +33,7 @@ class Multimedia extends DB
                     'I',  # Operacion
                     NULL,    # Id
                     $Nivel_id, 	    # Nivel Id
-                    $Multimedia,  		# Multimedia
+                    '$Multimedia',  		# Multimedia
                     '$Texto', 			# Texto
                     $tipoMultimedia 	# Tipo Multimedia
         ); ";

@@ -220,6 +220,7 @@ NULL, 	# Usuario Id
 'Curso de Java para principiantes', 	# Curso Descripcion
 NULL 		# Curso isBaja
 ); 
+SELECT * FROM Curso;
 
 
 CALL sp_GestionCurso(
@@ -233,7 +234,6 @@ NULL, 	# Curso Descripcion
 NULL 		# Curso isBaja
 ); 
 
-SELECT * FROM CursoCategoria;
 /*--------------------------------------------------------------------------------CATEGORIA -------------------------------------------------------------------------*/
 CALL sp_GestionCategoria(
 'I', #Operacion

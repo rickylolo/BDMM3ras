@@ -488,51 +488,57 @@ session_start(); // Inicio mi sesion PHP
 
 
                     <div id="editarMiCursoSelected" class="mt-4">
-                        <div class="row d-flex text-center">
+                        
+                        <div class="row d-flex text-center mb-4">
 
                             <h4>Ingresa los siguientes datos:</h4>
 
                         </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="image-upload d-flex justify-content-center p-2">
+                                    <label for="cursoIMG">
+                                    <img src="img/camera.jpg" alt="" id="E_img_cursoIMG" width="250px" height="250px">
+                                    </label>
+                                    <input type="file" onchange="vista_preliminarEditarCurso(event)" accept="image/jpeg" class="form-control" id="E_cursoIMG" name="E_cursoIMG" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                 
+                  
+                            <div class="col-8">
 
-                        <div class="image-upload d-flex justify-content-center p-2">
-                            <label for="cursoIMG">
-                                <img src="img/camera.jpg" alt="" id="E_img_cursoIMG" width="250px" height="250px">
-                            </label>
-                            <input type="file" onchange="vista_preliminarEditarCurso(event)" accept="image/jpeg" class="form-control" id="E_cursoIMG" name="E_cursoIMG" aria-describedby="basic-addon1">
+                                <div class="row fw-bold fs-6 ms-3 mb-2">
+                                    Nombre:
+                                </div>
+                                <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
+                                <input type="text" class="form-control" id="E_nombreCurso" name="E_nombreCurso" placeholder="Nombre del curso" aria-describedby="basic-addon1" required>
+                                </div>
 
+                                <div class="row fw-bold fs-6 ms-3 mb-2">
+                                    Descripción
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
+                                    <textarea row="8" class="form-control" id="E_descCurso" name="E_descCurso" placeholder="Descripción del curso" aria-describedby="basic-addon1" value=""></textarea>
+                                </div>
+
+                                <div class="row fw-bold fs-6 ms-3 mb-2">
+                                    Costo:
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-list"></i></span>
+                                    <input type="number" class="form-control" id="E_costoCurso" name="E_costoCurso" placeholder="Costo" aria-describedby="basic-addon1" required>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="row fw-bold fs-6 ms-3 mb-2">
-                            Nombre:
+                        <div class="p-4 d-flex justify-content-center">
+                                <button class="btn btn-primary" id="ButtonActualizarCurso" data-bs-dismiss="modal">Actualizar</button>
                         </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
-                            <input type="text" class="form-control" id="E_nombreCurso" name="E_nombreCurso" placeholder="Nombre del curso" aria-describedby="basic-addon1" required>
-                        </div>
-
-                        <div class="row fw-bold fs-6 ms-3 mb-2">
-                            Descripción
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
-
-                            <textarea row="8" class="form-control" id="E_descCurso" name="E_descCurso" placeholder="Descripción del curso" aria-describedby="basic-addon1" value=""></textarea>
-
-                        </div>
-
-                        <div class="row fw-bold fs-6 ms-3 mb-2">
-                            Costo:
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-list"></i></span>
-                            <input type="number" class="form-control" id="E_costoCurso" name="E_costoCurso" placeholder="Costo" aria-describedby="basic-addon1" required>
-                        </div>
-
-
                     </div>
 
                     <div id="categoriasCursoSelected">
-
                         <div class="pb-4 d-flex flex-row justify-content-between">
                             <div class="fs-3 fw-bold p-2">Categorias</div>
                             <div class="d-flex">
@@ -556,10 +562,10 @@ session_start(); // Inicio mi sesion PHP
                         </div>
                         <input type="hidden" id="miCategoriaParaCurso">
                         <div id="misCategoriasCursoSelectedEditar">
-
-
                         </div>
-                        <div id="nivelesCursoSelected">
+                    </div>
+
+                    <div id="nivelesCursoSelected">
                             <div class="container-fluid">
                                 <div class="d-flex flex-row justify-content-between">
                                     <div class="fs-5 fw-bold p-2">Niveles</div>
@@ -568,39 +574,11 @@ session_start(); // Inicio mi sesion PHP
 
                                 </div>
                             </div>
-                            <div class="accordion accordion-flush" id="miContenido">
+                            <div class="accordion accordion-flush" id="miContenidoCurso">
 
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingOne">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                            Nivel 1: Introducción
 
-                                        </button>
 
-                                    </h2>
-                                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#miContenido">
-                                        <div class="accordion-body">
-                                            <div class="card">
-                                                <div class="card-header text-end">
-                                                    <span class="badge rounded-pill bg-primary">Editar</span>
-                                                    <span class="badge rounded-pill bg-danger">Borrar</span>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Introducción</h5>
-                                                    <p class="card-text">¿Qué es HTML y para qué sirve?
-                                                        El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza
-                                                        para
-                                                        estructurar y desplegar una página web y
-                                                        sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una
-                                                        lista con
-                                                        viñetas, o imágenes y tablas de datos.</p>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
+                                <!-- <div class="accordion-item">
                                     <h2 class="accordion-header" id="flush-headingTwo">
                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
                                             Nivel 2: Conceptos Básicos
@@ -691,16 +669,12 @@ session_start(); // Inicio mi sesion PHP
 
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
 
 
                             </div>
                         </div>
-
-
-
-                    </div>
                     <div class="modal-footer">
 
 
@@ -708,11 +682,10 @@ session_start(); // Inicio mi sesion PHP
                 </div>
             </div>
         </div>
+    </div>
 
-
-
-        <!--  >MODAL WINDOW CURSO<-->
-        <div class="modal fade" id="miModalCurso" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+    <!--  >MODAL WINDOW CURSO<-->
+    <div class="modal fade" id="miModalCurso" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -772,13 +745,13 @@ session_start(); // Inicio mi sesion PHP
                     </div>
                 </div>
             </div>
-        </div>
-        <!--  >MODAL NIVEL<-->
-        <div class="modal fade" id="miModalNivel" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+    </div>
+    <!--  >MODAL NIVEL<-->
+    <div class="modal fade" id="miModalNivel" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitle">Nivel</h5>
+                        <h5 class="modal-title fw-bold ms-4 mb-4" id="modalTitle">Nivel</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <form method="post">
@@ -789,46 +762,126 @@ session_start(); // Inicio mi sesion PHP
                                     <h4>Ingresa los siguientes datos:</h4>
                                 </div>
                             </div>
-                            <div class="row modalTexto">
+                            <div class="row fw-bold fs-6 ms-3 mb-2">
                                 Nombre:
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
-                                <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Nombre del producto" aria-label="Username" aria-describedby="basic-addon1" required>
+                                <input type="text" class="form-control" id="nivelName" name="nivelName" placeholder="Nombre del producto" aria-label="Username" aria-describedby="basic-addon1" required>
                             </div>
-
-                            <div class="row modalTexto">
-                                Descripción:
+                              <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Costo de nivel:
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-list"></i></span>
-                                <input type="text" class="form-control" id="product_desc" name="product_desc" placeholder="Descripción" aria-label="Username" aria-describedby="basic-addon1" required>
-                            </div>
-
-                            <div class="row modalTexto">
-                                Multimedia
-                            </div>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-camera"> </i></span>
-                                <input type="file" onchange="vista_preliminar(event)" accept="image/jpeg" class="form-control" id="E_Multimedia" name="E_Multimedia" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
-
-
-                            </div>
-
-
+                                <input type="number" class="form-control" id="costoNivel" name="costoNivel" placeholder="Descripción" aria-label="Username" aria-describedby="basic-addon1" required>
+                            </div>           
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-success" id="ButtonRegistrarProducto" data-bs-dismiss="modal">Crear
+                            <button type="button" class="btn btn-success" id="ButtonRegistrarNivel" data-bs-toggle="modal" data-bs-target="#miModalNivelAltaMultimedia">Crear
                                 Nivel</button>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
+    </div>
 
-        <!--  >MODAL WINDOW LOGIN<-->
-        <div class="modal fade" id="miModalLogin" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+        <!--  >MODAL EDITAR NIVEL<-->
+    <div class="modal fade" id="miModalEditarNivel" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold ms-4 mb-4" id="modalTitle">Editar Nivel</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post">
+                        <div class="modal-body">
+                            <input type="hidden" id="miNivelSelected">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h4>Ingresa los siguientes datos:</h4>
+                                </div>
+                            </div>
+                            <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Nombre:
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
+                                <input type="text" class="form-control" id="E_nivelName" name="E_nivelName" placeholder="Nombre del nivel" aria-label="Username" aria-describedby="basic-addon1" required>
+                            </div>
+                              <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Costo de nivel:
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-list"></i></span>
+                                <input type="number" class="form-control" id="E_costoNivel" name="E_costoNivel" placeholder="Costo nivel" aria-label="Username" aria-describedby="basic-addon1" required>
+                            </div>           
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="ButtonActualizarNivel" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso">Actualizar
+                                Nivel</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+
+
+     <!--  >MODAL NIVEL - ALTA MULTIMEDIA<-->
+    <div class="modal fade" id="miModalNivelAltaMultimedia" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold ms-4 mb-4" id="modalTitle">Registrar Multimedia</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post">
+                        <div class="modal-body">
+                            <input type="text" id="miNivelSeleccionado">
+                             <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Texto del nivel:
+                            </div>
+                              <textarea row="8" class="form-control mb-4" id="E_TextoNivel" name="E_TextoNivel" placeholder="Texto del nivel" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
+
+                            <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Multimedia
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-camera"> </i></span>
+                                <input type="file" class="form-control"  accept=".jpg,.jpeg,.pdf,.mp4" id="E_MultimediaNivel" name="E_MultimediaNivel" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+
+                            <div id="miPDFNivel">
+                                <iframe src="" width="100%" height="600px" id="miPDFViewer">
+                                    <p>Lo sentimos, no se puede mostrar el archivo PDF.</p>
+                                </iframe>
+                            </div>
+                            <div id="miImagenNivel">
+                                <div class="image-upload d-flex justify-content-center p-2">
+                                    <img src="img/camera.jpg" alt="" id="miImageViewer" width="250px" height="250px">                                        
+                                </div>
+                            </div>
+                            <div id="miVideoNivel">
+                                <div class="image-upload d-flex justify-content-center p-2">
+                                     <video controls class="misVideos mx-auto">
+                                        <source class="misVideos" src="" id="miVideoViewer" width="640" height="360" type="video/mp4">
+                                     </video>                                        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" id="ButtonRegistrarMultimedia" data-bs-dismiss="modal">Agregar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+
+    <!--  >MODAL WINDOW LOGIN<-->
+    <div class="modal fade" id="miModalLogin" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content p-4">
                     <div class="modal-header">
@@ -868,10 +921,10 @@ session_start(); // Inicio mi sesion PHP
                 </div>
             </div>
 
-        </div>
+    </div>
 
-        <!--  >MODAL WINDOW REGISTER<-->
-        <div class="modal fade" id="miModal" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+    <!--  >MODAL WINDOW REGISTER<-->
+    <div class="modal fade" id="miModal" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content p-4">
                     <div class="modal-header">
@@ -991,10 +1044,10 @@ session_start(); // Inicio mi sesion PHP
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
 
-        <!--  >MODAL EDIT USER<-->
-        <div class="modal fade" id="miModalEditUser" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+    <!--  >MODAL EDIT USER<-->
+    <div class="modal fade" id="miModalEditUser" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content p-3">
                     <div class="modal-header">
@@ -1132,10 +1185,10 @@ session_start(); // Inicio mi sesion PHP
                     </form>
                 </div>
             </div>
-        </div>
+    </div>
 
-        <!--FOOTER<-->
-        <footer class="w-100 d-flex justify-content-center flex-wrap">
+    <!--FOOTER<-->
+    <footer class="w-100 d-flex justify-content-center flex-wrap">
             <p class="fs-5 px-3 pt-3 PCELText"><img src="img/cripto.png" class="" width="40" height="40">
             <p class="fs-5 px-3 pt-3">&copy; Todos los derechos reservados</p>
             </p>
@@ -1145,10 +1198,10 @@ session_start(); // Inicio mi sesion PHP
                 <a href="https://twitter.com/rickylolo29"><i class="bi bi-twitter"></i></a>
                 <a href="https://www.instagram.com/rickylolo29/"><i class="bi bi-instagram"></i></a>
             </div>
-        </footer>
+    </footer>
 
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>
 
 </html>

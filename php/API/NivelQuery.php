@@ -9,13 +9,12 @@ class Nivel extends DB
 
     // QUERY Get Niveles de un Curso
 
-    function getNivelData($Curso_id)
+    function getNivelesData($Curso_id)
     {
         $get = "CALL sp_GestionNivel(
-	            'G',  # Operacion
+	            'A',  # Operacion
 	            NULL,    # Nivel Id	
                 $Curso_id, 		# Curso Id	
-                NULL,          # noNivel
                 NULL,  			# nombre
                 NULL  		# costoNivel
         ); ";
@@ -23,16 +22,31 @@ class Nivel extends DB
         return $query;
     }
 
+    // QUERY Get Niveles de un Curso
+
+    function getNivelData($Nivel_id)
+    {
+        $get = "CALL sp_GestionNivel(
+	            'G',  # Operacion
+	            $Nivel_id,    # Nivel Id	
+                NULL, 		# Curso Id	
+                NULL,  			# nombre
+                NULL  		# costoNivel
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
+
     // ---------------------------------------INSERTAR INFORMACION------------------------------------------
     // QUERY Insertar Nivel
 
-    function insertarNivel($Curso_id,$noNivel, $nombreNivel, $costoNivel)
+    function insertarNivel($Curso_id,$nombreNivel, $costoNivel)
     {
         $insert = "CALL sp_GestionNivel(
 	                'I',                # Operacion
 	                NULL,               # Nivel Id	
                     $Curso_id, 		    # Curso Id	
-                    $noNivel,           # noNivel
                     '$nombreNivel',  	# nombre
                     $costoNivel  	    # costoNivel
         ); ";
@@ -43,13 +57,12 @@ class Nivel extends DB
    // ---------------------------------------ACTUALIZAR INFORMACION------------------------------------------
    // QUERY Actualizar Nivel
 
-    function actualizarNivel($Nivel_id,$noNivel, $nombreNivel, $costoNivel)
+    function actualizarNivel($Nivel_id,$nombreNivel, $costoNivel)
     {
-        $update = "CALL sp_GestionComentario(
+        $update = "CALL sp_GestionNivel(
 	                'E',                # Operacion
 	                $Nivel_id,          # Nivel Id	
                     NULL, 		        # Curso Id	
-                    $noNivel,           # noNivel
                     '$nombreNivel',  	# nombre
                     $costoNivel  		# costoNivel
         );";
@@ -67,7 +80,6 @@ class Nivel extends DB
 	                'D',  # Operacion
 	                $Nivel_id,    # Nivel Id	
                     NULL, 		# Curso Id	
-                    NULL,          # noNivel
                     NULL,  			# nombre
                     NULL  		# costoNivel
         );";

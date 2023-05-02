@@ -91,7 +91,7 @@ class Curso extends DB
             $Curso_id, 	# Curso Id
             NULL, 	# Usuario Id
             $costoCurso,  	# Curso Costo
-            $imagenCurso,	# Curso Imagen
+            '$imagenCurso',	# Curso Imagen
             '$nombreCurso',	# Curso Nombre
             '$descripcionCurso', 	# Curso Descripcion
             NULL 		# Curso isBaja

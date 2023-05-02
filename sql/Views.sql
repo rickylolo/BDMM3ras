@@ -27,12 +27,17 @@ DROP VIEW IF EXISTS vCursoInstructor;
 CREATE VIEW vCursoInstructor AS
 SELECT  A.Curso_id, A.Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, A.nombre cursoNombre, A.descripcion, isBaja, CursoCategoria_id, C.nombre categoriaNombre, ingresosCurso(A.Curso_id) Ingresos, promedioCurso(A.Curso_id) Promedio, contarAlumnos(A.Curso_id) noAlumnos
 FROM Curso A
+LEFT JOIN (
+    SELECT Curso_id, MAX(CursoCategoria_id) AS maxCategoriaId
+    FROM CursoCategoria
+    GROUP BY Curso_id
+) AS ultimaCategoria
+ON A.Curso_id = ultimaCategoria.Curso_id
 LEFT JOIN CursoCategoria B 
-ON A.Curso_id = B.Curso_id
+ON ultimaCategoria.maxCategoriaId = B.CursoCategoria_id
 LEFT JOIN Categoria C 
-ON B.Categoria_id = B.Categoria_id
+ON B.Categoria_id = C.Categoria_id
 GROUP BY A.Curso_id;
-
 
 /*--------------------------------------------------------------------------------CATEGORIA--------------------------------------------------------------------------*/
 DROP VIEW IF EXISTS vCategoria;
@@ -80,6 +85,12 @@ ON A.Curso_id = B.Curso_id;
 
 
 /*--------------------------------------------------------------------------------NIVEL-------------------------------------------------------------------------*/
+DROP VIEW IF EXISTS vNivel;
+
+CREATE VIEW vNivel AS
+SELECT Nivel_id, Curso_id, noNivel, nombre, costoNivel
+FROM Nivel;
+
 
 DROP VIEW IF EXISTS vObtenerTodosLosNivelesDeUnCurso;
 

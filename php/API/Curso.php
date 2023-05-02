@@ -104,7 +104,7 @@ class cursoAPI
     function actualizarCurso($Curso_id, $costoCurso, $imagenCurso, $nombreCurso, $descripcionCurso)
     {
         $Curso = new Curso();
-        $Curso->insertarCurso($Curso_id, $costoCurso, $imagenCurso, $nombreCurso, $descripcionCurso);
+        $Curso->actualizarCurso($Curso_id, $costoCurso, $imagenCurso, $nombreCurso, $descripcionCurso);
     }
 
 
@@ -288,11 +288,14 @@ if (isset($_POST['funcion'])) {
             $var->insertarCurso($id, $_POST['costoCurso'], $binariosImagen, $_POST['nombreCurso'], $_POST['descripcionCurso']);
             break;
         case "actualizarCurso":
-            $tipoArchivo = $_FILES['file']['type'];
-            $nombreArchivo = $_FILES['file']['name'];
-            $tamanoArchivo = $_FILES['file']['size'];
-            $imagenSubida = fopen($_FILES['file']['tmp_name'], 'r');
-            $binariosImagen = fread($imagenSubida, $tamanoArchivo);
+             $binariosImagen = '';
+            if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != NULL) {
+                $tipoArchivo = $_FILES['file']['type'];
+                $nombreArchivo = $_FILES['file']['name'];
+                $tamanoArchivo = $_FILES['file']['size'];
+                $imagenSubida = fopen($_FILES['file']['tmp_name'], 'r');
+                $binariosImagen = fread($imagenSubida, $tamanoArchivo);
+            }
             $var = new cursoAPI();
             $var->actualizarCurso($_POST['Curso_id'], $_POST['costoCurso'], $binariosImagen, $_POST['nombreCurso'], $_POST['descripcionCurso']);
             break;

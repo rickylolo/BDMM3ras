@@ -199,7 +199,7 @@ CREATE TABLE nivelCurso(
     tiempoRegistro 			DATETIME NOT NULL 				COMMENT'Tiempo de registro del usuario al curso',
 	isFinalizado			BIT NOT NULL DEFAULT 0			COMMENT'Bandera que indica si el usuario termino el nivel',
 	tiempoCompletado 		DATETIME						COMMENT'Tiempo de finalización del usuario al nivel',
-	costoNivel  			DECIMAL(9,2) UNSIGNED  	COMMENT'Costo del nivel en ese momento',
+	costoNivel  			DECIMAL(9,2) UNSIGNED  			COMMENT'Costo del nivel en ese momento',
  CONSTRAINT PK_nivelCurso
 	PRIMARY KEY (nivelCurso_id),
  CONSTRAINT FK_PK_nivelCurso_MetodoPago

@@ -348,7 +348,8 @@ BEGIN
 END //
 
 
-
+SELECT * FROM Nivel;
+SELECT * FROM Curso;
 /*--------------------------------------------------------------------------------NIVEL--------------------------------------------------------------------------*/
 DROP PROCEDURE IF EXISTS sp_GestionNivel;
 DELIMITER //
@@ -356,27 +357,29 @@ CREATE PROCEDURE sp_GestionNivel
 (
 	Operacion CHAR(1),
 	sp_Nivel_id 			INT,
-    sp_Curso_id 			INT,				
-    sp_noNivel          	INT,          			
+    sp_Curso_id 			INT,				       			
     sp_nombre  				VARCHAR(50),		
     sp_costoNivel  			DECIMAL(9,2)
-)		
+)
 
 BEGIN
 	DECLARE u_costoNivel DECIMAL(9,2);
+    DECLARE u_MisNiveles INT;
    IF Operacion = 'I' /*INSERT NIVEL*/
    THEN  
+		SET u_MisNiveles = contarNiveles(sp_Curso_id) + 1;
 		INSERT INTO Nivel(Curso_id,noNivel,nombre,costoNivel) 
-			VALUES (sp_Curso_id,sp_noNivel,sp_nombre,sp_costoNivel);
+			VALUES (sp_Curso_id,u_MisNiveles,sp_nombre,sp_costoNivel);
+		SELECT Curso_id
+        FROM vNivel WHERE Nivel_id = last_insert_id();
+	
    END IF;
    	IF Operacion = 'E'  /*EDIT NIVEL*/
     THEN 
 		SET u_costoNivel = CONVERT(sp_costoNivel,DECIMAL(9,2));
-    	SET sp_noNivel=IF(sp_noNivel='',NULL,sp_noNivel),
-            sp_nombre=IF(sp_nombre='',NULL,sp_nombre);
+    	SET sp_nombre=IF(sp_nombre='',NULL,sp_nombre);
 		UPDATE Nivel 
-			SET noNivel= IFNULL(sp_noNivel,noNivel),
-                nombre = IFNULL(sp_nombre,nombre), 
+			SET nombre = IFNULL(sp_nombre,nombre), 
                 costoNivel = IFNULL(u_costoNivel,costoNivel)
                 
 		WHERE Nivel_id = sp_Nivel_id;
@@ -384,10 +387,15 @@ BEGIN
     IF Operacion = 'D' THEN /*DELETE NIVEL*/
           DELETE FROM Nivel WHERE Nivel_id = sp_Nivel_id;
    END IF;
-    IF Operacion = 'G' THEN /*GET ALL NIVELES DEL CURSO*/
+    IF Operacion = 'A' THEN /*GET ALL NIVELES DEL CURSO*/
 		SELECT Nivel_id, noNivel, nombreNivel, costoNivel, Curso_id,imagenCurso, nombreCurso
         FROM vObtenerTodosLosNivelesDeUnCurso
         WHERE Curso_id = sp_Curso_id;
+   END IF;
+       IF Operacion = 'G' THEN /*GET DATA NIVEL*/
+		SELECT Nivel_id, Curso_id, noNivel, nombre, costoNivel
+        FROM vNivel
+        WHERE Nivel_id = sp_Nivel_id;
    END IF;
    
 END //

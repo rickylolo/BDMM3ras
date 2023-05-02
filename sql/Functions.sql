@@ -49,3 +49,18 @@ BEGIN
    RETURN miNumeroAlumnos;
 END; //
 DELIMITER ;
+
+
+DROP FUNCTION IF EXISTS contarNiveles;
+DELIMITER //
+CREATE FUNCTION contarNiveles (p_idCurso INT )
+RETURNS INT READS SQL DATA
+
+BEGIN
+   DECLARE miNumeroNiveles INT;
+   SELECT COUNT(Nivel_id) INTO miNumeroNiveles FROM Nivel WHERE Curso_id = p_idCurso;
+   SET miNumeroNiveles= IFNULL(miNumeroNiveles,0);
+   RETURN miNumeroNiveles;
+END; //
+DELIMITER ;
+
