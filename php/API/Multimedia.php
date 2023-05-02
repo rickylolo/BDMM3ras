@@ -33,10 +33,10 @@ class multimediaAPI
     }
     
 
-    function insertarMultimedia($Nivel_id,$Multimedia, $Texto, $tipoMultimedia)
+    function insertarMultimedia($Nivel_id,$MultimediaEscapeString, $Texto, $tipoMultimedia)
     {
         $Multimedia = new Multimedia();
-        $Multimedia->insertarMultimedia($Nivel_id,$Multimedia, $Texto, $tipoMultimedia);
+        $Multimedia->insertarMultimedia($Nivel_id,$MultimediaEscapeString, $Texto, $tipoMultimedia);
     }
 
 
@@ -52,13 +52,20 @@ if (isset($_POST['funcion'])) {
     $funcion = $_POST['funcion'];
     switch ($funcion) {
         case "registrarMultimedia":
-            $tipoArchivo = $_FILES['file']['type'];
-            $nombreArchivo = $_FILES['file']['name'];
-            $tamanoArchivo = $_FILES['file']['size'];
-            $imagenSubida = fopen($_FILES['file']['tmp_name'], 'r');
-            $binarios = fread($imagenSubida, $tamanoArchivo);
+           $binarios = '';
+            if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != NULL) {
+                $tipoArchivo = $_FILES['file']['type'];
+                $nombreArchivo = $_FILES['file']['name'];
+                $tamanoArchivo = $_FILES['file']['size'];
+                $imagenSubida = fopen($_FILES['file']['tmp_name'], 'r');
+                $binarios = fread($imagenSubida, $tamanoArchivo);
+                $tipoMultimedia = $_POST['tipoMultimedia'];
+            }
+            else{
+                 $tipoMultimedia = 1;
+            }
             $var = new multimediaAPI();
-            $var->insertarMultimedia($_POST['Nivel_id'], $binarios,$_POST['Texto'],$_POST['tipoMultimedia']);
+            $var->insertarMultimedia($_POST['Nivel_id'], $binarios,$_POST['Texto'],$tipoMultimedia);
             break;
         case "eliminarMultimedia":
             $var = new multimediaAPI();

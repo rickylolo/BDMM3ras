@@ -26,14 +26,15 @@ class Multimedia extends DB
     // ---------------------------------------INSERTAR INFORMACION------------------------------------------
     // QUERY Insertar Multimedia
 
-    function insertarMultimedia($Nivel_id,$Multimedia, $Texto, $tipoMultimedia)
+    function insertarMultimedia($Nivel_id, $Multimedia, $Texto, $tipoMultimedia)
     {
-        $Multimedia = mysqli_escape_string($this->myCon(), $Multimedia); //MI BLOB
+         $Multimedia = mysqli_escape_string($this->myCon(), $Multimedia); 
+        mysqli_close($this->myCon());
         $insert = "CALL sp_GestionMultimedia(
-                    'I',  # Operacion
-                    NULL,    # Id
-                    $Nivel_id, 	    # Nivel Id
-                    '$Multimedia',  		# Multimedia
+                    'I',                # Operacion
+                    NULL,               # Id
+                    $Nivel_id, 	        # Nivel Id
+                    '$Multimedia',  	# Multimedia
                     '$Texto', 			# Texto
                     $tipoMultimedia 	# Tipo Multimedia
         ); ";

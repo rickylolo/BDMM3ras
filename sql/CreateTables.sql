@@ -155,9 +155,9 @@ DROP TABLE IF EXISTS Multimedia;
 CREATE TABLE Multimedia(
 	Multimedia_id 		INT AUTO_INCREMENT NOT NULL 	COMMENT'Clave Primaria de la multimedia',
     Nivel_id 			INT NOT NULL 					COMMENT'Clave Foránea del nivel',
-    multimedia  		MEDIUMBLOB 						COMMENT'Multimedia',
+    multimedia  		LONGBLOB 						COMMENT'Multimedia',
     texto 				TEXT 							COMMENT'Texto',
-    tipoMultimedia 		TINYINT NOT NULL 				COMMENT'No. que identifica el tipo de multimedia del nivel 1:texto o link, 2:imagen, 3:video, 4:PDF',
+    tipoMultimedia 		TINYINT NOT NULL 				COMMENT'No. que identifica el tipo de multimedia del nivel 1:imagen, 2:video, 3:PDF',
  CONSTRAINT PK_Multimedia
 	PRIMARY KEY (Multimedia_id),
  CONSTRAINT FK_Multimedia_Nivel

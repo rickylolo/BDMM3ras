@@ -468,9 +468,18 @@ CALL sp_GestionMultimedia(
 'I',  # Operacion
 NULL,    # Id
 1, 	    # Nivel Id
-NULL,  		# Multimedia
+1,  		# Multimedia
 'Texto Prueba', 			# Texto
 1 	# Tipo Multimedia
+);
+
+CALL sp_GestionMultimedia(
+'E',  # Operacion
+3,    # Id
+NULL, 	    # Nivel Id
+NULL,  		# Multimedia
+'Texto Prueba', 			# Texto
+NULL 	# Tipo Multimedia
 );
 
 CALL sp_GestionMultimedia(
@@ -482,10 +491,11 @@ NULL, 		# Texto
 NULL 		# Tipo Multimedia
 );
 
+
 CALL sp_GestionMultimedia(
 'G',  		# Operacion
 NULL,    		# Id
-1, 	    # Nivel Id
+3, 	    # Nivel Id
 NULL,  		# Multimedia
 NULL, 		# Texto
 NULL 		# Tipo Multimedia

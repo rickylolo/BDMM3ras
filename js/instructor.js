@@ -183,7 +183,9 @@ $(document).ready(function () {
                                            <div id="` +
               items[i].Nivel_id +
               `" class="d-flex justify-content-center mb-2 mp-2">
-                                          <span class="badge rounded-pill bg-success" data-bs-toggle="modal" data-bs-target="#miModalNivelAltaMultimedia">Añadir Multimedia</span>
+                                          <span class="badge rounded-pill bg-success añadirMultimedia" id="` +
+              items[i].Nivel_id +
+              `" data-bs-toggle="modal" data-bs-target="#miModalNivelAltaMultimedia">Añadir Multimedia</span>
                                            <span id="` +
               items[i].Nivel_id +
               `" class="ms-2 me-2 badge rounded-pill bg-primary editarNivel" data-bs-toggle="modal" data-bs-target="#miModalEditarNivel">Editar Nivel</span>
@@ -208,6 +210,7 @@ $(document).ready(function () {
       })
   }
 
+  // TO DO
   function cargarMultimediaNivel(Nivel_id) {
     $.ajax({
       type: 'POST',
@@ -215,32 +218,104 @@ $(document).ready(function () {
       url: 'php/API/Multimedia.php',
     })
       .done(function (data) {
-        console.log(data)
         var items = JSON.parse(data)
         console.log(items)
-        $('#sd').empty()
+        $(`#miContenidoMultimedia-` + Nivel_id).empty()
         for (let i = 0; i < items.length; i++) {
-          $('#sd').append(
-            `
+          switch (items[i].tipoMultimedia) {
+            case 1:
+              $(`#miContenidoMultimedia-` + Nivel_id).append(
+                `
              <div class="card">
                 <div class="card-header text-end">          
-                    <span class="badge rounded-pill bg-primary editarMultimedia">Editar</span>
-                    <span class="badge rounded-pill bg-danger borrarMultimedia">Borrar</span>
+                    <span id="` +
+                  items[i].Multimedia_id +
+                  `" class="badge rounded-pill bg-primary editarMultimedia">Editar</span>
+                    <span id="` +
+                  items[i].Multimedia_id +
+                  `" class="badge rounded-pill bg-danger borrarMultimedia">Borrar</span>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Introducción</h5>
-                    <p class="card-text">¿Qué es HTML y para qué sirve?
-                        El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza
-                        para
-                        estructurar y desplegar una página web y
-                        sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una
-                        lista con
-                        viñetas, o imágenes y tablas de datos.</p>
+                    <p class="card-text">` +
+                  items[i].texto +
+                  `</p>
+                </div>
+            </div>
+          `
+              )
+              break
+            case 2:
+              $(`#miContenidoMultimedia-` + Nivel_id).append(
+                `
+             <div class="card">
+                <div class="card-header text-end">          
+                    <span id="` +
+                  items[i].Multimedia_id +
+                  `" class="badge rounded-pill bg-primary editarMultimedia">Editar</span>
+                    <span id="` +
+                  items[i].Multimedia_id +
+                  `" class="badge rounded-pill bg-danger borrarMultimedia">Borrar</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">` +
+                  items[i].texto +
+                  `</p>
+              Soy una imagen
 
                 </div>
             </div>
           `
-          )
+              )
+              break
+            case 3:
+              $(`#miContenidoMultimedia-` + Nivel_id).append(
+                `
+             <div class="card">
+                <div class="card-header text-end">          
+                    <span id="` +
+                  items[i].Multimedia_id +
+                  `" class="badge rounded-pill bg-primary editarMultimedia">Editar</span>
+                    <span id="` +
+                  items[i].Multimedia_id +
+                  `" class="badge rounded-pill bg-danger borrarMultimedia">Borrar</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">` +
+                  items[i].texto +
+                  `</p>
+              Soy un video
+
+                </div>
+            </div>
+          `
+              )
+              break
+            case 4:
+              $(`#miContenidoMultimedia-` + Nivel_id).append(
+                `
+             <div class="card">
+                <div class="card-header text-end">          
+                    <span id="` +
+                  items[i].Multimedia_id +
+                  `" class="badge rounded-pill bg-primary editarMultimedia">Editar</span>
+                    <span id="` +
+                  items[i].Multimedia_id +
+                  `" class="badge rounded-pill bg-danger borrarMultimedia">Borrar</span>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">` +
+                  items[i].texto +
+                  `</p>
+              Soy un pdf
+
+                </div>
+            </div>
+          `
+              )
+              break
+            default:
+              break
+          }
         }
       })
       .fail(function (data) {
@@ -358,6 +433,17 @@ $(document).ready(function () {
     let miIdNivel = $(this).attr('id')
     cargarMultimediaNivel(miIdNivel)
   }
+
+  // -- MULTIMEDIA -> AÑADIR MULTIMEDIA  --
+  $('#miContenidoCurso').on(
+    'click',
+    '.añadirMultimedia',
+    funcSendIdNivelMultimedia
+  )
+  function funcSendIdNivelMultimedia() {
+    let miIdNivel = $(this).attr('id')
+    $('#miNivelSeleccionado').val(miIdNivel)
+  }
   // ----------------------------- REGISTRO DATOS -----------------
   // -- CURSO --
   $('#ButtonRegistrarCurso').click(funcRegistrarCurso)
@@ -462,6 +548,45 @@ $(document).ready(function () {
       })
   }
 
+  // -- MULTIMEDIA --
+  $('#ButtonRegistrarMultimedia').click(funcRegistrarMultimedia)
+  function funcRegistrarMultimedia() {
+    var form_data = new FormData()
+    var file_data = $('#miMultimediaNivelModal').prop('files')[0]
+    var texto = $('#TextoNivel').val()
+    var Nivel_id = $('#miNivelSeleccionado').val()
+    var tipoMultimedia = $('#miTipoMultimedia').val()
+
+    form_data.append('funcion', 'registrarMultimedia')
+    form_data.append('file', file_data)
+    form_data.append('Nivel_id', Nivel_id)
+    form_data.append('Texto', texto)
+    form_data.append('tipoMultimedia', tipoMultimedia)
+
+    $.ajax({
+      url: 'php/API/Multimedia.php',
+      type: 'POST',
+      cache: false,
+      contentType: false,
+      data: form_data,
+      dataType: 'Text',
+      enctype: 'multipart/form-data',
+      processData: false,
+    })
+      .done(function (data) {
+        console.log(data)
+        alert('Registro de multimedia correctamente')
+        $('#miMultimediaNivelModal').val('')
+        $('#TextoNivel').val('')
+        $('#miNivelSeleccionado').val('')
+        $('#miTipoMultimedia').val('')
+        mostrarNada()
+      })
+      // MANEJO DE ERRORES DEL SERVIDOR
+      .fail(function (jqXHR, textStatus, errorThrown) {
+        console.log('Error: ' + errorThrown)
+      })
+  }
   // ----------------------------- ACTUALIZAR DATOS -----------------
 
   // -- CURSO --
@@ -567,6 +692,11 @@ $(document).ready(function () {
     $('#miImagenNivel').hide()
     $('#miVideoNivel').hide()
   }
+  function mostrarNada() {
+    $('#miPDFNivel').hide()
+    $('#miImagenNivel').hide()
+    $('#miVideoNivel').hide()
+  }
   function mostrarImagen() {
     //IMAGEN
     $('#miImagenNivel').show()
@@ -579,7 +709,7 @@ $(document).ready(function () {
     $('#miPDFNivel').hide()
     $('#miImagenNivel').hide()
   }
-  $('#E_MultimediaNivel').change(handleFileSelect)
+  $('#miMultimediaNivelModal').change(handleFileSelect)
   function handleFileSelect(event) {
     const file = event.target.files[0]
     const extension = file.name.split('.').pop().toLowerCase()
@@ -591,6 +721,7 @@ $(document).ready(function () {
         }
         const pdfUrl = URL.createObjectURL(file)
         $('#miPDFViewer').attr('src', pdfUrl)
+        $('#miTipoMultimedia').val(4)
         mostrarPDF()
         break
       case 'jpg':
@@ -601,6 +732,7 @@ $(document).ready(function () {
         }
         const imgUrl = URL.createObjectURL(file)
         $('#miImageViewer').attr('src', imgUrl)
+        $('#miTipoMultimedia').val(2)
         mostrarImagen()
         break
       case 'mp4':
@@ -610,6 +742,7 @@ $(document).ready(function () {
         }
         const videoUrl = URL.createObjectURL(file)
         $('#miVideoViewer').attr('src', videoUrl)
+        $('#miTipoMultimedia').val(3)
         mostarVideo()
         break
     }

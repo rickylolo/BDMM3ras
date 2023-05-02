@@ -353,7 +353,7 @@ session_start(); // Inicio mi sesion PHP
                             <h5>Ingresa los datos:</h5>
 
                         </div>
-                        <form method="POST">
+                    
 
                             <div class="image-upload d-flex justify-content-center p-2">
                                 <label for="metodoIMG">

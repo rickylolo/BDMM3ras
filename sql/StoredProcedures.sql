@@ -408,7 +408,7 @@ CREATE PROCEDURE sp_GestionMultimedia
 	Operacion CHAR(1),
 	sp_Multimedia_id 		INT,
     sp_Nivel_id 			INT,				
-    sp_multimedia  			MEDIUMBLOB, 					
+    sp_multimedia  			LONGBLOB, 					
     sp_texto 				TEXT, 						
     sp_tipoMultimedia 		TINYINT			
 )		
@@ -418,6 +418,17 @@ BEGIN
    THEN  
 		INSERT INTO Multimedia(Nivel_id,multimedia,texto,tipoMultimedia) 
 			VALUES (sp_Nivel_id,sp_multimedia,sp_texto,sp_tipoMultimedia);
+   END IF;
+	IF Operacion = 'E' /*ACTUALIZAR MULTIMEDIA*/
+   THEN  
+		SET sp_multimedia=IF(sp_multimedia='',NULL,sp_multimedia),
+            sp_texto=IF(sp_texto='',NULL,sp_texto),
+            sp_tipoMultimedia=IF(sp_tipoMultimedia='',NULL,sp_tipoMultimedia);
+		UPDATE Multimedia 
+			SET multimedia = IFNULL(sp_multimedia,multimedia), 
+                texto = IFNULL(sp_texto,texto),
+                tipoMultimedia = IFNULL(sp_tipoMultimedia,tipoMultimedia)
+		WHERE Multimedia_id = sp_Multimedia_id;
    END IF;
     IF Operacion = 'D' THEN /*DELETE MULTIMEDIA*/
           DELETE FROM Multimedia WHERE Multimedia_id = sp_Multimedia_id;
@@ -429,6 +440,7 @@ BEGIN
         WHERE Nivel_id = sp_Nivel_id;
    END IF;
 END //
+
 
 
 /*--------------------------------------------------------------------------------USUARIO CURSO--------------------------------------------------------------------------*/

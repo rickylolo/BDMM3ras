@@ -41,6 +41,7 @@ class MetodoPago extends DB
     function insertarMetodoPago($NombreMetodo, $ImagenMetodo)
     {
         $ImagenMetodo = mysqli_escape_string($this->myCon(), $ImagenMetodo); //IMAGEN
+        mysqli_close($this->myCon());
         $insert = "CALL sp_GestionMetodoPago(
            'I', #Operacion
             NULL, #MetodoPago_Id	 

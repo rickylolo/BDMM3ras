@@ -787,7 +787,7 @@ session_start(); // Inicio mi sesion PHP
             </div>
     </div>
 
-        <!--  >MODAL EDITAR NIVEL<-->
+    <!--  >MODAL EDITAR NIVEL<-->
     <div class="modal fade" id="miModalEditarNivel" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
@@ -821,7 +821,7 @@ session_start(); // Inicio mi sesion PHP
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" id="ButtonActualizarNivel" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso">Actualizar
                                 Nivel</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso">Cancelar</button>
                         </div>
                     </form>
                 </div>
@@ -840,17 +840,18 @@ session_start(); // Inicio mi sesion PHP
                     <form method="post">
                         <div class="modal-body">
                             <input type="text" id="miNivelSeleccionado">
+                            <input type="text" id="miTipoMultimedia">
                              <div class="row fw-bold fs-6 ms-3 mb-2">
                                 Texto del nivel:
                             </div>
-                              <textarea row="8" class="form-control mb-4" id="E_TextoNivel" name="E_TextoNivel" placeholder="Texto del nivel" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
+                              <textarea row="8" class="form-control mb-4" id="TextoNivel" name="TextoNivel" placeholder="Texto del nivel" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
 
                             <div class="row fw-bold fs-6 ms-3 mb-2">
                                 Multimedia
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"> <i class="bi bi-camera"> </i></span>
-                                <input type="file" class="form-control"  accept=".jpg,.jpeg,.pdf,.mp4" id="E_MultimediaNivel" name="E_MultimediaNivel" aria-label="Username" aria-describedby="basic-addon1">
+                                <input type="file" class="form-control"  accept="image/jpg, image/jpeg, .pdf, video/mp4" id="miMultimediaNivelModal" name="miMultimediaNivelModal">
                             </div>
 
                             <div id="miPDFNivel">
@@ -872,13 +873,66 @@ session_start(); // Inicio mi sesion PHP
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-success" id="ButtonRegistrarMultimedia" data-bs-dismiss="modal">Agregar</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-success" id="ButtonRegistrarMultimedia" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso">Agregar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso">Cancelar</button>
                         </div>
                     </form>
                 </div>
             </div>
     </div>
+
+         <!--  >MODAL NIVEL - Editar MULTIMEDIA<-->
+    <div class="modal fade" id="miModalNivelEditarMultimedia" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold ms-4 mb-4" id="modalTitle">Actualizar Multimedia</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form method="post">
+                        <div class="modal-body">
+                            <input type="text" id="miMultimediaSeleccionada">
+                            <input type="text" id="E_miTipoMultimedia">
+                             <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Texto del nivel:
+                            </div>
+                              <textarea row="8" class="form-control mb-4" id="E_TextoNivel" name="E_TextoNivel" placeholder="Texto del nivel" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
+
+                            <div class="row fw-bold fs-6 ms-3 mb-2">
+                                Multimedia
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1"> <i class="bi bi-camera"> </i></span>
+                                <input type="file" class="form-control"  accept="image/jpg, image/jpeg, .pdf, video/mp4" id="E_miMultimediaNivelModal" name="miMultimediaNivelModal">
+                            </div>
+
+                            <div id="E_miPDFNivel">
+                                <iframe src="" width="100%" height="600px" id="E_miPDFViewer">
+                                    <p>Lo sentimos, no se puede mostrar el archivo PDF.</p>
+                                </iframe>
+                            </div>
+                            <div id="E_miImagenNivel">
+                                <div class="image-upload d-flex justify-content-center p-2">
+                                    <img src="img/camera.jpg" alt="" id="E_miImageViewer" width="250px" height="250px">                                        
+                                </div>
+                            </div>
+                            <div id="E_miVideoNivel">
+                                <div class="image-upload d-flex justify-content-center p-2">
+                                     <video controls class="misVideos mx-auto">
+                                        <source class="misVideos" src="" id="E_miVideoViewer" width="640" height="360" type="video/mp4">
+                                     </video>                                        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" id="ButtonActualizarMultimedia" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso">Actualizar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+
 
     <!--  >MODAL WINDOW LOGIN<-->
     <div class="modal fade" id="miModalLogin" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
