@@ -43,6 +43,60 @@ class Curso extends DB
         return $query;
     }
 
+    // QUERY Get Datos Cursos Mejores Calificados
+
+    function getCursosMejoresCalificados()
+    {
+        $get = "CALL sp_GestionCurso(
+            'X', 	#Operacion
+            NULL, 	# Curso Id
+            NULL, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            NULL,	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
+    // QUERY Get Datos Cursos Mas Vendidos
+
+    function getCursosMasVendidos()
+    {
+        $get = "CALL sp_GestionCurso(
+            'Y', 	#Operacion
+            NULL, 	# Curso Id
+            NULL, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            NULL,	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
+    // QUERY Get Datos Cursos Mas Recientes
+
+    function getCursosMasRecientes()
+    {
+        $get = "CALL sp_GestionCurso(
+            'Z', 	#Operacion
+            NULL, 	# Curso Id
+            NULL, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            NULL,	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
     // QUERY REPORTE INSTRUCTOR
 
     function getReporteInstructor($Usuario_id)

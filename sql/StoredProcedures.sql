@@ -187,6 +187,23 @@ BEGIN
         FROM vCursoInstructor
         WHERE Usuario_id = sp_Usuario_id;
    END IF;
+        IF Operacion = 'X' THEN /*GET CURSO MEJOR CALIFICADO */
+		SELECT nombreCompleto, Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
+		FROM vCursosMejorCalificado
+		WHERE isBaja <> 1;
+   END IF;
+        IF Operacion = 'Y' THEN /*GET CURSOS MAS VENDIDOS*/
+		SELECT nombreCompleto, Curso_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja, misCursosVendidos
+        FROM vCursosMasVendido
+		WHERE isBaja <> 1;
+   END IF;
+        IF Operacion = 'Z' THEN /*GET CURSOS MAS RECIENTES*/
+		SELECT CONCAT(B.nombre,' ',apellidoPaterno,' ',apellidoMaterno) AS nombreCompleto, Curso_id, A.Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, A.nombre, A.descripcion, isBaja
+        FROM vCurso A
+        LEFT JOIN Usuario B
+		ON A.Usuario_id= B.Usuario_id 
+        WHERE isBaja <> 1;
+   END IF;
 END //
 
 /*--------------------------------------------------------------------------------CATEGORIA--------------------------------------------------------------------------*/

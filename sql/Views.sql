@@ -39,6 +39,29 @@ LEFT JOIN Categoria C
 ON B.Categoria_id = C.Categoria_id
 GROUP BY A.Curso_id;
 
+DROP VIEW IF EXISTS vCursosMejorCalificado;
+
+CREATE VIEW vCursosMejorCalificado AS
+SELECT CONCAT(B.nombre,' ',apellidoPaterno,' ',apellidoMaterno) nombreCompleto, Curso_id, A.Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, A.nombre, A.descripcion, isBaja 
+FROM vCurso A
+LEFT JOIN Usuario B
+ON A.Usuario_id= B.Usuario_id 
+WHERE noLikes >= noDislikes
+ORDER BY noLikes DESC;
+
+
+DROP VIEW IF EXISTS vCursosMasVendido;
+
+CREATE VIEW vCursosMasVendido AS
+SELECT CONCAT(C.nombre,' ',apellidoPaterno,' ',apellidoMaterno) nombreCompleto,A.Curso_id, noNiveles, A.costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, A.nombre, A.descripcion, isBaja, COUNT(B.Curso_id) misCursosVendidos
+FROM Curso A
+LEFT JOIN usuarioCurso B
+ON A.Curso_id = B.Curso_id
+LEFT JOIN Usuario C
+ON A.Usuario_id= C.Usuario_id 
+GROUP BY A.Curso_id
+ORDER BY misCursosVendidos;
+
 /*--------------------------------------------------------------------------------CATEGORIA--------------------------------------------------------------------------*/
 DROP VIEW IF EXISTS vCategoria;
 

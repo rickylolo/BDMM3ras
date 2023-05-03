@@ -78,6 +78,138 @@ $(document).ready(function () {
       })
   }
 
+  // ------- CURSOS --------
+  // --- MEJORES CALIFICADOS ---
+  cargarCursosMejoresCalificados()
+  function cargarCursosMejoresCalificados() {
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'getCursosMejoresCalificados' },
+      url: 'php/API/Curso.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        $('#misCursosMejoresCalificados').empty()
+        for (let i = 0; i < items.length; i++) {
+          $('#misCursosMejoresCalificados').append(
+            `
+                <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="data:image/jpeg;base64,` +
+              items[i].imagenCurso +
+              `" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>` +
+              items[i].nombre +
+              `</b></h4>
+                            <span>Impartido Por :<div class="instructor">` +
+              items[i].nombreCompleto +
+              `</div></span><br>
+                            <div class="btn verCurso" id="` +
+              items[i].Curso_id +
+              `">Ver Curso</div>
+                        </div>
+                </article>
+            `
+          )
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
+  // --- MAS VENDIDOS  ---
+  cargarCursosMasVendidos()
+  function cargarCursosMasVendidos() {
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'getCursosMasVendidos' },
+      url: 'php/API/Curso.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        $('#misCursosMasVendidos').empty()
+        for (let i = 0; i < items.length; i++) {
+          $('#misCursosMasVendidos').append(
+            `
+                <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="data:image/jpeg;base64,` +
+              items[i].imagenCurso +
+              `" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>` +
+              items[i].nombre +
+              `</b></h4>
+                            <span>Impartido Por :<div class="instructor">` +
+              items[i].nombreCompleto +
+              `</div></span><br>
+                            <div class="btn verCurso" id="` +
+              items[i].Curso_id +
+              `">Ver Curso</div>
+                        </div>
+                </article>
+            `
+          )
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+  // --- MAS RECIENTES ---
+  cargarCursosMasRecientes()
+  function cargarCursosMasRecientes() {
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'getCursosMasRecientes' },
+      url: 'php/API/Curso.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        $('#misCursosMasRecientes').empty()
+        for (let i = 0; i < items.length; i++) {
+          $('#misCursosMasRecientes').append(
+            `
+                <article class="post">
+                        <div class="post-header">
+                            <a href="curso.php">
+                                <img src="data:image/jpeg;base64,` +
+              items[i].imagenCurso +
+              `" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>` +
+              items[i].nombre +
+              `</b></h4>
+                            <span>Impartido Por :<div class="instructor">` +
+              items[i].nombreCompleto +
+              `</div></span><br>
+                            <div class="btn verCurso" id="` +
+              items[i].Curso_id +
+              `">Ver Curso</div>
+                        </div>
+                </article>
+            `
+          )
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
+  // ---    MAS VENDIDOS     ---
+
+  // ---    MAS RECIENTES    ---
   // ----------------------------- ACTUALIZAR DATOS -----------------
   // -- USUARIO --
   $('#EditUser').click(funcActualizarDatosPerfil)

@@ -69,7 +69,101 @@ class cursoAPI
         }
     }
 
+    
+    function getCursosMejoresCalificados()
+    {
 
+        $Curso = new Curso();
+        $arrCursos = array();
+        $arrCursos["Datos"] = array();
+
+        $res = $Curso->getCursosMejoresCalificados();
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $obj = array(
+                    "nombreCompleto" => $row['nombreCompleto'],
+                    "Curso_id" => $row['Curso_id'],
+                    "Usuario_id" => $row['Usuario_id'],
+                    "noNiveles" => $row['noNiveles'],
+                    "noComentarios" => $row['noComentarios'],
+                    "noLikes" => $row['noLikes'],
+                    "noDislikes" => $row['noDislikes'],
+                    "imagenCurso" => base64_encode(($row['imagenCurso'])),
+                    "nombre" => $row['nombre'],
+                    "descripcion" => $row['descripcion'],
+                    "isBaja" => $row['isBaja']
+                );
+                array_push($arrCursos["Datos"], $obj);
+            }
+            echo json_encode($arrCursos["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
+    }
+
+    function getCursosMasVendidos()
+    {
+
+        $Curso = new Curso();
+        $arrCursos = array();
+        $arrCursos["Datos"] = array();
+
+        $res = $Curso->getCursosMasVendidos();
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $obj = array(
+                    "nombreCompleto" => $row['nombreCompleto'],
+                    "Curso_id" => $row['Curso_id'],
+                    "noNiveles" => $row['noNiveles'],
+                    "noComentarios" => $row['noComentarios'],
+                    "noLikes" => $row['noLikes'],
+                    "noDislikes" => $row['noDislikes'],
+                    "imagenCurso" => base64_encode(($row['imagenCurso'])),
+                    "nombre" => $row['nombre'],
+                    "descripcion" => $row['descripcion'],
+                    "isBaja" => $row['isBaja']
+                );
+                array_push($arrCursos["Datos"], $obj);
+            }
+            echo json_encode($arrCursos["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
+    }
+
+    function getCursosMasRecientes()
+    {
+
+        $Curso = new Curso();
+        $arrCursos = array();
+        $arrCursos["Datos"] = array();
+
+        $res = $Curso->getCursosMasRecientes();
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $obj = array(
+                    "nombreCompleto" => $row['nombreCompleto'],
+                    "Curso_id" => $row['Curso_id'],
+                    "Usuario_id" => $row['Usuario_id'],
+                    "noNiveles" => $row['noNiveles'],
+                    "noComentarios" => $row['noComentarios'],
+                    "noLikes" => $row['noLikes'],
+                    "noDislikes" => $row['noDislikes'],
+                    "imagenCurso" => base64_encode(($row['imagenCurso'])),
+                    "nombre" => $row['nombre'],
+                    "descripcion" => $row['descripcion'],
+                    "isBaja" => $row['isBaja']
+                );
+                array_push($arrCursos["Datos"], $obj);
+            }
+            echo json_encode($arrCursos["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
+    }
     function insertarCurso($Usuario_id, $costoCurso, $imagenCurso, $nombreCurso, $descripcionCurso)
     {
         $Curso = new Curso();
@@ -342,6 +436,21 @@ if (isset($_POST['funcion'])) {
             $id = $_SESSION['Usuario_id'];
             $var = new cursoAPI();
             $var->getReporteInstructor($id);
+            break;
+        
+        // -----------------------
+
+        case "getCursosMejoresCalificados":
+            $var = new cursoAPI();
+            $var->getCursosMejoresCalificados();
+            break;
+        case "getCursosMasVendidos":
+            $var = new cursoAPI();
+            $var->getCursosMasVendidos();
+            break;
+        case "getCursosMasRecientes":
+            $var = new cursoAPI();
+            $var->getCursosMasRecientes();
             break;
     }
 }

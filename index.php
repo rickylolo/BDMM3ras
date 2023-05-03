@@ -128,63 +128,11 @@ session_start(); // Inicio mi sesion PHP
             <hr class="solid">
             <div class="row fs-4 product-title"><b>Cursos mejores calificados</b></div>
             <hr class="solid">
+
+
             <section class="post-list">
-                <div class="content">
-                    <article class="post">
-                        <div class="post-header">
-                            <a href="curso.php">
-                                <img src="img/html.jpg" class="post-img">
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h4><b>Curso de HTML 5</b></h4>
-                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                            <div class="btn verCurso">Ver Curso</div>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <div class="post-header">
-                            <a href="curso.php">
-                                <img src="img/css.png" class="post-img">
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h4><b>CSS 3 para principiantes</b></h4>
-                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                            <div class="btn verCurso">Ver Curso</div>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <div class="post-header">
-                            <a href="curso.php">
-                                <img src="img/javascript.jpg" class="post-img">
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h4><b>Javascript elemental</b></h4>
-                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                            <div class="btn verCurso">Ver Curso</div>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <div class="post-header">
-                            <a href="curso.php">
-                                <img src="img/react.png" class="post-img">
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h4><b>React desde Cero a Experto</b></h4>
-                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                            <div class="btn verCurso">Ver Curso</div>
-                        </div>
-                    </article>
+                <div class="content" id="misCursosMejoresCalificados">
                 </div>
-
-
-
             </section>
 
             <!--                 CURSOS MAS VENDIDOS                 -->
@@ -192,58 +140,7 @@ session_start(); // Inicio mi sesion PHP
             <div class="row fs-4 product-title"><b>Cursos mas vendidos</b></div>
             <hr class="solid">
             <section class="post-list">
-                <div class="content">
-                    <article class="post">
-                        <div class="post-header">
-                            <a href="curso.php">
-                                <img src="img/html.jpg" class="post-img">
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h4><b>Curso de HTML 5</b></h4>
-                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                            <div class="btn verCurso">Ver curso</div>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <div class="post-header">
-                            <a href="curso.php">
-                                <img src="img/css.png" class="post-img">
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h4><b>CSS 3 para principiantes</b></h4>
-                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                            <div class="btn verCurso">Ver Curso</div>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <div class="post-header">
-                            <a href="curso.php">
-                                <img src="img/javascript.jpg" class="post-img">
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h4><b>Javascript elemental</b></h4>
-                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                            <div class="btn verCurso">Ver Curso</div>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <div class="post-header">
-                            <a href="curso.php">
-                                <img src="img/react.png" class="post-img">
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h4><b>React desde Cero a Experto</b></h4>
-                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                            <div class="btn verCurso">Ver Curso</div>
-                        </div>
-                    </article>
+                <div class="content"  id="misCursosMasVendidos">
                 </div>
 
 
@@ -255,58 +152,8 @@ session_start(); // Inicio mi sesion PHP
             <div class="row fs-4 product-title"><b>Cursos mas recientes</b></div>
             <hr class="solid">
             <section class="post-list">
-                <div class="content">
-                    <article class="post">
-                        <div class="post-header">
-                            <a href="curso.php">
-                                <img src="img/html.jpg" class="post-img">
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h4><b>Curso de HTML 5</b></h4>
-                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                            <div class="btn verCurso">Ver Curso</div>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <div class="post-header">
-                            <a href="curso.php">
-                                <img src="img/css.png" class="post-img">
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h4><b>CSS 3 para principiantes</b></h4>
-                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                            <div class="btn verCurso">Ver Curso</div>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <div class="post-header">
-                            <a href="curso.php">
-                                <img src="img/javascript.jpg" class="post-img">
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h4><b>Javascript elemental</b></h4>
-                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                            <div class="btn verCurso">Ver Curso</div>
-                        </div>
-                    </article>
-
-                    <article class="post">
-                        <div class="post-header">
-                            <a href="curso.php">
-                                <img src="img/react.png" class="post-img">
-                            </a>
-                        </div>
-                        <div class="post-body">
-                            <h4><b>React desde Cero a Experto</b></h4>
-                            <span>Impartido Por :<div class="instructor">Ricardo Alberto Grimaldo Estévez</div></span><br>
-                            <div class="btn verCurso">Ver Curso</div>
-                        </div>
-                    </article>
+                <div class="content"  id="misCursosMasRecientes">
+                 
                 </div>
 
 
