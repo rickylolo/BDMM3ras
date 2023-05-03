@@ -73,6 +73,7 @@ class nivelAPI
             while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
                 $obj = array(
                     "Curso_id" => $row['Curso_id'],
+                     "Nivel_id" => $row['Nivel_id']
                 );
                 array_push($arrCursos["Datos"], $obj);
             }

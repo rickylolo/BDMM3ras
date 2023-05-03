@@ -365,12 +365,13 @@ CREATE PROCEDURE sp_GestionNivel
 BEGIN
 	DECLARE u_costoNivel DECIMAL(9,2);
     DECLARE u_MisNiveles INT;
+	DECLARE u_MiCurso INT;
    IF Operacion = 'I' /*INSERT NIVEL*/
    THEN  
 		SET u_MisNiveles = contarNiveles(sp_Curso_id) + 1;
 		INSERT INTO Nivel(Curso_id,noNivel,nombre,costoNivel) 
 			VALUES (sp_Curso_id,u_MisNiveles,sp_nombre,sp_costoNivel);
-		SELECT Curso_id
+		SELECT Nivel_id,Curso_id
         FROM vNivel WHERE Nivel_id = last_insert_id();
 	
    END IF;
@@ -385,6 +386,9 @@ BEGIN
 		WHERE Nivel_id = sp_Nivel_id;
    END IF;
     IF Operacion = 'D' THEN /*DELETE NIVEL*/
+          SELECT noNivel INTO u_MisNiveles FROM Nivel WHERE Nivel_id = sp_Nivel_id;
+          SELECT Curso_id INTO u_MiCurso FROM Nivel WHERE Nivel_id = sp_Nivel_id;
+		  UPDATE Nivel SET noNivel = noNivel - 1 WHERE noNivel > u_MisNiveles AND Curso_id = u_MiCurso;
           DELETE FROM Nivel WHERE Nivel_id = sp_Nivel_id;
    END IF;
     IF Operacion = 'A' THEN /*GET ALL NIVELES DEL CURSO*/
@@ -429,20 +433,30 @@ BEGIN
                 texto = IFNULL(sp_texto,texto),
                 tipoMultimedia = IFNULL(sp_tipoMultimedia,tipoMultimedia)
 		WHERE Multimedia_id = sp_Multimedia_id;
+        SELECT Nivel_id FROM Multimedia WHERE Multimedia_id = sp_Multimedia_id;
+        
    END IF;
     IF Operacion = 'D' THEN /*DELETE MULTIMEDIA*/
+		  SELECT Nivel_id FROM Multimedia WHERE Multimedia_id = sp_Multimedia_id;
           DELETE FROM Multimedia WHERE Multimedia_id = sp_Multimedia_id;
+        
    END IF;
    
-      IF Operacion = 'G' THEN /*GET ALL MULTIMEDIA DEL NIVEL*/
+      IF Operacion = 'A' THEN /*GET ALL MULTIMEDIA DEL NIVEL*/
 		SELECT Multimedia_id, multimedia, texto, tipoMultimedia
         FROM vObtenerTodaMultimediaDeUnNivel
         WHERE Nivel_id = sp_Nivel_id;
    END IF;
+   
+	  IF Operacion = 'G' THEN /*GET DATA MULTIMEDIA*/
+		SELECT Multimedia_id, Nivel_id, multimedia, texto, tipoMultimedia
+        FROM vMultimedia
+        WHERE Multimedia_id = sp_Multimedia_id;
+   END IF;
 END //
 
 
-
+SET GLOBAL max_allowed_packet=1073741824;
 /*--------------------------------------------------------------------------------USUARIO CURSO--------------------------------------------------------------------------*/
 DROP PROCEDURE IF EXISTS sp_GestionUsuarioCurso;
 DELIMITER //

@@ -502,6 +502,8 @@ NULL 		# Tipo Multimedia
 );
 
 
+SELECT * FROM NIVEL WHERE Curso_id = 3;
+
 /*-------------------------------------------------------------------------------- USUARIO CURSO -------------------------------------------------------------------------*/
 CALL sp_GestionUsuarioCurso(
 'I', #Operacion

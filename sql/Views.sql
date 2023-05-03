@@ -102,6 +102,13 @@ ON A.Curso_id = B.Curso_id;
 
 /*-------------------------------------------------------------------------------- MULTIMEDIA -------------------------------------------------------------------------*/
 
+DROP VIEW IF EXISTS vMultimedia;
+
+CREATE VIEW vMultimedia AS
+SELECT Multimedia_id, Nivel_id, multimedia, texto, tipoMultimedia
+FROM Multimedia;
+
+
 DROP VIEW IF EXISTS vObtenerTodaMultimediaDeUnNivel;
 
 CREATE VIEW vObtenerTodaMultimediaDeUnNivel AS

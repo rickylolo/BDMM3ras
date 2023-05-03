@@ -32,7 +32,7 @@
   object-fit: cover;
 }
 
-.image-upload>input {
+.image-upload > input {
   display: none;
 }
 
@@ -95,6 +95,10 @@
   color: rgb(0, 0, 0);
   margin-bottom: 10px;
   font-size: small;
+}
+
+.badge {
+  cursor: pointer;
 }
 
 .post-body h2 {

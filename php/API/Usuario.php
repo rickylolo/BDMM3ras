@@ -37,7 +37,7 @@ class usuarioAPI
 
     function getUserData($Usuario_id)
     {
-
+        
         $user = new User();
         $arrUsers = array();
         $arrUsers["Datos"] = array();
@@ -164,10 +164,16 @@ if (isset($_POST['funcion'])) {
             $var->actualizarUser($id, $_POST['MetodoPago_id'], $_POST['email'], $_POST['password'], $rol, $binariosImagen, $_POST['descripcion'], $_POST['names'], $_POST['lastNameP'], $_POST['lastNameM'], $_POST['fechaNac'], $_POST['genero']);
             break;
         case "obtenerDataUsuario":
+
             session_start();
+            if (!empty($_SESSION)) {
             $id = $_SESSION['Usuario_id'];
             $var = new usuarioAPI();
             $var->getUserData($id);
+            }
+            else{
+                echo '0';
+            }
             break;
         case "obtenerDataUsuariosBloqueados":
             $var = new usuarioAPI();

@@ -7,6 +7,9 @@ $(document).ready(function () {
   $('#miImagenNivel').hide()
   $('#miVideoNivel').hide()
 
+  $('#E_miPDFNivel').hide()
+  $('#E_miImagenNivel').hide()
+  $('#E_miVideoNivel').hide()
   // MI DROPDOWN CURSO CATEGORIA
   $('#miDropdownCursosCategoriasEditar').on(
     'click',
@@ -210,7 +213,6 @@ $(document).ready(function () {
       })
   }
 
-  // TO DO
   function cargarMultimediaNivel(Nivel_id) {
     $.ajax({
       type: 'POST',
@@ -219,7 +221,6 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
-        console.log(items)
         $(`#miContenidoMultimedia-` + Nivel_id).empty()
         for (let i = 0; i < items.length; i++) {
           switch (items[i].tipoMultimedia) {
@@ -230,12 +231,12 @@ $(document).ready(function () {
                 <div class="card-header text-end">          
                     <span id="` +
                   items[i].Multimedia_id +
-                  `" class="badge rounded-pill bg-primary editarMultimedia">Editar</span>
+                  `" class="badge rounded-pill bg-primary editarMultimedia" data-bs-toggle="modal" data-bs-target="#miModalNivelEditarMultimedia">Editar</span>
                     <span id="` +
                   items[i].Multimedia_id +
                   `" class="badge rounded-pill bg-danger borrarMultimedia">Borrar</span>
                 </div>
-                <div class="card-body">
+                <div class="card-body d-flex text-center justify-content-center">
                     <p class="card-text">` +
                   items[i].texto +
                   `</p>
@@ -251,17 +252,21 @@ $(document).ready(function () {
                 <div class="card-header text-end">          
                     <span id="` +
                   items[i].Multimedia_id +
-                  `" class="badge rounded-pill bg-primary editarMultimedia">Editar</span>
+                  `" class="badge rounded-pill bg-primary editarMultimedia" data-bs-toggle="modal" data-bs-target="#miModalNivelEditarMultimedia">Editar</span>
                     <span id="` +
                   items[i].Multimedia_id +
                   `" class="badge rounded-pill bg-danger borrarMultimedia">Borrar</span>
                 </div>
-                <div class="card-body">
+                   <div class="card-body d-flex fw-bold fs-5 text-center justify-content-center">
                     <p class="card-text">` +
                   items[i].texto +
                   `</p>
-              Soy una imagen
-
+                      </div>
+                    <div class="image-upload d-flex justify-content-center p-2 ms-3 me-3 mb-4">
+                                    <img src="data:image/jpeg;base64,` +
+                  items[i].multimedia +
+                  `" alt="" width="75%">                                        
+                
                 </div>
             </div>
           `
@@ -274,17 +279,22 @@ $(document).ready(function () {
                 <div class="card-header text-end">          
                     <span id="` +
                   items[i].Multimedia_id +
-                  `" class="badge rounded-pill bg-primary editarMultimedia">Editar</span>
+                  `" class="badge rounded-pill bg-primary editarMultimedia" data-bs-toggle="modal" data-bs-target="#miModalNivelEditarMultimedia">Editar</span>
                     <span id="` +
                   items[i].Multimedia_id +
                   `" class="badge rounded-pill bg-danger borrarMultimedia">Borrar</span>
                 </div>
-                <div class="card-body">
+                   <div class="card-body d-flex fw-bold fs-5 text-center justify-content-center">
                     <p class="card-text">` +
                   items[i].texto +
                   `</p>
-              Soy un video
-
+                      </div>
+                    <div class="image-upload d-flex justify-content-center p-2 ms-3 me-3 mb-4">
+                                 <video controls class="misVideos mx-auto">
+                                        <source class="misVideos" src="data:video/mp4;base64,` +
+                  items[i].multimedia +
+                  `"width="640" height="360" type="video/mp4">
+                                 </video>            
                 </div>
             </div>
           `
@@ -297,17 +307,22 @@ $(document).ready(function () {
                 <div class="card-header text-end">          
                     <span id="` +
                   items[i].Multimedia_id +
-                  `" class="badge rounded-pill bg-primary editarMultimedia">Editar</span>
+                  `" class="badge rounded-pill bg-primary editarMultimedia" data-bs-toggle="modal" data-bs-target="#miModalNivelEditarMultimedia">Editar</span>
                     <span id="` +
                   items[i].Multimedia_id +
                   `" class="badge rounded-pill bg-danger borrarMultimedia">Borrar</span>
                 </div>
-                <div class="card-body">
+                   <div class="card-body d-flex fw-bold fs-5 text-center justify-content-center">
                     <p class="card-text">` +
                   items[i].texto +
                   `</p>
-              Soy un pdf
-
+                      </div>
+                    <div class="image-upload d-flex justify-content-center p-2 ms-3 me-3 mb-4">
+                                <iframe src="data:application/pdf;base64,` +
+                  items[i].multimedia +
+                  `" width="100%" height="600px">
+                                    <p>Lo sentimos, no se puede mostrar el archivo PDF.</p>
+                                </iframe>
                 </div>
             </div>
           `
@@ -444,6 +459,28 @@ $(document).ready(function () {
     let miIdNivel = $(this).attr('id')
     $('#miNivelSeleccionado').val(miIdNivel)
   }
+
+  // -- MULTIMEDIA -> EDITAR MULTIMEDIA  --
+  $('#miContenidoCurso').on('click', '.editarMultimedia', funcEditarMultimedia)
+  function funcEditarMultimedia() {
+    let miIdMultimedia = $(this).attr('id')
+    $('#miMultimediaSeleccionada').val(miIdMultimedia)
+    // Mis datos Multimedia
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'obtenerDataMultimedia', Multimedia_id: miIdMultimedia },
+      url: 'php/API/Multimedia.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        $('#E_miTipoMultimedia').val(items[0].tipoMultimedia)
+        $('#E_TextoNivel').val(items[0].texto)
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
   // ----------------------------- REGISTRO DATOS -----------------
   // -- CURSO --
   $('#ButtonRegistrarCurso').click(funcRegistrarCurso)
@@ -539,7 +576,13 @@ $(document).ready(function () {
       },
     })
       .done(function (data) {
+        $('#nivelName').val('')
+        $('#costoNivel').val('')
         var items = JSON.parse(data)
+        var Nivel_id = items[0].Nivel_id
+        var Curso_id = items[0].Curso_id
+        $('#miNivelSeleccionado').val(Nivel_id)
+        cargarNivelesCurso(Curso_id)
         alert('Nivel insertado correctamente')
       })
       // MANEJO DE ERRORES DEL SERVIDOR
@@ -573,13 +616,13 @@ $(document).ready(function () {
       enctype: 'multipart/form-data',
       processData: false,
     })
-      .done(function (data) {
-        console.log(data)
+      .done(function () {
         alert('Registro de multimedia correctamente')
         $('#miMultimediaNivelModal').val('')
         $('#TextoNivel').val('')
         $('#miNivelSeleccionado').val('')
         $('#miTipoMultimedia').val('')
+        cargarMultimediaNivel(Nivel_id)
         mostrarNada()
       })
       // MANEJO DE ERRORES DEL SERVIDOR
@@ -616,8 +659,7 @@ $(document).ready(function () {
       enctype: 'multipart/form-data',
       processData: false,
     })
-      .done(function (data) {
-        console.log(data)
+      .done(function () {
         alert('Curso Actualizado Correctamente')
         cargarReporteCurso()
       })
@@ -644,8 +686,7 @@ $(document).ready(function () {
         costoNivel: costoNivel,
       },
     })
-      .done(function (data) {
-        console.log(data)
+      .done(function () {
         cargarNivelesCurso(cursoID)
         alert('Nivel actualizado correctamente')
       })
@@ -655,14 +696,50 @@ $(document).ready(function () {
       })
   }
 
+  // -- MULTIMEDIA --
+  $('#ButtonActualizarMultimedia').click(funcActualizarMultimedia)
+  function funcActualizarMultimedia() {
+    var form_data = new FormData()
+    var multimediaId = $('#miMultimediaSeleccionada').val()
+    var file_data = $('#E_miMultimediaNivelModal').prop('files')[0]
+    var texto = $('#E_TextoNivel').val()
+    var tipoMultimedia = $('#E_miTipoMultimedia').val()
+
+    form_data.append('funcion', 'actualizarMultimedia')
+    form_data.append('file', file_data)
+    form_data.append('Multimedia_id', multimediaId)
+    form_data.append('Texto', texto)
+    form_data.append('tipoMultimedia', tipoMultimedia)
+    $.ajax({
+      url: 'php/API/Multimedia.php',
+      type: 'POST',
+      cache: false,
+      contentType: false,
+      data: form_data,
+      dataType: 'Text',
+      enctype: 'multipart/form-data',
+      processData: false,
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        cargarMultimediaNivel(items[0].Nivel_id)
+        alert('Multimedia actualizada correctamente')
+      })
+      // MANEJO DE ERRORES DEL SERVIDOR
+      .fail(function (jqXHR, textStatus, errorThrown) {
+        console.log('Error: ' + errorThrown)
+      })
+  }
   // ----------------------------- ELIMINAR DATOS -----------------
+
+  // -- CURSO-CATEGORIA --
   $('#misCategoriasCursoSelectedEditar').on(
     'click',
     '.borrarCategoriaCurso',
     funcionBorrarCategoriaCurso
   )
   function funcionBorrarCategoriaCurso() {
-    let miIdCursoCategoria = $(this).attr('id')
+    var miIdCursoCategoria = $(this).attr('id')
     var cursoID = $('#miCursoSelectedEdit').val()
     if (confirm('¿Seguro deseas eliminar esta categoria de este curso?')) {
       $.ajax({
@@ -684,6 +761,53 @@ $(document).ready(function () {
     }
   }
 
+  // -- NIVEL --
+  $('#miContenidoCurso').on('click', '.borrarNivel', funcBorrarNivel)
+  function funcBorrarNivel() {
+    var miIdNivel = $(this).attr('id')
+    var cursoID = $('#miCursoSelectedEdit').val()
+    if (confirm('¿Seguro deseas eliminar este Nivel de este curso?')) {
+      $.ajax({
+        type: 'POST',
+        data: {
+          funcion: 'eliminarNivel',
+          Nivel_id: miIdNivel,
+        },
+        url: 'php/API/Nivel.php',
+      })
+        .done(function () {
+          cargarNivelesCurso(cursoID)
+          alert('Nivel eliminado correctamente del curso')
+        })
+        .fail(function (data) {
+          console.error(data)
+        })
+    }
+  }
+
+  // -- MULTIMEDIA --
+  $('#miContenidoCurso').on('click', '.borrarMultimedia', funcBorrarMultimedia)
+  function funcBorrarMultimedia() {
+    var miIdMultimedia = $(this).attr('id')
+    if (confirm('¿Seguro deseas eliminar esta Multimedia?')) {
+      $.ajax({
+        type: 'POST',
+        data: {
+          funcion: 'eliminarMultimedia',
+          Multimedia_id: miIdMultimedia,
+        },
+        url: 'php/API/Multimedia.php',
+      })
+        .done(function (data) {
+          var items = JSON.parse(data)
+          cargarMultimediaNivel(items[0].Nivel_id)
+          alert('Multimedia eliminada correctamente del curso')
+        })
+        .fail(function (data) {
+          console.error(data)
+        })
+    }
+  }
   // PREVISUALIZACION NIVELES
 
   function mostrarPDF() {
@@ -709,8 +833,26 @@ $(document).ready(function () {
     $('#miPDFNivel').hide()
     $('#miImagenNivel').hide()
   }
-  $('#miMultimediaNivelModal').change(handleFileSelect)
-  function handleFileSelect(event) {
+  function mostrarPDFEditar() {
+    //PDF
+    $('#E_miPDFNivel').show()
+    $('#E_miImagenNivel').hide()
+    $('#E_miVideoNivel').hide()
+  }
+  function mostrarImagenEditar() {
+    //IMAGEN
+    $('#E_miImagenNivel').show()
+    $('#E_miPDFNivel').hide()
+    $('#E_miVideoNivel').hide()
+  }
+  function mostarVideoEditar() {
+    //VIDEO
+    $('#E_miVideoNivel').show()
+    $('#E_miPDFNivel').hide()
+    $('#E_miImagenNivel').hide()
+  }
+  $('#miMultimediaNivelModal').change(handleFileSelectAlta)
+  function handleFileSelectAlta(event) {
     const file = event.target.files[0]
     const extension = file.name.split('.').pop().toLowerCase()
     switch (extension) {
@@ -744,6 +886,44 @@ $(document).ready(function () {
         $('#miVideoViewer').attr('src', videoUrl)
         $('#miTipoMultimedia').val(3)
         mostarVideo()
+        break
+    }
+  }
+  $('#E_miMultimediaNivelModal').change(handleFileSelect)
+  function handleFileSelect(event) {
+    const file = event.target.files[0]
+    const extension = file.name.split('.').pop().toLowerCase()
+    switch (extension) {
+      case 'pdf':
+        if (file.type !== 'application/pdf') {
+          alert('PDF no valido')
+          return
+        }
+        const pdfUrl = URL.createObjectURL(file)
+        $('#E_miPDFViewer').attr('src', pdfUrl)
+        $('#E_miTipoMultimedia').val(4)
+        mostrarPDFEditar()
+        break
+      case 'jpg':
+      case 'jpeg':
+        if (file.type !== 'image/jpeg' && file.type !== 'image/jpg') {
+          alert('Por favor, seleccione un archivo de imagen JPG o JPEG.')
+          return
+        }
+        const imgUrl = URL.createObjectURL(file)
+        $('#E_miImageViewer').attr('src', imgUrl)
+        $('#E_miTipoMultimedia').val(2)
+        mostrarImagenEditar()
+        break
+      case 'mp4':
+        if (file.type !== 'video/mp4') {
+          alert('Por favor, seleccione un archivo de video MP4.')
+          return
+        }
+        const videoUrl = URL.createObjectURL(file)
+        $('#E_miVideoViewer').attr('src', videoUrl)
+        $('#E_miTipoMultimedia').val(3)
+        mostarVideoEditar()
         break
     }
   }

@@ -767,20 +767,20 @@ session_start(); // Inicio mi sesion PHP
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-chat-left-text"></i></span>
-                                <input type="text" class="form-control" id="nivelName" name="nivelName" placeholder="Nombre del producto" aria-label="Username" aria-describedby="basic-addon1" required>
+                                <input type="text" class="form-control" id="nivelName" name="nivelName" placeholder="Nombre del nivel" aria-label="Username" aria-describedby="basic-addon1" required>
                             </div>
                               <div class="row fw-bold fs-6 ms-3 mb-2">
                                 Costo de nivel:
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-list"></i></span>
-                                <input type="number" class="form-control" id="costoNivel" name="costoNivel" placeholder="Descripción" aria-label="Username" aria-describedby="basic-addon1" required>
+                                <input type="number" class="form-control" id="costoNivel" name="costoNivel" placeholder="Costo del nivel" aria-label="Username" aria-describedby="basic-addon1" required>
                             </div>           
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-success" id="ButtonRegistrarNivel" data-bs-toggle="modal" data-bs-target="#miModalNivelAltaMultimedia">Crear
                                 Nivel</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso">Cancelar</button>
                         </div>
                     </form>
                 </div>
