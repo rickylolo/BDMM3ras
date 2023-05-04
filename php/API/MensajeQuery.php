@@ -7,17 +7,16 @@ class Mensaje extends DB
 
     // ---------------------------------------CONSULTA DE INFORMACION------------------------------------------
 
-    // QUERY Get Datos Mensajes Alumno
+    // QUERY Get Todos Mensajes Header Instructor
 
-    function getMensajeData($Alumno_id)
+    function getMensajesInstructorData($Instructor_id)
     {
         $get = "CALL sp_GestionMensaje(
-                    'G',  		    #Operacion
+                    'X',  		    #Operacion
                     NULL, 		    # Id
-                    NULL,	# Instructor Id
-                    $Alumno_id, 	        # Alumno Id
-                    NULL, 		    # Curso Id
-                    NULL            # Texto
+                    $Instructor_id,	# Instructor Id
+                    NULL, 	        # Alumno Id
+                    NULL 		    # Curso Id
         ); ";
         $query = $this->connect()->query($get);
         return $query;
@@ -25,15 +24,14 @@ class Mensaje extends DB
 
      // QUERY Get Todos Mensajes Instructor
 
-    function getAllMensajesInstructorData($Instructor_id)
+    function getMensajesEstudianteData($Alumno_id)
     {
         $get = "CALL sp_GestionMensaje(
-                    'A',  		    #Operacion
+                    'Z',  		    #Operacion
                     NULL, 		    # Id
-                    $Instructor_id,	# Instructor Id
-                    NULL, 	        # Alumno Id
-                    NULL, 		    # Curso Id
-                    NULL            # Texto
+                    NULL,	        # Instructor Id
+                    $Alumno_id,     # Alumno Id
+                    NULL 		    # Curso Id
         ); ";
         $query = $this->connect()->query($get);
         return $query;
@@ -42,15 +40,14 @@ class Mensaje extends DB
     // ---------------------------------------INSERTAR INFORMACION------------------------------------------
     // QUERY Insertar Mensaje
 
-    function insertarMensaje($Instructor_id,$Alumno_id, $Curso_id, $textoMensaje)
+    function insertarMensaje($Instructor_id,$Alumno_id, $Curso_id)
     {
         $insert = "CALL sp_GestionMensaje(
                     'I',  		#Operacion
                     NULL, 		# Id
                     $Instructor_id,	# Instructor Id
                     $Alumno_id, 	# Alumno Id
-                    $Curso_id, 		# Curso Id
-                    '$textoMensaje' # Texto
+                    $Curso_id 		# Curso Id
         ); ";
         $query = $this->connect()->query($insert);
         return $query;

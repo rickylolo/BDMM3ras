@@ -6,24 +6,54 @@ class mensajeAPI
 {
 
 
-    function getMensajeData($Curso_id)
+    function getMensajesInstructor($Instructor_id)
     {
 
         $Mensaje = new Mensaje();
         $arrMensajes = array();
         $arrMensajes["Datos"] = array();
 
-        $res = $Mensaje->getMensajeData($Curso_id);
+        $res = $Mensaje->getMensajesInstructorData($Instructor_id);
         if ($res) { // Entra si hay información
             while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
                 $obj = array( 
                     "Mensaje_id" => $row['Mensaje_id'],
-                    "noMensaje" => $row['noMensaje'],
-                    "nombreMensaje" => $row['nombreMensaje'],
-                    "costoMensaje" => $row['costoMensaje'],
                     "Curso_id" => $row['Curso_id'],
+                    "UsuarioInstructor_id" => $row['UsuarioInstructor_id'],
+                    "UsuarioAlumno_id" => $row['UsuarioAlumno_id'],
                     "imagenCurso" => base64_encode(($row['imagenCurso'])),
-                    "nombreCurso" => $row['nombreCurso']
+                    "nombre" => $row['nombre'],
+                    "correo" => $row['correo'],
+                    "nombreUsuario" => $row['nombreUsuario']
+                );
+                array_push($arrMensajes["Datos"], $obj);
+            }
+            echo json_encode($arrMensajes["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
+    }
+
+        function getMensajesEstudiante($Alumno_id)
+    {
+
+        $Mensaje = new Mensaje();
+        $arrMensajes = array();
+        $arrMensajes["Datos"] = array();
+
+        $res = $Mensaje->getMensajesEstudianteData($Alumno_id);
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $obj = array( 
+                    "Mensaje_id" => $row['Mensaje_id'],
+                    "Curso_id" => $row['Curso_id'],
+                    "UsuarioInstructor_id" => $row['UsuarioInstructor_id'],
+                    "UsuarioAlumno_id" => $row['UsuarioAlumno_id'],
+                    "imagenCurso" => base64_encode(($row['imagenCurso'])),
+                    "nombre" => $row['nombre'],
+                    "correo" => $row['correo'],
+                    "nombreUsuario" => $row['nombreUsuario']
                 );
                 array_push($arrMensajes["Datos"], $obj);
             }
@@ -35,25 +65,12 @@ class mensajeAPI
     }
     
 
-    function insertarMensaje($Curso_id,$noMensaje, $nombreMensaje, $costoMensaje)
+    function insertarMensaje($UsuarioInstructor,$UsuarioAlumno, $Curso_id)
     {
         $Mensaje = new Mensaje();
-        $Mensaje->insertarMensaje($Curso_id,$noMensaje, $nombreMensaje, $costoMensaje);
+        $Mensaje->insertarMensaje($UsuarioInstructor,$UsuarioAlumno, $Curso_id);
     }
 
-    
-    function actualizarMensaje($Mensaje_id,$noMensaje, $nombreMensaje, $costoMensaje)
-    {
-        $Mensaje = new Mensaje();
-        $Mensaje->insertarMensaje($Mensaje_id,$noMensaje, $nombreMensaje, $costoMensaje);
-    }
-
-
-    function eliminarMensaje($Mensaje_id)
-    {
-        $Mensaje = new Mensaje();
-        $Mensaje->eliminarMensaje($Mensaje_id);
-    }
 }
 
 //AJAX
@@ -62,19 +79,15 @@ if (isset($_POST['funcion'])) {
     switch ($funcion) {
         case "insertarMensaje":
             $var = new mensajeAPI();
-            $var->insertarMensaje($_POST['Curso_id'], $_POST['noMensaje'],$_POST['nombreMensaje'],$_POST['costoMensaje']);
+            $var->insertarMensaje($_POST['Instructor_id'], $_POST['Alumno_id'],$_POST['Curso_id']);
             break;
-        case "actualizarMensaje":
+        case "obtenerMensajesInstructor":
             $var = new mensajeAPI();
-            $var->actualizarMensaje($_POST['Mensaje_id'], $_POST['noMensaje'],$_POST['nombreMensaje'],$_POST['costoMensaje']);
+            $var->getMensajesInstructor($_POST['Instructor_id']);
             break;
-        case "eliminarMensaje":
+        case "obtenerMensajesEstudiante":
             $var = new mensajeAPI();
-            $var->eliminarMensaje($_POST['Mensaje_id']);
-            break;
-        case "obtenerDataMensajeesDeUnCurso":
-            $var = new mensajeAPI();
-            $var->getMensajeData($_POST['Curso_id']);
+            $var->getMensajesEstudiante($_POST['Alumno_id']);
             break;
 
     }

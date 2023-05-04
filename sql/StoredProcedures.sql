@@ -84,7 +84,7 @@ BEGIN
         WHERE Usuario_id = sp_Usuario_id;
    END IF;
         IF Operacion = 'X' THEN /*GET DATOS INSTRUCTOR*/
-		SELECT correo, fotoPerfil, descripcion, CONCAT(nombre,' ',apellidoMaterno,' ',apellidoPaterno) nombre
+		SELECT Usuario_id,correo, fotoPerfil, descripcion, CONCAT(nombre,' ',apellidoMaterno,' ',apellidoPaterno) nombre
         FROM vUsuario
         WHERE Usuario_id = sp_Usuario_id AND rolUsuario = 2;
    END IF;
@@ -306,35 +306,60 @@ CREATE PROCEDURE sp_GestionMensaje
 (
 	Operacion CHAR(1),
 	sp_Mensaje_id 			 INT,
-    sp_UsuarioInstructor_id INT,			
+    sp_UsuarioInstructor_id  INT,			
     sp_UsuarioAlumno_id 	 INT,			
-    sp_Curso_id 			 INT,		
-    sp_texto  				 TEXT
+    sp_Curso_id 			 INT
 )		
 
 BEGIN
+  DECLARE isExistenteMensaje INT;
    IF Operacion = 'I' /*INSERT MENSAJE*/
    THEN  
-		INSERT INTO Mensaje(UsuarioInstructor_id,UsuarioAlumno_id,Curso_id,texto,tiempoRegistro) 
-			VALUES (sp_UsuarioInstructor_id,sp_UsuarioAlumno_id,sp_Curso_id,sp_texto,now());
-   END IF;
-    IF Operacion = 'D' THEN /*DELETE MENSAJE*/
-          DELETE FROM ComentarioCurso WHERE ComentarioCurso_id = sp_ComentarioCurso_id;
-   END IF;
-      IF Operacion = 'A' THEN /*GET ALL MENSAJES INSTRUCTOR*/
-		SELECT Mensaje_id, UsuarioInstructor_id, UsuarioAlumno_id, Curso_id, texto, tiempoRegistro
-        FROM vMensaje
+   
+		SELECT COUNT(*) INTO isExistenteMensaje FROM Mensaje
 		WHERE UsuarioInstructor_id = sp_UsuarioInstructor_id
-        GROUP BY Curso_id, UsuarioAlumno_id;
-       
+		AND UsuarioAlumno_id = sp_UsuarioAlumno_id
+		AND Curso_id = sp_Curso_id;
+		IF isExistenteMensaje = 0 THEN
+			INSERT INTO Mensaje(UsuarioInstructor_id,UsuarioAlumno_id,Curso_id) 
+			VALUES (sp_UsuarioInstructor_id,sp_UsuarioAlumno_id,sp_Curso_id);
+        END IF;
+		
    END IF;
-     IF Operacion = 'G' THEN /*GET ALL MENSAJES CURSO ESTUDIANTE*/
-	    SELECT Mensaje_id, UsuarioInstructor_id, UsuarioAlumno_id, Curso_id, texto, tiempoRegistro
-        FROM vMensaje
-		WHERE Curso_id = sp_Curso_id AND UsuarioInstructor_id=sp_UsuarioInstructor_id AND UsuarioAlumno_id=sp_UsuarioAlumno_id
-        ORDER BY tiempoRegistro DESC;
+   IF Operacion = 'D' THEN /*DELETE MENSAJE*/
+          DELETE FROM Mensaje WHERE Mensaje_id = sp_Mensaje_id;
+   END IF;
+   IF Operacion = 'X' THEN /*GET ALL MENSAJE HEADER INSTRUCTOR*/
+          SELECT Mensaje_id, Curso_id, UsuarioInstructor_id, UsuarioAlumno_id, imagenCurso, nombre, correo, nombreUsuario FROM vMensaje
+          WHERE UsuarioInstructor_id = sp_UsuarioInstructor_id;
+   END IF;
+	IF Operacion = 'Z' THEN /*GET ALL MENSAJE HEADER ALUMNO*/
+          SELECT Mensaje_id, Curso_id, UsuarioInstructor_id, UsuarioAlumno_id, imagenCurso, nombre, correo, nombreUsuario FROM vMensaje
+          WHERE UsuarioAlumno_id = sp_UsuarioAlumno_id;
    END IF;
 END //
+
+
+
+/*--------------------------------------------------------------------------------MENSAJE DETALLE--------------------------------------------------------------------------*/
+DROP PROCEDURE IF EXISTS sp_GestionMensajeDetalle;
+DELIMITER //
+CREATE PROCEDURE sp_GestionMensajeDetalle
+(
+	Operacion CHAR(1),
+	sp_MensajeDetalle_id 	 INT,		
+    sp_Mensaje_id 			 INT,		
+    sp_texto  				 TINYTEXT
+)		
+
+BEGIN
+   IF Operacion = 'I' /*INSERT MENSAJE DETALLE*/
+   THEN  
+		INSERT INTO MensajeDetalle(Mensaje_id,texto,tiempoRegistro) 
+			VALUES (sp_Mensaje_id,sp_texto,now());
+   END IF;
+END //
+
 
 
 /*--------------------------------------------------------------------------------CURSO CATEGORIA--------------------------------------------------------------------------*/

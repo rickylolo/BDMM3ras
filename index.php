@@ -682,55 +682,11 @@ session_start(); // Inicio mi sesion PHP
                     <h4 class="modal-title" id="modalTitle">Escoge un método de pago:</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-4 row">
-                            <div class="col-6 d-flex align-items-center">
-                                <div class="form-check ">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-                                    <label class="form-check-label" for="defaultCheck1">
-                                    </label>
-                                </div>
-                                <div class="col-6">
-                                    <img src="https://www.consumoteca.com/wp-content/uploads/Logo-de-PayPal.jpg" height="100px">
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div class="col-8 d-flex align-items-center">
-                            Paypal
-
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-4 row">
-                            <div class="col-6 d-flex align-items-center">
-                                <div class="form-check ">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-                                    <label class="form-check-label" for="defaultCheck1">
-                                    </label>
-                                </div>
-                                <div class="col-6">
-                                    <img src="https://lapeorempresadelmundo.es/wp-content/uploads/2020/11/tarjeta-credito-logo.png" height="75px">
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div class="col-8 d-flex align-items-center">
-                            Tarjeta BBVA con terminación ****8243
-
-                        </div>
-                    </div>
-
+                <div class="modal-body" id="misMetodosPagoComprar">
 
 
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
-                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <div class="modal-footer" id="miFooterMetodoPago">
                 </div>
             </div>
         </div>

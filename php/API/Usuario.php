@@ -80,7 +80,8 @@ class usuarioAPI
         if ($res) { // Entra si hay información
             while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
 
-                $obj = array( // correo, fotoPerfil, descripcion,nombre
+                $obj = array( 
+                    "Usuario_id" => $row['Usuario_id'],
                     "correo" => $row['correo'],
                     "fotoPerfil" => base64_encode(($row['fotoPerfil'])),
                     "descripcion" => $row['descripcion'],

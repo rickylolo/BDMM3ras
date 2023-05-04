@@ -105,8 +105,6 @@ CREATE TABLE Mensaje(
     UsuarioInstructor_id INT NOT NULL 					COMMENT'Clave Foránea del usuario instructor del mensaje',
     UsuarioAlumno_id 	 INT NOT NULL 					COMMENT'Clave Foránea del usuario alumno del mensaje',
 	Curso_id 			 INT NOT NULL 					COMMENT'Clave Foránea del curso del mensaje',
-    texto  				 TEXT NOT NULL 					COMMENT'Texto sobre la reseña del curso',
-    tiempoRegistro 		 DATETIME NOT NULL 				COMMENT'Tiempo de registro del mensaje',
  CONSTRAINT PK_Mensaje
 	PRIMARY KEY (Mensaje_id),
  CONSTRAINT FK_Mensaje_UsuarioInstructor
@@ -116,6 +114,23 @@ CREATE TABLE Mensaje(
 CONSTRAINT FK_Mensaje_Curso
 	FOREIGN KEY (Curso_id) REFERENCES Curso(Curso_id)
 );
+
+-- 													TABLA DE MENSAJE-DETALLE --
+DROP TABLE IF EXISTS MensajeDetalle;
+CREATE TABLE MensajeDetalle(
+	MensajeDetalle_id 			 INT AUTO_INCREMENT NOT NULL 	COMMENT'Clave Primaria de los mensajes detalle',
+    Usuario_id					 INT NOT NULL 					COMMENT'Clave Foránea del usuario',
+	Mensaje_id 			 		 INT NOT NULL 					COMMENT'Clave Foránea del mensaje',
+    texto  				 		 TINYTEXT NOT NULL 			    COMMENT'Texto sobre la reseña del curso',
+    tiempoRegistro 		 	     DATETIME NOT NULL 				COMMENT'Tiempo de registro del mensaje',
+ CONSTRAINT PK_MensajeDetalle_id
+	PRIMARY KEY (MensajeDetalle_id),
+ CONSTRAINT FK_MensajeDetalle_Usuario
+	FOREIGN KEY (Usuario_id) REFERENCES Usuario(Usuario_id),
+ CONSTRAINT FK_MensajeDetalle_Mensaje_id
+	FOREIGN KEY (Mensaje_id) REFERENCES Mensaje(Mensaje_id)
+);
+
 
 
 

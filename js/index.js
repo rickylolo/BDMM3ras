@@ -492,17 +492,21 @@ $(document).ready(function () {
                 <div class="container">
                     <hr class="solid">
                     <div class="d-flex flex-row pfpInstructor">
+                    
                         <div class="p-2"><img src="data:image/jpeg;base64,` +
             items[0].fotoPerfil +
             `" class="rounded-circle">
                         </div>
                         <div class="p-2">
                             <div class="d-flex flex-column">
-
+                                <div class="d-flex justify-content-between">
                                 <p class="fs-5 ps-4  fw-bold">` +
             items[0].nombre +
-            `</p>
-
+            `</p> 
+                                <button class="btn btn-primary" id="` +
+            items[0].Usuario_id +
+            `" data-bs-toggle="modal" data-bs-target="#miModalMensaje"><i class="bi bi-chat"></i> Enviar Mensaje</button>
+                                </div>
                                 <p class="text-muted ps-4  fs-6">` +
             items[0].correo +
             `</p>
@@ -526,6 +530,76 @@ $(document).ready(function () {
       })
   }
 
+  cargarMetodosComprarCurso()
+  function cargarMetodosComprarCurso() {
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'obtenerDataTodosMetodoPago' },
+      url: 'php/API/MetodoPago.php',
+    })
+      .done(function (data) {
+        if (data == 0) {
+          $('#misMetodosPagoComprar').append(
+            ` 
+            <div class="alert alert-warning" role="alert">
+  ¡No has Iniciado Sesión! 
+</div>
+            `
+          )
+          $('#miFooterMetodoPago').append(
+            `
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalLogin">
+                                      Iniciar Sesión
+                                    </button>
+          `
+          )
+          return
+        }
+        var items = JSON.parse(data)
+        $('#misMetodosPagoComprar').empty()
+        $('#miFooterMetodoPago').empty()
+        $('#miFooterMetodoPago').append(
+          `
+            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
+            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          `
+        )
+        for (let i = 0; i < items.length; i++) {
+          $('#misMetodosPagoComprar').append(
+            `
+                    <div class="row">
+                        <div class="col-4 row">
+                            <div class="col-6 d-flex align-items-center">
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="` +
+              items[i].MetodoPago_id +
+              `" checked>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                    </label>
+                                </div>
+                                <div class="col-6">
+                                    <img src="data:image/jpeg;base64,` +
+              items[i].imagenMetodo +
+              `"" height="100px">
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-8 d-flex align-items-center">
+                           ` +
+              items[i].nombreMetodo +
+              `
+
+                        </div>
+                    </div>`
+          )
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
   // -- VER CONTENIDO CURSO --
   $('#misCursosIndex').on('click', '.verCursoDetalle', funcVerCurso)
   function funcVerCurso() {

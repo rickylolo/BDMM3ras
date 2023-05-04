@@ -108,8 +108,15 @@ if (isset($_POST['funcion'])) {
             $var->getMetodoPagoData($_POST['MetodoPago_id']);
             break;
         case "obtenerDataTodosMetodoPago":
-            $var = new metodoPagoAPI();
-            $var->getAllMetodoPagoData();
+            session_start();
+            if (!empty($_SESSION)) {
+                $var = new metodoPagoAPI();
+                $var->getAllMetodoPagoData();
+            }
+            else{
+                echo '0';
+            }
+           
             break;
     }
 }
