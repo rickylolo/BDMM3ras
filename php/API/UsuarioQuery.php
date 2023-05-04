@@ -54,6 +54,28 @@ class User extends DB
         return $query;
     }
 
+     // QUERY Get Datos Usuario Instructor
+    function getUserDataInstructor($Usuario_id)
+    {
+        $get = "CALL sp_GestionUsuario(
+            'X', #Operacion
+            $Usuario_id, #Id Usuario
+            NULL, #Correo
+            NULL, #Nickname
+            NULL, #Contraseña
+            NULL, #Rol de usuario
+            NULL, #PFP
+            NULL, #Descripcion
+            NULL, # Nombre(s)
+            NULL, # Apellido Paterno
+            NULL, # Apellido Materno
+            NULL, # Fecha de nacimiento
+            NULL, # Genero
+            NULL  # Flag Perfil Bloqueado          
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
 
 
     // QUERY Get Datos Usuarios Bloqueados

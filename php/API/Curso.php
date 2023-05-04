@@ -23,9 +23,10 @@ class cursoAPI
                     "costoCurso" => $row['costoCurso'],
                     "noDislikes" => $row['noDislikes'],
                     "imagenCurso" => base64_encode(($row['imagenCurso'])),
-                    "nombre" => $row['nombre'],
+                    "cursoNombre" => $row['cursoNombre'],
                     "descripcion" => $row['descripcion'],
-                    "isBaja" => $row['isBaja']
+                    "isBaja" => $row['isBaja'],
+                    "categoriaNombre" => $row['categoriaNombre'],
                 );
                 array_push($arrCursos["Datos"], $obj);
             }
@@ -35,8 +36,6 @@ class cursoAPI
             exit();
         }
     }
-
-
 
     function getAllCursoData()
     {
@@ -164,6 +163,7 @@ class cursoAPI
             exit();
         }
     }
+
     function insertarCurso($Usuario_id, $costoCurso, $imagenCurso, $nombreCurso, $descripcionCurso)
     {
         $Curso = new Curso();
@@ -193,7 +193,6 @@ class cursoAPI
             exit();
         }
     }
-
 
     function actualizarCurso($Curso_id, $costoCurso, $imagenCurso, $nombreCurso, $descripcionCurso)
     {
@@ -309,7 +308,6 @@ class cursoAPI
         }
     }
 
-
     function insertarCursoCategoria($Curso_id, $Categoria_id)
     {
         $Curso = new Curso();
@@ -322,10 +320,7 @@ class cursoAPI
         $Curso->eliminarCursoCategoria($CursoCategoria_id);
     }
 
-
     // ----------------------------------------------------------------- CURSO - USUARIO -----------------------------------------------------------------
-
-
 
     function getCursosDeUnUsuario($Usuario_id)
     {
@@ -364,6 +359,7 @@ class cursoAPI
         $Curso = new Curso();
         $Curso->insertarCursoAUsuario($MetodoPago_id, $Curso_id, $Usuario_id, $costoCurso);
     }
+    
 }
 
 //AJAX

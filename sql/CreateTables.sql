@@ -24,7 +24,7 @@ CREATE TABLE Usuario(
 	userPassword 		VARCHAR(30) NOT NULL 			COMMENT'Contraseña del usuario',
 	rolUsuario 			TINYINT NOT NULL 				COMMENT'No. que identifica el rol del usuario 1:Admin, 2:Instructor, 3:Alumno',
 	fotoPerfil			MEDIUMBLOB 						COMMENT'Foto de perfil tipo avatar',
-	descripcion 		TINYTEXT        				COMMENT'descripcion del usuario',
+	descripcion 		TEXT        					COMMENT'descripcion del usuario',
 	nombre 				VARCHAR(30) NOT NULL 			COMMENT'Nombre completo del usuario',
 	apellidoMaterno 	VARCHAR(30) NOT NULL 			COMMENT'Apellido materno del usuario',
 	apellidoPaterno 	VARCHAR(30) NOT NULL 			COMMENT'Apellido paterno del usuario',
@@ -38,7 +38,6 @@ CREATE TABLE Usuario(
  CONSTRAINT FK_Usuario_MetodoPago
 	FOREIGN KEY (MetodoPago_id) REFERENCES MetodoPago(MetodoPago_id)
 );
-
 
 
 

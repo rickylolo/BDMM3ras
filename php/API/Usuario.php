@@ -69,6 +69,32 @@ class usuarioAPI
     }
 
 
+    function getUserDataInstructor($Usuario_id)
+    {
+        
+        $user = new User();
+        $arrUsers = array();
+        $arrUsers["Datos"] = array();
+
+        $res = $user->getUserDataInstructor($Usuario_id);
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+
+                $obj = array( // correo, fotoPerfil, descripcion,nombre
+                    "correo" => $row['correo'],
+                    "fotoPerfil" => base64_encode(($row['fotoPerfil'])),
+                    "descripcion" => $row['descripcion'],
+                    "nombre" => $row['nombre']
+                );
+                array_push($arrUsers["Datos"], $obj);
+            }
+            echo json_encode($arrUsers["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
+    }
+
     function getUserBloqueadosData()
     {
 
@@ -174,6 +200,10 @@ if (isset($_POST['funcion'])) {
             else{
                 echo '0';
             }
+            break;
+        case "obtenerDataUsuarioInstructor":
+            $var = new usuarioAPI();
+            $var->getUserDataInstructor($_POST['Usuario_id']);
             break;
         case "obtenerDataUsuariosBloqueados":
             $var = new usuarioAPI();

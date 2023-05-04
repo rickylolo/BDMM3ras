@@ -14,7 +14,7 @@ CREATE PROCEDURE sp_GestionUsuario
 	sp_userPassword 	VARCHAR(30),
 	sp_rolUsuario 		TINYINT,
 	sp_fotoPerfil 		MEDIUMBLOB,
-	sp_descripcion 		TINYTEXT, 
+	sp_descripcion 		TEXT, 
 	sp_nombre 			VARCHAR(50),
 	sp_apellidoPaterno  VARCHAR(30),
 	sp_apellidoMaterno  VARCHAR(30),
@@ -82,6 +82,11 @@ BEGIN
 		SELECT Usuario_id, MetodoPago_id, correo, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo
         FROM vUsuario
         WHERE Usuario_id = sp_Usuario_id;
+   END IF;
+        IF Operacion = 'X' THEN /*GET DATOS INSTRUCTOR*/
+		SELECT correo, fotoPerfil, descripcion, CONCAT(nombre,' ',apellidoMaterno,' ',apellidoPaterno) nombre
+        FROM vUsuario
+        WHERE Usuario_id = sp_Usuario_id AND rolUsuario = 2;
    END IF;
 END //
 
@@ -178,8 +183,8 @@ BEGIN
         FROM vCurso;
    END IF;
      IF Operacion = 'G' THEN /*GET CURSO*/
-	SELECT Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
-        FROM vCurso
+	SELECT Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, cursoNombre, descripcion, isBaja, categoriaNombre
+        FROM vCursoInstructor
         WHERE  Curso_id = sp_Curso_id;
    END IF;
 	IF Operacion = 'R' THEN /*GET REPORTE INSTRUCTOR*/

@@ -123,13 +123,82 @@ session_start(); // Inicio mi sesion PHP
             </div>
         </nav>
         <!--                 CURSOS                 -->
-        <!--                 CURSOS MEJORES CALIFICADOS                 -->
-        <div class="container">
+        <div id="miCursoDetalle" class="mt-2">
+            <div class="container" id="miInfoCurso">
+             
+            </div>
+            <hr class="solid">
+            <ul class="nav nav-tabs justify-content-center">
+                <li class="nav-item" id="mostrarContenido">
+                    <a class="nav-link active" aria-current="page">Contenido</a>
+                </li>
+                <li class="nav-item" id="mostrarValoracion">
+                    <a class="nav-link" aria-current="page">Valoraciones</a>
+                </li>
+                <li class="nav-item" id="mostrarInstructor">
+                    <a class="nav-link" aria-current="page">Instructor</a>
+                </li>
+            </ul>
+            <!-- MI ACORDEON -->
+            <div  id="miContenido" class="container">
+            </div>
+            <!-- MIS VALORACIONES -->
+            <div id="Valoraciones" class="container">
+                <hr class="solid">
+                <h4>Comentarios y valoraciones de los estudiantes </h4>
+                <hr class="solid">
+                <div id="misValoraciones" class="list-group p-2">
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+
+                            <div class="d-flex">
+                                <img src="img/avatar.jpg" class="pfp rounded-circle">
+                                <div class="align-self-center">
+                                    <p class="fs-5 p-3 fw-bold align-middle">rickylolo</p>
+                                </div>
+                            </div>
+                            <div class="align-self-start">
+                                <span class="badge rounded-pill bg-success">Recomendado</span>
+                            </div>
+                        </div>
+                        <hr class="solid">
+                        <p class="mb-1">Recomiendo el curso, es facil para principiantes</p>
+
+                    </a>
+                    <hr class="solid">
+                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                            <div class="d-flex">
+                                <img src="img/avatar3.jpg" class="pfp rounded-circle">
+                                <div class="align-self-center">
+                                    <p class="fs-5 p-3 fw-bold align-middle">Robertin123</p>
+                                </div>
+                            </div>
+                            <div class="align-self-start">
+                                <span class="badge rounded-pill bg-danger">No Recomendado</span>
+                            </div>
+                        </div>
+                        <hr class="solid">
+                        <p class="mb-1">Este curso es muy facil</p>
+
+                    </a>
+
+
+                </div>
+            </div>
+            <!-- MI INSTRUCTOR -->
+            <div id="Instructor" class="container">
+            
+            </div>
+        </div>
+
+      
+        <div class="container" id="misCursosIndex">
+            
+          <!--                 CURSOS MEJORES CALIFICADOS                 -->
             <hr class="solid">
             <div class="row fs-4 product-title"><b>Cursos mejores calificados</b></div>
             <hr class="solid">
-
-
             <section class="post-list">
                 <div class="content" id="misCursosMejoresCalificados">
                 </div>
@@ -152,13 +221,11 @@ session_start(); // Inicio mi sesion PHP
             <div class="row fs-4 product-title"><b>Cursos mas recientes</b></div>
             <hr class="solid">
             <section class="post-list">
-                <div class="content"  id="misCursosMasRecientes">
-                 
+                <div class="content"  id="misCursosMasRecientes"> 
                 </div>
-
-
-
             </section>
+
+
         </div>
     </div>
     <!--  >MODAL WINDOW LOGIN<-->
@@ -601,6 +668,69 @@ session_start(); // Inicio mi sesion PHP
                         <button class="btn btn-outline-primary" type="submit"><i class="bi bi-send"></i></button>
 
                     </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <!--  >MODAL WINDOW METODO PAGO<-->
+    <div class="modal fade" id="miModalMetodoPago" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Escoge un método de pago:</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4 row">
+                            <div class="col-6 d-flex align-items-center">
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                    </label>
+                                </div>
+                                <div class="col-6">
+                                    <img src="https://www.consumoteca.com/wp-content/uploads/Logo-de-PayPal.jpg" height="100px">
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-8 d-flex align-items-center">
+                            Paypal
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4 row">
+                            <div class="col-6 d-flex align-items-center">
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                                    <label class="form-check-label" for="defaultCheck1">
+                                    </label>
+                                </div>
+                                <div class="col-6">
+                                    <img src="https://lapeorempresadelmundo.es/wp-content/uploads/2020/11/tarjeta-credito-logo.png" height="75px">
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-8 d-flex align-items-center">
+                            Tarjeta BBVA con terminación ****8243
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
+                    <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 </div>
             </div>
         </div>

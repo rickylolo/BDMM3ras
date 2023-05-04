@@ -19,11 +19,6 @@
   min-height: 100vh;
 }
 
-#correo {
-  position: relative;
-  top: -1rem;
-}
-
 #img-foto2,
 #E_imgFoto {
   width: 15rem;
@@ -35,7 +30,12 @@
 .image-upload > input {
   display: none;
 }
-
+.image-upload img {
+  border-radius: 1%;
+  width: 75%;
+  object-fit: contain;
+  max-height: 35rem;
+}
 #navbarCursosInstructor {
   background: white;
 }
@@ -86,19 +86,24 @@
 }
 
 .post-body {
-  padding: 0.5rem;
+  padding: 0.75rem;
   text-align: center;
 }
 
 .post-body span {
   display: inline-block;
   color: rgb(0, 0, 0);
-  margin-bottom: 10px;
+  margin-bottom: 2rem;
   font-size: small;
 }
 
 .badge {
   cursor: pointer;
+}
+
+.pfpInstructor img {
+  width: 8.1rem;
+  height: 8.1rem;
 }
 
 .post-body h2 {
@@ -125,7 +130,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
-  max-width: 1000px;
+  max-width: 100%;
   margin: auto;
 }
 
