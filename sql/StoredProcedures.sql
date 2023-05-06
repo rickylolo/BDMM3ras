@@ -321,8 +321,9 @@ BEGIN
 		AND UsuarioAlumno_id = sp_UsuarioAlumno_id
 		AND Curso_id = sp_Curso_id;
 		IF isExistenteMensaje = 0 THEN
-			INSERT INTO Mensaje(UsuarioInstructor_id,UsuarioAlumno_id,Curso_id) 
-			VALUES (sp_UsuarioInstructor_id,sp_UsuarioAlumno_id,sp_Curso_id);
+			
+			INSERT INTO Mensaje(UsuarioInstructor_id,UsuarioAlumno_id,Curso_id, UltimoMensaje) 
+			VALUES (sp_UsuarioInstructor_id,sp_UsuarioAlumno_id,sp_Curso_id, now());
         END IF;
 		
    END IF;
@@ -331,11 +332,13 @@ BEGIN
    END IF;
    IF Operacion = 'X' THEN /*GET ALL MENSAJE HEADER INSTRUCTOR*/
           SELECT Mensaje_id, Curso_id, UsuarioInstructor_id, UsuarioAlumno_id, imagenCurso, nombre, correo, nombreUsuario FROM vMensaje
-          WHERE UsuarioInstructor_id = sp_UsuarioInstructor_id;
+          WHERE UsuarioInstructor_id = sp_UsuarioInstructor_id
+          ORDER BY UltimoMensaje DESC;
    END IF;
 	IF Operacion = 'Z' THEN /*GET ALL MENSAJE HEADER ALUMNO*/
           SELECT Mensaje_id, Curso_id, UsuarioInstructor_id, UsuarioAlumno_id, imagenCurso, nombre, correo, nombreUsuario FROM vMensaje
-          WHERE UsuarioAlumno_id = sp_UsuarioAlumno_id;
+          WHERE UsuarioAlumno_id = sp_UsuarioAlumno_id
+           ORDER BY UltimoMensaje DESC;
    END IF;
 END //
 
@@ -348,15 +351,24 @@ CREATE PROCEDURE sp_GestionMensajeDetalle
 (
 	Operacion CHAR(1),
 	sp_MensajeDetalle_id 	 INT,		
-    sp_Mensaje_id 			 INT,		
+    sp_Mensaje_id 			 INT,	
+	sp_Usuario_id            INT,	
     sp_texto  				 TINYTEXT
 )		
 
 BEGIN
    IF Operacion = 'I' /*INSERT MENSAJE DETALLE*/
    THEN  
-		INSERT INTO MensajeDetalle(Mensaje_id,texto,tiempoRegistro) 
-			VALUES (sp_Mensaje_id,sp_texto,now());
+		INSERT INTO MensajeDetalle(Mensaje_id,texto,Usuario_id,tiempoRegistro) 
+			VALUES (sp_Mensaje_id,sp_texto,sp_Usuario_id,now());
+		UPDATE Mensaje 
+        SET UltimoMensaje = now() 
+        WHERE Mensaje_id = sp_Mensaje_id;
+   END IF;
+   IF Operacion = 'G' THEN /*GET ALL MENSAJES*/
+          SELECT MensajeDetalle_id,Curso_id, Usuario_id, Mensaje_id, texto, tiempoRegistro, fotoPerfil, nombreUsuario
+          FROM vMensajeDetalle
+          WHERE Mensaje_id = sp_Mensaje_id;
    END IF;
 END //
 
@@ -395,8 +407,8 @@ BEGIN
 END //
 
 
-SELECT * FROM Nivel;
-SELECT * FROM Curso;
+SELECT * FROM MensajeDetalle;
+
 /*--------------------------------------------------------------------------------NIVEL--------------------------------------------------------------------------*/
 DROP PROCEDURE IF EXISTS sp_GestionNivel;
 DELIMITER //

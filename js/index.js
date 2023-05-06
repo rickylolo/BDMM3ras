@@ -254,6 +254,7 @@ $(document).ready(function () {
       .done(function (data) {
         var items = JSON.parse(data)
         misDatosInstructor(items[0].Usuario_id)
+        $('#miCursoSeleccionadoMensajes').val(items[0].Curso_id)
         $('#miInfoCurso').empty()
         $('#miInfoCurso').append(
           `
@@ -503,7 +504,7 @@ $(document).ready(function () {
                                 <p class="fs-5 ps-4  fw-bold">` +
             items[0].nombre +
             `</p> 
-                                <button class="btn btn-primary" id="` +
+                                <button class="btn btn-primary enviarMensajeInstructor" id="` +
             items[0].Usuario_id +
             `" data-bs-toggle="modal" data-bs-target="#miModalMensaje"><i class="bi bi-chat"></i> Enviar Mensaje</button>
                                 </div>
@@ -530,6 +531,169 @@ $(document).ready(function () {
       })
   }
 
+  cargarMisMensajesHeader()
+  function cargarMisMensajesHeader() {
+    $.ajax({
+      type: 'POST',
+      data: {
+        funcion: 'obtenerMensajes',
+      },
+      url: 'php/API/Mensaje.php',
+    })
+      .done(function (data) {
+        if (data == 0) return
+        var items = JSON.parse(data)
+        $('#misChats').empty()
+        for (let i = 0; i < items.length; i++) {
+          $('#misChats').append(
+            `
+            <a id="` +
+              items[i].Mensaje_id +
+              `" class="list-group-item list-group-item-action verMensajes" aria-current="true">
+             
+                                    <div class="d-flex flex-row miImagen chat miCursoChat" id="` +
+              items[i].Curso_id +
+              `">
+                                        <div class="p-2"><img src="data:image/jpeg;base64,` +
+              items[i].imagenCurso +
+              `" class="pfp">
+                                        </div>
+                                          <p class="fs-5 pt-4 ps-2 fw-bold">` +
+              items[i].nombre +
+              `</p>
+
+                                    </div>
+                                                                            <div class="pt-2 pb-2">
+                                            <div class="d-flex flex-column">
+                                            
+                                              
+                                                <p class="text-muted fs-6 fw-light"><b>Instructor: </b>` +
+              items[i].nombreUsuario +
+              `
+                                                </p>
+                                                                                                <p class="text-muted fs-6 fw-light"><b>Correo: </b>` +
+              items[i].correo +
+              `
+                                                </p>
+                                            </div>
+                                        </div>
+                            </a>
+
+            `
+          )
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
+  function cargarHeaderChat(Curso_id) {
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'obtenerCurso', Curso_id: Curso_id },
+      url: 'php/API/Curso.php',
+    })
+      .done(function (data) {
+        console.log(data)
+        var items = JSON.parse(data)
+        $('#DatosCursoHeader').empty()
+        $('#DatosCursoHeader').append(
+          `
+                              <div class="p-2"><img src="data:image/jpeg;base64,` +
+            items[0].imagenCurso +
+            `" class="pfp">
+                                </div>
+                                <div class="p-2">
+                                    <div class="d-flex flex-column">
+                                        <p class="fs-5 p-1 fw-bold">` +
+            items[0].cursoNombre +
+            `</p>
+                              
+                                    </div>
+                                </div>
+
+        
+        `
+        )
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
+  function cargarMisMensajes(mensajeHeader_id) {
+    $('#miMensaje').empty()
+    $('#miMensaje').append(
+      `
+                            <div class="d-flex flex-row miImagen" id="DatosCursoHeader">
+                            </div>                                            
+                            <div class="list-group" id="misMensajesChat">
+                            </div> 
+            `
+    )
+
+    $.ajax({
+      type: 'POST',
+      data: {
+        funcion: 'obtenerMensajesHeader',
+        Mensaje_id: mensajeHeader_id,
+      },
+      url: 'php/API/Mensaje.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+
+        $('#misMensajesChat').empty()
+        if (items.length == 0) {
+          $('#misMensajesChat').append(
+            `
+                          <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading">No hay mensajes en este chat</h4>
+                            <p>Escribe un mensaje abajo para crear una conversación</p>
+                            <hr>               
+                        </div>
+            `
+          )
+        }
+        for (let i = 0; i < items.length; i++) {
+          $('#misMensajesChat').append(
+            `
+                                <a href="" class="list-group-item list-group-item-action bg-" aria-current="true">
+                                    <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+                                        <div class="d-flex">
+                                            <img src="data:image/jpeg;base64,` +
+              items[i].fotoPerfil +
+              `" class="pfp rounded-circle">
+                                            <div class="align-self-center">
+                                                <p class="fs-5 p-3 fw-bold align-middle">` +
+              items[i].nombreUsuario +
+              `</p>
+                                            </div>
+                                        </div>
+                                        <div class="align-self-start">
+                                            <small class="text-muted p-3">` +
+              items[i].tiempoRegistro +
+              `</small>
+                                        </div>
+                                    </div>
+                                    <hr class="solid">
+                                    <p class="mb-1">` +
+              items[i].texto +
+              `</p>
+
+                                </a>
+                                <hr class="solid">
+
+            `
+          )
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
   cargarMetodosComprarCurso()
   function cargarMetodosComprarCurso() {
     $.ajax({
@@ -538,6 +702,8 @@ $(document).ready(function () {
       url: 'php/API/MetodoPago.php',
     })
       .done(function (data) {
+        $('#misMetodosPagoComprar').empty()
+        $('#miFooterMetodoPago').empty()
         if (data == 0) {
           $('#misMetodosPagoComprar').append(
             ` 
@@ -556,8 +722,6 @@ $(document).ready(function () {
           return
         }
         var items = JSON.parse(data)
-        $('#misMetodosPagoComprar').empty()
-        $('#miFooterMetodoPago').empty()
         $('#miFooterMetodoPago').append(
           `
             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
@@ -600,6 +764,7 @@ $(document).ready(function () {
         console.error(data)
       })
   }
+
   // -- VER CONTENIDO CURSO --
   $('#misCursosIndex').on('click', '.verCursoDetalle', funcVerCurso)
   function funcVerCurso() {
@@ -615,6 +780,44 @@ $(document).ready(function () {
     misDatosMultimediaNivel(Nivel_id)
   }
 
+  // INICIAR MENSAJES CHAT VER MENSAJES DEL CHAT
+  $('#misChats').on('click', '.verMensajes', funcVerMensajesChat)
+  function funcVerMensajesChat() {
+    let idMensaje = $(this).attr('id')
+    let idCurso = $(this).children('.miCursoChat').attr('id')
+
+    $('#miFooterMensajes').empty()
+    $('#miFooterMensajes').append(
+      `
+                    
+            <div class="d-flex justify-content-end" id="` +
+        idCurso +
+        `">
+                        <input class="form-control me-2" type="search" id="miTextoMensaje" placeholder="Escribe aqui tu mensaje" aria-label="Buscar">
+
+                        <button id="` +
+        idMensaje +
+        `" class="btn btn-outline-primary registrarMensajeDetalle"><i class="bi bi-send"></i></button>
+          </div>
+                  
+            `
+    )
+    cargarMisMensajes(idMensaje)
+    cargarHeaderChat(idCurso)
+  }
+
+  // VER MENSAJE INSTRUCTOR
+  $('#Instructor').on(
+    'click',
+    '.enviarMensajeInstructor',
+    funcPasarIdCursoMensaje
+  )
+  function funcPasarIdCursoMensaje() {
+    let idInstructor = $(this).attr('id')
+    let idCurso = $('#miCursoSeleccionadoMensajes').val()
+    funcRegistrarMensaje(idInstructor, idCurso)
+    cargarMisMensajesHeader()
+  }
   // ----------------------------- ACTUALIZAR DATOS -----------------
   // -- USUARIO --
   $('#EditUser').click(funcActualizarDatosPerfil)
@@ -827,6 +1030,102 @@ $(document).ready(function () {
       // MANEJO DE ERRORES DEL SERVIDOR
       .fail(function (jqXHR, textStatus, errorThrown) {
         console.log('Error: ' + errorThrown)
+      })
+  }
+
+  //-------------------------MENSAJE - HEADER ----------------------------
+
+  function funcRegistrarMensaje(idInstructor, idCurso) {
+    $.ajax({
+      type: 'POST',
+      data: {
+        funcion: 'insertarMensaje',
+        Instructor_id: idInstructor,
+        Curso_id: idCurso,
+      },
+      url: 'php/API/Mensaje.php',
+    })
+      .done(function (data) {
+        if (data == 0) {
+          $('#miBodyMensajes').empty()
+          $('#miFooterMensajes').empty()
+          $('#miBodyMensajes').append(
+            `
+             <div class="alert alert-warning" role="alert">
+                ¡No has Iniciado Sesión!, Debes iniciar sesión para chatear con un Instructor
+             </div>
+        
+        `
+          )
+
+          $('#miFooterMensajes').append(
+            `
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalLogin">
+                                      Iniciar Sesión
+              </button>
+          `
+          )
+
+          return
+        }
+        if (data == 1) {
+          $('#miBodyMensajes').empty()
+          $('#miFooterMensajes').empty()
+          $('#miBodyMensajes').append(
+            `
+             <div class="alert alert-warning" role="alert">
+                Debes ser estudiante para enviar mensaje a un Instructor
+             </div>
+        
+        `
+          )
+
+          $('#miFooterMensajes').append(
+            `
+              <button type="button" class="btn btn-success" data-bs-dismiss="modal">
+                                      Aceptar
+              </button>
+          `
+          )
+          return
+        }
+        if (data == 3) {
+          cargarMisMensajesHeader()
+          return
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
+  //-------------------------MENSAJE ----------------------------
+
+  $('#miFooterMensajes').on(
+    'click',
+    '.registrarMensajeDetalle',
+    funcRegistrarMensajeDetalle
+  )
+  function funcRegistrarMensajeDetalle() {
+    let idMensaje = $(this).attr('id')
+    let idCurso = $(this).parent().attr('id')
+    let texto = $('#miTextoMensaje').val()
+    $.ajax({
+      type: 'POST',
+      data: {
+        funcion: 'insertarMensajeDetalle',
+        Mensaje_id: idMensaje,
+        Texto: texto,
+      },
+      url: 'php/API/Mensaje.php',
+    })
+      .done(function () {
+        $('#miTextoMensaje').val('')
+        cargarMisMensajes(idMensaje)
+        cargarHeaderChat(idCurso)
+      })
+      .fail(function (data) {
+        console.error(data)
       })
   }
 })

@@ -84,7 +84,7 @@ FROM ComentarioCurso;
 DROP VIEW IF EXISTS vMensaje;
 
 CREATE VIEW vMensaje AS
-SELECT Mensaje_id, A.Curso_id, A.UsuarioInstructor_id,  A.UsuarioAlumno_id, imagenCurso, B.nombre, correo, CONCAT(C.nombre,' ', apellidoPaterno,' ',  apellidoMaterno) nombreUsuario
+SELECT Mensaje_id, A.Curso_id, A.UsuarioInstructor_id,  A.UsuarioAlumno_id, imagenCurso, B.nombre, correo, CONCAT(C.nombre,' ', apellidoPaterno,' ',  apellidoMaterno) nombreUsuario, UltimoMensaje
 FROM Mensaje A
 LEFT JOIN Curso B ON A.Curso_id = B.Curso_id
 LEFT JOIN Usuario C ON C.Usuario_id= A.UsuarioInstructor_id;
@@ -92,9 +92,11 @@ LEFT JOIN Usuario C ON C.Usuario_id= A.UsuarioInstructor_id;
 DROP VIEW IF EXISTS vMensajeDetalle;
 
 CREATE VIEW vMensajeDetalle AS
-SELECT MensajeDetalle_id, C.Usuario_id, Mensaje_id, texto, tiempoRegistro, fotoPerfil,  CONCAT(C.nombre,' ', apellidoPaterno,' ',  apellidoMaterno) nombreUsuario
+SELECT MensajeDetalle_id, B.Curso_id, C.Usuario_id, A.Mensaje_id, texto, tiempoRegistro, fotoPerfil,  CONCAT(C.nombre,' ', apellidoPaterno,' ',  apellidoMaterno) nombreUsuario
 FROM MensajeDetalle A
-LEFT JOIN Usuario C ON C.Usuario_id= A.Usuario_id;
+LEFT JOIN Usuario C ON C.Usuario_id= A.Usuario_id
+LEFT JOIN Mensaje B ON B.Mensaje_id= A.Mensaje_id
+ORDER BY tiempoRegistro DESC;
 
 /*--------------------------------------------------------------------------------CURSO CATEGORIA-------------------------------------------------------------------------*/
 DROP VIEW IF EXISTS vObtenerTodasCategoriaDeCurso;

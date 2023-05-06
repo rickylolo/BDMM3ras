@@ -37,6 +37,22 @@ class Mensaje extends DB
         return $query;
     }
 
+
+    // QUERY Get Todos Mensajes Head 
+
+    function getTodosMensajes($Mensaje_id)
+    {
+        $get = "CALL sp_GestionMensajeDetalle(
+                    'G',  		    #Operacion
+                    NULL, 		    # Id
+                    $Mensaje_id,	# Mensaje Id
+                    NULL,           # Usuario Id
+                    NULL            # Texto
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
     // ---------------------------------------INSERTAR INFORMACION------------------------------------------
     // QUERY Insertar Mensaje
 
@@ -48,6 +64,20 @@ class Mensaje extends DB
                     $Instructor_id,	# Instructor Id
                     $Alumno_id, 	# Alumno Id
                     $Curso_id 		# Curso Id
+        ); ";
+        $query = $this->connect()->query($insert);
+        return $query;
+    }
+
+    // QUERY Insertar Mensaje Detalle
+    function insertarMensajeDetalle($Mensaje_id,$Usuario_id,$Texto)
+    {
+        $insert = "CALL sp_GestionMensajeDetalle(
+                    'I',  		    #Operacion
+                    NULL, 		    # Id
+                    $Mensaje_id,	# Mensaje Id
+                    $Usuario_id,    # Usuario Id
+                    '$Texto'        # Texto
         ); ";
         $query = $this->connect()->query($insert);
         return $query;

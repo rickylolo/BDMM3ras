@@ -105,6 +105,7 @@ CREATE TABLE Mensaje(
     UsuarioInstructor_id INT NOT NULL 					COMMENT'Clave Foránea del usuario instructor del mensaje',
     UsuarioAlumno_id 	 INT NOT NULL 					COMMENT'Clave Foránea del usuario alumno del mensaje',
 	Curso_id 			 INT NOT NULL 					COMMENT'Clave Foránea del curso del mensaje',
+    UltimoMensaje        DATETIME NOT NULL              COMMENT'Mi Tiempo ultimo mensaje',
  CONSTRAINT PK_Mensaje
 	PRIMARY KEY (Mensaje_id),
  CONSTRAINT FK_Mensaje_UsuarioInstructor

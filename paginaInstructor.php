@@ -234,135 +234,31 @@ session_start(); // Inicio mi sesion PHP
                     <h4 class="modal-title" id="modalTitle">Chat</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                    <input type="hidden" id="miCursoSeleccionadoMensajes">
+                <div class="modal-body" id="miBodyMensajes">
+                
                     <div class="d-flex flex-row justify-content-between">
-                        <div id="misChats">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                                    <div class="d-flex flex-row miImagen chat">
-                                        <div class="p-2"><img src="img/html.jpg" class="pfp">
-                                        </div>
-                                        <div class="p-2">
-                                            <div class="d-flex flex-column">
-                                                <p class="fs-6 p-1 fw-bold">Curso de HTML 5</p>
-                                                <p class="text-muted fs-6 fw-light" id="correo">Instructor: Nicholas
-                                                    Schaufrman
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                                    <div class="d-flex flex-row miImagen chat">
-                                        <div class="p-2"><img src="img/css.png" class="pfp">
-                                        </div>
-                                        <div class="p-2">
-                                            <div class="d-flex flex-column">
-                                                <p class="fs-6 p-1 fw-bold">Curso de CSS 3</p>
-                                                <p class="text-muted fs-6 fw-light" id="correo">Instructor: Nicholas
-                                                    Schaufrman
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                                    <div class="d-flex flex-row miImagen chat">
-                                        <div class="p-2"><img src="img/javascript.jpg" class="pfp">
-                                        </div>
-                                        <div class="p-2">
-                                            <div class="d-flex flex-column">
-                                                <p class="fs-6 p-1 fw-bold">Curso de Javascript</p>
-                                                <p class="text-muted fs-6 fw-light" id="correo">Instructor: Nicholas
-                                                    Schaufrman
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
+     
+                        <div class="list-group" id="misChats">
+                           
                         </div>
-                        <div id="miMensaje" class="p-2 flex-fill">
-                            <div class="d-flex flex-row miImagen">
-                                <div class="p-2"><img src="img/html.jpg" class="pfp">
-                                </div>
-                                <div class="p-2">
-                                    <div class="d-flex flex-column">
-                                        <p class="fs-5 p-1 fw-bold">Curso de HTML 5</p>
-                                        <p class="text-muted fs-6" id="correo">Instructor: Nicholas Schaufrman</p>
-                                    </div>
-                                </div>
-                            </div>
+                        <div id="miMensaje" class="ps-2 flex-fill">
 
-                            <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action bg-" aria-current="true">
-                                    <div class="miImagen misMensajes d-flex w-100 justify-content-between">
-                                        <div class="d-flex">
-                                            <img src="img/avatar.jpg" class="pfp rounded-circle">
-                                            <div class="align-self-center">
-                                                <p class="fs-5 p-3 fw-bold align-middle">rickylolo</p>
-                                            </div>
-                                        </div>
-                                        <div class="align-self-start">
-                                            <small class="text-muted p-3">8:35pm 22/Feb/2023</small>
-                                        </div>
-                                    </div>
-                                    <hr class="solid">
-                                    <p class="mb-1">Tengo dudas del curso</p>
+                        <div class="alert alert-success" role="alert">
+                            <h4 class="alert-heading">Aqui apareceran tus mensajes</h4>
+                            <p>Aqui iran el contenido de tus mensajes selecciona un chat de el lado izquierdo para continuar</p>
+                            <hr>               
+                        </div>
 
-                                </a>
-                                <hr class="solid">
-                                <a href="#" class="list-group-item list-group-item-action bg-" aria-current="true">
-                                    <div class="miImagen misMensajes d-flex w-100 justify-content-between">
-                                        <div class="d-flex">
-                                            <img src="img/avatar2.jpg" class="pfp rounded-circle">
-                                            <div class="align-self-center">
-                                                <p class="fs-5 p-3 fw-bold align-middle">Nicholas Schaufrman</p>
-                                            </div>
-                                        </div>
-                                        <div class="align-self-start">
-                                            <small class="text-muted p-3">9:17pm 23/Feb/2023</small>
-                                        </div>
-                                    </div>
-                                    <hr class="solid">
-                                    <p class="mb-1">Cuál es tu duda</p>
-                                </a>
-                                <hr class="solid">
-                                <a href="#" class="list-group-item list-group-item-action bg-" aria-current="true">
-                                    <div class="miImagen misMensajes d-flex w-100 justify-content-between">
-                                        <div class="d-flex">
-                                            <img src="img/avatar.jpg" class="pfp rounded-circle">
-                                            <div class="align-self-center">
-                                                <p class="fs-5 p-3 fw-bold align-middle">rickylolo</p>
-                                            </div>
-                                        </div>
-                                        <div class="align-self-start">
-                                            <small class="text-muted p-3">8:35pm 23/Feb/2023</small>
-                                        </div>
-                                    </div>
-                                    <hr class="solid">
-                                    <p class="mb-1">Que diferencia hay entre un div y un span</p>
-
-                                </a>
-                                <hr class="solid">
-
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-
-                    <form class="d-flex" role="search">
-
-                        <input class="form-control me-2" type="search" placeholder="Escribe aqui tu mensaje" aria-label="Buscar">
-
-                        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-send"></i></button>
-
-                    </form>
+                <div class="modal-footer" id="miFooterMensajes">
                 </div>
             </div>
         </div>
     </div>
+
 
     <!--  >MODAL WINDOW CURSO DETALLE<-->
     <div class="modal fade" id="miModalCursoDetalle" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
