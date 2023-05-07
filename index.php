@@ -535,39 +535,6 @@ session_start(); // Inicio mi sesion PHP
         </div>
     </div>
 
-    <!--  >MODAL WINDOW MENSAJES<-->
-    <div class="modal fade" id="miModalMensaje" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
-        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="modalTitle">Chat</h4>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                    <input type="hidden" id="miCursoSeleccionadoMensajes">
-                <div class="modal-body" id="miBodyMensajes">
-                
-                    <div class="d-flex flex-row justify-content-between">
-     
-                        <div class="list-group" id="misChats">
-                           
-                        </div>
-                        <div id="miMensaje" class="ps-2 flex-fill">
-
-                        <div class="alert alert-success" role="alert">
-                            <h4 class="alert-heading">Aqui apareceran tus mensajes</h4>
-                            <p>Aqui iran el contenido de tus mensajes selecciona un chat de el lado izquierdo para continuar</p>
-                            <hr>               
-                        </div>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer" id="miFooterMensajes">
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <!--  >MODAL WINDOW METODO PAGO<-->
     <div class="modal fade" id="miModalMetodoPago" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
@@ -585,6 +552,42 @@ session_start(); // Inicio mi sesion PHP
                 </div>
             </div>
         </div>
+    </div>
+
+
+    <!--  >MODAL WINDOW DETALLE PAGO-->
+    <div class="modal fade" id="miModalDetallePago" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content p-1">
+                <div class="modal-header">
+                    <h4 class="modal-title fw-bold ms-4" id="modalTitle">Detalle Pago</h4>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                        <input type="text" id="metodoPagoDetalle"> 
+                        <input type="text" id="cursoPagoDetalle">
+                        <input type="text" id="costoCursoPagoDetalle">
+                        <div id="miContenidoDetalle">
+
+                            <div class="d-flex justify-content-end">
+                                <div class="d-flex flex-column">
+                                    <div class="ps-2 pb-4 pe-4 fs-5 fw-bold">Nombre Metodo Pago</div>
+                                    <div class="ps-2 pt-4 fs-6">Total a pagar: 255.50 MXN</div>
+                                </div>
+                                <div class="p-2"><img class="rounded" width="200px" height="200px"></div>
+                            </div>
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="RegistrarCursoConfirmar">Confirmar Compra</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
+
     </div>
 
 

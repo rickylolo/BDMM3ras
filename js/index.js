@@ -255,6 +255,8 @@ $(document).ready(function () {
         var items = JSON.parse(data)
         misDatosInstructor(items[0].Usuario_id)
         $('#miCursoSeleccionadoMensajes').val(items[0].Curso_id)
+        $('#cursoPagoDetalle').val(items[0].Curso_id)
+        $('#costoCursoPagoDetalle').val(items[0].costoCurso)
         $('#miInfoCurso').empty()
         $('#miInfoCurso').append(
           `
@@ -312,6 +314,27 @@ $(document).ready(function () {
         
         `
         )
+        $('#miContenidoDetalle').empty()
+        $('#miContenidoDetalle').append(
+          `
+                            <div class="d-flex justify-content-start">
+                                <div class="p-2"><img class="rounded" src="data:image/jpeg;base64,` +
+            items[0].imagenCurso +
+            `" width="200px" height="200px"></div>
+                                <div class="d-flex flex-column">
+                                    <div class="ps-2 pb-2 fs-4 fw-bold">` +
+            items[0].cursoNombre +
+            `</div>
+                                    <div class="ps-4 fs-6">` +
+            items[0].descripcion +
+            `</div>
+                                </div>
+                            </div>
+                            <hr class="solid">
+        
+        `
+        )
+
         $('#miCursoDetalle').show()
       })
       .fail(function (data) {
@@ -364,6 +387,8 @@ $(document).ready(function () {
                                         </div>
                                     </div>
                                 </div>
+
+                                
           `
           )
         }
@@ -595,7 +620,6 @@ $(document).ready(function () {
       url: 'php/API/Curso.php',
     })
       .done(function (data) {
-        console.log(data)
         var items = JSON.parse(data)
         $('#DatosCursoHeader').empty()
         $('#DatosCursoHeader').append(
@@ -708,24 +732,25 @@ $(document).ready(function () {
           $('#misMetodosPagoComprar').append(
             ` 
             <div class="alert alert-warning" role="alert">
-  ¡No has Iniciado Sesión! 
-</div>
+                ¡No has Iniciado Sesión! 
+            </div>
             `
           )
           $('#miFooterMetodoPago').append(
             `
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalLogin">
-                                      Iniciar Sesión
-                                    </button>
+                 Iniciar Sesión
+              </button>
           `
           )
           return
         }
+
         var items = JSON.parse(data)
         $('#miFooterMetodoPago').append(
           `
-            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Aceptar</button>
-            <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#miModalDetallePago" id="irModalDetallePago">Aceptar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
           `
         )
         for (let i = 0; i < items.length; i++) {
@@ -735,7 +760,7 @@ $(document).ready(function () {
                         <div class="col-4 row">
                             <div class="col-6 d-flex align-items-center">
                                 <div class="form-check ">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="` +
+                                    <input class="form-check-input" type="radio" name="radiosMetodos" id="radiosMetodos" value="` +
               items[i].MetodoPago_id +
               `" checked>
                                     <label class="form-check-label" for="defaultCheck1">
@@ -758,6 +783,13 @@ $(document).ready(function () {
                         </div>
                     </div>`
           )
+        }
+
+        // Valor Radios Value Metodo
+        $('#irModalDetallePago').click(funcValueRadioMetodo)
+        function funcValueRadioMetodo() {
+          let radioMetodo = $("input[name='radiosMetodos']:checked").val()
+          $('#metodoPagoDetalle').val(radioMetodo)
         }
       })
       .fail(function (data) {

@@ -407,7 +407,6 @@ BEGIN
 END //
 
 
-SELECT * FROM MensajeDetalle;
 
 /*--------------------------------------------------------------------------------NIVEL--------------------------------------------------------------------------*/
 DROP PROCEDURE IF EXISTS sp_GestionNivel;
@@ -514,8 +513,10 @@ BEGIN
    END IF;
 END //
 
-
 SET GLOBAL max_allowed_packet=1073741824;
+
+
+
 /*--------------------------------------------------------------------------------USUARIO CURSO--------------------------------------------------------------------------*/
 DROP PROCEDURE IF EXISTS sp_GestionUsuarioCurso;
 DELIMITER //
