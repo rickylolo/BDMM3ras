@@ -68,34 +68,28 @@ session_start(); // Inicio mi sesion PHP
                         } else {
                             echo ' 
                                     <div id="perfil">
-                                    <div class="d-flex flex-column dropstart misDatosUsuario">
-                                    <div class="miImagen dropdown p-2 mx-auto" id="DatosUser" data-bs-toggle="dropdown"
-                                                  aria-expanded="false"><img src="" id="pfp" class="pfp rounded-circle">
-                                    </div>
-                                    <ul class="dropdown-menu p-3" aria-labelledby="DatosUser">
-                                    <li class="misDatosUser">
-                                    <div class="d-flex flex-row miImagen">
-                                    <div class="p-1"><img src="" id="pfp2" class="pfp rounded-circle">
-                                    </div>
-                                    <div class="p-1">
-                                        <div class="d-flex flex-column">
-
-                                            <p class="fs-5 fw-bold " id="miNombre">rickylolo</p>
-
-                                            <p class="text-muted fw-light fs-6" id="correoNav">ricky_lolo29@hotmail.com</p>
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <div class="dropdown-divider"></div>
-                            <li><a class="dropdown-item" href="" data-bs-toggle="modal"
-                                    data-bs-target="#miModalEditUser"><i class="pe-1 bi bi-pen"></i> Editar
-                                    Perfil</a>
-                            </li>
+                                        <div class="d-flex flex-column dropstart misDatosUsuario">
+                                            <div class="miImagen dropdown p-2 mx-auto" id="DatosUser" data-bs-toggle="dropdown"
+                                                  aria-expanded="false">
+                                                  <img src="" id="pfp" class="pfp rounded-circle">
+                                            </div>
+                                            <ul class="dropdown-menu p-3" aria-labelledby="DatosUser">
+                                            <li class="misDatosUser">
+                                                <div class="d-flex flex-row miImagen">
+                                                    <div class="p-1">
+                                                        <img src="" id="pfp2" class="pfp rounded-circle">
+                                                    </div>
+                                                    <div class="p-1">
+                                                        <div class="d-flex flex-column">
+                                                            <p class="fs-5 fw-bold " id="miNombre">rickylolo</p>
+                                                            <p class="text-muted fw-light fs-6" id="correoNav">ricky_lolo29@hotmail.com</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <div class="dropdown-divider"></div>
+                                            <li><a class="dropdown-item" href="" data-bs-toggle="modal"data-bs-target="#miModalEditUser"><i class="pe-1 bi bi-pen"></i> Editar Perfil</a>
+                                            </li>
                             ';
                             if ($_SESSION["rolUsuario"] == 1) {
                                 echo '<li><a class="dropdown-item" href="paginaAdmin.php"><i class="pe-1 bi bi-file-earmark"></i> Página Admin</a></li>';
@@ -384,9 +378,9 @@ session_start(); // Inicio mi sesion PHP
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" id="ButtonRegistroEstudiante" data-bs-dismiss="modal">Registrar
+                    <button type="button" class="btn btn-success" id="ButtonRegistroEstudiante">Registrar
                         Alumno</button>
-                    <button type="button" class="btn btn-success" id="ButtonRegistroInstructor" data-bs-dismiss="modal">Registrar
+                    <button type="button" class="btn btn-success" id="ButtonRegistroInstructor">Registrar
                         Instructor</button>
                     <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#miModalLogin">Regresar</button>
                 </div>
@@ -460,7 +454,7 @@ session_start(); // Inicio mi sesion PHP
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
 
-                            <textarea row="8" class="form-control" id="E_descripcion" name="E_descripcion" placeholder="Describete" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
+                            <textarea rows="8" class="form-control" id="E_descripcion" name="E_descripcion" placeholder="Describete" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
 
                         </div>
 
@@ -554,6 +548,24 @@ session_start(); // Inicio mi sesion PHP
         </div>
     </div>
 
+        <!--  >MODAL WINDOW METODO PAGO<-->
+    <div class="modal fade" id="miModalMetodoPagoNivel" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Escoge un método de pago:</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="misMetodosPagoComprarNivel">
+
+
+                </div>
+                <div class="modal-footer" id="miFooterMetodoPagoNivel">
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!--  >MODAL WINDOW DETALLE PAGO-->
     <div class="modal fade" id="miModalDetallePago" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
@@ -565,9 +577,8 @@ session_start(); // Inicio mi sesion PHP
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                        <input type="text" id="metodoPagoDetalle"> 
-                        <input type="text" id="cursoPagoDetalle">
-                        <input type="text" id="costoCursoPagoDetalle">
+                        <input type="hidden" id="metodoPagoDetalle"> 
+                        <input type="hidden" id="cursoPagoDetalle">
                         <div id="miContenidoDetalle">
 
                             <div class="d-flex justify-content-end">
@@ -590,6 +601,67 @@ session_start(); // Inicio mi sesion PHP
 
     </div>
 
+        <!--  >MODAL WINDOW DETALLE PAGO-->
+        <div class="modal fade" id="miModalDetallePagoNivel" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content p-1">
+                <div class="modal-header">
+                    <h4 class="modal-title fw-bold ms-4" id="modalTitle">Detalle Pago</h4>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                         <input type="hidden" id="nivelPagoDetalleNivel">
+                         <input type="hidden" id="cursoPagoDetalleNivel">
+                         <input type="hidden" id="metodoPagoDetalleNivel">
+                        <div id="miContenidoDetallePagoNivel">
+
+            
+                        </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="RegistrarNivelConfirmar">Confirmar Compra</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <!--  >MODAL WINDOW MENSAJES<-->
+    <div class="modal fade" id="miModalMensaje" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Chat</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                    <input type="hidden" id="miCursoSeleccionadoMensajes">
+                <div class="modal-body" id="miBodyMensajes">
+                
+                    <div class="d-flex flex-row justify-content-between">
+     
+                        <div class="list-group" id="misChats">
+                           
+                        </div>
+                        <div id="miMensaje" class="ps-2 flex-fill">
+
+                        <div class="alert alert-success" role="alert">
+                            <h4 class="alert-heading">Aqui apareceran tus mensajes</h4>
+                            <p>Aqui iran el contenido de tus mensajes selecciona un chat de el lado izquierdo para continuar</p>
+                            <hr>               
+                        </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer" id="miFooterMensajes">
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!--FOOTER<-->
     <footer class="w-100 d-flex align-items justify-content-center flex-wrap">

@@ -13,7 +13,6 @@ class User extends DB
         $get = "CALL sp_GestionUsuario(
             'L', #Operacion
             NULL, #Id Usuario
-            NULL, #Id Metodo Pago
             '$emailUsername', #Correo
             '$password', #Contraseña
             NULL, #Rol de usuario
@@ -38,7 +37,6 @@ class User extends DB
             'G', #Operacion
             $Usuario_id, #Id Usuario
             NULL, #Correo
-            NULL, #Nickname
             NULL, #Contraseña
             NULL, #Rol de usuario
             NULL, #PFP
@@ -61,7 +59,6 @@ class User extends DB
             'X', #Operacion
             $Usuario_id, #Id Usuario
             NULL, #Correo
-            NULL, #Nickname
             NULL, #Contraseña
             NULL, #Rol de usuario
             NULL, #PFP
@@ -86,7 +83,6 @@ class User extends DB
             'B', #Operacion
             NULL, #Id Usuario
             NULL, #Correo
-            NULL, #Nickname
             NULL, #Contraseña
             NULL, #Rol de usuario
             NULL, #PFP
@@ -112,7 +108,6 @@ class User extends DB
         $insert = "CALL sp_GestionUsuario(
             'I', #Operacion
             NULL, #Id Usuario
-            NULL, #Id Metodo Pago
             '$email', #Correo
             '$password', #Contraseña
             $user_Type, #Rol de usuario
@@ -132,13 +127,12 @@ class User extends DB
     // ---------------------------------------ACTUALIZAR INFORMACION------------------------------------------
     // QUERY Actualizar Usuario
 
-    function actualizarUser($Usuario_id, $MetodoPago_id, $correo, $contraseña, $rol, $user_IMG, $descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero)
+    function actualizarUser($Usuario_id, $correo, $contraseña, $rol, $user_IMG, $descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero)
     {
         $user_IMG = mysqli_escape_string($this->myCon(), $user_IMG); //IMAGEN
         $update = "CALL sp_GestionUsuario(
             'E', #Operacion
             $Usuario_id, #Id Usuario
-            $MetodoPago_id, #Id Metodo Pago
             '$correo', #Correo
             '$contraseña', #Contraseña
             $rol, #Rol de usuario
@@ -164,7 +158,6 @@ class User extends DB
         $update = "CALL sp_GestionUsuario(
             'P', #Operacion
             $Usuario_id, #Id Usuario
-            NULL, #Id Metodo Pago
             NULL, #Correo
             NULL, #Contraseña
             NULL, #Rol de usuario

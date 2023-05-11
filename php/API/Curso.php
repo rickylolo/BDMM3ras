@@ -354,10 +354,10 @@ class cursoAPI
         }
     }
 
-    function insertarCursoAUsuario($MetodoPago_id, $Curso_id, $Usuario_id, $costoCurso)
+    function insertarCursoAUsuario($MetodoPago_id, $Curso_id, $Usuario_id)
     {
         $Curso = new Curso();
-        $Curso->insertarCursoAUsuario($MetodoPago_id, $Curso_id, $Usuario_id, $costoCurso);
+        $Curso->insertarCursoAUsuario($MetodoPago_id, $Curso_id, $Usuario_id);
     }
     
 }
@@ -423,9 +423,13 @@ if (isset($_POST['funcion'])) {
             $var = new cursoAPI();
             $var->getCursosDeUnUsuario($_POST['Usuario_id']);
             break;
-        case "insertarCursoAUsuario":
+        // -----------------------
+        case "insertarCursoUsuario":
+          
+            session_start();
+            $id = $_SESSION['Usuario_id'];
             $var = new cursoAPI();
-            $var->insertarCursoAUsuario($_POST['MetodoPago_id'], $_POST['Curso_id'], $_POST['Usuario_id'], $_POST['costoCurso']);
+            $var->insertarCursoAUsuario($_POST['MetodoPago_id'], $_POST['Curso_id'], $id);
             break;
         case "getReporteInstructor":
             session_start();

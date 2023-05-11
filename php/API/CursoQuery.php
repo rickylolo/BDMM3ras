@@ -249,22 +249,20 @@ class Curso extends DB
                 NULL, 		#usuarioCurso Id
                 NULL, 		#MetodoPago Id
                 NULL, 		#Curso Id
-                $Usuario_id,#Usuario Id
-                NULL		#costoCurso
+                $Usuario_id #Usuario Id
         ); ";
         $query = $this->connect()->query($get);
         return $query;
     }
 
-    function insertarCursoAUsuario($MetodoPago_id, $Curso_id, $Usuario_id, $costoCurso)
+    function insertarCursoAUsuario($MetodoPago_id, $Curso_id, $Usuario_id)
     {
-        $insert = "CALL sp_GestionCurso(
+        $insert = "CALL sp_GestionUsuarioCurso(
                   'I',  #Operacion
                   NULL, #usuarioCurso Id
                   $MetodoPago_id,    #MetodoPago Id
                   $Curso_id,    #Curso Id
-                  $Usuario_id,    #Usuario Id
-                  $costoCurso #costoCurso
+                  $Usuario_id    #Usuario Id
         ); ";
         $query = $this->connect()->query($insert);
         return $query;

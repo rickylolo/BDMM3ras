@@ -14,15 +14,42 @@ END; //
 DELIMITER ;
 
 
+DROP FUNCTION IF EXISTS obtenerCostoNivel;
+DELIMITER //
+CREATE FUNCTION obtenerCostoNivel (p_idNivel INT )
+RETURNS DECIMAL(9,2) READS SQL DATA
+
+BEGIN
+   DECLARE miCostoNivel DECIMAL(9,2);
+   SELECT costoNivel INTO miCostoNivel FROM nivel WHERE Nivel_id = p_idNivel;
+   SET miCostoNivel= IFNULL(miCostoNivel,0);
+   RETURN miCostoNivel;
+END; //
+DELIMITER ;
+
+DROP FUNCTION IF EXISTS obtenerCostoCurso;
+DELIMITER //
+CREATE FUNCTION obtenerCostoCurso (p_idCurso INT )
+RETURNS DECIMAL(9,2) READS SQL DATA
+
+BEGIN
+   DECLARE miCostoCurso DECIMAL(9,2);
+   SELECT costoCurso INTO miCostoCurso FROM Curso WHERE Curso_id = p_idCurso;
+   SET miCostoCurso= IFNULL(miCostoCurso,0);
+   RETURN miCostoCurso;
+END; //
+DELIMITER ;
+
+
 DROP FUNCTION IF EXISTS ingresosCurso;
 DELIMITER //
 CREATE FUNCTION ingresosCurso (p_idCurso INT )
-RETURNS INT READS SQL DATA
+RETURNS DECIMAL(9,2) READS SQL DATA
 
 BEGIN
-   DECLARE miSuma INT;
-   DECLARE miSumaTotalUsuarioCurso INT;
-   DECLARE miSumaTotalUsuarioNivel INT;
+   DECLARE miSuma DECIMAL(9,2);
+   DECLARE miSumaTotalUsuarioCurso DECIMAL(9,2);
+   DECLARE miSumaTotalUsuarioNivel DECIMAL(9,2);
    SELECT SUM(costoCurso) INTO miSumaTotalUsuarioCurso FROM usuarioCurso WHERE Curso_id = p_idCurso;
    SET miSumaTotalUsuarioCurso= IFNULL(miSumaTotalUsuarioCurso,0);
    

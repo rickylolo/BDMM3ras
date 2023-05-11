@@ -19,7 +19,6 @@ CREATE TABLE MetodoPago(
 DROP TABLE IF EXISTS Usuario;
 CREATE TABLE Usuario(
 	Usuario_id 			INT AUTO_INCREMENT NOT NULL 	COMMENT'Clave Primaria Tabla Usuario',
-    MetodoPago_id 		INT								COMMENT'Clave Foránea de los Metodos de pago',
 	correo 				VARCHAR(40) NOT NULL UNIQUE 	COMMENT'Correo electrónico del usuario',
 	userPassword 		VARCHAR(30) NOT NULL 			COMMENT'Contraseña del usuario',
 	rolUsuario 			TINYINT NOT NULL 				COMMENT'No. que identifica el rol del usuario 1:Admin, 2:Instructor, 3:Alumno',
@@ -34,12 +33,8 @@ CREATE TABLE Usuario(
 	ultimoCambio 		DATETIME NOT NULL 				COMMENT'Fecha ultima de modificacion del usuario',
 	esBloqueado 		BIT DEFAULT 0 					COMMENT'Bandera que indica si esta bloqueado',
  CONSTRAINT PK_Usuario
-	PRIMARY KEY (Usuario_id),
- CONSTRAINT FK_Usuario_MetodoPago
-	FOREIGN KEY (MetodoPago_id) REFERENCES MetodoPago(MetodoPago_id)
+	PRIMARY KEY (Usuario_id)
 );
-
-
 
 
 
@@ -192,7 +187,7 @@ CREATE TABLE usuarioCurso(
 	isFinalizado			BIT NOT NULL DEFAULT 0			COMMENT'Bandera que indica si el usuario termino el curso',
     nivelesCompletados 		TINYINT DEFAULT 0               COMMENT'Cantidad de niveles completados del curso por el estudiante',
 	tiempoCompletado 		DATETIME 						COMMENT'Tiempo de finalización del usuario al curso',
-	costoCurso  			DECIMAL(9,2) UNSIGNED       	COMMENT'Costo del curso en ese momento',
+	costoCurso  			DECIMAL(9,2)                	COMMENT'Costo del curso en ese momento',
  CONSTRAINT PK_usuarioCurso
 	PRIMARY KEY (usuarioCurso_id),
  CONSTRAINT FK_usuarioCurso_MetodoPago
@@ -204,26 +199,33 @@ CREATE TABLE usuarioCurso(
 );
 
 
--- 												TABLA DE usuarioNivel--
+-- 												TABLA DE nivelCurso--
 DROP TABLE IF EXISTS nivelCurso;
 CREATE TABLE nivelCurso(
 	nivelCurso_id 			INT AUTO_INCREMENT NOT NULL 	COMMENT'Clave Primaria de usuarioNivel',
     MetodoPago_id 			INT NOT NULL 					COMMENT'Clave Foránea del metodo de pago del usuario',
     usuarioCurso_id			INT NOT NULL 					COMMENT'Clave Foránea del usuarioCurso',
 	Nivel_id 				INT NOT NULL 					COMMENT'Clave Foránea del nivel',
+    Usuario_id				INT NOT NULL 					COMMENT'Clave Foránea del usuario',
     tiempoRegistro 			DATETIME NOT NULL 				COMMENT'Tiempo de registro del usuario al curso',
 	isFinalizado			BIT NOT NULL DEFAULT 0			COMMENT'Bandera que indica si el usuario termino el nivel',
 	tiempoCompletado 		DATETIME						COMMENT'Tiempo de finalización del usuario al nivel',
-	costoNivel  			DECIMAL(9,2) UNSIGNED  			COMMENT'Costo del nivel en ese momento',
+	costoNivel  			DECIMAL(9,2)        			COMMENT'Costo del nivel en ese momento',
  CONSTRAINT PK_nivelCurso
 	PRIMARY KEY (nivelCurso_id),
  CONSTRAINT FK_PK_nivelCurso_MetodoPago
 	FOREIGN KEY (MetodoPago_id) REFERENCES MetodoPago(MetodoPago_id),
+ CONSTRAINT FK_PK_nivelCurso_Usuario
+	FOREIGN KEY (Usuario_id) REFERENCES Usuario(Usuario_id),
  CONSTRAINT FK_PK_nivelCurso_Nivel
 	FOREIGN KEY (Nivel_id) REFERENCES Nivel(Nivel_id),
  CONSTRAINT FK_nivelCurso_usuarioCurso
 	FOREIGN KEY (usuarioCurso_id) REFERENCES usuarioCurso(usuarioCurso_id)
 );
+
+
+SELECT * FROM usuarioCurso;
+SELECT * FROM nivelCurso;
 
 /*
 DROP TABLE IF EXISTS nivelCurso;

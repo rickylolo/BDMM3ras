@@ -48,7 +48,6 @@ class usuarioAPI
 
                 $obj = array(
                     "Usuario_id" => $row['Usuario_id'],
-                    "MetodoPago_id" => $row['MetodoPago_id'],
                     "correo" => $row['correo'],
                     "rolUsuario" => $row['rolUsuario'],
                     "fotoPerfil" => base64_encode(($row['fotoPerfil'])),
@@ -109,7 +108,6 @@ class usuarioAPI
 
                 $obj = array(
                     "Usuario_id" => $row['Usuario_id'],
-                    "MetodoPago_id" => $row['MetodoPago_id'],
                     "correo" => $row['correo'],
                     "rolUsuario" => $row['rolUsuario'],
                     "fotoPerfil" => base64_encode(($row['fotoPerfil'])),
@@ -137,10 +135,10 @@ class usuarioAPI
     }
 
 
-    function actualizarUser($Usuario_id, $MetodoPago_id, $correo, $contraseña, $rol, $user_IMG, $descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero)
+    function actualizarUser($Usuario_id, $correo, $contraseña, $rol, $user_IMG, $descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero)
     {
         $user = new User();
-        $user->actualizarUser($Usuario_id, $MetodoPago_id, $correo, $contraseña, $rol, $user_IMG, $descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero);
+        $user->actualizarUser($Usuario_id, $correo, $contraseña, $rol, $user_IMG, $descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero);
     }
 
     function actualizarBloqueo($Usuario_id, $isBloqueado)
@@ -188,7 +186,7 @@ if (isset($_POST['funcion'])) {
             $id = $_SESSION['Usuario_id'];
             $rol = $_SESSION['rolUsuario'];
             $var = new usuarioAPI();
-            $var->actualizarUser($id, $_POST['MetodoPago_id'], $_POST['email'], $_POST['password'], $rol, $binariosImagen, $_POST['descripcion'], $_POST['names'], $_POST['lastNameP'], $_POST['lastNameM'], $_POST['fechaNac'], $_POST['genero']);
+            $var->actualizarUser($id, $_POST['email'], $_POST['password'], $rol, $binariosImagen, $_POST['descripcion'], $_POST['names'], $_POST['lastNameP'], $_POST['lastNameM'], $_POST['fechaNac'], $_POST['genero']);
             break;
         case "obtenerDataUsuario":
 

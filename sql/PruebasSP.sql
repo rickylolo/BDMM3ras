@@ -455,6 +455,15 @@ CALL sp_GestionNivel(
 
 
 CALL sp_GestionNivel(
+	'A',  # Operacion
+	8,    # Nivel Id	
+    3, 		# Curso Id	
+    NULL,          # noNivel
+    NULL  			# nombre
+);
+
+
+CALL sp_GestionNivel(
 	'G',  # Operacion
 	NULL,    # Nivel Id	
     1, 		# Curso Id	

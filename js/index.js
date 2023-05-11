@@ -256,7 +256,6 @@ $(document).ready(function () {
         misDatosInstructor(items[0].Usuario_id)
         $('#miCursoSeleccionadoMensajes').val(items[0].Curso_id)
         $('#cursoPagoDetalle').val(items[0].Curso_id)
-        $('#costoCursoPagoDetalle').val(items[0].costoCurso)
         $('#miInfoCurso').empty()
         $('#miInfoCurso').append(
           `
@@ -354,43 +353,94 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
+        console.log(items)
         $('#miContenido').empty()
         for (let i = 0; i < items.length; i++) {
-          $('#miContenido').append(
-            `
-                                <div class="accordion-item">
-                                    <h2 class="verContenidoNivel accordion-header" id="` +
-              items[i].Nivel_id +
-              `">
-                                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-` +
-              items[i].Nivel_id +
-              `" aria-expanded="false" aria-controls="flush-collapseOne">
-                                                                        Nivel ` +
-              items[i].noNivel +
-              `: ` +
-              items[i].nombreNivel +
+          if (!(items[i].isComprado == 0)) {
+            $('#miContenido').append(
               `
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapse-` +
-              items[i].Nivel_id +
-              `" class="accordion-collapse collapse" aria-labelledby="` +
-              items[i].Nivel_id +
-              `" data-bs-parent="#miContenido">
-                                        <div class="accordion-body">    
-                                           <div id="miContenidoMultimedia-` +
-              items[i].Nivel_id +
-              `">    
+                                    <div class="accordion-item">
+                                        <h2 class="verContenidoNivel accordion-header" id="` +
+                items[i].Nivel_id +
+                `">
+                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-` +
+                items[i].Nivel_id +
+                `" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                                            Nivel ` +
+                items[i].noNivel +
+                `: ` +
+                items[i].nombreNivel +
+                `
+                                            </button>
+                                        </h2>
 
-                                          
+                                        <div id="flush-collapse-` +
+                items[i].Nivel_id +
+                `" class="accordion-collapse collapse" aria-labelledby="` +
+                items[i].Nivel_id +
+                `" data-bs-parent="#miContenido">
+                                            <div class="accordion-body">    
+                                               <div id="miContenidoMultimedia-` +
+                items[i].Nivel_id +
+                `">    
+    
+                                              
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+    
+                                    
+              `
+            )
+          } else {
+            $('#miContenido').append(
+              `
+            <div class="accordion-item">
+            <h2 class="accordion-header" id="` +
+                items[i].Nivel_id +
+                `">
+                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-` +
+                items[i].Nivel_id +
+                `" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                Nivel ` +
+                items[i].noNivel +
+                `: ` +
+                items[i].nombreNivel +
+                `
+                </button>
+            </h2>
 
-                                
+            <div id="flush-collapse-` +
+                items[i].Nivel_id +
+                `" class="accordion-collapse collapse" aria-labelledby="` +
+                items[i].Nivel_id +
+                `" data-bs-parent="#miContenido">
+                <div class="accordion-body">     
+                <div class="alert alert-primary" role="alert">
+                <h4 class="alert-heading">No has comprado este nivel</h4>
+                <p class="text-start">Puedes comprarlo con el botón de abajo</p>
+                <p class="text-end">Costo del nivel: ` +
+                items[i].costoNivel +
+                `</p>
+                <hr>       
+                <div id=" ` +
+                items[i].Curso_id +
+                `">        
+                <button class="btn btn-primary comprarNivel" data-bs-toggle="modal" data-bs-target="#miModalMetodoPagoNivel" id="` +
+                items[i].Nivel_id +
+                `">Comprar nivel</button>
+                  </div>
+            </div>
+                </div>
+            </div>
+        </div>
+
+        
+        
           `
-          )
+            )
+          }
         }
       })
       .fail(function (data) {
@@ -410,9 +460,7 @@ $(document).ready(function () {
         $(`#miContenidoMultimedia-` + Nivel_id).append(`
              <div class="card">
                               <div class="card-header text-end">          
-                    <span class="badge rounded-pill bg-primary">Nivel No Comprado</span>
-                    <span class="badge rounded-pill bg-success">Nivel Completado</span>
-                    <span class="badge rounded-pill bg-danger">Nivel No Completado</span>
+                    <span class="badge rounded-pill bg-success">Nivel Comprado</span>
                 </div>`)
         for (let i = 0; i < items.length; i++) {
           switch (items[i].tipoMultimedia) {
@@ -743,6 +791,21 @@ $(document).ready(function () {
               </button>
           `
           )
+
+          $('#misMetodosPagoComprarNivel').append(
+            ` 
+            <div class="alert alert-warning" role="alert">
+                ¡No has Iniciado Sesión! 
+            </div>
+            `
+          )
+          $('#miFooterMetodoPagoNivel').append(
+            `
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalLogin">
+                 Iniciar Sesión
+              </button>
+          `
+          )
           return
         }
 
@@ -750,6 +813,12 @@ $(document).ready(function () {
         $('#miFooterMetodoPago').append(
           `
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#miModalDetallePago" id="irModalDetallePago">Aceptar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          `
+        )
+        $('#miFooterMetodoPagoNivel').append(
+          `
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#miModalDetallePagoNivel" id="irModalDetallePagoNivel">Aceptar</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
           `
         )
@@ -783,6 +852,36 @@ $(document).ready(function () {
                         </div>
                     </div>`
           )
+
+          $('#misMetodosPagoComprarNivel').append(
+            `
+                    <div class="row">
+                        <div class="col-4 row">
+                            <div class="col-6 d-flex align-items-center">
+                                <div class="form-check ">
+                                    <input class="form-check-input" type="radio" name="radiosMetodosNivel" id="radiosMetodosNivel" value="` +
+              items[i].MetodoPago_id +
+              `" checked>
+                                    <label class="form-check-label" for="defaultCheck1">
+                                    </label>
+                                </div>
+                                <div class="col-6">
+                                    <img src="data:image/jpeg;base64,` +
+              items[i].imagenMetodo +
+              `"" height="100px">
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-8 d-flex align-items-center">
+                           ` +
+              items[i].nombreMetodo +
+              `
+
+                        </div>
+                    </div>`
+          )
         }
 
         // Valor Radios Value Metodo
@@ -790,6 +889,13 @@ $(document).ready(function () {
         function funcValueRadioMetodo() {
           let radioMetodo = $("input[name='radiosMetodos']:checked").val()
           $('#metodoPagoDetalle').val(radioMetodo)
+        }
+
+        // Valor Radios Value Metodo
+        $('#irModalDetallePagoNivel').click(funcValueRadioMetodoNivel)
+        function funcValueRadioMetodoNivel() {
+          let radioMetodo = $("input[name='radiosMetodosNivel']:checked").val()
+          $('#metodoPagoDetalleNivel').val(radioMetodo)
         }
       })
       .fail(function (data) {
@@ -836,6 +942,13 @@ $(document).ready(function () {
     )
     cargarMisMensajes(idMensaje)
     cargarHeaderChat(idCurso)
+  }
+
+  // -- COMPRAR NIVEL --
+  $('#miContenido').on('click', '.comprarNivel', funcComprarNivelPasarIds)
+  function funcComprarNivelPasarIds() {
+    $('#nivelPagoDetalleNivel').val($(this).attr('id'))
+    $('#cursoPagoDetalleNivel').val($(this).parent().attr('id'))
   }
 
   // VER MENSAJE INSTRUCTOR
@@ -950,15 +1063,9 @@ $(document).ready(function () {
   //-------------------------ESTUDIANTE----------------------------
   $('#ButtonRegistroEstudiante').click(funcRegistrarEstudiante)
   function funcRegistrarEstudiante() {
-    //Verificacion contraseña
+    //TRAER INFORMACION
     var contrasenia = $('#password').val()
     var contrasenia_confirmar = $('#confirmar_password').val()
-    if (contrasenia != contrasenia_confirmar) {
-      alert('La contraseña no coincide reintenta nuevamente')
-      return
-    }
-    var form_data = new FormData()
-    var file_data = $('#userIMG').prop('files')[0]
     var email = $('#email').val()
     var usuario = $('#usuario').val()
     var names = $('#names').val()
@@ -966,6 +1073,32 @@ $(document).ready(function () {
     var lastNameM = $('#lastNameM').val()
     var fechaNacimiento = $('#Birthday').val()
     var genero = $('#gender-user').val()
+    var file_data = $('#userIMG').prop('files')[0]
+    //VERIFICAR INFORMACION
+    if (contrasenia != contrasenia_confirmar) {
+      alert('La contraseña no coincide reintenta nuevamente')
+      return
+    }
+    if (!file_data) {
+      alert('Favor de cargar la imagen')
+      return
+    }
+    if (
+      email == '' ||
+      usuario == '' ||
+      names == '' ||
+      lastNameP == '' ||
+      lastNameM == '' ||
+      fechaNacimiento == '' ||
+      genero == '' ||
+      contrasenia == '' ||
+      contrasenia_confirmar == ''
+    ) {
+      alert('Faltan llenar Campos')
+      return
+    }
+    //CREAR MI FORMDATA
+    var form_data = new FormData()
     form_data.append('file', file_data)
     form_data.append('funcion', 'registrarUsuario')
     form_data.append('email', email)
@@ -988,6 +1121,7 @@ $(document).ready(function () {
       processData: false,
     })
       .done(function () {
+        $('#miModal').modal('hide')
         alert('Registro de estudiante correctamente')
         $('#userIMG').val('')
         $('#email').val('')
@@ -1009,15 +1143,9 @@ $(document).ready(function () {
   //-------------------------INSTRUCTOR----------------------------
   $('#ButtonRegistroInstructor').click(funcRegistrarInstructor)
   function funcRegistrarInstructor() {
-    //Verificacion contraseña
+    //TRAER INFORMACION
     var contrasenia = $('#password').val()
     var contrasenia_confirmar = $('#confirmar_password').val()
-    if (contrasenia != contrasenia_confirmar) {
-      alert('La contraseña no coincide reintenta nuevamente')
-      return
-    }
-    var form_data = new FormData()
-    var file_data = $('#userIMG').prop('files')[0]
     var email = $('#email').val()
     var usuario = $('#usuario').val()
     var names = $('#names').val()
@@ -1025,6 +1153,32 @@ $(document).ready(function () {
     var lastNameM = $('#lastNameM').val()
     var fechaNacimiento = $('#Birthday').val()
     var genero = $('#gender-user').val()
+    var file_data = $('#userIMG').prop('files')[0]
+    //VERIFICAR INFORMACION
+    if (contrasenia != contrasenia_confirmar) {
+      alert('La contraseña no coincide reintenta nuevamente')
+      return
+    }
+    if (!file_data) {
+      alert('Favor de cargar la imagen')
+      return
+    }
+    if (
+      email == '' ||
+      usuario == '' ||
+      names == '' ||
+      lastNameP == '' ||
+      lastNameM == '' ||
+      fechaNacimiento == '' ||
+      genero == '' ||
+      contrasenia == '' ||
+      contrasenia_confirmar == ''
+    ) {
+      alert('Faltan llenar Campos')
+      return
+    }
+    //CREAR MI FORMDATA
+    var form_data = new FormData()
     form_data.append('file', file_data)
     form_data.append('funcion', 'registrarUsuario')
     form_data.append('email', email)
@@ -1047,7 +1201,8 @@ $(document).ready(function () {
       processData: false,
     })
       .done(function () {
-        alert('Registro de instructor correctamente')
+        $('#miModal').modal('hide')
+        alert('Registro de estudiante correctamente')
         $('#userIMG').val('')
         $('#email').val('')
         $('#usuario').val('')
@@ -1066,7 +1221,6 @@ $(document).ready(function () {
   }
 
   //-------------------------MENSAJE - HEADER ----------------------------
-
   function funcRegistrarMensaje(idInstructor, idCurso) {
     $.ajax({
       type: 'POST',
@@ -1132,7 +1286,6 @@ $(document).ready(function () {
   }
 
   //-------------------------MENSAJE ----------------------------
-
   $('#miFooterMensajes').on(
     'click',
     '.registrarMensajeDetalle',
@@ -1155,6 +1308,54 @@ $(document).ready(function () {
         $('#miTextoMensaje').val('')
         cargarMisMensajes(idMensaje)
         cargarHeaderChat(idCurso)
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
+  //-------------------------COMPRAR CURSO ----------------------------
+  $('#RegistrarCursoConfirmar').click(funcComprarCurso)
+  function funcComprarCurso() {
+    let MetodoPago = $('#metodoPagoDetalle').val()
+    let idCurso = $('#cursoPagoDetalle').val()
+    $.ajax({
+      type: 'POST',
+      data: {
+        funcion: 'insertarCursoUsuario',
+        MetodoPago_id: MetodoPago,
+        Curso_id: idCurso,
+      },
+      url: 'php/API/Curso.php',
+    })
+      .done(function () {
+        $('#miModalDetallePago').modal('hide')
+        alert('Curso comprado correctamente')
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
+  //-------------------------COMPRAR NIVEL ----------------------------
+  $('#RegistrarNivelConfirmar').click(funcComprarNivel)
+  function funcComprarNivel() {
+    let MetodoPago = $('#metodoPagoDetalleNivel').val()
+    let idNivel = $('#nivelPagoDetalleNivel').val()
+    let idCurso = $('#cursoPagoDetalleNivel').val()
+    $.ajax({
+      type: 'POST',
+      data: {
+        funcion: 'insertarNivelCursoUsuario',
+        MetodoPago_id: MetodoPago,
+        Nivel_id: idNivel,
+      },
+      url: 'php/API/Nivel.php',
+    })
+      .done(function () {
+        $('#miModalDetallePagoNivel').modal('hide')
+        misDatosContenidoCurso(idCurso)
+        alert('Nivel comprado correctamente')
       })
       .fail(function (data) {
         console.error(data)

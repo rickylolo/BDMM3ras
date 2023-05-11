@@ -9,11 +9,11 @@ class Nivel extends DB
 
     // QUERY Get Niveles de un Curso
 
-    function getNivelesData($Curso_id)
+    function getNivelesData($Curso_id,$Usuario_id)
     {
         $get = "CALL sp_GestionNivel(
 	            'A',  # Operacion
-	            NULL,    # Nivel Id	
+	            $Usuario_id,    # Nivel Id	
                 $Curso_id, 		# Curso Id	
                 NULL,  			# nombre
                 NULL  		# costoNivel
@@ -94,33 +94,19 @@ class Nivel extends DB
       
     // ---------------------------------------CONSULTA DE INFORMACION------------------------------------------
 
-    // QUERY Get Datos de los Niveles de un Curso de un Usuario
-    function getNivelesCursoUsuarioData($usuarioCurso_id)
-    {
-        $get = "CALL sp_GestionNivelCurso(
-                'G', 		#Operacion
-                NULL, 		#niveCurso Id
-                NULL, 		#MetodoPago Id
-                $usuarioCurso_id, 		#usuarioCurso Id
-                NULL,       #Usuario Id
-                NULL		#costoNivel
-        ); ";
-        $query = $this->connect()->query($get);
-        return $query;
-    }
+
 
      // ---------------------------------------INSERTAR INFORMACION------------------------------------------
     // QUERY Insertar Nivel Curso Usuario
 
-    function insertarNivelUsuarioCurso($MetodoPago_id,$usuarioCurso_id, $Nivel_id, $costoNivel)
+    function insertarNivelUsuarioCurso($MetodoPago_id,$Usuario_id, $Nivel_id)
     {
         $insert = "CALL sp_GestionNivelCurso(
                    'I',             #Operacion
-                   NULL, 		    #niveCurso Id
+                   NULL, 		    #usuarioCurso Id
                    $MetodoPago_id,  #MetodoPago Id
-                   $usuarioCurso_id, #usuarioCurso Id
-                   $Nivel_id,       #Usuario Id
-                   $costoNivel      #costoNivel
+                   $Usuario_id,      #Usuario Id
+                   $Nivel_id       #Nivel Id
         ); ";
         $query = $this->connect()->query($insert);
         return $query;

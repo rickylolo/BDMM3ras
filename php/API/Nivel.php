@@ -6,14 +6,14 @@ class nivelAPI
 {
 
 
-    function getNivelesData($Curso_id)
+    function getNivelesData($Curso_id,$Usuario_id)
     {
 
         $Nivel = new Nivel();
         $arrNivels = array();
         $arrNivels["Datos"] = array();
 
-        $res = $Nivel->getNivelesData($Curso_id);
+        $res = $Nivel->getNivelesData($Curso_id,$Usuario_id);
         if ($res) { // Entra si hay información
             while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
                 $obj = array( 
@@ -22,8 +22,7 @@ class nivelAPI
                     "nombreNivel" => $row['nombreNivel'],
                     "costoNivel" => $row['costoNivel'],
                     "Curso_id" => $row['Curso_id'],
-                    "imagenCurso" => base64_encode(($row['imagenCurso'])),
-                    "nombreCurso" => $row['nombreCurso']
+                    "isComprado" => $row['isComprado']
                 );
                 array_push($arrNivels["Datos"], $obj);
             }
@@ -97,6 +96,13 @@ class nivelAPI
         $Nivel = new Nivel();
         $Nivel->eliminarNivel($Nivel_id);
     }
+
+    
+    function insertarNivelUsuarioCurso($MetodoPago_id,$Usuario_id,$Nivel_id)
+    {
+        $Nivel = new Nivel();
+        $Nivel->insertarNivelUsuarioCurso($MetodoPago_id,$Usuario_id,$Nivel_id);
+    }
 }
 
 //AJAX
@@ -118,11 +124,20 @@ if (isset($_POST['funcion'])) {
 
         case "obtenerDataNivelesDeUnCurso":
             $var = new nivelAPI();
-            $var->getNivelesData($_POST['Curso_id']);
+               session_start();
+            $id = $_SESSION['Usuario_id'];
+            $var->getNivelesData($_POST['Curso_id'],$id);
             break;
         case "obtenerDataNivel":
             $var = new nivelAPI();
             $var->getNivelData($_POST['Nivel_id']);
+            break;
+
+        case "insertarNivelCursoUsuario":
+            $var = new nivelAPI();
+            session_start();
+            $id = $_SESSION['Usuario_id'];
+            $var->insertarNivelUsuarioCurso($_POST['MetodoPago_id'],$id,$_POST['Nivel_id']);
             break;
     }
 }

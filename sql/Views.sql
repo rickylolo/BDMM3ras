@@ -4,7 +4,7 @@ USE BDMM_PROYECTO;
 DROP VIEW IF EXISTS vUsuario;
 
 CREATE VIEW vUsuario AS
-SELECT Usuario_id, MetodoPago_id, correo, userPassword, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo, fechaRegistro, ultimoCambio, esBloqueado
+SELECT Usuario_id, correo, userPassword, rolUsuario, fotoPerfil, descripcion, nombre, apellidoMaterno, apellidoPaterno, fechaNacimiento, sexo, fechaRegistro, ultimoCambio, esBloqueado
 FROM Usuario;
 
 
@@ -128,10 +128,15 @@ FROM Nivel;
 DROP VIEW IF EXISTS vObtenerTodosLosNivelesDeUnCurso;
 
 CREATE VIEW vObtenerTodosLosNivelesDeUnCurso AS
-SELECT Nivel_id, noNivel, A.nombre AS nombreNivel, costoNivel, A.Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, B.nombre AS nombreCurso, descripcion, isBaja
-FROM Nivel A
-LEFT JOIN Curso B
-ON A.Curso_id = B.Curso_id;
+SELECT Nivel_id, Curso_id, noNivel, nombre, costoNivel
+FROM Nivel;
+
+
+SELECT *
+FROM vObtenerTodosLosNivelesDeUnCurso
+WHERE Usuario_id = 8
+  AND Curso_id = 3;
+
 
 /*-------------------------------------------------------------------------------- MULTIMEDIA -------------------------------------------------------------------------*/
 
