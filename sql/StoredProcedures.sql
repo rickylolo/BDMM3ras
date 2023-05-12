@@ -535,7 +535,7 @@ BEGIN
    IF Operacion = 'I' /*INSERT USUARIO CURSO*/
    THEN  
    
-		SELECT COUNT(*) INTO isExistenteUsuarioCurso FROM usuarioCurso
+		SELECT COUNT(usuarioCurso_id) INTO isExistenteUsuarioCurso FROM usuarioCurso
         WHERE Curso_id = sp_Curso_id
 		AND Usuario_id = sp_Usuario_id;
         	IF isExistenteUsuarioCurso = 0 THEN
@@ -560,7 +560,7 @@ BEGIN
    END IF;
    IF Operacion = 'G' /*GET USUARIO CURSOS*/
    THEN  
-		SELECT Usuario_id, usuarioCurso_id, Curso_id, isFinalizado, nivelesCompletados, tiempoCompletado, costoCurso, noNiveles, imagenCurso, nombre, descripcion
+		SELECT Usuario_id, nombreCompleto, usuarioCurso_id, Curso_id, isFinalizado, nivelesCompletados, tiempoCompletado, costoCurso, noNiveles, imagenCurso, nombre, descripcion
         FROM vObtenerTodosLosCursosDeUnUsuario
         WHERE Usuario_id = sp_Usuario_id;
    END IF;
@@ -619,6 +619,11 @@ BEGIN
         FROM vObtenerTodosLosNivelesDeUnCursoDeUnUsuario
         WHERE usuarioCurso_id = sp_usuarioCurso_id;
    END IF;
+      IF Operacion = 'E' /*GET USUARIO NIVELES CURSO*/
+   THEN  
+		UPDATE nivelCurso SET isFinalizado = 1
+        WHERE Nivel_id = sp_Nivel_id AND Usuario_id = sp_Usuario_id AND isFinalizado = 0;
+   END IF;
 END //
 
 SELECT * FROM UsuarioCurso;
@@ -627,9 +632,9 @@ DELETE FROM nivelCurso;
 DELETE FROM UsuarioCurso;
 
 CALL sp_GestionNivelCurso(
-'I',             #Operacion
+'E',             #Operacion
 NULL, 		    #usuarioCurso Id
-3,  #MetodoPago Id
+NULL,  #MetodoPago Id
 9,      #Usuario Id
-14       #Nivel Id
+12       #Nivel Id
 );

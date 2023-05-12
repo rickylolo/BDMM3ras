@@ -111,6 +111,18 @@ class Nivel extends DB
         $query = $this->connect()->query($insert);
         return $query;
     }
+
+    function marcarNivelFinalizado($Usuario_id,$Nivel_id){
+        $insert = "CALL sp_GestionNivelCurso(
+                   'E',             #Operacion
+                   NULL, 		    #usuarioCurso Id
+                   NULL,  #MetodoPago Id
+                   $Usuario_id,      #Usuario Id
+                   $Nivel_id       #Nivel Id
+        ); ";
+        $query = $this->connect()->query($insert);
+        return $query;
+    }
 }
 
 ?>

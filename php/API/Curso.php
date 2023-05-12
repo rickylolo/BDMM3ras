@@ -338,6 +338,7 @@ class cursoAPI
                     "Curso_id" => $row['Curso_id'],
                     "isFinalizado" => $row['isFinalizado'],
                     "nivelesCompletados" => $row['nivelesCompletados'],
+                    "nombreCompleto" => $row['nombreCompleto'],
                     "tiempoCompletado" => $row['tiempoCompletado'],
                     "costoCurso" => $row['costoCurso'],
                     "noNiveles" => $row['noNiveles'],
@@ -419,17 +420,18 @@ if (isset($_POST['funcion'])) {
             $var->eliminarCursoCategoria($_POST['CursoCategoria_id']);
             break;
             // ----------------------------------------------------------------- CURSO - USUARIO -----------------------------------------------------------------
-        case "obtenerCursosDeUnUsuario":
-            $var = new cursoAPI();
-            $var->getCursosDeUnUsuario($_POST['Usuario_id']);
-            break;
         // -----------------------
-        case "insertarCursoUsuario":
-          
+        case "insertarCursoUsuario":   
             session_start();
             $id = $_SESSION['Usuario_id'];
             $var = new cursoAPI();
             $var->insertarCursoAUsuario($_POST['MetodoPago_id'], $_POST['Curso_id'], $id);
+            break;
+        case "obtenerCursosDeUnUsuario":
+            $var = new cursoAPI();
+               session_start();
+            $id = $_SESSION['Usuario_id'];
+            $var->getCursosDeUnUsuario($id);
             break;
         case "getReporteInstructor":
             session_start();

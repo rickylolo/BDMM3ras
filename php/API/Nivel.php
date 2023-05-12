@@ -103,6 +103,13 @@ class nivelAPI
         $Nivel = new Nivel();
         $Nivel->insertarNivelUsuarioCurso($MetodoPago_id,$Usuario_id,$Nivel_id);
     }
+
+        
+    function marcarNivelFinalizado($Usuario_id,$Nivel_id)
+    {
+        $Nivel = new Nivel();
+        $Nivel->marcarNivelFinalizado($Usuario_id,$Nivel_id);
+    }
 }
 
 //AJAX
@@ -132,12 +139,19 @@ if (isset($_POST['funcion'])) {
             $var = new nivelAPI();
             $var->getNivelData($_POST['Nivel_id']);
             break;
+    
 
         case "insertarNivelCursoUsuario":
             $var = new nivelAPI();
             session_start();
             $id = $_SESSION['Usuario_id'];
             $var->insertarNivelUsuarioCurso($_POST['MetodoPago_id'],$id,$_POST['Nivel_id']);
+            break;
+        case "marcarNivelFinalizado":   
+            session_start();
+            $id = $_SESSION['Usuario_id'];
+            $var = new nivelAPI();
+            $var->marcarNivelFinalizado($id, $_POST['Nivel_id']);
             break;
     }
 }

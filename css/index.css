@@ -54,6 +54,7 @@
   box-shadow: 0 1px 3px 1px rgb(136, 136, 136);
   overflow: hidden;
   transition: 0.15s;
+  border-radius: 15px;
 }
 
 .post .verCurso {
@@ -107,12 +108,12 @@
 }
 
 .post-body h2 {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .post-body p {
   line-height: 1.2;
-  margin-bottom: 0rem;
+  margin-bottom: 0.2rem;
 }
 
 .post-body .post-link:hover {

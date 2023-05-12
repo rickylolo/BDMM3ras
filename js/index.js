@@ -245,6 +245,7 @@ $(document).ready(function () {
       })
   }
 
+  // --- DETALLES CURSO ---
   function misDatosCursoDetalle(cursoID) {
     $.ajax({
       type: 'POST',
@@ -292,7 +293,7 @@ $(document).ready(function () {
 
                             </div>
 
-                            <p class="text-muted fs-5 p-4">` +
+                            <p class="text-muted fs-6 p-4">` +
             items[0].descripcion +
             `</p>
                             <div class="mt-auto">
@@ -341,6 +342,7 @@ $(document).ready(function () {
       })
   }
 
+  // --- CONTENIDO NIVELES DE MI CURSO ---
   function misDatosContenidoCurso(cursoID) {
     // Mis datos Curso
     $.ajax({
@@ -386,6 +388,7 @@ $(document).ready(function () {
     
                                               
                                                 </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -448,6 +451,7 @@ $(document).ready(function () {
       })
   }
 
+  // --- MULTIMEDIA CADA NIVEL DEL CURSO ---
   function misDatosMultimediaNivel(Nivel_id) {
     $.ajax({
       type: 'POST',
@@ -467,7 +471,7 @@ $(document).ready(function () {
             case 1:
               $(`#miContenidoMultimedia-` + Nivel_id).append(
                 `
-             <div class="card mt-2 mb-2">
+             <div class="card">
                 <div class="card-body d-flex text-center justify-content-center">
                     <p class="card-text">` +
                   items[i].texto +
@@ -480,7 +484,7 @@ $(document).ready(function () {
             case 2:
               $(`#miContenidoMultimedia-` + Nivel_id).append(
                 `
-             <div class="card mt-2 mb-2">
+             <div class="card">
                  <div class="card-header text-center fw-bold fs-5">          
 ` +
                   items[i].texto +
@@ -499,7 +503,7 @@ $(document).ready(function () {
             case 3:
               $(`#miContenidoMultimedia-` + Nivel_id).append(
                 `
-             <div class="card mt-2 mb-2">
+             <div class="card">
                  <div class="card-header text-center fw-bold fs-5">          
 ` +
                   items[i].texto +
@@ -519,7 +523,7 @@ $(document).ready(function () {
             case 4:
               $(`#miContenidoMultimedia-` + Nivel_id).append(
                 `
-             <div class="card mt-2 mb-2">
+             <div class="card">
                  <div class="card-header text-center fw-bold fs-5">          
 ` +
                   items[i].texto +
@@ -546,6 +550,7 @@ $(document).ready(function () {
       })
   }
 
+  // --- DATOS DE MI INSTRUCTOR ---
   function misDatosInstructor(miUsuario_id) {
     $.ajax({
       type: 'POST',
@@ -604,6 +609,7 @@ $(document).ready(function () {
       })
   }
 
+  // --- CARGAR LOS HEADERS DE LOS MENSAJES (CHATS) ---
   cargarMisMensajesHeader()
   function cargarMisMensajesHeader() {
     $.ajax({
@@ -655,39 +661,6 @@ $(document).ready(function () {
             `
           )
         }
-      })
-      .fail(function (data) {
-        console.error(data)
-      })
-  }
-
-  function cargarHeaderChat(Curso_id) {
-    $.ajax({
-      type: 'POST',
-      data: { funcion: 'obtenerCurso', Curso_id: Curso_id },
-      url: 'php/API/Curso.php',
-    })
-      .done(function (data) {
-        var items = JSON.parse(data)
-        $('#DatosCursoHeader').empty()
-        $('#DatosCursoHeader').append(
-          `
-                              <div class="p-2"><img src="data:image/jpeg;base64,` +
-            items[0].imagenCurso +
-            `" class="pfp">
-                                </div>
-                                <div class="p-2">
-                                    <div class="d-flex flex-column">
-                                        <p class="fs-5 p-1 fw-bold">` +
-            items[0].cursoNombre +
-            `</p>
-                              
-                                    </div>
-                                </div>
-
-        
-        `
-        )
       })
       .fail(function (data) {
         console.error(data)
@@ -760,6 +733,40 @@ $(document).ready(function () {
             `
           )
         }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
+  // --- MAS RECIENTES ---
+  function cargarHeaderChat(Curso_id) {
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'obtenerCurso', Curso_id: Curso_id },
+      url: 'php/API/Curso.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        $('#DatosCursoHeader').empty()
+        $('#DatosCursoHeader').append(
+          `
+                              <div class="p-2"><img src="data:image/jpeg;base64,` +
+            items[0].imagenCurso +
+            `" class="pfp">
+                                </div>
+                                <div class="p-2">
+                                    <div class="d-flex flex-column">
+                                        <p class="fs-5 p-1 fw-bold">` +
+            items[0].cursoNombre +
+            `</p>
+                              
+                                    </div>
+                                </div>
+
+        
+        `
+        )
       })
       .fail(function (data) {
         console.error(data)
@@ -1330,6 +1337,7 @@ $(document).ready(function () {
     })
       .done(function () {
         $('#miModalDetallePago').modal('hide')
+        misDatosContenidoCurso(idCurso)
         alert('Curso comprado correctamente')
       })
       .fail(function (data) {
