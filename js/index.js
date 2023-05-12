@@ -12,6 +12,7 @@ $(document).ready(function () {
   $('#Valoraciones').hide()
   $('#Instructor').hide()
   $('#miCursoDetalle').hide()
+  $('#cursoSearch').hide()
 
   // -------- MIS BOTONES ------------
   //CONTENIDO
@@ -56,7 +57,7 @@ $(document).ready(function () {
         $('#misCategoriasNav').empty()
         for (let i = 0; i < items.length; i++) {
           $('#misCategoriasNav').append(
-            `<li><a class="dropdown-item miBusquedaCategoria" href="" id="` +
+            `<li><a class="dropdown-item miBusquedaCategoria" id="` +
               items[i].Categoria_id +
               `"> ` +
               items[i].nombre +
@@ -910,14 +911,143 @@ $(document).ready(function () {
       })
   }
 
+  //BUSCAR SEARCH CURSOS
+  $('#buscarSearchCursos').click(function () {
+    $('#cursoSearch').show()
+    $('#miCursoDetalle').hide()
+    let miTextoBuscar = $('#miTextoBuscarCursos').val()
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'obtenerCursosSearch', texto: miTextoBuscar },
+      url: 'php/API/Curso.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        $('#misCursosSearch').empty()
+        $('#miAlertaBusqueda').empty()
+        if (items.length == 0) {
+          $('#miAlertaBusqueda').append(
+            `
+                   <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading">No hay resultados de esta busqueda</h4>
+                            <p class="text-center">Intenta realizando otra busqueda</p>
+                            <hr>               
+                        </div>
+            `
+          )
+        } else {
+          for (let i = 0; i < items.length; i++) {
+            $('#misCursosSearch').append(
+              `
+                <article class="post">
+                        <div class="post-header">
+                             <a href="#" class="verCursoDetalle" id="` +
+                items[i].Curso_id +
+                `">
+                                <img src="data:image/jpeg;base64,` +
+                items[i].imagenCurso +
+                `" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>` +
+                items[i].nombre +
+                `</b></h4>
+                            <span>Impartido Por :<div class="instructor">` +
+                items[i].nombreCompleto +
+                `</div></span><br>
+                            <a href="#" class="btn verCurso verCursoDetalle" id="` +
+                items[i].Curso_id +
+                `">Ver Curso</a>
+                        </div>
+                </article>
+            `
+            )
+          }
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  })
+
   // -- VER CONTENIDO CURSO --
   $('#misCursosIndex').on('click', '.verCursoDetalle', funcVerCurso)
+  $('#misCursosSearch').on('click', '.verCursoDetalle', funcVerCurso)
   function funcVerCurso() {
     let miIdCurso = $(this).attr('id')
     misDatosCursoDetalle(miIdCurso)
     misDatosContenidoCurso(miIdCurso)
   }
 
+  // -- BUSCAR CURSOS POR CATEGORIA ---
+  $('#misCategoriasNav').on(
+    'click',
+    '.miBusquedaCategoria',
+    funcBuscarPorCategoriaCurso
+  )
+  function funcBuscarPorCategoriaCurso() {
+    $('#cursoSearch').show()
+    $('#miCursoDetalle').hide()
+    let miIdCategoria = $(this).attr('id')
+    $.ajax({
+      type: 'POST',
+      data: {
+        funcion: 'obtenerCursosDeUnaCategoria',
+        Categoria_id: miIdCategoria,
+      },
+      url: 'php/API/Curso.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+
+        $('#misCursosSearch').empty()
+        $('#miAlertaBusqueda').empty()
+        if (items.length == 0) {
+          $('#miAlertaBusqueda').append(
+            `
+                   <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading">No hay resultados de esta busqueda</h4>
+                            <p class="text-center">Intenta realizando otra busqueda</p>
+                            <hr>               
+                        </div>
+            `
+          )
+        } else {
+          for (let i = 0; i < items.length; i++) {
+            $('#misCursosSearch').append(
+              `
+                <article class="post">
+                        <div class="post-header">
+                             <a href="#" class="verCursoDetalle" id="` +
+                items[i].Curso_id +
+                `">
+                                <img src="data:image/jpeg;base64,` +
+                items[i].imagenCurso +
+                `" class="post-img">
+                            </a>
+                        </div>
+                        <div class="post-body">
+                            <h4><b>` +
+                items[i].nombre +
+                `</b></h4>
+                            <span>Impartido Por :<div class="instructor">` +
+                items[i].nombreCompleto +
+                `</div></span><br>
+                            <a href="#" class="btn verCurso verCursoDetalle" id="` +
+                items[i].Curso_id +
+                `">Ver Curso</a>
+                        </div>
+                </article>
+            `
+            )
+          }
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
   // -- VER CONTENIDO NIVEL --
   $('#miContenido').on('click', '.verContenidoNivel', funcVerMultimedia)
   function funcVerMultimedia() {

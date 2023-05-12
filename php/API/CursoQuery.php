@@ -97,6 +97,24 @@ class Curso extends DB
         return $query;
     }
 
+        // QUERY Get Datos Cursos Search
+    function getCursosSearch($nombre)
+    {
+        $get = "CALL sp_GestionCurso(
+            'S', 	#Operacion
+            NULL, 	# Curso Id
+            NULL, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            '$nombre',	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
+
     // QUERY REPORTE INSTRUCTOR
 
     function getReporteInstructor($Usuario_id)
@@ -206,6 +224,23 @@ class Curso extends DB
     }
 
 
+        // QUERY Get Datos Cursos de un Usuario
+    function getKardex($Usuario_id)
+    {
+        $get = "CALL sp_GestionCurso(
+            'K', 	#Operacion
+            NULL, 	# Curso Id
+            $Usuario_id, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            NULL,	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
     // ---------------------------------------INSERTAR INFORMACION------------------------------------------
     // QUERY Insertar Curso Categoria
 
@@ -254,6 +289,8 @@ class Curso extends DB
         $query = $this->connect()->query($get);
         return $query;
     }
+
+
 
     function insertarCursoAUsuario($MetodoPago_id, $Curso_id, $Usuario_id)
     {

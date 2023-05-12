@@ -43,6 +43,111 @@ $(document).ready(function () {
       })
   }
 
+  cargarKardex()
+  function cargarKardex() {
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'getKardex' },
+      url: 'php/API/Curso.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        $('#misElementosKardex').empty()
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].tiempoCompletado != null) {
+            $('#misElementosKardex').append(
+              `
+                         <a href="" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
+                    <div class="d-flex flex-row miImagen justify-content-between">
+                        <div class="d-flex">
+                            <img src="data:image/jpeg;base64,` +
+                items[i].imagenCurso +
+                `" class="pfp">
+                            <div class="p-1 d-flex flex-column">
+                                <p class="fs-6 fw-bold">` +
+                items[i].nombreCurso +
+                `</p>
+                                <p class="text-muted fs-6 fw-light">` +
+                items[i].nombreCategoria +
+                `</p>
+                            </div>
+                            <div class="ps-4 d-flex flex-row">
+                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Progreso: <b>` +
+                items[i].Progreso +
+                `</b>
+                                </p>
+                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Fecha de ingreso: <b>` +
+                items[i].tiempoRegistro +
+                `</b>
+                                </p>
+                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha ultimo nivel: <b>` +
+                items[i].ultimoNivel +
+                `</b>
+                                </p>
+                                                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha finalizado: <b>` +
+                items[i].tiempoCompletado +
+                `</b>
+                                </p>
+                                 <div class="d-flex justify-content-end ps-4 pb-1">
+                            <p class="mb-1"><button type="button" class="btn btn-success"><i
+                                        class="bi bi-bookmark-star-fill"></i></button>
+                            </p>
+
+
+                        </div>
+                                     
+                            </div>
+                        </div>
+                       
+                    </div>
+                </a>`
+            )
+          } else {
+            $('#misElementosKardex').append(
+              `
+                   <a href="" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
+                    <div class="d-flex flex-row miImagen justify-content-between">
+                        <div class="d-flex">
+                            <img src="data:image/jpeg;base64,` +
+                items[i].imagenCurso +
+                `" class="pfp">
+                            <div class="p-1 d-flex flex-column">
+                                <p class="fs-6 fw-bold">` +
+                items[i].nombreCurso +
+                `</p>
+                                <p class="text-muted fs-6 fw-light">` +
+                items[i].nombreCategoria +
+                `</p>
+                            </div>
+                            <div class="ps-4 d-flex flex-row">
+                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Progreso: <b>` +
+                items[i].Progreso +
+                `</b>
+                                </p>
+                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Fecha de ingreso: <b>` +
+                items[i].tiempoRegistro +
+                `</b>
+                                </p>
+                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha ultimo nivel: <b>` +
+                items[i].ultimoNivel +
+                `</b>
+                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha finalizado: <b>No Completado</b>
+                                </p>
+                                             
+                            </div>
+                        </div>
+                       
+                    </div>
+                </a>
+            `
+            )
+          }
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
   // --- DETALLES CURSO ---
   function misDatosCursoDetalle(cursoID) {
     $.ajax({
@@ -146,7 +251,6 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
-        console.log(items)
         $('#miContenido').empty()
         for (let i = 0; i < items.length; i++) {
           if (!(items[i].isComprado == 0)) {
@@ -319,7 +423,6 @@ $(document).ready(function () {
   $('#miContenido').on('click', '.finalizarNivel', funcFinalizarNivel)
   function funcFinalizarNivel() {
     let miIdNivel = $(this).attr('id')
-    alert(miIdNivel)
     $.ajax({
       type: 'POST',
       data: {
@@ -328,10 +431,7 @@ $(document).ready(function () {
       },
       url: 'php/API/Nivel.php',
     })
-      .done(function (data) {
-        console.log(data)
-        if (data == 0) return
-
+      .done(function () {
         alert('Nivel Finalizado Correctamente')
       })
       .fail(function (data) {
@@ -345,6 +445,7 @@ $(document).ready(function () {
 
   //CONTENIDO
   $('#mostrarKardex').click(function () {
+    cargarKardex()
     // Muestro
     $('#miKardex').show()
     // Oculto

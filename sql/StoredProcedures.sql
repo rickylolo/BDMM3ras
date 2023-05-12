@@ -208,6 +208,18 @@ BEGIN
 		ON A.Usuario_id= B.Usuario_id 
         WHERE isBaja <> 1;
    END IF;
+	IF Operacion = 'S' THEN /*GET CURSOS SEARCH*/
+		SELECT CONCAT(B.nombre,' ',apellidoPaterno,' ',apellidoMaterno) AS nombreCompleto, Curso_id, A.Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, A.nombre, A.descripcion, isBaja
+        FROM vCurso A
+        LEFT JOIN Usuario B
+		ON A.Usuario_id= B.Usuario_id 
+        WHERE isBaja <> 1 AND  (sp_nombre IS NULL OR A.nombre LIKE CONCAT("%",sp_nombre,"%"));
+   END IF;
+		IF Operacion = 'K' THEN /*GET KARDEX*/
+		SELECT Usuario_id, Curso_id, isFinalizado, imagenCurso, nombreCurso, Progreso, DATE(ultimoNivel) ultimoNivel, nombreCategoria, DATE(tiempoCompletado) tiempoCompletado,DATE(tiempoRegistro) tiempoRegistro
+        FROM vKardex
+        WHERE Usuario_id = sp_Usuario_id;
+   END IF;
 END //
 
 /*--------------------------------------------------------------------------------CATEGORIA--------------------------------------------------------------------------*/
@@ -399,9 +411,9 @@ BEGIN
 		WHERE Curso_id = sp_Curso_id;
    END IF;
      IF Operacion = 'C' THEN /*GET ALL  CURSOS DE UNA CATEGORIA*/
-	    SELECT CursoCategoria_id, Categoria_id, Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
+	    SELECT nombreCompleto, Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
         FROM vObtenerTodosLosCursosDeUnaCategoria
-		WHERE Categoria_id = sp_Categoria_id;
+		WHERE Categoria_id = sp_Categoria_id AND isBaja <> 1;
    END IF;
 END //
 

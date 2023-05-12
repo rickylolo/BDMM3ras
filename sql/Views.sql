@@ -63,10 +63,12 @@ GROUP BY A.Curso_id
 ORDER BY misCursosVendidos;
 
 
+
+
 DROP VIEW IF EXISTS vKardex;
 
 CREATE VIEW vKardex AS
-SELECT A.Usuario_id, B.Curso_id, B.isFinalizado, imagenCurso, C.nombre, CONCAT(nivelesCompletados,'/',noNiveles) Progreso, D.tiempoRegistro ultimoNivel, F.nombre, B.tiempoCompletado
+SELECT A.Usuario_id, B.Curso_id, B.isFinalizado, imagenCurso, C.nombre nombreCurso, CONCAT(nivelesCompletados,'/',noNiveles) Progreso, D.tiempoRegistro ultimoNivel, F.nombre nombreCategoria, B.tiempoCompletado, B.tiempoRegistro
 FROM Usuario A
 LEFT JOIN usuarioCurso B ON A.Usuario_id= B.Usuario_id
  JOIN Curso C ON B.Curso_id = C.Curso_id
@@ -124,10 +126,11 @@ ON A.Categoria_id = B.Categoria_id;
 DROP VIEW IF EXISTS vObtenerTodosLosCursosDeUnaCategoria;
 
 CREATE VIEW vObtenerTodosLosCursosDeUnaCategoria AS
-SELECT CursoCategoria_id, Categoria_id, A.Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
+
+SELECT CONCAT(C.nombre,' ',apellidoPaterno,' ',apellidoMaterno) AS nombreCompleto, Categoria_id, B.Curso_id, B.Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, B.nombre, B.descripcion, isBaja
 FROM CursoCategoria A
-LEFT JOIN Curso B
-ON A.Curso_id = B.Curso_id;
+LEFT JOIN Curso B ON A.Curso_id = B.Curso_id
+LEFT JOIN Usuario C ON C.Usuario_id = B.Usuario_id;
 
 
 /*--------------------------------------------------------------------------------NIVEL-------------------------------------------------------------------------*/

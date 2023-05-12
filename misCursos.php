@@ -277,95 +277,9 @@ session_start(); // Inicio mi sesion PHP
             <div class="list-group">
                 <div class="d-flex pt-4 pe-4 justify-content-end">Total de cursos: 3</div>
                 <hr class="solid">
-                <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                    <div class="d-flex flex-row miImagen justify-content-between">
-                        <div class="d-flex">
-                            <img src="img/html.jpg" class="pfp">
-                            <div class="p-1 d-flex flex-column">
-                                <p class="fs-6 fw-bold">Curso de HTML 5</p>
-                                <p class="text-muted fs-6 fw-light">Desarrollo</p>
-                            </div>
-                            <div class="ps-4 d-flex flex-row">
-                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Progreso: <b>3/4</b>
-                                </p>
-                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Fecha de ingreso: <b>3/Feb/2023</b>
-                                </p>
-                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha ultimo nivel: <b>5/Feb/2023</b>
-                                </p>
-                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha finalizado: <b>7/Feb/2023</b>
-                                </p>
-                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Estado: <b>Incompleto</b>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end pt-4">
-                            <p class="mb-1"><button type="button" class="btn btn-success"><i
-                                        class="bi bi-bookmark-star-fill"></i></button>
-                            </p>
+                <div id="misElementosKardex"></div>
 
-
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                    <div class="d-flex flex-row miImagen justify-content-between">
-                        <div class="d-flex align-items-start">
-                            <img src="img/javascript.jpg" class="pfp">
-                            <div class="p-1 d-flex flex-column">
-                                <p class="fs-6 fw-bold">Curso de Javascript</p>
-                                <p class="text-muted fs-6 fw-light">Desarrollo</p>
-                            </div>
-                            <div class="ps-4 d-flex flex-row">
-                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Progreso: <b>3/4</b>
-                                </p>
-                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Fecha de ingreso: <b>3/Feb/2023</b>
-                                </p>
-                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha ultimo nivel: <b>5/Feb/2023</b>
-                                </p>
-                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha finalizado: <b>7/Feb/2023</b>
-                                </p>
-                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Estado: <b>Incompleto</b>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <p class="mb-1"><button type="button" class="btn btn-success"><i
-                                        class="bi bi-bookmark-star-fill"></i></button>
-                            </p>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                    <div class="d-flex flex-row miImagen justify-content-between">
-                        <div class="d-flex align-items-start">
-                            <img src="img/css.png" class="pfp">
-                            <div class="p-1 d-flex flex-column">
-                                <p class="fs-6 fw-bold">Curso de CSS 3</p>
-                                <p class="text-muted fs-6 fw-light">Desarrollo</p>
-                            </div>
-                            <div class="ps-4 d-flex flex-row">
-                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Progreso: <b>3/4</b>
-                                </p>
-                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Fecha de ingreso: <b>3/Feb/2023</b>
-                                </p>
-                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha ultimo nivel: <b>5/Feb/2023</b>
-                                </p>
-                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha finalizado: <b>7/Feb/2023</b>
-                                </p>
-                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Estado: <b>Incompleto</b>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <p class="mb-1"><button type="button" class="btn btn-success"><i
-                                        class="bi bi-bookmark-star-fill"></i></button>
-                            </p>
-
-                        </div>
-                    </div>
-                </a>
-
-                <hr class="solid">
+   
 
             </div>
 
