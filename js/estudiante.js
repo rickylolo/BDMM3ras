@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  $('#miKardex').hide()
+
   cargarCursosEstudiante()
   function cargarCursosEstudiante() {
     $.ajax({
@@ -379,6 +381,86 @@ $(document).ready(function () {
       })
   }
 
+  // -- MIS VALORACIONES CURSO --
+  function misComentariosCurso(cursoID) {
+    // Mis Comentarios Curso
+    $.ajax({
+      type: 'POST',
+      data: {
+        funcion: 'obtenerDataComentariosCurso',
+        Curso_id: cursoID,
+      },
+      url: 'php/API/Comentario.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        $('#misValoraciones').empty()
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].isLike == 1) {
+            $('#misValoraciones').append(
+              `
+                 <a class="list-group-item list-group-item-action pb-2" aria-current="true">
+                        <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+
+                            <div class="d-flex">
+                                <img src="data:image/jpeg;base64,` +
+                items[i].fotoPerfil +
+                `" class="pfp rounded-circle">
+                                <div class="align-self-center">
+                                    <p class="fs-5 ps-2 pt-1 fw-bold align-middle">` +
+                items[i].nombreUsuario +
+                `</p>
+                                </div>
+                            </div>
+                            <div class="align-self-start">
+                                <span class="badge rounded-pill bg-success">Recomendado</span>
+                            </div>
+                        </div>
+                        <hr class="solid">
+                        <p class="mb-1">` +
+                items[i].texto +
+                `</p>
+
+                    </a>
+              `
+            )
+          }
+          if (items[i].isLike == 0) {
+            $('#misValoraciones').append(
+              `
+                              <a class="list-group-item list-group-item-action pb-2" aria-current="true">
+                        <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+
+                            <div class="d-flex">
+                                <img src="data:image/jpeg;base64,` +
+                items[i].fotoPerfil +
+                `" class="pfp rounded-circle">
+                                <div class="align-self-center">
+                                    <p class="fs-5 ps-2 pt-1 fw-bold align-middle">` +
+                items[i].nombreUsuario +
+                `</p>
+                                </div>
+                            </div>
+                            <div class="align-self-start">
+                                <span class="badge rounded-pill bg-danger">No Recomendado</span>
+                            </div>
+                        </div>
+                        <hr class="solid">
+                        <p class="mb-1">` +
+                items[i].texto +
+                `</p>
+
+                    </a>
+              `
+            )
+          }
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
   // --- DATOS DE MI INSTRUCTOR ---
   function misDatosInstructor(miUsuario_id) {
     $.ajax({
@@ -448,6 +530,7 @@ $(document).ready(function () {
     let miIdCurso = $(this).attr('id')
     misDatosCursoDetalle(miIdCurso)
     misDatosContenidoCurso(miIdCurso)
+    misComentariosCurso(miIdCurso)
   }
 
   // -- MARCAR NIVEL COMO FINALIZADO --
@@ -470,7 +553,7 @@ $(document).ready(function () {
       })
   }
 
-  // -- ESCRIBIR COMENTARIO --
+  // -- ESCRIBIR COMENTARIO PASAR ID Y ABRIR MODAL --
   $('#misElementosKardex').on(
     'click',
     '.escribirComentario',
@@ -481,7 +564,7 @@ $(document).ready(function () {
     $.ajax({
       type: 'POST',
       data: {
-        funcion: 'obtenerDataComentario',
+        funcion: 'obtenerDataComentariosEstudiante',
         Curso_id: miCurso,
       },
       url: 'php/API/Comentario.php',
@@ -492,7 +575,7 @@ $(document).ready(function () {
           alert('No se puede registrar mas de un comentario por curso')
           return
         }
-
+        $('#miCursoSeleccionadoComentario').val(miCurso)
         $('#miModalComentario').modal('show')
       })
       .fail(function (data) {
@@ -500,7 +583,63 @@ $(document).ready(function () {
       })
   }
 
-  $('#miKardex').hide()
+  // -------- REGISTRAR COMENTARIO LIKE  ------------
+
+  // COMENTARIO POSITIVO
+  $('#RegistrarComentarioPositivo').click(function () {
+    let idCurso = $('#miCursoSeleccionadoComentario').val()
+    let miComentario = $('#comentarioCurso').val()
+
+    //-------- VALIDACIONES
+    if (miComentario == '') {
+      alert('Favor de escribir un comentario')
+      return
+    }
+    $.ajax({
+      type: 'POST',
+      data: {
+        funcion: 'registrarComentario',
+        Curso_id: idCurso,
+        TextoComentario: miComentario,
+        isLike: 1,
+      },
+      url: 'php/API/Comentario.php',
+    })
+      .done(function () {
+        alert('Comentario realizado correctamente')
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  })
+
+  // COMENTARIO NEGATIVO
+  $('#RegistrarComentarioNegativo').click(function () {
+    let idCurso = $('#miCursoSeleccionadoComentario').val()
+    let miComentario = $('#comentarioCurso').val()
+
+    //-------- VALIDACIONES
+    if (miComentario == '') {
+      alert('Favor de escribir un comentario')
+      return
+    }
+    $.ajax({
+      type: 'POST',
+      data: {
+        funcion: 'registrarComentario',
+        Curso_id: idCurso,
+        TextoComentario: miComentario,
+        isLike: 0,
+      },
+      url: 'php/API/Comentario.php',
+    })
+      .done(function () {
+        alert('Comentario realizado correctamente')
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  })
 
   // -------- MIS BOTONES ------------
 

@@ -94,8 +94,9 @@ GROUP BY A.Categoria_id;
 DROP VIEW IF EXISTS vComentarioCurso;
 
 CREATE VIEW vComentarioCurso AS
-SELECT ComentarioCurso_id, Usuario_id, Curso_id, isLike, texto, tiempoRegistro
-FROM ComentarioCurso;
+SELECT CONCAT(B.nombre,' ',apellidoPaterno,' ',apellidoMaterno) nombreUsuario, B.fotoPerfil, ComentarioCurso_id, A.Usuario_id, Curso_id, isLike, texto, tiempoRegistro
+FROM ComentarioCurso A
+LEFT JOIN Usuario B ON B.Usuario_id = A.Usuario_id;
 
 /*--------------------------------------------------------------------------------MENSAJE-------------------------------------------------------------------------*/
 DROP VIEW IF EXISTS vMensaje;

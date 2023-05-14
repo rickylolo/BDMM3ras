@@ -16,6 +16,7 @@ session_start(); // Inicio mi sesion PHP
     <script src="js/index.js"></script>
     <script src="js/estudiante.js"></script>
     <link href="css/index.css" rel="stylesheet">
+     <link href="css/diploma.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
@@ -124,14 +125,14 @@ session_start(); // Inicio mi sesion PHP
             </div>
             <hr class="solid">
             <ul class="nav nav-tabs justify-content-center">
-                <li class="nav-item" id="mostrarContenido">
-                    <a class="nav-link active" aria-current="page">Contenido</a>
+                 <li class="nav-item">
+                    <a class="nav-link active" aria-current="page"  id="mostrarContenido">Contenido</a>
                 </li>
-                <li class="nav-item" id="mostrarValoracion">
-                    <a class="nav-link" aria-current="page">Valoraciones</a>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page"  id="mostrarValoracion">Valoraciones</a>
                 </li>
-                <li class="nav-item" id="mostrarInstructor">
-                    <a class="nav-link" aria-current="page">Instructor</a>
+                <li class="nav-item" >
+                    <a class="nav-link" aria-current="page" id="mostrarInstructor">Instructor</a>
                 </li>
             </ul>
             <!-- MI ACORDEON -->
@@ -143,40 +144,7 @@ session_start(); // Inicio mi sesion PHP
                 <h4>Comentarios y valoraciones de los estudiantes </h4>
                 <hr class="solid">
                 <div id="misValoraciones" class="list-group p-2">
-                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                        <div class="miImagen misMensajes d-flex w-100 justify-content-between">
-
-                            <div class="d-flex">
-                                <img src="img/avatar.jpg" class="pfp rounded-circle">
-                                <div class="align-self-center">
-                                    <p class="fs-5 p-3 fw-bold align-middle">rickylolo</p>
-                                </div>
-                            </div>
-                            <div class="align-self-start">
-                                <span class="badge rounded-pill bg-success">Recomendado</span>
-                            </div>
-                        </div>
-                        <hr class="solid">
-                        <p class="mb-1">Recomiendo el curso, es facil para principiantes</p>
-
-                    </a>
-                    <hr class="solid">
-                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                        <div class="miImagen misMensajes d-flex w-100 justify-content-between">
-                            <div class="d-flex">
-                                <img src="img/avatar3.jpg" class="pfp rounded-circle">
-                                <div class="align-self-center">
-                                    <p class="fs-5 p-3 fw-bold align-middle">Robertin123</p>
-                                </div>
-                            </div>
-                            <div class="align-self-start">
-                                <span class="badge rounded-pill bg-danger">No Recomendado</span>
-                            </div>
-                        </div>
-                        <hr class="solid">
-                        <p class="mb-1">Este curso es muy facil</p>
-
-                    </a>
+                   
 
 
                 </div>
@@ -724,8 +692,31 @@ session_start(); // Inicio mi sesion PHP
                     <h4 class="modal-title" id="modalTitle">Diploma</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                   
+                <div class="modal-body d-flex justify-content-center">
+                    <div class="body-diploma ">
+                       <div class="container-diploma">
+        <div class="logo">
+            <img src="img/cripto.png" width="40px">
+            CryptCourse
+        </div>
+
+        <div class="marquee">
+            Certificado
+        </div>
+
+        <div class="assignment">
+            Se le presenta el siguiente certificado a:
+        </div>
+
+        <div class="person">
+            Ricardo Alberto Grimaldo Estévez
+        </div>
+
+        <div class="reason">
+            Por haber completado satisfactoriamente <br>HTML Desde 0 Hasta Experto
+        </div>
+        </div>
+    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" id="GenerarDiploma" data-bs-dismiss="modal"><i

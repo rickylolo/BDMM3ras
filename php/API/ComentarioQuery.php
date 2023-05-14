@@ -9,12 +9,12 @@ class Comentario extends DB
 
     // QUERY Get Datos Comentario
 
-    function getComentarioData($Usuario_id, $Curso_id)
+    function getComentarioData($Curso_id)
     {
         $get = "CALL sp_GestionComentario(
                 'G', # Operacion
                 NULL, # Id
-                $Usuario_id, # User Id
+                NULL, # User Id
                 $Curso_id, #Curso Id
                 NULL, # is Like
                 NULL # texto
@@ -25,13 +25,13 @@ class Comentario extends DB
 
      // QUERY Get Datos Todos Comentario 
 
-    function getAllComentariosData()
+    function getAllComentariosEstudianteData($Usuario_id,$Curso_id)
     {
         $get = "CALL sp_GestionComentario(
-                'A', # Operacion
+                'E', # Operacion
                 NULL, # Id
-                NULL, # User Id
-                NULL, #Curso Id
+                $Usuario_id, # User Id
+                $Curso_id, #Curso Id
                 NULL, # is Like
                 NULL # texto
         ); ";

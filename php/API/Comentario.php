@@ -10,17 +10,19 @@ class comentarioAPI
 
 
     
-    function getComentarioData($Usuario_id, $Curso_id)
+    function getComentarioData($Curso_id)
     {
 
         $Comentario = new Comentario();
         $arrComentarios = array();
         $arrComentarios["Datos"] = array();
 
-        $res = $Comentario->getComentarioData($Usuario_id, $Curso_id);
+        $res = $Comentario->getComentarioData($Curso_id);
         if ($res) { // Entra si hay información
             while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
                 $obj = array( 
+                    "nombreUsuario" => $row['nombreUsuario'],
+                    "fotoPerfil" => base64_encode(($row['fotoPerfil'])),
                     "ComentarioCurso_id" => $row['ComentarioCurso_id'],
                     "Usuario_id" => $row['Usuario_id'],
                     "Curso_id" => $row['Curso_id'],
@@ -37,17 +39,19 @@ class comentarioAPI
         }
     }
     
-    function getAllComentariosData()
+     
+    function getComentariosEstudiante($Usuario_id, $Curso_id)
     {
 
         $Comentario = new Comentario();
         $arrComentarios = array();
         $arrComentarios["Datos"] = array();
 
-        $res = $Comentario->getAllComentariosData();
+        $res = $Comentario->getAllComentariosEstudianteData($Usuario_id,$Curso_id);
         if ($res) { // Entra si hay información
             while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
-                $obj = array(
+                $obj = array( 
+
                     "ComentarioCurso_id" => $row['ComentarioCurso_id'],
                     "Usuario_id" => $row['Usuario_id'],
                     "Curso_id" => $row['Curso_id'],
@@ -63,6 +67,7 @@ class comentarioAPI
             exit();
         }
     }
+
 
     function insertarComentario($Usuario_id, $Curso_id, $isLike, $textoComentario)
     {
@@ -81,17 +86,17 @@ if (isset($_POST['funcion'])) {
             session_start();
             $id = $_SESSION['Usuario_id'];
             $var = new comentarioAPI();
-            $var->insertarComentario($id,$_POST['Curso_id'],$_POST['isLike'],$_POST['textoComentario']);
+            $var->insertarComentario($id,$_POST['Curso_id'],$_POST['isLike'],$_POST['TextoComentario']);
             break;
-        case "obtenerDataTodosComentario":
+        case "obtenerDataComentariosCurso":
             $var = new comentarioAPI();
-            $var->getAllComentariosData();
+            $var->getComentarioData($_POST['Curso_id']);
             break;
-        case "obtenerDataComentario":
+         case "obtenerDataComentariosEstudiante":
             session_start();
             $id = $_SESSION['Usuario_id'];
             $var = new comentarioAPI();
-            $var->getComentarioData($id,$_POST['Curso_id']);
+            $var->getComentariosEstudiante($id,$_POST['Curso_id']);
             break;
     }
 }

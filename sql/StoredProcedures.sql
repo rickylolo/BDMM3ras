@@ -300,17 +300,17 @@ BEGIN
 		END IF;
    END IF;
 
-      IF Operacion = 'A' THEN /*GET ALL COMENTARIO CURSO*/
-		SELECT ComentarioCurso_id, Usuario_id, Curso_id, isLike, texto, tiempoRegistro
+      IF Operacion = 'G' THEN /*GET ALL COMENTARIO CURSO*/
+		SELECT nombreUsuario, fotoPerfil, ComentarioCurso_id, Usuario_id, Curso_id, isLike, texto, tiempoRegistro
         FROM vComentarioCurso
         WHERE Curso_id = sp_Curso_id;
    END IF;
-		IF Operacion = 'G' THEN /*GET COMENTARIO */
+
+      IF Operacion = 'E' THEN /*GET COMENTARIO ESTUDIANTE*/
 		SELECT ComentarioCurso_id, Usuario_id, Curso_id, isLike, texto, tiempoRegistro
         FROM vComentarioCurso
         WHERE Curso_id = sp_Curso_id AND Usuario_id = sp_Usuario_id;
    END IF;
-
 END //
 
 

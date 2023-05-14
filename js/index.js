@@ -18,10 +18,17 @@ $(document).ready(function () {
   //CONTENIDO
   $('#mostrarContenido').click(function () {
     // Muestro
+
     $('#miContenido').show()
     // Oculto
     $('#Valoraciones').hide()
+    $('#mostrarValoracion').removeClass('active')
     $('#Instructor').hide()
+
+    // TABS ACTIVES
+    $(this).addClass('active')
+    $('#mostrarValoracion').removeClass('active')
+    $('#mostrarInstructor').removeClass('active')
   })
 
   //VALORACIONES
@@ -31,6 +38,11 @@ $(document).ready(function () {
     // Oculto
     $('#Instructor').hide()
     $('#miContenido').hide()
+
+    // TABS ACTIVES
+    $(this).addClass('active')
+    $('#mostrarContenido').removeClass('active')
+    $('#mostrarInstructor').removeClass('active')
   })
 
   //INSTRUCTOR
@@ -40,6 +52,11 @@ $(document).ready(function () {
     // Oculto
     $('#Valoraciones').hide()
     $('#miContenido').hide()
+
+    // TABS ACTIVES
+    $(this).addClass('active')
+    $('#mostrarContenido').removeClass('active')
+    $('#mostrarValoracion').removeClass('active')
   })
 
   // ----------------------------- CARGAR DATOS -----------------
@@ -682,6 +699,86 @@ $(document).ready(function () {
       })
   }
 
+  // -- MIS VALORACIONES CURSO --
+  function misComentariosCurso(cursoID) {
+    // Mis Comentarios Curso
+    $.ajax({
+      type: 'POST',
+      data: {
+        funcion: 'obtenerDataComentariosCurso',
+        Curso_id: cursoID,
+      },
+      url: 'php/API/Comentario.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        $('#misValoraciones').empty()
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].isLike == 1) {
+            $('#misValoraciones').append(
+              `
+                 <a class="list-group-item list-group-item-action pb-2" aria-current="true">
+                        <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+
+                            <div class="d-flex">
+                                <img src="data:image/jpeg;base64,` +
+                items[i].fotoPerfil +
+                `" class="pfp rounded-circle">
+                                <div class="align-self-center">
+                                    <p class="fs-5 ps-2 pt-1 fw-bold align-middle">` +
+                items[i].nombreUsuario +
+                `</p>
+                                </div>
+                            </div>
+                            <div class="align-self-start">
+                                <span class="badge rounded-pill bg-success">Recomendado</span>
+                            </div>
+                        </div>
+                        <hr class="solid">
+                        <p class="mb-1">` +
+                items[i].texto +
+                `</p>
+
+                    </a>
+              `
+            )
+          }
+          if (items[i].isLike == 0) {
+            $('#misValoraciones').append(
+              `
+                              <a class="list-group-item list-group-item-action pb-2" aria-current="true">
+                        <div class="miImagen misMensajes d-flex w-100 justify-content-between">
+
+                            <div class="d-flex">
+                                <img src="data:image/jpeg;base64,` +
+                items[i].fotoPerfil +
+                `" class="pfp rounded-circle">
+                                <div class="align-self-center">
+                                    <p class="fs-5 ps-2 pt-1 fw-bold align-middle">` +
+                items[i].nombreUsuario +
+                `</p>
+                                </div>
+                            </div>
+                            <div class="align-self-start">
+                                <span class="badge rounded-pill bg-danger">No Recomendado</span>
+                            </div>
+                        </div>
+                        <hr class="solid">
+                        <p class="mb-1">` +
+                items[i].texto +
+                `</p>
+
+                    </a>
+              `
+            )
+          }
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
   // --- CARGAR LOS HEADERS DE LOS MENSAJES (CHATS) ---
   cargarMisMensajesHeader()
   function cargarMisMensajesHeader() {
@@ -740,6 +837,7 @@ $(document).ready(function () {
       })
   }
 
+  // ---- CARGAR LOS MENSAJES DE MIS CHATS
   function cargarMisMensajes(mensajeHeader_id) {
     $('#miMensaje').empty()
     $('#miMensaje').append(
@@ -1089,6 +1187,7 @@ $(document).ready(function () {
     let miIdCurso = $(this).attr('id')
     misDatosCursoDetalle(miIdCurso)
     misDatosContenidoCurso(miIdCurso)
+    misComentariosCurso(miIdCurso)
   }
 
   // -- BUSCAR CURSOS POR CATEGORIA ---
