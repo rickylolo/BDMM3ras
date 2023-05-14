@@ -288,33 +288,29 @@ CREATE PROCEDURE sp_GestionComentario
 )		
 
 BEGIN
+  DECLARE isExistenteComentario INT;
    IF Operacion = 'I' /*INSERT COMENTARIO CURSO*/
    THEN  
-		INSERT INTO ComentarioCurso(Usuario_id,Curso_id,isLike,texto,tiempoRegistro) 
-			VALUES (sp_Usuario_id,sp_Curso_id,sp_isLike,sp_texto,now());
+		SELECT COUNT(ComentarioCurso_id) INTO isExistenteComentario FROM ComentarioCurso
+		WHERE Curso_id = sp_Curso_id
+		AND Usuario_id = sp_Usuario_id;
+		IF isExistenteComentario = 0 THEN
+			INSERT INTO ComentarioCurso(Usuario_id,Curso_id,isLike,texto,tiempoRegistro) 
+				VALUES (sp_Usuario_id,sp_Curso_id,sp_isLike,sp_texto,now());
+		END IF;
    END IF;
-	IF Operacion = 'E'  /*EDIT COMENTARIO CURSO*/
-    THEN 
-    	SET sp_isLike=IF(sp_isLike='',NULL,sp_isLike),
-			sp_texto=IF(sp_texto='',NULL,sp_texto);
-		UPDATE ComentarioCurso 
-			SET isLike = IFNULL(sp_isLike,isLike), 
-				texto= IFNULL(sp_texto,texto)
-                
-		WHERE ComentarioCurso_id = sp_ComentarioCurso_id;
-   END IF;
-    IF Operacion = 'D' THEN /*DELETE COMENTARIO CURSO*/
-          DELETE FROM ComentarioCurso WHERE ComentarioCurso_id = sp_ComentarioCurso_id;
-   END IF;
+
       IF Operacion = 'A' THEN /*GET ALL COMENTARIO CURSO*/
 		SELECT ComentarioCurso_id, Usuario_id, Curso_id, isLike, texto, tiempoRegistro
-        FROM vComentarioCurso;
-   END IF;
-     IF Operacion = 'G' THEN /*GET COMENTARIO CURSO*/
-	    SELECT ComentarioCurso_id, Usuario_id, Curso_id, isLike, texto, tiempoRegistro
         FROM vComentarioCurso
-		WHERE ComentarioCurso_id = sp_ComentarioCurso_id;
+        WHERE Curso_id = sp_Curso_id;
    END IF;
+		IF Operacion = 'G' THEN /*GET COMENTARIO */
+		SELECT ComentarioCurso_id, Usuario_id, Curso_id, isLike, texto, tiempoRegistro
+        FROM vComentarioCurso
+        WHERE Curso_id = sp_Curso_id AND Usuario_id = sp_Usuario_id;
+   END IF;
+
 END //
 
 
@@ -335,7 +331,7 @@ BEGIN
    IF Operacion = 'I' /*INSERT MENSAJE*/
    THEN  
    
-		SELECT COUNT(*) INTO isExistenteMensaje FROM Mensaje
+		SELECT COUNT(Mensaje_id) INTO isExistenteMensaje FROM Mensaje
 		WHERE UsuarioInstructor_id = sp_UsuarioInstructor_id
 		AND UsuarioAlumno_id = sp_UsuarioAlumno_id
 		AND Curso_id = sp_Curso_id;

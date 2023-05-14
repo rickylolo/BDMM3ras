@@ -9,14 +9,15 @@ class comentarioAPI
 {
 
 
-    function getComentarioData($Comentario_id)
+    
+    function getComentarioData($Usuario_id, $Curso_id)
     {
 
         $Comentario = new Comentario();
         $arrComentarios = array();
         $arrComentarios["Datos"] = array();
 
-        $res = $Comentario->getComentarioData($Comentario_id);
+        $res = $Comentario->getComentarioData($Usuario_id, $Curso_id);
         if ($res) { // Entra si hay información
             while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
                 $obj = array( 
@@ -70,17 +71,6 @@ class comentarioAPI
     }
 
 
-    function actualizarComentario($Comentario_id,$isLike, $textoComentario)
-    {
-        $Comentario = new Comentario();
-        $Comentario->actualizarComentario($Comentario_id,$isLike, $textoComentario);
-    }
-
-    function eliminarComentario($Comentario_id)
-    {
-        $Comentario = new Comentario();
-        $Comentario->eliminarComentario($Comentario_id);
-    }
 }
 
 //AJAX
@@ -88,24 +78,20 @@ if (isset($_POST['funcion'])) {
     $funcion = $_POST['funcion'];
     switch ($funcion) {
         case "registrarComentario":
+            session_start();
+            $id = $_SESSION['Usuario_id'];
             $var = new comentarioAPI();
-            $var->insertarComentario($_POST['Usuario_id'],$_POST['Curso_id'],$_POST['isLike'],$_POST['textoComentario']);
-            break;
-        case "actualizarComentario":
-            $var = new comentarioAPI();
-            $var->actualizarComentario($_POST['Comentario_id'],$_POST['isLike'],$_POST['textoComentario']);
-            break;
-        case "eliminarComentario":
-            $var = new comentarioAPI();
-            $var->eliminarComentario($_POST['Comentario_id']);
-            break;
-        case "obtenerDataComentario":
-            $var = new comentarioAPI();
-            $var->getComentarioData($_POST['Comentario_id']);
+            $var->insertarComentario($id,$_POST['Curso_id'],$_POST['isLike'],$_POST['textoComentario']);
             break;
         case "obtenerDataTodosComentario":
             $var = new comentarioAPI();
             $var->getAllComentariosData();
+            break;
+        case "obtenerDataComentario":
+            session_start();
+            $id = $_SESSION['Usuario_id'];
+            $var = new comentarioAPI();
+            $var->getComentarioData($id,$_POST['Curso_id']);
             break;
     }
 }

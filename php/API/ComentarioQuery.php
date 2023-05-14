@@ -9,13 +9,13 @@ class Comentario extends DB
 
     // QUERY Get Datos Comentario
 
-    function getComentarioData($Comentario_id)
+    function getComentarioData($Usuario_id, $Curso_id)
     {
         $get = "CALL sp_GestionComentario(
                 'G', # Operacion
-                $Comentario_id, # Id
-                NULL, # User Id
-                NULL, #Curso Id
+                NULL, # Id
+                $Usuario_id, # User Id
+                $Curso_id, #Curso Id
                 NULL, # is Like
                 NULL # texto
         ); ";
@@ -53,41 +53,6 @@ class Comentario extends DB
                     '$textoComentario' # texto
         ); ";
         $query = $this->connect()->query($insert);
-        return $query;
-    }
-
-   // ---------------------------------------ACTUALIZAR INFORMACION------------------------------------------
-   // QUERY Actualizar Comentario
-
-    function actualizarComentario($Comentario_id,$isLike, $textoComentario)
-    {
-        $update = "CALL sp_GestionComentario(
-                    'E', # Operacion
-                    $Comentario_id, # Id
-                    NULL, # User Id
-                    NULL, # Curso Id
-                    $isLike, # is Like
-                    '$textoComentario' # texto
-        );";
-        $query = $this->connect()->query($update);
-        return $query;
-    }
-
-
-     // ---------------------------------------ELIMINAR INFORMACION------------------------------------------
-      // QUERY Eliminar Comentario
-
-    function eliminarComentario($Comentario_id)
-    {
-        $delete = "CALL sp_GestionComentario(
-                'D', # Operacion
-                $Comentario_id, # Id
-                NULL, # User Id
-                NULL, #Curso Id
-                NULL, # is Like
-                NULL # texto
-        );";
-        $query = $this->connect()->query($delete);
         return $query;
     }
      

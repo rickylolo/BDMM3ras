@@ -115,9 +115,13 @@ $(document).ready(function () {
                             </div>
 
                              <div class="d-flex pt-2"> 
-                                <p class="mb-1 pe-1"><button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
+                                <p class="mb-1 pe-1"><button type="button" id="` +
+                items[i].Curso_id +
+                `" class="btn btn-primary escribirComentario"><i class="bi bi-pencil-square"></i></button>
                             </p>
-                            <p class="mb-1"><button type="button" class="btn btn-success"><i
+                            <p class="mb-1" data-bs-toggle="modal" data-bs-target="#miModalDiploma"><button type="button" class="btn btn-success verDiploma" id="` +
+                items[i].Curso_id +
+                `"><i
                                         class="bi bi-bookmark-star-fill"></i></button>
                             </p>
                             </div>
@@ -460,6 +464,36 @@ $(document).ready(function () {
     })
       .done(function () {
         alert('Nivel Finalizado Correctamente')
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
+  // -- ESCRIBIR COMENTARIO --
+  $('#misElementosKardex').on(
+    'click',
+    '.escribirComentario',
+    funcEscribirComentario
+  )
+  function funcEscribirComentario() {
+    let miCurso = $(this).attr('id')
+    $.ajax({
+      type: 'POST',
+      data: {
+        funcion: 'obtenerDataComentario',
+        Curso_id: miCurso,
+      },
+      url: 'php/API/Comentario.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        if (items.length != 0) {
+          alert('No se puede registrar mas de un comentario por curso')
+          return
+        }
+
+        $('#miModalComentario').modal('show')
       })
       .fail(function (data) {
         console.error(data)

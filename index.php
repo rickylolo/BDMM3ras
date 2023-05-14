@@ -727,6 +727,7 @@ session_start(); // Inicio mi sesion PHP
         </div>
     </div>
 
+
     <!--FOOTER<-->
     <footer class="w-100 d-flex align-items justify-content-center flex-wrap">
         <p class="fs-5 px-3 pt-3 PCELText"><img src="img/cripto.png" class="" width="40" height="40">

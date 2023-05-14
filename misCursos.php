@@ -276,11 +276,12 @@ session_start(); // Inicio mi sesion PHP
                 </div>
             </nav>
             <div class="list-group">
-                <div class="d-flex pt-4 pe-4 justify-content-end" id="miTotalDeCursosResultados">Total de cursos: 3</div>
+                <div class="d-flex pt-4 pe-4 justify-content-end" id="miTotalDeCursosResultados">Total de cursos: 3
+                </div>
                 <hr class="solid">
                 <div id="misElementosKardex"></div>
 
-   
+
 
             </div>
 
@@ -676,8 +677,67 @@ session_start(); // Inicio mi sesion PHP
         </div>
     </div>
 
+    <!--  >MODAL WINDOW COMENTARIO<-->
+    <div class="modal fade" id="miModalComentario" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+        data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Comentario</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" id="miCursoSeleccionadoComentario">
 
+                    <div class="row fw-bold fs-6 ms-3 mb-2">
+                        Escribe tu comentario:
+                    </div>
 
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope"></i></span>
+                        <textarea type="text" rows="6" class="form-control" id="comentarioCurso" name="comentarioCurso"
+                            placeholder="" aria-label="comentarioCurso" aria-describedby="basic-addon1"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer justify-content-between">
+                    <div>
+                        <button type="button" class="btn btn-outline-success" id="RegistrarComentarioPositivo"
+                            data-bs-dismiss="modal"><i class="bi bi-hand-thumbs-up"></i> Comentar
+                        </button>
+                        <button type="button" class="btn btn-outline-danger" id="RegistrarComentarioNegativo"
+                            data-bs-dismiss="modal"><i class="bi bi-hand-thumbs-down"></i> Comentar
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
+                            class="bi bi-box-arrow-left"></i> Regresar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  >MODAL WINDOW DIPLOMA<-->
+    <div class="modal fade" id="miModalDiploma" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+        data-bs-backdrop="static">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Diploma</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" id="GenerarDiploma" data-bs-dismiss="modal"><i
+                            class="bi bi-award"></i> Generar Diploma</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i
+                            class="bi bi-box-arrow-left"></i> Regresar</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!--FOOTER<-->
     <footer class="w-100 d-flex align-items justify-content-center flex-wrap">
