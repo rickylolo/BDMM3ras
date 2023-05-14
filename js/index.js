@@ -122,6 +122,19 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
+        if (items.length == 0) {
+          $('#miAlertCursosMejoresCalificados').empty()
+          $('#miAlertCursosMejoresCalificados').append(
+            `
+                <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading text-center">No hay cursos</h4>
+                            <p class="text-center">Estamos trabajando en ello.</p>
+                            <hr>               
+                </div>
+            `
+          )
+          return
+        }
         $('#misCursosMejoresCalificados').empty()
         for (let i = 0; i < items.length; i++) {
           $('#misCursosMejoresCalificados').append(
@@ -167,6 +180,19 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
+        if (items.length == 0) {
+          $('#miAlertCursosMasVendidos').empty()
+          $('#miAlertCursosMasVendidos').append(
+            `
+                <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading text-center">No hay cursos</h4>
+                            <p class="text-center">Estamos trabajando en ello.</p>
+                            <hr>               
+                </div>
+            `
+          )
+          return
+        }
         $('#misCursosMasVendidos').empty()
         for (let i = 0; i < items.length; i++) {
           $('#misCursosMasVendidos').append(
@@ -211,6 +237,19 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
+        if (items.length == 0) {
+          $('#miAlertCursosMasRecientes').empty()
+          $('#miAlertCursosMasRecientes').append(
+            `
+                <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading text-center">No hay cursos</h4>
+                            <p class="text-center">Estamos trabajando en ello.</p>
+                            <hr>               
+                </div>
+            `
+          )
+          return
+        }
         $('#misCursosMasRecientes').empty()
         for (let i = 0; i < items.length; i++) {
           $('#misCursosMasRecientes').append(
@@ -332,7 +371,41 @@ $(document).ready(function () {
                                 </div>
                             </div>
                             <hr class="solid">
+                            <div class="d-flex justify-content-between ps-4 pe-4"> 
+                            <div class="d-flex justify-content-end">
+                              <b class="pe-2">Cantidad de niveles:</b>` +
+            items[0].noNiveles +
+            `
+                            </div>
+                            <div class="d-flex justify-content-end">
+                              <b class="pe-2">Total a pagar:</b>` +
+            items[0].costoCurso +
+            `
+                            </div>
+
+                            </div>
         
+        `
+        )
+
+        $('#miContenidoDetallePagoNivel').empty()
+        $('#miContenidoDetallePagoNivel').append(
+          `
+                            <div class="d-flex justify-content-start">
+                                <div class="p-2"><img class="rounded" src="data:image/jpeg;base64,` +
+            items[0].imagenCurso +
+            `" width="200px" height="200px"></div>
+                                <div class="d-flex flex-column">
+                                    <div class="ps-2 pb-2 fs-4 fw-bold">` +
+            items[0].cursoNombre +
+            `</div>
+                                    <div class="ps-4 fs-6">` +
+            items[0].descripcion +
+            `</div>
+                                </div>
+                            </div>
+                            <hr class="solid">
+                            <div id="miContenidoNivelDetallePagoInfo"></div>
         `
         )
 
@@ -356,7 +429,6 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
-        console.log(items)
         $('#miContenido').empty()
         for (let i = 0; i < items.length; i++) {
           if (!(items[i].isComprado == 0)) {
@@ -401,7 +473,7 @@ $(document).ready(function () {
             $('#miContenido').append(
               `
             <div class="accordion-item">
-            <h2 class="accordion-header" id="` +
+            <h2 class="nivelDetalleInfo accordion-header" id="` +
                 items[i].Nivel_id +
                 `">
                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-` +
@@ -911,6 +983,45 @@ $(document).ready(function () {
       })
   }
 
+  function cargarDatosNivelDetallePago(Nivel_id) {
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'obtenerDataNivel', Nivel_id: Nivel_id },
+      url: 'php/API/Nivel.php',
+    })
+      .done(function (data) {
+        console.log(data)
+        var items = JSON.parse(data)
+        $('#miContenidoNivelDetallePagoInfo').empty()
+        $('#miContenidoNivelDetallePagoInfo').append(
+          `
+           <div class="d-flex justify-content-between ps-4 pe-4"> 
+                            <div class="d-flex justify-content-end">
+                              <b class="pe-2">Nivel número:</b>` +
+            items[0].noNivel +
+            `
+                            </div>
+                            <div class="d-flex justify-content-end">
+                              <b class="pe-2">Nombre nivel:</b>` +
+            items[0].nombre +
+            `
+                            </div>
+                            <div class="d-flex justify-content-end">
+                              <b class="pe-2">Total a pagar:</b>` +
+            items[0].costoNivel +
+            `
+                            </div>
+
+            </div>
+                              
+        `
+        )
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
   //BUSCAR SEARCH CURSOS
   $('#buscarSearchCursos').click(function () {
     $('#cursoSearch').show()
@@ -1055,6 +1166,12 @@ $(document).ready(function () {
     misDatosMultimediaNivel(Nivel_id)
   }
 
+  // -- NIVEL DETALLE INFO --
+  $('#miContenido').on('click', '.nivelDetalleInfo', funcPasarInfoNivelDetalle)
+  function funcPasarInfoNivelDetalle() {
+    let Nivel_id = $(this).attr('id')
+    cargarDatosNivelDetallePago(Nivel_id)
+  }
   // INICIAR MENSAJES CHAT VER MENSAJES DEL CHAT
   $('#misChats').on('click', '.verMensajes', funcVerMensajesChat)
   function funcVerMensajesChat() {

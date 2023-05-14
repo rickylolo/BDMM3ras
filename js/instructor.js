@@ -95,6 +95,16 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
+        if (items.length == 0) {
+          $('#miReporteInstructor').empty()
+          $('#miReporteInstructor').append(`
+                          <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading">No hay cursos en progreso</h4>
+                            <p class="text-center">Da de alta un nuevo curso</p>
+                            <hr>               
+                        </div>`)
+          return
+        }
         $('#miReporteInstructor').empty()
         for (let i = 0; i < items.length; i++) {
           if (items[i].categoriaNombre == null)
@@ -108,7 +118,81 @@ $(document).ready(function () {
               items[i].imagenCurso +
               `" class="mt-2 pfp">
                             <div class="p-1 d-flex flex-column">
-                                <p class="fs-5 fw-bold">` +
+                                <p class="fs-5">` +
+              items[i].cursoNombre +
+              `</p>
+                                <p class="text-muted fs-6">` +
+              items[i].categoriaNombre +
+              `</p>
+                            </div>
+                        </div>
+                        <div class="d-flex mt-2 justify-content-end">
+                            <div class="d-flex me-4 pt-2 pb-4">
+                                <p class="ps-4  text-muted fs-6 fw-light">Núm. Niveles: <b>` +
+              items[i].noNiveles +
+              `</b>
+                                </p>
+                                <p class="ps-4  text-muted fs-6 fw-light">Costo Curso: <b>` +
+              items[i].costoCurso +
+              ` MXN</b>
+                                </p>
+                            </div>
+                            <p class="mb-1 me-1 aprobarCurso" id="` +
+              items[i].Curso_id +
+              `"><button type="button" class="btn btn-success"><i class="bi bi-check2-square"></i></button>
+                            </p>
+                            <p class="mb-1 me-1 editarCurso" id="` +
+              items[i].Curso_id +
+              `"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso"><i class="bi bi-pen"></i></button>
+                            </p>
+                            <p class="mb-1 borrarCurso" id="` +
+              items[i].Curso_id +
+              `"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></p>
+
+                        </div>
+                    </div>
+                </a> `
+          )
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
+  cargarReporteCursoAprobados()
+  function cargarReporteCursoAprobados() {
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'getReporteInstructorAprobados' },
+      url: 'php/API/Curso.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        if (items.length == 0) {
+          $('#miReporteInstructorAprobados').empty()
+          $('#miReporteInstructorAprobados').append(`
+                               <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading">No hay cursos aprobados</h4>
+                            <p class="text-center">Puedes aprobar cursos desde la página del instructor</p>
+                            <hr>               
+                        </div>`)
+          return
+        }
+        $('#miReporteInstructorAprobados').empty()
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].categoriaNombre == null)
+            items[i].categoriaNombre = 'Ninguna categoría'
+
+          $('#miReporteInstructorAprobados').append(
+            `<a class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
+                    <div class="d-flex flex-row miImagen justify-content-between">
+                        <div class="d-flex justify-content-start">
+                            <img  src="data:image/jpeg;base64,` +
+              items[i].imagenCurso +
+              `" class="mt-2 pfp">
+                            <div class="p-1 d-flex flex-column">
+                                <p class="fs-5">` +
               items[i].cursoNombre +
               `</p>
                                 <p class="text-muted fs-6">` +
@@ -131,14 +215,11 @@ $(document).ready(function () {
               ` MXN</b>
                                 </p>
                             </div>
+                            <p class="mb-1 pe-1 borrarCurso" id="` +
+              items[i].Curso_id +
+              `"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></p>
                             <p class="mb-1 verCursoDetalle" data-bs-toggle="modal" data-bs-target="#miModalCursoDetalle"><button type="button" class="btn btn-success"><i class="bi bi-search"></i></button>
                             </p>
-                            <p class="mb-1 editarCurso" id="` +
-              items[i].Curso_id +
-              `"><button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso"><i class="bi bi-pen"></i></button>
-                            </p>
-                            <p class="mb-1"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></p>
-
                         </div>
                     </div>
                 </a> `
@@ -479,6 +560,59 @@ $(document).ready(function () {
       .fail(function (data) {
         console.error(data)
       })
+  }
+
+  // -- DAR DE BAJA CURSO  --
+  $('#miReporteInstructor').on('click', '.borrarCurso', funcDarBajaCurso)
+  $('#miReporteInstructorAprobados').on(
+    'click',
+    '.borrarCurso',
+    funcDarBajaCurso
+  )
+  function funcDarBajaCurso() {
+    let idCurso = $(this).attr('id')
+    if (confirm('¿Seguro que quieres dar de baja este curso?')) {
+      $.ajax({
+        type: 'POST',
+        data: {
+          funcion: 'bajaCurso',
+          Curso_id: idCurso,
+        },
+        url: 'php/API/Curso.php',
+      })
+        .done(function () {
+          cargarReporteCurso()
+          cargarReporteCursoAprobados()
+          alert('Curso dado de baja exitosamente')
+        })
+        .fail(function (data) {
+          console.error(data)
+        })
+    }
+  }
+
+  // -- APROBAR CURSO  --
+  $('#miReporteInstructor').on('click', '.aprobarCurso', funcAprobarCurso)
+  function funcAprobarCurso() {
+    let idCurso = $(this).attr('id')
+    if (confirm('¿Seguro que quieres aprobar este curso?')) {
+      $.ajax({
+        type: 'POST',
+        data: {
+          funcion: 'aprobarCurso',
+          Curso_id: idCurso,
+        },
+        url: 'php/API/Curso.php',
+      })
+        .done(function () {
+          cargarReporteCurso()
+          cargarReporteCursoAprobados()
+          alert('Curso aprobado exitosamente')
+        })
+        .fail(function (data) {
+          console.error(data)
+        })
+    }
   }
 
   // ----------------------------- REGISTRO DATOS -----------------

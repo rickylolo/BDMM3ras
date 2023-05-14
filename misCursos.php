@@ -202,6 +202,7 @@ session_start(); // Inicio mi sesion PHP
                 </li>
 
             </ul>
+            <div id="miAlertaCursosEstudiante"></div>
             <section class="post-list">
                 <div class="content" id="miContenidoCursosEstudiante">
 
@@ -275,7 +276,7 @@ session_start(); // Inicio mi sesion PHP
                 </div>
             </nav>
             <div class="list-group">
-                <div class="d-flex pt-4 pe-4 justify-content-end">Total de cursos: 3</div>
+                <div class="d-flex pt-4 pe-4 justify-content-end" id="miTotalDeCursosResultados">Total de cursos: 3</div>
                 <hr class="solid">
                 <div id="misElementosKardex"></div>
 

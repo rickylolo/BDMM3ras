@@ -8,6 +8,23 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
+
+        if (items.length == 0) {
+          $('#miAlertaCursosEstudiante').empty()
+          $('#miAlertaCursosEstudiante').append(
+            `
+                             <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading text-center">No hay cursos comprados</h4>
+                            <p class="text-center">Puedes comprar cursos en la página de inicio</p>
+                            <hr>    
+                            <div class="d-flex justify-content-center">           
+                            <a class="btn btn-primary" href="index.php">Ir a Inicio</a>
+                            </div>
+                        </div>
+            `
+          )
+          return
+        }
         $('#miContenidoCursosEstudiante').empty()
         for (let i = 0; i < items.length; i++) {
           $('#miContenidoCursosEstudiante').append(
@@ -52,17 +69,19 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
+        if (items.length == 0) return
+        $('#miTotalDeCursosResultados').text('Total de cursos: ' + items.length)
         $('#misElementosKardex').empty()
         for (let i = 0; i < items.length; i++) {
           if (items[i].tiempoCompletado != null) {
             $('#misElementosKardex').append(
               `
-                         <a href="" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                    <div class="d-flex flex-row miImagen justify-content-between">
+                         <a class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between miImagen">
                         <div class="d-flex">
                             <img src="data:image/jpeg;base64,` +
                 items[i].imagenCurso +
-                `" class="pfp">
+                `" class="pfp mt-1">
                             <div class="p-1 d-flex flex-column">
                                 <p class="fs-6 fw-bold">` +
                 items[i].nombreCurso +
@@ -71,33 +90,41 @@ $(document).ready(function () {
                 items[i].nombreCategoria +
                 `</p>
                             </div>
-                            <div class="ps-4 d-flex flex-row">
+                            </div>
+                    
                                 <p class="ps-4 pt-3 text-muted fs-6 fw-light">Progreso: <b>` +
                 items[i].Progreso +
                 `</b>
                                 </p>
-                                <p class="ps-4 pt-3 text-muted fs-6 fw-light">Fecha de ingreso: <b>` +
-                items[i].tiempoRegistro +
-                `</b>
-                                </p>
+                                
                                 <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha ultimo nivel: <b>` +
                 items[i].ultimoNivel +
                 `</b>
+  </p>
+                  <div class="p-1 ps-4 d-flex flex-column">
+                                <p class="text-muted fs-6 fw-light">Fecha ingreso: <b>` +
+                items[i].tiempoRegistro +
+                `</b>
                                 </p>
-                                                                <p class="ps-4 pt-3  text-muted fs-6 fw-light">Fecha finalizado: <b>` +
+                                </p>
+                                                                <p class="text-muted fs-6 fw-light">Fecha finalizado: <b>` +
                 items[i].tiempoCompletado +
                 `</b>
                                 </p>
-                                 <div class="d-flex justify-content-end ps-4 pb-1">
+                                
+                            </div>
+
+                             <div class="d-flex pt-2"> 
+                                <p class="mb-1 pe-1"><button type="button" class="btn btn-primary"><i class="bi bi-pencil-square"></i></button>
+                            </p>
                             <p class="mb-1"><button type="button" class="btn btn-success"><i
                                         class="bi bi-bookmark-star-fill"></i></button>
                             </p>
-
-
-                        </div>
-                                     
                             </div>
-                        </div>
+
+                   
+                      
+                     
                        
                     </div>
                 </a>`

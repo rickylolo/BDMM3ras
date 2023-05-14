@@ -164,7 +164,7 @@ class cursoAPI
         }
     }
 
-       function getCursosSearch($nombre)
+    function getCursosSearch($nombre)
     {
 
         $Curso = new Curso();
@@ -239,6 +239,11 @@ class cursoAPI
         $Curso->bajaCurso($Curso_id);
     }
 
+   function aprobarCurso($Curso_id)
+    {
+        $Curso = new Curso();
+        $Curso->aprobarCurso($Curso_id);
+    }
     // ----------------------------------------------------------------- CURSO - CATEGORIA -----------------------------------------------------------------
 
     function getCategoriasDeUnCurso($Curso_id)
@@ -338,6 +343,42 @@ class cursoAPI
         }
     }
 
+        function getReporteInstructorAprobados($Usuario_id)
+    {
+
+        $Curso = new Curso();
+        $arrCursos = array();
+        $arrCursos["Datos"] = array();
+
+        $res = $Curso->getReporteInstructorAprobados($Usuario_id);
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $obj = array(
+                    "Curso_id" => $row['Curso_id'],
+                    "Usuario_id" => $row['Usuario_id'],
+                    "noNiveles" => $row['noNiveles'],
+                    "costoCurso" => $row['costoCurso'],
+                    "noComentarios" => $row['noComentarios'],
+                    "noLikes" => $row['noLikes'],
+                    "noDislikes" => $row['noDislikes'],
+                    "imagenCurso" => base64_encode(($row['imagenCurso'])),
+                    "cursoNombre" => $row['cursoNombre'],
+                    "descripcion" => $row['descripcion'],
+                    "isBaja" => $row['isBaja'],
+                    "CursoCategoria_id" => $row['CursoCategoria_id'],
+                    "categoriaNombre" => $row['categoriaNombre'],
+                    "Ingresos" => $row['Ingresos'],
+                    "Promedio" => $row['Promedio'],
+                    "noAlumnos" => $row['noAlumnos']
+                );
+                array_push($arrCursos["Datos"], $obj);
+            }
+            echo json_encode($arrCursos["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
+    }
     function insertarCursoCategoria($Curso_id, $Categoria_id)
     {
         $Curso = new Curso();
@@ -454,6 +495,10 @@ if (isset($_POST['funcion'])) {
             $var = new cursoAPI();
             $var->bajaCurso($_POST['Curso_id']);
             break;
+        case "aprobarCurso":
+            $var = new cursoAPI();
+            $var->aprobarCurso($_POST['Curso_id']);
+            break;
         case "obtenerCurso":
             $var = new cursoAPI();
             $var->getCursoData($_POST['Curso_id']);
@@ -502,6 +547,12 @@ if (isset($_POST['funcion'])) {
             $id = $_SESSION['Usuario_id'];
             $var = new cursoAPI();
             $var->getReporteInstructor($id);
+            break;
+        case "getReporteInstructorAprobados":
+            session_start();
+            $id = $_SESSION['Usuario_id'];
+            $var = new cursoAPI();
+            $var->getReporteInstructorAprobados($id);
             break;
         case "getKardex":
             session_start();

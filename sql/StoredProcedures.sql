@@ -177,6 +177,9 @@ BEGIN
        IF Operacion = 'B' THEN /*DAR DE BAJA CURSO*/
           UPDATE Curso SET isBaja = 1 WHERE Curso_id = sp_Curso_id;
    END IF;
+       IF Operacion = 'T' THEN /*APROBAR CURSO*/
+          UPDATE Curso SET isBorrador  = 0 WHERE Curso_id = sp_Curso_id;
+   END IF;
       IF Operacion = 'A' THEN /*GET ALL CURSO*/
 		SELECT Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
         FROM vCurso;
@@ -186,10 +189,15 @@ BEGIN
         FROM vCursoInstructor
         WHERE  Curso_id = sp_Curso_id;
    END IF;
-	IF Operacion = 'R' THEN /*GET REPORTE INSTRUCTOR*/
+	IF Operacion = 'R' THEN /*GET REPORTE INSTRUCTOR BORRADORES*/
 		SELECT Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, cursoNombre, descripcion, isBaja, CursoCategoria_id, categoriaNombre, Ingresos, Promedio, noAlumnos
         FROM vCursoInstructor
-        WHERE Usuario_id = sp_Usuario_id;
+        WHERE Usuario_id = sp_Usuario_id AND isBorrador = 1 AND isBaja <> 1;
+   END IF;
+   	IF Operacion = 'U' THEN /*GET REPORTE INSTRUCTOR APROBADOS*/
+		SELECT Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, cursoNombre, descripcion, isBaja, CursoCategoria_id, categoriaNombre, Ingresos, Promedio, noAlumnos
+        FROM vCursoInstructor
+        WHERE Usuario_id = sp_Usuario_id AND isBorrador = 0 AND isBaja <> 1;
    END IF;
         IF Operacion = 'X' THEN /*GET CURSO MEJOR CALIFICADO */
 		SELECT nombreCompleto, Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja

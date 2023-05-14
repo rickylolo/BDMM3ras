@@ -135,7 +135,7 @@ session_start(); // Inicio mi sesion PHP
 
             <nav class="navbar navbar-light" id="navbarCursosInstructor">
                 <div class="container-fluid">
-                    <a class="navbar-brand fs-3 fw-bold p-2">Cursos</a>
+                    <a class="navbar-brand fs-2 fw-bold p-2">Cursos</a>
                     <form class="d-flex">
 
                         <div class="dropdown">
@@ -161,11 +161,14 @@ session_start(); // Inicio mi sesion PHP
                 </div>
             </nav>
             <div class="list-group">
-
-                <div id="miReporteInstructor" class="mt-4 mb-4">
-
+                <div class="fs-5 ps-2 fw-bold pt-4">Cursos En Progreso</div>
+                <div id="miReporteInstructor" class="mt-1 mb-4">
+   
                 </div>
-
+                     <div class="fs-5 ps-2 fw-bold pt-4">Cursos Aprobados</div>
+                <div id="miReporteInstructorAprobados" class="mt-1 mb-4">
+                 
+                </div>
 
 
 
@@ -735,8 +738,8 @@ session_start(); // Inicio mi sesion PHP
                     </div>
                     <form method="post">
                         <div class="modal-body">
-                            <input type="text" id="miNivelSeleccionado">
-                            <input type="text" id="miTipoMultimedia">
+                            <input type="hidden" id="miNivelSeleccionado">
+                            <input type="hidden" id="miTipoMultimedia">
                              <div class="row fw-bold fs-6 ms-3 mb-2">
                                 Texto del nivel:
                             </div>
@@ -787,8 +790,8 @@ session_start(); // Inicio mi sesion PHP
                     </div>
                     <form method="post">
                         <div class="modal-body">
-                            <input type="text" id="miMultimediaSeleccionada">
-                            <input type="text" id="E_miTipoMultimedia">
+                            <input type="hidden" id="miMultimediaSeleccionada">
+                            <input type="hidden" id="E_miTipoMultimedia">
                              <div class="row fw-bold fs-6 ms-3 mb-2">
                                 Texto del nivel:
                             </div>

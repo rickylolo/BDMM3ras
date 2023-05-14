@@ -57,6 +57,8 @@ CREATE TABLE Curso(
 CONSTRAINT FK_Curso_Usuario
 	FOREIGN KEY (Usuario_id) REFERENCES Usuario(Usuario_id)
 );
+ALTER TABLE Curso
+ADD COLUMN isBorrador BIT DEFAULT 1 COMMENT 'Bandera para Borrador del Curso';
 
 
 -- 												TABLA DE CATEGORIA --

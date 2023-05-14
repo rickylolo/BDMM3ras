@@ -19,13 +19,14 @@ FROM MetodoPago;
 DROP VIEW IF EXISTS vCurso;
 
 CREATE VIEW vCurso AS
-SELECT  Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
-FROM Curso;
+SELECT  Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja, isBorrador
+FROM Curso
+WHERE isBorrador <> 1;
 
 DROP VIEW IF EXISTS vCursoInstructor;
 
 CREATE VIEW vCursoInstructor AS
-SELECT  A.Curso_id, A.Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, A.nombre cursoNombre, A.descripcion, isBaja, CursoCategoria_id, C.nombre categoriaNombre, ingresosCurso(A.Curso_id) Ingresos, promedioCurso(A.Curso_id) Promedio, contarAlumnos(A.Curso_id) noAlumnos
+SELECT  A.Curso_id,A.isBorrador, A.Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, A.nombre cursoNombre, A.descripcion, isBaja, CursoCategoria_id, C.nombre categoriaNombre, ingresosCurso(A.Curso_id) Ingresos, promedioCurso(A.Curso_id) Promedio, contarAlumnos(A.Curso_id) noAlumnos
 FROM Curso A
 LEFT JOIN (
     SELECT Curso_id, MAX(CursoCategoria_id) AS maxCategoriaId
@@ -44,9 +45,8 @@ DROP VIEW IF EXISTS vCursosMejorCalificado;
 CREATE VIEW vCursosMejorCalificado AS
 SELECT CONCAT(B.nombre,' ',apellidoPaterno,' ',apellidoMaterno) nombreCompleto, Curso_id, A.Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, A.nombre, A.descripcion, isBaja 
 FROM vCurso A
-LEFT JOIN Usuario B
-ON A.Usuario_id= B.Usuario_id 
-WHERE noLikes >= noDislikes
+LEFT JOIN Usuario B ON A.Usuario_id= B.Usuario_id 
+WHERE noLikes >= noDislikes AND A.isBorrador <> 1
 ORDER BY noLikes DESC;
 
 
@@ -59,6 +59,7 @@ LEFT JOIN usuarioCurso B
 ON A.Curso_id = B.Curso_id
 LEFT JOIN Usuario C
 ON A.Usuario_id= C.Usuario_id 
+WHERE A.isBorrador <> 1
 GROUP BY A.Curso_id
 ORDER BY misCursosVendidos;
 
@@ -75,6 +76,7 @@ LEFT JOIN usuarioCurso B ON A.Usuario_id= B.Usuario_id
 LEFT JOIN nivelCurso D ON B.usuarioCurso_id = D.usuarioCurso_id
  JOIN CursoCategoria E ON E.Curso_id = C.Curso_id
  JOIN Categoria F ON E.Categoria_id = F.Categoria_id
+ WHERE C.isBorrador <> 1
 GROUP BY B.Curso_id;
 
 /*--------------------------------------------------------------------------------CATEGORIA--------------------------------------------------------------------------*/

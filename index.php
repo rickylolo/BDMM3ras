@@ -206,6 +206,7 @@ session_start(); // Inicio mi sesion PHP
             <hr class="solid">
             <div class="row fs-4 product-title"><b>Cursos mejores calificados</b></div>
             <hr class="solid">
+            <div id="miAlertCursosMejoresCalificados"></div>
             <section class="post-list">
                 <div class="content" id="misCursosMejoresCalificados">
                 </div>
@@ -215,6 +216,7 @@ session_start(); // Inicio mi sesion PHP
             <hr class="solid">
             <div class="row fs-4 product-title"><b>Cursos mas vendidos</b></div>
             <hr class="solid">
+             <div id="miAlertCursosMasVendidos"></div>
             <section class="post-list">
                 <div class="content" id="misCursosMasVendidos">
                 </div>
@@ -227,6 +229,7 @@ session_start(); // Inicio mi sesion PHP
             <hr class="solid">
             <div class="row fs-4 product-title"><b>Cursos mas recientes</b></div>
             <hr class="solid">
+            <div id="miAlertCursosMasRecientes"></div>
             <section class="post-list">
                 <div class="content" id="misCursosMasRecientes">
                 </div>

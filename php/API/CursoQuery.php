@@ -132,6 +132,24 @@ class Curso extends DB
         $query = $this->connect()->query($get);
         return $query;
     }
+    
+    // QUERY REPORTE INSTRUCTOR APROBADOS
+
+    function getReporteInstructorAprobados($Usuario_id)
+    {
+        $get = "CALL sp_GestionCurso(
+            'U', 	#Operacion
+            NULL, 	# Curso Id
+            $Usuario_id, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            NULL,	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
     // ---------------------------------------INSERTAR INFORMACION------------------------------------------
     // QUERY Insertar Curso
 
@@ -190,6 +208,23 @@ class Curso extends DB
         return $query;
     }
 
+        // QUERY Aprobar Curso
+
+    function aprobarCurso($Curso_id)
+    {
+        $update = "CALL sp_GestionCurso(
+            'T', 	#Operacion
+            $Curso_id, 	# Curso Id
+            NULL, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            NULL,	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        );";
+        $query = $this->connect()->query($update);
+        return $query;
+    }
     // ---------------------------------------                                     <--   CURSO - CATEGORIA  -->                                    ------------------------------------------
 
 
