@@ -150,6 +150,24 @@ class Curso extends DB
         $query = $this->connect()->query($get);
         return $query;
     }
+
+       // QUERY GET DIPLOMA
+
+    function getDiploma($Usuario_id, $Curso_id)
+    {
+        $get = "CALL sp_GestionCurso(
+            'C', 	#Operacion
+            $Curso_id, 	# Curso Id
+            $Usuario_id, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            NULL,	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
     // ---------------------------------------INSERTAR INFORMACION------------------------------------------
     // QUERY Insertar Curso
 

@@ -583,6 +583,73 @@ $(document).ready(function () {
       })
   }
 
+  // -- GET DIPLOMA --
+  $('#misElementosKardex').on('click', '.verDiploma', funcVerDiploma)
+  function funcVerDiploma() {
+    let miCurso = $(this).attr('id')
+    $.ajax({
+      type: 'POST',
+      data: {
+        funcion: 'getDiploma',
+        Curso_id: miCurso,
+      },
+      url: 'php/API/Curso.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        if (items.length == 0) {
+          alert('Error no se obtuvo diploma')
+          return
+        }
+        $('#miDiploma').empty()
+        $('#miDiploma').append(
+          `
+                            <div class="logo">
+                                <img src="img/cripto.png" width="40px">
+                                CryptCourse
+                            </div>
+
+                            <div class="marquee">
+                                Certificado
+                            </div>
+
+                            <div class="assignment">
+                                Se le presenta el siguiente certificado a:
+                            </div>
+
+                            <div class="person">
+                                ` +
+            items[0].Alumno +
+            `
+                            </div>
+
+                            <div class="reason">
+                                Por haber completado satisfactoriamente <br>                 ` +
+            items[0].nombreCurso +
+            `
+                            </div>
+                            <div class="ps-4 pe-4 d-flex justify-content-between">
+                            <div class="fs-6">
+                                Firmado por: <br>                 ` +
+            items[0].Instructor +
+            `
+                            </div>
+                            <div class="fs-6">
+                                Terminado: <br>                 ` +
+            items[0].tiempoCompletado +
+            `
+                            </div>
+                            </div>
+        
+        
+          `
+        )
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
   // -------- REGISTRAR COMENTARIO LIKE  ------------
 
   // COMENTARIO POSITIVO
@@ -639,6 +706,32 @@ $(document).ready(function () {
       .fail(function (data) {
         console.error(data)
       })
+  })
+
+  // GENERAR DIPLOMA PDF
+  $('#GenerarDiploma').click(function () {
+    const $miDiploma = document.querySelector('#miPDFDiploma')
+    html2pdf()
+      .set({
+        margin: 1,
+        filename: 'diploma.pdf',
+        image: {
+          type: 'jpeg',
+          quality: 0.98,
+        },
+        html2canvas: {
+          scale: 3,
+          letterRendering: true,
+        },
+        jsPDF: {
+          unit: 'in',
+          format: 'a3',
+          orientation: 'portrait',
+        },
+      })
+      .from($miDiploma)
+      .save()
+      .catch((err) => console.log(err))
   })
 
   // -------- MIS BOTONES ------------

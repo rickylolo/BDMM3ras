@@ -239,6 +239,31 @@ class cursoAPI
         $Curso->bajaCurso($Curso_id);
     }
 
+    function getDiploma($Usuario_id,$Curso_id)
+    {
+
+        $Curso = new Curso();
+        $arrCursos = array();
+        $arrCursos["Datos"] = array();
+
+        $res = $Curso->getDiploma($Usuario_id,$Curso_id);
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $obj = array(
+                    "Alumno" => $row['Alumno'],
+                    "tiempoCompletado" => $row['tiempoCompletado'],
+                    "Instructor" => $row['Instructor'],
+                    "nombreCurso" => $row['nombreCurso']
+                );
+                array_push($arrCursos["Datos"], $obj);
+            }
+            echo json_encode($arrCursos["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
+    }
+
    function aprobarCurso($Curso_id)
     {
         $Curso = new Curso();
@@ -559,6 +584,12 @@ if (isset($_POST['funcion'])) {
             $id = $_SESSION['Usuario_id'];
             $var = new cursoAPI();
             $var->getKardex($id);
+            break;
+        case "getDiploma":
+            session_start();
+            $id = $_SESSION['Usuario_id'];
+            $var = new cursoAPI();
+            $var->getDiploma($id, $_POST['Curso_id']);
             break;
         // -----------------------
 

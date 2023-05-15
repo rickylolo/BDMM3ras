@@ -228,6 +228,11 @@ BEGIN
         FROM vKardex
         WHERE Usuario_id = sp_Usuario_id;
    END IF;
+   		IF Operacion = 'C' THEN /*GET DIPLOMA*/
+		SELECT Usuario_id, Curso_id, Alumno, tiempoCompletado, Instructor, nombreCurso
+        FROM vDiploma
+        WHERE Usuario_id = sp_Usuario_id AND Curso_id = sp_Curso_id;
+   END IF;
 END //
 
 /*--------------------------------------------------------------------------------CATEGORIA--------------------------------------------------------------------------*/

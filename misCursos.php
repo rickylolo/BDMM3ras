@@ -13,10 +13,11 @@ session_start(); // Inicio mi sesion PHP
     <title>CryptCourse| Mis Cursos</title>
     <link rel="shortcut icon" href="img\cripto.png">
     <script src="js/jquery-3.6.0.js"></script>
+    <script src="js/html2pdf.bundle.min.js"></script>
     <script src="js/index.js"></script>
     <script src="js/estudiante.js"></script>
     <link href="css/index.css" rel="stylesheet">
-     <link href="css/diploma.css" rel="stylesheet">
+    <link href="css/diploma.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 </head>
@@ -125,13 +126,13 @@ session_start(); // Inicio mi sesion PHP
             </div>
             <hr class="solid">
             <ul class="nav nav-tabs justify-content-center">
-                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page"  id="mostrarContenido">Contenido</a>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" id="mostrarContenido">Contenido</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page"  id="mostrarValoracion">Valoraciones</a>
+                    <a class="nav-link" aria-current="page" id="mostrarValoracion">Valoraciones</a>
                 </li>
-                <li class="nav-item" >
+                <li class="nav-item">
                     <a class="nav-link" aria-current="page" id="mostrarInstructor">Instructor</a>
                 </li>
             </ul>
@@ -144,7 +145,7 @@ session_start(); // Inicio mi sesion PHP
                 <h4>Comentarios y valoraciones de los estudiantes </h4>
                 <hr class="solid">
                 <div id="misValoraciones" class="list-group p-2">
-                   
+
 
 
                 </div>
@@ -693,30 +694,11 @@ session_start(); // Inicio mi sesion PHP
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex justify-content-center">
-                    <div class="body-diploma ">
-                       <div class="container-diploma">
-        <div class="logo">
-            <img src="img/cripto.png" width="40px">
-            CryptCourse
-        </div>
-
-        <div class="marquee">
-            Certificado
-        </div>
-
-        <div class="assignment">
-            Se le presenta el siguiente certificado a:
-        </div>
-
-        <div class="person">
-            Ricardo Alberto Grimaldo Estévez
-        </div>
-
-        <div class="reason">
-            Por haber completado satisfactoriamente <br>HTML Desde 0 Hasta Experto
-        </div>
-        </div>
-    </div>
+                    <div class="body-diploma " id="miPDFDiploma">
+                        <div class="container-diploma" id="miDiploma">
+                           
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-success" id="GenerarDiploma" data-bs-dismiss="modal"><i

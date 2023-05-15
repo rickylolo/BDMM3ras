@@ -79,6 +79,18 @@ LEFT JOIN nivelCurso D ON B.usuarioCurso_id = D.usuarioCurso_id
  WHERE C.isBorrador <> 1
 GROUP BY B.Curso_id;
 
+
+
+DROP VIEW IF EXISTS vDiploma;
+
+CREATE VIEW vDiploma AS
+SELECT B.Usuario_id, B.Curso_id,CONCAT(A.nombre,' ',A.apellidoPaterno,' ',A.apellidoMaterno) Alumno, B.tiempoCompletado, CONCAT(D.nombre,' ',D.apellidoPaterno,' ',D.apellidoMaterno) Instructor, C.nombre nombreCurso
+FROM Usuario A
+LEFT JOIN usuarioCurso B ON A.Usuario_id= B.Usuario_id
+ JOIN Curso C ON B.Curso_id = C.Curso_id
+LEFT JOIN Usuario D ON C.Usuario_id = D.Usuario_id
+ WHERE C.isBorrador <> 1 AND B.isFinalizado = 1;
+
 /*--------------------------------------------------------------------------------CATEGORIA--------------------------------------------------------------------------*/
 DROP VIEW IF EXISTS vCategoria;
 

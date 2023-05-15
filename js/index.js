@@ -730,8 +730,14 @@ $(document).ready(function () {
                 `</p>
                                 </div>
                             </div>
-                            <div class="align-self-start">
-                                <span class="badge rounded-pill bg-success">Recomendado</span>
+                            <div>
+                            <div  class="d-flex justify-content-end">
+                             <span class="badge rounded-pill bg-success">Recomendado</span>
+                             </div>
+                                <div class="fs-6 fw-light pe-2 pt-2">Fecha comentario: ` +
+                items[i].tiempoRegistro +
+                `</div>
+                               
                             </div>
                         </div>
                         <hr class="solid">
@@ -759,8 +765,13 @@ $(document).ready(function () {
                 `</p>
                                 </div>
                             </div>
-                            <div class="align-self-start">
-                                <span class="badge rounded-pill bg-danger">No Recomendado</span>
+                           <div  class="d-flex justify-content-end">
+                             <span class="badge rounded-pill bg-danger">No Recomendado</span>
+                             </div>
+                                <div class="fs-6 fw-light pe-2 pt-2">Fecha comentario: ` +
+                items[i].tiempoRegistro +
+                `</div>
+                               
                             </div>
                         </div>
                         <hr class="solid">
