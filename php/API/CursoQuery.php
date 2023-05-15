@@ -312,6 +312,7 @@ class Curso extends DB
         return $query;
     }
 
+
     // ---------------------------------------INSERTAR INFORMACION------------------------------------------
     // QUERY Insertar Curso Categoria
 
@@ -361,7 +362,20 @@ class Curso extends DB
         return $query;
     }
 
-
+    
+        // QUERY Get ReporteCursoDetalle
+    function getReporteCursoDetalle($Curso_id)
+    {
+        $get = "CALL sp_GestionUsuarioCurso(
+            'T', 		#Operacion
+                NULL, 		#usuarioCurso Id
+                NULL, 		#MetodoPago Id
+                $Curso_id, 		#Curso Id
+                NULL #Usuario Id
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
 
     function insertarCursoAUsuario($MetodoPago_id, $Curso_id, $Usuario_id)
     {

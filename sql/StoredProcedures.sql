@@ -591,6 +591,13 @@ BEGIN
         FROM vObtenerTodosLosCursosDeUnUsuario
         WHERE Usuario_id = sp_Usuario_id;
    END IF;
+      IF Operacion = 'T' /*GET REPORTE CURSO DETALLE*/
+   THEN  
+		SELECT Curso_id, nombre, imagenCurso, Alumno, fotoPerfil, Progreso, totalPagado, nombreMetodo, tiempoRegistro
+        FROM vObtenerDetalleCursoInstructor
+        WHERE Curso_id = sp_Curso_id;
+   END IF;
+   
 END //
 
 /*--------------------------------------------------------------------------------NIVEL CURSO--------------------------------------------------------------------------*/

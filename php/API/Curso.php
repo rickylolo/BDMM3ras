@@ -390,7 +390,7 @@ class cursoAPI
         }
     }
 
-        function getReporteInstructorAprobados($Usuario_id)
+    function getReporteInstructorAprobados($Usuario_id)
     {
 
         $Curso = new Curso();
@@ -426,6 +426,7 @@ class cursoAPI
             exit();
         }
     }
+
     function insertarCursoCategoria($Curso_id, $Categoria_id)
     {
         $Curso = new Curso();
@@ -508,6 +509,37 @@ class cursoAPI
             exit();
         }
     }
+
+    
+
+    function getReporteCursoDetalleInstructor($Curso_id)
+    {
+         $Curso = new Curso();
+        $arrCursos = array();
+        $arrCursos["Datos"] = array();
+
+        $res = $Curso->getReporteCursoDetalle($Curso_id);
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $obj = array( 
+                    "Curso_id" => $row['Curso_id'],
+                    "nombre" => $row['nombre'],
+                    "imagenCurso" => base64_encode(($row['imagenCurso'])),
+                    "Alumno" => $row['Alumno'],
+                    "fotoPerfil" => base64_encode(($row['fotoPerfil'])),
+                    "Progreso" => $row['Progreso'],
+                    "totalPagado" => $row['totalPagado'],
+                    "nombreMetodo" => $row['nombreMetodo'],
+                    "tiempoRegistro" => $row['tiempoRegistro']
+                );
+                array_push($arrCursos["Datos"], $obj);
+            }
+            echo json_encode($arrCursos["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
+    }
     
 }
 
@@ -516,15 +548,16 @@ if (isset($_POST['funcion'])) {
     $funcion = $_POST['funcion'];
     switch ($funcion) {
         case "insertarCurso":
+            session_start();
+            $id = $_SESSION['Usuario_id'];
             $tipoArchivo = $_FILES['file']['type'];
             $nombreArchivo = $_FILES['file']['name'];
             $tamanoArchivo = $_FILES['file']['size'];
             $imagenSubida = fopen($_FILES['file']['tmp_name'], 'r');
             $binariosImagen = fread($imagenSubida, $tamanoArchivo);
-            session_start();
-            $id = $_SESSION['Usuario_id'];
             $var = new cursoAPI();
             $var->insertarCurso($id, $_POST['costoCurso'], $binariosImagen, $_POST['nombreCurso'], $_POST['descripcionCurso']);
+            echo 'Curso insertado satisfactoriamente';
             break;
         case "actualizarCurso":
              $binariosImagen = '';
@@ -580,8 +613,14 @@ if (isset($_POST['funcion'])) {
         case "insertarCursoUsuario":   
             session_start();
             $id = $_SESSION['Usuario_id'];
+            if($_SESSION['rolUsuario'] == 2 || $_SESSION['rolUsuario'] == 1)
+            {
+                echo 'Solo los estudiantes pueden comprar cursos';
+                break;
+            }
             $var = new cursoAPI();
             $var->insertarCursoAUsuario($_POST['MetodoPago_id'], $_POST['Curso_id'], $id);
+            echo 'Curso registrado exitosamente';
             break;
         case "obtenerCursosDeUnUsuario":
             $var = new cursoAPI();
@@ -618,6 +657,10 @@ if (isset($_POST['funcion'])) {
             $id = $_SESSION['Usuario_id'];
             $var = new cursoAPI();
             $var->getReporteIngresosMetodos($id);
+            break;
+        case "getReporteDetalleCursoInstructor":
+            $var = new cursoAPI();
+            $var->getReporteCursoDetalleInstructor($_POST['Curso_id']);
             break;
         // -----------------------
 

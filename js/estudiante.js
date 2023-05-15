@@ -726,7 +726,7 @@ $(document).ready(function () {
         jsPDF: {
           unit: 'in',
           format: 'a3',
-          orientation: 'portrait',
+          orientation: 'landscape',
         },
       })
       .from($miDiploma)

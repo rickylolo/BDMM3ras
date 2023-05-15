@@ -145,7 +145,12 @@ if (isset($_POST['funcion'])) {
             $var = new nivelAPI();
             session_start();
             $id = $_SESSION['Usuario_id'];
+            if($_SESSION['rolUsuario'] == 1 || $_SESSION['rolUsuario'] == 2){
+                echo'Solo los estudiantes pueden comprar niveles';
+                break;
+            }
             $var->insertarNivelUsuarioCurso($_POST['MetodoPago_id'],$id,$_POST['Nivel_id']);
+            echo'Nivel comprado correctamente';
             break;
         case "marcarNivelFinalizado":   
             session_start();

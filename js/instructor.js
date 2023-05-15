@@ -99,7 +99,7 @@ $(document).ready(function () {
           $('#miReporteInstructor').empty()
           $('#miReporteInstructor').append(`
                           <div class="alert alert-primary" role="alert">
-                            <h4 class="alert-heading">No hay cursos en progreso</h4>
+                            <h4 class="alert-heading text-center">No hay cursos en progreso</h4>
                             <p class="text-center">Da de alta un nuevo curso</p>
                             <hr>               
                         </div>`)
@@ -214,7 +214,7 @@ $(document).ready(function () {
           $('#miReporteInstructorAprobados').empty()
           $('#miReporteInstructorAprobados').append(`
                                <div class="alert alert-primary" role="alert">
-                            <h4 class="alert-heading">No hay cursos aprobados</h4>
+                            <h4 class="alert-heading text-center">No hay cursos aprobados</h4>
                             <p class="text-center">Puedes aprobar cursos desde la página del instructor</p>
                             <hr>               
                         </div>`)
@@ -256,11 +256,14 @@ $(document).ready(function () {
               ` MXN</b>
                                 </p>
                             </div>
-                            <p class="mb-1 pe-1 borrarCurso" id="` +
+                         
+                            <p class="mb-1 verCursoDetalle" id="` +
+              items[i].Curso_id +
+              `" data-bs-toggle="modal" data-bs-target="#miModalCursoDetalle"><button type="button" class="btn btn-success"><i class="bi bi-search"></i></button>
+                            </p>
+                               <p class="mb-1 ps-1 borrarCurso" id="` +
               items[i].Curso_id +
               `"><button type="button" class="btn btn-danger"><i class="bi bi-trash"></i></button></p>
-                            <p class="mb-1 verCursoDetalle" data-bs-toggle="modal" data-bs-target="#miModalCursoDetalle"><button type="button" class="btn btn-success"><i class="bi bi-search"></i></button>
-                            </p>
                         </div>
                     </div>
                 </a> `
@@ -460,11 +463,11 @@ $(document).ready(function () {
       })
   }
 
-  function cargarCategoriasCurso(miIdCurso) {
+  function cargarCategoriasCurso(Curso_id) {
     // Mis Datos Categorias
     $.ajax({
       type: 'POST',
-      data: { funcion: 'obtenerCategoriasDeUnCurso', Curso_id: miIdCurso },
+      data: { funcion: 'obtenerCategoriasDeUnCurso', Curso_id: Curso_id },
       url: 'php/API/Curso.php',
     })
       .done(function (data) {
@@ -499,6 +502,86 @@ $(document).ready(function () {
       })
   }
 
+  function verReporteCursoDetallado(Curso_id) {
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'getReporteDetalleCursoInstructor', Curso_id: Curso_id },
+      url: 'php/API/Curso.php',
+    })
+      .done(function (data) {
+        $('#miCursoDetalleLista').empty()
+        var items = JSON.parse(data)
+        if (items.length == 0) {
+          $('#miCursoDetalleLista').append(
+            `
+              <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading">No hay estudiantes inscritos</h4>
+                            <p class="text-center">Aqui veras el reporte de tus estudiantes en este curso</p>
+                            <hr>               
+                        </div>
+          `
+          )
+          return
+        }
+        let miTotal = 0
+        for (let i = 0; i < items.length; i++) {
+          miTotal += parseFloat(items[i].totalPagado)
+          $('#miCursoDetalleLista').append(
+            `
+            <a class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
+                            <div class="d-flex flex-row miImagen justify-content-between">
+                                <div class="d-flex pt-1">
+                                    <img src="data:image/jpeg;base64,` +
+              items[i].fotoPerfil +
+              `" class="pfp rounded-circle">
+                                    <div class="p-1 d-flex flex-column">
+                                        <p class="fs-6 fw-bold">` +
+              items[i].Alumno +
+              `</p>
+                                        <p class="text-muted fs-6">` +
+              items[i].tiempoRegistro +
+              `
+                                    </div>
+                                    <div class="ps-4 d-flex justify-content-end">
+                                        </p>
+                                        <p class="ps-4 pt-4 text-muted fs-6 fw-light">Avance: <b>` +
+              items[i].Progreso +
+              `</b>
+                                        </p>
+                                        <p class="ps-4 pt-4 text-muted fs-6 fw-light">Pagó: <b>` +
+              items[i].totalPagado +
+              ` MXN</b>
+                                        </p>
+                                        <p class="ps-4 pt-4  text-muted fs-6 fw-light">Forma de Pago: <b>` +
+              items[i].nombreMetodo +
+              `</b>
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                  </a>
+          `
+          )
+        }
+        $('#nombreCursoEnModalCursoDetalle').text(items[0].nombre)
+        document.getElementById('miFotoEnCursoDetalleModal').src =
+          'data:image/jpeg;base64,' + items[0].imagenCurso
+        $('#miCursoDetalleLista').append(
+          `
+                      <div class="d-flex flex-row justify-content-between">
+                            <div class="fs-5 fw-bold p-2">Total</div>
+                            <div class="fs-5 fw-bold p-2">` +
+            miTotal +
+            ` MXN</div>
+                        </div>
+          `
+        )
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
   // ONCLICK
   // -- CURSO DASHBOARD --
   $('#miReporteInstructor').on('click', '.editarCurso', funcionGetCurso)
@@ -558,6 +641,17 @@ $(document).ready(function () {
       .fail(function (data) {
         console.error(data)
       })
+  }
+
+  // -- VER REPORTE CURSO DETALLE --
+  $('#miReporteInstructorAprobados').on(
+    'click',
+    '.verCursoDetalle',
+    funcVerReporteCursoDetalle
+  )
+  function funcVerReporteCursoDetalle() {
+    let Curso_id = $(this).attr('id')
+    verReporteCursoDetallado(Curso_id)
   }
 
   // -- MULTIMEDIA DASHBOARD --

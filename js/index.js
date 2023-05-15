@@ -1692,10 +1692,10 @@ $(document).ready(function () {
       },
       url: 'php/API/Curso.php',
     })
-      .done(function () {
+      .done(function (data) {
         $('#miModalDetallePago').modal('hide')
         misDatosContenidoCurso(idCurso)
-        alert('Curso comprado correctamente')
+        alert(data)
       })
       .fail(function (data) {
         console.error(data)
@@ -1717,10 +1717,10 @@ $(document).ready(function () {
       },
       url: 'php/API/Nivel.php',
     })
-      .done(function () {
+      .done(function (data) {
         $('#miModalDetallePagoNivel').modal('hide')
         misDatosContenidoCurso(idCurso)
-        alert('Nivel comprado correctamente')
+        alert(data)
       })
       .fail(function (data) {
         console.error(data)

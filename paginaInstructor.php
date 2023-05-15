@@ -225,85 +225,17 @@ session_start(); // Inicio mi sesion PHP
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="d-flex miImagen align-items-start">
-                        <img src="img/html.jpg" class="pfp">
+                        <img src="" id="miFotoEnCursoDetalleModal" class="pfp">
                         <div class="p-1 d-flex flex-column">
-                            <p class="fs-5 fw-bold">Curso de HTML 5</p>
+                            <p class="fs-5 fw-bold" id="nombreCursoEnModalCursoDetalle"></p>
                         </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="list-group">
-                        <hr class="solid">
-                        <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                            <div class="d-flex flex-row miImagen justify-content-between">
-                                <div class="d-flex">
-                                    <img src="img/avatar.jpg" class="pfp rounded-circle">
-                                    <div class="p-1 d-flex flex-column">
-                                        <p class="fs-5 fw-bold">rickylolo</p>
-                                        <p class="text-muted fs-6">22/Feb/2022 12:10pm
-                                    </div>
-                                    <div class="ps-4 d-flex">
-                                        </p>
-                                        <p class="ps-4 pt-4 text-muted fs-6 fw-light">Avance: <b>3/4</b>
-                                        </p>
-                                        <p class="ps-4 pt-4 text-muted fs-6 fw-light">Pagó: <b>203.00 MXN</b>
-                                        </p>
-                                        <p class="ps-4 pt-4  text-muted fs-6 fw-light">Forma de Pago: <b>Paypal</b>
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                            <div class="d-flex flex-row miImagen justify-content-between">
-                                <div class="d-flex">
-                                    <img src="img/avatar2.jpg" class="pfp rounded-circle">
-                                    <div class="p-1 d-flex flex-column">
-                                        <p class="fs-5 fw-bold">Juanito</p>
-                                        <p class="text-muted fs-6">22/Feb/2022 12:10pm
-                                    </div>
-                                    <div class="ps-4 d-flex">
-                                        </p>
-                                        <p class="ps-4 pt-4 text-muted fs-6 fw-light">Avance: <b>3/4</b>
-                                        </p>
-                                        <p class="ps-4 pt-4 text-muted fs-6 fw-light">Pagó: <b>203.00 MXN</b>
-                                        </p>
-                                        <p class="ps-4 pt-4  text-muted fs-6 fw-light">Forma de Pago: <b>Paypal</b>
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </a>
-                        <a href="#" class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
-                            <div class="d-flex flex-row miImagen justify-content-between">
-                                <div class="d-flex">
-                                    <img src="img/avatar3.jpg" class="pfp rounded-circle">
-                                    <div class="p-1 d-flex flex-column">
-                                        <p class="fs-5 fw-bold">Pedrito</p>
-                                        <p class="text-muted fs-6">22/Feb/2022 12:10pm
-                                    </div>
-                                    <div class="ps-4 d-flex">
-                                        </p>
-                                        <p class="ps-4 pt-4 text-muted fs-6 fw-light">Avance: <b>3/4</b>
-                                        </p>
-                                        <p class="ps-4 pt-4 text-muted fs-6 fw-light">Pagó: <b>203.00 MXN</b>
-                                        </p>
-                                        <p class="ps-4 pt-4  text-muted fs-6 fw-light">Forma de Pago: <b>Paypal</b>
-                                        </p>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </a>
-
-                        <hr class="solid">
-                        <div class="d-flex flex-row justify-content-between">
-                            <div class="fs-5 fw-bold p-2">Total</div>
-                            <div class="fs-5 fw-bold p-2">609.00 MXN</div>
-                        </div>
+                    <div class="list-group" id="miCursoDetalleLista">
+                      
+                    
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -430,104 +362,6 @@ session_start(); // Inicio mi sesion PHP
                                 </div>
                             </div>
                             <div class="accordion accordion-flush" id="miContenidoCurso">
-
-
-
-                                <!-- <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingTwo">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                            Nivel 2: Conceptos Básicos
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#miContenido">
-                                        <div class="accordion-body">
-                                            <div class="card">
-                                                <div class="card-header text-end">
-                                                    <span class="badge rounded-pill bg-primary">Editar</span>
-                                                    <span class="badge rounded-pill bg-danger">Borrar</span>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title">Conceptos Básicos</h5>
-                                                    <p class="card-text"></p>
-                                                    El Lenguaje de Marcado de Hipertexto (HTML) es el código que se utiliza para
-                                                    estructurar y desplegar una página web y
-                                                    sus contenidos. Por ejemplo, sus contenidos podrían ser párrafos, una lista
-                                                    con viñetas, o imágenes y tablas de datos.
-                                                    Como lo sugiere el título, este artículo te dará una comprensión básica de
-                                                    HTML y cúal es su función.
-
-                                                    Entonces, ¿qué es HTML en realidad?
-                                                    HTML no es un lenguaje de programación; es un lenguaje de marcado que define
-                                                    la estructura de tu contenido. HTML
-                                                    consiste en una serie de elementos que usarás para encerrar diferentes
-                                                    partes del contenido para que se vean o comporten
-                                                    de una determinada manera. Las etiquetas de encierre pueden hacer de una
-                                                    palabra o una imagen un hipervínculo a otro
-                                                    sitio, se pueden cambiar palabras a cursiva, agrandar o achicar la letra,
-                                                    etc.
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingThree">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                            Nivel 3: Formularios
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#miContenido">
-                                        <div class="accordion-body">
-                                            <div class="card">
-                                                <div class="card-header text-end">
-                                                    <span class="badge rounded-pill bg-primary">Editar</span>
-                                                    <span class="badge rounded-pill bg-danger">Borrar</span>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-muted">Formularios.</h5>
-                                                    <video controls class="misVideos mx-auto">
-                                                        <source class="misVideos" src="" type="video/mp4">
-                                                    </video>
-                                                    <hr class="solid">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="flush-headingFour">
-                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                                            Nivel 4: Imagenes, links, listas y tablas.
-                                        </button>
-                                    </h2>
-
-                                    <div id="flush-collapseFour" class="accordion-collapse collapse" aria-labelledby="flush-headingFour" data-bs-parent="#miContenido">
-                                        <div class="accordion-body">
-                                            <div class="card">
-                                                <div class="card-header text-end">
-                                                    <span class="badge rounded-pill bg-primary">Editar</span>
-                                                    <span class="badge rounded-pill bg-danger">Borrar</span>
-                                                </div>
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-center text-muted">Imagenes, links, listas y
-                                                        tablas.</h5>
-                                                    <video controls class="misVideos mx-auto">
-                                                        <source class="misVideos" src="" type="video/mp4">
-                                                    </video>
-                                                    <hr class="solid">
-
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-                                </div> -->
-
-
-
                             </div>
                         </div>
                     <div class="modal-footer">
