@@ -160,6 +160,47 @@ $(document).ready(function () {
       })
   }
 
+  cargarIngresosMetodosPago()
+  function cargarIngresosMetodosPago() {
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'getReporteIngresosMetodo' },
+      url: 'php/API/Curso.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        $('#misMetodosPago').empty()
+        for (let i = 0; i < items.length; i++) {
+          $('#misMetodosPago').append(
+            `
+           <a class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="misMetodosImgs d-flex w-100 justify-content-between">
+                            <div class="d-flex flex-fill">
+                                <img  src="data:image/jpeg;base64,` +
+              items[i].imagenMetodo +
+              `">
+                                <p class="fs-5 p-3 fw-bold align-middle">` +
+              items[i].nombreMetodo +
+              `</p>
+
+                            </div>
+                            <p class="fs-6 p-3 fw-bold align-middle">` +
+              items[i].totalIngresos +
+              `MXN</p>
+                        </div>
+
+
+                    </a>
+
+          `
+          )
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
   cargarReporteCursoAprobados()
   function cargarReporteCursoAprobados() {
     $.ajax({
@@ -485,8 +526,8 @@ $(document).ready(function () {
         document.getElementById('E_img_cursoIMG').src =
           'data:image/jpeg;base64,' + items[0].imagenCurso
         // Mi nombre
-        $('#nombreCursoSelected').text(items[0].nombre)
-        $('#E_nombreCurso').val(items[0].nombre)
+        $('#nombreCursoSelected').text(items[0].cursoNombre)
+        $('#E_nombreCurso').val(items[0].cursoNombre)
         $('#E_descCurso').val(items[0].descripcion)
         $('#E_costoCurso').val(items[0].costoCurso)
       })

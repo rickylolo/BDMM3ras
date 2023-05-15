@@ -77,9 +77,7 @@ LEFT JOIN nivelCurso D ON B.usuarioCurso_id = D.usuarioCurso_id
  JOIN CursoCategoria E ON E.Curso_id = C.Curso_id
  JOIN Categoria F ON E.Categoria_id = F.Categoria_id
  WHERE C.isBorrador <> 1
-GROUP BY B.Curso_id;
-
-
+GROUP BY A.Usuario_id,B.Curso_id;
 
 DROP VIEW IF EXISTS vDiploma;
 
@@ -210,3 +208,19 @@ ON B.usuarioCurso_id = C.usuarioCurso_id
 LEFT JOIN Nivel D
 ON C.Nivel_id = D.Nivel_id
 GROUP BY nivelCurso_id;
+
+
+DROP VIEW IF EXISTS vObtenerTotalGananciasReporteInstructor;
+
+CREATE VIEW vObtenerTotalGananciasReporteInstructor AS
+SELECT A.Usuario_id,nombreMetodo, imagenMetodo, ((SELECT SUM(costoCurso) FROM usuarioCurso WHERE usuarioCurso.MetodoPago_id = E.MetodoPago_id) + (SELECT SUM(costoNivel) FROM nivelCurso WHERE nivelCurso.MetodoPago_id = E.MetodoPago_id)) totalIngresos
+FROM Usuario A
+INNER JOIN Curso B
+ON A.Usuario_id = B.Usuario_id
+LEFT JOIN usuarioCurso C
+ON C.Curso_id= B.Curso_id
+LEFT JOIN nivelCurso D
+ON D.usuarioCurso_id = C.usuarioCurso_id
+INNER JOIN MetodoPago E
+ON E.MetodoPago_id = D.MetodoPago_id
+GROUP BY  E.MetodoPago_id;

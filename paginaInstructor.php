@@ -177,52 +177,8 @@ session_start(); // Inicio mi sesion PHP
             <div class="container">
                 <div class="fs-4 fw-bolder p-2">Total ingresos</div>
                 <div id="misMetodosPago">
-                    <hr class="solid">
-                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                        <div class="misMetodosImgs d-flex w-100 justify-content-between">
-                            <div class="d-flex flex-fill">
-                                <img src="img/paypal.jpg">
-                                <p class="fs-5 p-3 fw-bold align-middle">Paypal</p>
+    
 
-                            </div>
-                            <p class="fs-6 p-3 fw-bold align-middle">5070.00 MXN</p>
-                        </div>
-
-
-                    </a>
-
-                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                        <div class="misMetodosImgs d-flex w-100 justify-content-between">
-                            <div class="d-flex flex-fill">
-                                <img src="img/tarjeta.png">
-                                <p class="fs-5 p-3 fw-bold align-middle">Tarjeta Credito</p>
-
-                            </div>
-                            <p class="fs-6 p-3 fw-bold align-middle">752.20 MXN</p>
-
-                        </div>
-
-
-                    </a>
-
-                    <a href="#" class="list-group-item list-group-item-action" aria-current="true">
-                        <div class="misMetodosImgs d-flex w-100 justify-content-between">
-                            <div class="d-flex">
-                                <img src="img/tarjeta.png">
-                                <p class="fs-5 p-3 fw-bold align-middle">Tarjeta Debito</p>
-
-                            </div>
-                            <p class="fs-6 p-3 fw-bold align-middle">570.00 MXN</p>
-
-                        </div>
-
-
-                    </a>
-                    <div class="d-flex flex-row justify-content-between">
-                        <div class="fs-6 fw-bold p-4">Total</div>
-                        <div class="fs-6 fw-bold p-4">6392.20 MXN</div>
-                    </div>
-                    <hr class="solid">
                 </div>
             </div>
         </div>

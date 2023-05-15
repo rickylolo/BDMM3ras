@@ -168,6 +168,24 @@ class Curso extends DB
         $query = $this->connect()->query($get);
         return $query;
     }
+
+           // QUERY GET INGRESOS METODO
+
+    function getReporteIngresosMetodo($Usuario_id,)
+    {
+        $get = "CALL sp_GestionCurso(
+            'Q', 	#Operacion
+            NULL, 	# Curso Id
+            $Usuario_id, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            NULL,	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
     // ---------------------------------------INSERTAR INFORMACION------------------------------------------
     // QUERY Insertar Curso
 

@@ -199,6 +199,11 @@ BEGIN
         FROM vCursoInstructor
         WHERE Usuario_id = sp_Usuario_id AND isBorrador = 0 AND isBaja <> 1;
    END IF;
+      	IF Operacion = 'Q' THEN /*GET INGRESOS METODOS*/
+		SELECT Usuario_id, nombreMetodo, imagenMetodo, totalIngresos
+        FROM vObtenerTotalGananciasReporteInstructor
+        WHERE Usuario_id = sp_Usuario_id;
+   END IF;
         IF Operacion = 'X' THEN /*GET CURSO MEJOR CALIFICADO */
 		SELECT nombreCompleto, Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
 		FROM vCursosMejorCalificado
@@ -392,6 +397,7 @@ BEGIN
    END IF;
 END //
 
+SELECT * FROM usuarioCurso;
 
 
 /*--------------------------------------------------------------------------------CURSO CATEGORIA--------------------------------------------------------------------------*/
