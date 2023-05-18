@@ -151,12 +151,37 @@ class User extends DB
 
 
 
-    // QUERY Actualizar Bloqueo
+    // QUERY Actualizar Bloqueo por correo
 
-    function actualizarBloqueo($Usuario_id, $isBloqueado)
+    function bloqueoUsuario($correo)
     {
         $update = "CALL sp_GestionUsuario(
             'P', #Operacion
+            NULL, #Id Usuario
+            '$correo', #Correo
+            NULL, #Contraseña
+            NULL, #Rol de usuario
+            NULL, #PFP
+            NULL, #Descripción
+            NULL, # Nombre(s)
+            NULL, # Apellido Paterno
+            NULL, # Apellido Materno
+            NULL, # Fecha de nacimiento
+            NULL, # Genero
+            NULL # Flag Perfil Bloqueado    
+
+        ); ";
+        $query = $this->connect()->query($update);
+        return $query;
+    }
+
+    
+    // QUERY Actualizar Bloqueo por id
+
+    function actualizarBloqueo($Usuario_id)
+    {
+        $update = "CALL sp_GestionUsuario(
+            'T', #Operacion
             $Usuario_id, #Id Usuario
             NULL, #Correo
             NULL, #Contraseña
@@ -168,7 +193,7 @@ class User extends DB
             NULL, # Apellido Materno
             NULL, # Fecha de nacimiento
             NULL, # Genero
-            $isBloqueado # Flag Perfil Bloqueado    
+            NULL # Flag Perfil Bloqueado    
 
         ); ";
         $query = $this->connect()->query($update);

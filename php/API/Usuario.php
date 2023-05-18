@@ -141,12 +141,16 @@ class usuarioAPI
         $user->actualizarUser($Usuario_id, $correo, $contraseña, $rol, $user_IMG, $descripcion, $names, $lastNameP, $lastNameM, $fechaNac,  $genero);
     }
 
-    function actualizarBloqueo($Usuario_id, $isBloqueado)
+    function BloqueoUsuario($correo)
     {
         $user = new User();
-        $user->actualizarBloqueo($Usuario_id, $isBloqueado);
+        $user->bloqueoUsuario($correo);
     }
-
+    function actualizarBloqueo($Usuario_id)
+    {
+        $user = new User();
+        $user->actualizarBloqueo($Usuario_id);
+    }
     function cerrarSesion()
     {
         session_start();
@@ -209,9 +213,13 @@ if (isset($_POST['funcion'])) {
             $var->getUserBloqueadosData();
             break;
 
+        case "bloquearUsuario":
+            $var = new usuarioAPI();
+            $var->BloqueoUsuario($_POST['correo']);
+            break;
         case "actualizarBloqueo":
             $var = new usuarioAPI();
-            $var->actualizarBloqueo($_POST['Usuario_id'], $_POST['isBloqueado']);
+            $var->actualizarBloqueo($_POST['Usuario_id']);
             break;
     }
 }

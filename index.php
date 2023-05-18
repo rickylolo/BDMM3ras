@@ -543,8 +543,7 @@ session_start(); // Inicio mi sesion PHP
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="EditUser"
-                            data-bs-dismiss="modal">Actualizar</button>
+                        <button type="button" class="btn btn-primary" id="EditUser">Actualizar</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>

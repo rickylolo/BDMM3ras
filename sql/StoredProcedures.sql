@@ -62,7 +62,10 @@ BEGIN
           DELETE FROM Usuario WHERE  Usuario_id = sp_Usuario_id;
    END IF;
       IF Operacion = 'P' THEN /*BLOQUEAR/DESBLOQUEAR USUARIO*/
-          UPDATE Usuario SET esBloqueado = sp_esBloqueado WHERE Usuario_id = sp_Usuario_id;
+          UPDATE Usuario SET esBloqueado = 1 WHERE correo = sp_correo;
+   END IF;
+     IF Operacion = 'T' THEN /*BLOQUEAR/DESBLOQUEAR USUARIO*/
+          UPDATE Usuario SET esBloqueado = 0 WHERE Usuario_id= sp_Usuario_id;
    END IF;
     IF Operacion = 'L' THEN /*LOG IN USUARIO*/
 		SELECT Usuario_id, rolUsuario
@@ -397,7 +400,6 @@ BEGIN
    END IF;
 END //
 
-SELECT * FROM usuarioCurso;
 
 
 /*--------------------------------------------------------------------------------CURSO CATEGORIA--------------------------------------------------------------------------*/

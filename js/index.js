@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  let contadorBloqueo = 0
   $('.SexoUsuario').on('click', function (event) {
     event.preventDefault()
     $('#gender-user').val($(this).text())
@@ -6,7 +7,7 @@ $(document).ready(function () {
 
   $('.E_SexoUsuario').on('click', function (event) {
     event.preventDefault()
-    $('#E-gender-user').val($(this).text())
+    $('#E_generoUsuario').val($(this).text())
   })
 
   $('#Valoraciones').hide()
@@ -1343,6 +1344,16 @@ $(document).ready(function () {
     var genero = $('#E_generoUsuario').val()
     var fechaNacimiento = $('#E_FechaNacimiento').val()
 
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    if (contrasenia != '') {
+      if (!regex.test(contrasenia)) {
+        alert(
+          'La contraseña no cumple con las caracteristicas antes mencionados'
+        )
+        return
+      }
+    }
     if (contrasenia != confirmar_Contrasenia) {
       alert('La contraseña no coincide reintenta nuevamente')
       return
@@ -1373,6 +1384,7 @@ $(document).ready(function () {
       processData: false,
     })
       .done(function () {
+        $('#miModalEditUser').modal('hide')
         cargarDatosUser()
         alert('Perfil Actualizado Correctamente')
       })
@@ -1401,7 +1413,15 @@ $(document).ready(function () {
         var items = JSON.parse(data)
 
         if (items.length == 0) {
-          alert('No existen usuarios con esas credenciales, intenta nuevamente')
+          if (contadorBloqueo == 3) {
+            contadorBloqueo = 0
+            bloquearUsuario(usuarioCorreo)
+            return
+          }
+          alert(
+            'No existen usuarios con esas credenciales o el usuario esta bloqueado, intenta nuevamente o contactenos en nuestras redes sociales'
+          )
+          contadorBloqueo++
           return
         }
         switch (items[0].rolUsuario) {
@@ -1422,6 +1442,24 @@ $(document).ready(function () {
       })
   }
 
+  function bloquearUsuario(correo) {
+    $.ajax({
+      url: 'php/API/Usuario.php',
+      type: 'POST',
+      data: {
+        funcion: 'bloquearUsuario',
+        correo: correo,
+      },
+    })
+      .done(function (data) {
+        console.log(data)
+        alert('Correo: ' + correo + 'Bloqueado')
+      })
+      // MANEJO DE ERRORES DEL SERVIDOR
+      .fail(function (jqXHR, textStatus, errorThrown) {
+        console.log('Error: ' + errorThrown)
+      })
+  }
   // ----------------------------- REGISTRO DATOS -----------------
   // Registro de usuarios con dataform
   //-------------------------ESTUDIANTE----------------------------
@@ -1438,6 +1476,16 @@ $(document).ready(function () {
     var fechaNacimiento = $('#Birthday').val()
     var genero = $('#gender-user').val()
     var file_data = $('#userIMG').prop('files')[0]
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    if (contrasenia != '') {
+      if (!regex.test(contrasenia)) {
+        alert(
+          'La contraseña no cumple con las caracteristicas antes mencionados'
+        )
+        return
+      }
+    }
     //VERIFICAR INFORMACION
     if (contrasenia != contrasenia_confirmar) {
       alert('La contraseña no coincide reintenta nuevamente')
@@ -1518,6 +1566,16 @@ $(document).ready(function () {
     var fechaNacimiento = $('#Birthday').val()
     var genero = $('#gender-user').val()
     var file_data = $('#userIMG').prop('files')[0]
+    const regex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+    if (contrasenia != '') {
+      if (!regex.test(contrasenia)) {
+        alert(
+          'La contraseña no cumple con las caracteristicas antes mencionados'
+        )
+        return
+      }
+    }
     //VERIFICAR INFORMACION
     if (contrasenia != contrasenia_confirmar) {
       alert('La contraseña no coincide reintenta nuevamente')

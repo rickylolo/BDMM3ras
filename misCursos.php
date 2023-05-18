@@ -445,7 +445,7 @@ session_start(); // Inicio mi sesion PHP
         </div>
     </div>
 
-    <!--  >MODAL EDIT USER<-->
+     <!--  >MODAL EDIT USER<-->
     <div class="modal fade" id="miModalEditUser" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
         data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
@@ -520,7 +520,7 @@ session_start(); // Inicio mi sesion PHP
                             <span class="input-group-text" id="basic-addon1"> <i
                                     class="bi bi-file-person-fill"></i></span>
 
-                            <textarea row="8" class="form-control" id="E_descripcion" name="E_descripcion"
+                            <textarea rows="8" class="form-control" id="E_descripcion" name="E_descripcion"
                                 placeholder="Describete" aria-label="Username" aria-describedby="basic-addon1"
                                 value=""></textarea>
 
@@ -570,11 +570,11 @@ session_start(); // Inicio mi sesion PHP
                         </div>
                         <div class="input-group mb-3">
                             <div class="dropdown input-group-text" id="basic-addon1">
-                                <button class="btn dropdown-toggle text-black-50" type="button" id="dropdownMenuButton3"
+                                <button class="btn dropdown-toggle text-black-50" type="button" id="dropdownMenuButton2"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Selecciona aquí:
                                 </button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                                     <li><a href=" " class="dropdown-item E_SexoUsuario">Hombre</a></li>
                                     <li><a href=" " class="dropdown-item E_SexoUsuario">Mujer</a></li>
                                     <li><a href=" " class="dropdown-item E_SexoUsuario">Otro</a></li>
@@ -601,14 +601,14 @@ session_start(); // Inicio mi sesion PHP
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="EditUser"
-                            data-bs-dismiss="modal">Actualizar</button>
+                        <button type="button" class="btn btn-primary" id="EditUser">Actualizar</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
 
 
     <!--  >MODAL WINDOW MENSAJES<-->

@@ -148,10 +148,7 @@ session_start(); // Inicio mi sesion PHP
                 <nav class="navbar navbar-light" id="buscarUsersBlock">
                     <div class="container-fluid">
                         <a class="navbar-brand fs-3 fw-bold p-2">Usuarios bloqueados</a>
-                        <form class="d-flex">
-                            <input class="form-control" type="search" placeholder="Buscar Usuario" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-                        </form>
+                    
                     </div>
                 </nav>
                 <hr class="solid">
@@ -164,10 +161,7 @@ session_start(); // Inicio mi sesion PHP
                 <nav class="navbar navbar-light" id="buscarUsersBlock">
                     <div class="container-fluid">
                         <a class="navbar-brand fs-3 fw-bold">Categorias</a>
-                        <form class="d-flex">
-                            <input class="form-control" type="search" placeholder="Buscar Categoria" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-                        </form>
+                       
                     </div>
                 </nav>
                 <hr class="solid">
@@ -180,10 +174,7 @@ session_start(); // Inicio mi sesion PHP
                 <nav class="navbar navbar-light" id="buscarUsersBlock">
                     <div class="container-fluid">
                         <a class="navbar-brand fs-3 fw-bold">Método de pago</a>
-                        <form class="d-flex">
-                            <input class="form-control" type="search" placeholder="Buscar Método de pago" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
-                        </form>
+                      
                     </div>
                 </nav>
                 <hr class="solid">
@@ -630,8 +621,9 @@ session_start(); // Inicio mi sesion PHP
         </div>
     </div>
 
-    <!--  >MODAL EDIT USER<-->
-    <div class="modal fade" id="miModalEditUser" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle" data-bs-backdrop="static">
+     <!--  >MODAL EDIT USER<-->
+    <div class="modal fade" id="miModalEditUser" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
+        data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content p-3">
                 <div class="modal-header">
@@ -651,7 +643,9 @@ session_start(); // Inicio mi sesion PHP
                             <label for="E_userIMG">
                                 <img src="" alt="" id="E_imgFoto" width="250px" height="250px">
                             </label>
-                            <input type="file" onchange="vista_preliminarEdit(event)" accept="image/jpeg" class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil" aria-label="Username" aria-describedby="basic-addon1">
+                            <input type="file" onchange="vista_preliminarEdit(event)" accept="image/jpeg"
+                                class="form-control" id="E_userIMG" name="E_userIMG" placeholder="Foto de perfil"
+                                aria-label="Username" aria-describedby="basic-addon1">
 
 
                         </div>
@@ -663,7 +657,9 @@ session_start(); // Inicio mi sesion PHP
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">@</span>
 
-                            <input type="text" class="form-control" id="E_email" name="E_email" placeholder="Correo Electrónico" aria-label="Username" aria-describedby="basic-addon1" value="">
+                            <input type="text" class="form-control" id="E_email" name="E_email"
+                                placeholder="Correo Electrónico" aria-label="Username" aria-describedby="basic-addon1"
+                                value="">
 
                         </div>
 
@@ -672,7 +668,8 @@ session_start(); // Inicio mi sesion PHP
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"> <i class="bi bi-key"></i></span>
-                            <input type="password" class="form-control" id="E_contrasenia" name="E_contrasenia" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" value="">
+                            <input type="password" class="form-control" id="E_contrasenia" name="E_contrasenia"
+                                placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" value="">
 
                         </div>
                         <p style="font-size: small;">Contraseña con un mínimo de 8 caracteres, una
@@ -685,7 +682,9 @@ session_start(); // Inicio mi sesion PHP
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"> <i class="bi bi-key"></i></span>
-                            <input type="password" class="form-control" id="E_confirmarContrasenia" name="E_confirmarContrasenia" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1" value="">
+                            <input type="password" class="form-control" id="E_confirmarContrasenia"
+                                name="E_confirmarContrasenia" placeholder="Contraseña" aria-label="Username"
+                                aria-describedby="basic-addon1" value="">
 
                         </div>
 
@@ -694,9 +693,12 @@ session_start(); // Inicio mi sesion PHP
                             Descripción
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
+                            <span class="input-group-text" id="basic-addon1"> <i
+                                    class="bi bi-file-person-fill"></i></span>
 
-                            <textarea row="8" class="form-control" id="E_descripcion" name="E_descripcion" placeholder="Describete" aria-label="Username" aria-describedby="basic-addon1" value=""></textarea>
+                            <textarea rows="8" class="form-control" id="E_descripcion" name="E_descripcion"
+                                placeholder="Describete" aria-label="Username" aria-describedby="basic-addon1"
+                                value=""></textarea>
 
                         </div>
 
@@ -705,7 +707,8 @@ session_start(); // Inicio mi sesion PHP
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1"><i class="bi bi-file-person"></i></span>
-                            <input type="text" class="form-control" id="E_names" name="E_names" placeholder="Nombre(s)" aria-label="Username" aria-describedby="basic-addon1" value="">
+                            <input type="text" class="form-control" id="E_names" name="E_names" placeholder="Nombre(s)"
+                                aria-label="Username" aria-describedby="basic-addon1" value="">
 
                         </div>
 
@@ -714,9 +717,12 @@ session_start(); // Inicio mi sesion PHP
                             Apellido Paterno
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
+                            <span class="input-group-text" id="basic-addon1"> <i
+                                    class="bi bi-file-person-fill"></i></span>
 
-                            <input type="text" class="form-control" id="E_lastNameP" name="E_lastNameP" placeholder="Apellido Paterno" aria-label="Username" aria-describedby="basic-addon1" value="">
+                            <input type="text" class="form-control" id="E_lastNameP" name="E_lastNameP"
+                                placeholder="Apellido Paterno" aria-label="Username" aria-describedby="basic-addon1"
+                                value="">
 
                         </div>
 
@@ -726,9 +732,12 @@ session_start(); // Inicio mi sesion PHP
                             Apellido Materno
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
+                            <span class="input-group-text" id="basic-addon1"> <i
+                                    class="bi bi-file-person-fill"></i></span>
 
-                            <input type="text" class="form-control" id="E_lastNameM" name="E_lastNameM" placeholder="Apellido Materno" aria-label="Username" aria-describedby="basic-addon1" value="">
+                            <input type="text" class="form-control" id="E_lastNameM" name="E_lastNameM"
+                                placeholder="Apellido Materno" aria-label="Username" aria-describedby="basic-addon1"
+                                value="">
 
                         </div>
 
@@ -737,7 +746,8 @@ session_start(); // Inicio mi sesion PHP
                         </div>
                         <div class="input-group mb-3">
                             <div class="dropdown input-group-text" id="basic-addon1">
-                                <button class="btn dropdown-toggle text-black-50" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="btn dropdown-toggle text-black-50" type="button" id="dropdownMenuButton2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     Selecciona aquí:
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
@@ -746,16 +756,20 @@ session_start(); // Inicio mi sesion PHP
                                     <li><a href=" " class="dropdown-item E_SexoUsuario">Otro</a></li>
                                 </ul>
                             </div>
-                            <input type="text" class="form-control" name="gender-user" id="E_generoUsuario" placeholder="Sexo" aria-label="Sexo" aria-describedby="basic-addon1" required>
+                            <input type="text" class="form-control" name="gender-user" id="E_generoUsuario"
+                                placeholder="Sexo" aria-label="Sexo" aria-describedby="basic-addon1" required>
                         </div>
 
                         <div class="row fw-bold fs-6 ms-3 mb-2">
                             Fecha de nacimiento
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1"> <i class="bi bi-file-person-fill"></i></span>
+                            <span class="input-group-text" id="basic-addon1"> <i
+                                    class="bi bi-file-person-fill"></i></span>
 
-                            <input type="date" class="form-control" id="E_FechaNacimiento" name="E_FechaNacimiento" placeholder="Fecha de Nacimiento" aria-label="Fecha Nacimiento" aria-describedby="basic-addon1" value="">
+                            <input type="date" class="form-control" id="E_FechaNacimiento" name="E_FechaNacimiento"
+                                placeholder="Fecha de Nacimiento" aria-label="Fecha Nacimiento"
+                                aria-describedby="basic-addon1" value="">
 
                         </div>
 
@@ -763,13 +777,14 @@ session_start(); // Inicio mi sesion PHP
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="EditUser" data-bs-dismiss="modal">Actualizar</button>
+                        <button type="button" class="btn btn-primary" id="EditUser">Actualizar</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
 
     <!--FOOTER<-->
     <footer class="w-100 d-flex justify-content-center flex-wrap">
