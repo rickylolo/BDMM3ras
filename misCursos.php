@@ -38,23 +38,10 @@ session_start(); // Inicio mi sesion PHP
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="bi bi-list"></i> Categorías
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="misCategoriasNav">
-
-
-                            </ul>
-                        </li>
+                    
 
                     </ul>
-                    <form class="d-flex me-2" role="search">
-                        <input class="form-control " type="search" placeholder="Buscar" aria-label="Buscar">
-                        <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
-
-                    </form>
+                
                     <div class="p-2">
                         <?php
                         if ($_SESSION == NULL) {
@@ -164,7 +151,7 @@ session_start(); // Inicio mi sesion PHP
             <ul class="nav nav-tabs justify-content-end">
 
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="">Todos</a>
+                    <a class="nav-link active" aria-current="page">Todos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="mostrarKardex">Kardex</a>
@@ -199,51 +186,48 @@ session_start(); // Inicio mi sesion PHP
                 <div class="container-fluid">
                     <a class="navbar-brand fs-5 p-2">Filtros</a>
                     <form class="d-flex">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        <div class="dropdown pe-2">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton5"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Cursos
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="">Terminados</a></li>
-                                <li><a class="dropdown-item" href="">Activos</a></li>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton5">
+                                <li id="verKardexTerminados"><a class="dropdown-item" >Terminados</a></li>
+                                <li id="verKardexActivos"><a class="dropdown-item" >Activos</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="">Todos</a></li>
+                                <li id="verKardexTodos"><a class="dropdown-item" >Todos</a></li>
 
                             </ul>
                         </div>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2"
+                        <div class="dropdown pe-2">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton7"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Categorias
                             </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                                <li><a class="dropdown-item" href="">Desarrollo</a></li>
-                                <li><a class="dropdown-item" href="">Negocios</a></li>
-                                <li><a class="dropdown-item" href="">Finanzas</a></li>
-                                <li><a class="dropdown-item" href="">Cocina</a></li>
-                                <li><a class="dropdown-item" href="">Productividad</a></li>
-                                <li><a class="dropdown-item" href="">Diseño</a></li>
-                                <li><a class="dropdown-item" href="">Marketing</a></li>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton7">
+                         
                             </ul>
                         </div>
-                        <input class="form-control" type="search" placeholder="Buscar curso" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                        <input class="form-control ps-2" type="search" id="miTextoSearchKardex" placeholder="Buscar curso" aria-label="Search">
+                        <button class="btn btn-outline-success" type="button" id="BuscarSearchKardex"><i class="bi bi-search"></i></button>
                     </form>
 
                 </div>
 
-                <div class="container-fluid">
+        
+            </nav>
+                <div class="d-flex justify-content-end">
+                     <div class="pe-2">
                     <div class="input-group">
                         <span class="input-group-text">Rango de fechas</span>
                         <input type="date" aria-label="First name" class="form-control">
                         <input type="date" aria-label="Last name" class="form-control">
                         <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
                     </div>
+                     </div>
                 </div>
-            </nav>
             <div class="list-group">
                 <div class="d-flex pt-4 pe-4 justify-content-end" id="miTotalDeCursosResultados">Total de cursos: 3
                 </div>
@@ -609,8 +593,6 @@ session_start(); // Inicio mi sesion PHP
         </div>
     </div>
 
-
-
     <!--  >MODAL WINDOW MENSAJES<-->
     <div class="modal fade" id="miModalMensaje" tabindex="-1" aria-hidden="true" aria-labelledby="modalTitle"
         data-bs-backdrop="static">
@@ -656,7 +638,7 @@ session_start(); // Inicio mi sesion PHP
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <input type="text" id="miCursoSeleccionadoComentario">
+                    <input type="hidden" id="miCursoSeleccionadoComentario">
 
                     <div class="row fw-bold fs-6 ms-3 mb-2">
                         Escribe tu comentario:

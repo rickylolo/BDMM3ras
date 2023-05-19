@@ -40,6 +40,21 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
+
+        if (items.length == 0) {
+          $('#misCategoriasDashboard').empty()
+          $('#misCategoriasDashboard').append(
+            `
+               <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading text-center">No hay categorias</h4>
+                            <p class="text-center">Aqui apareceran las categorias</p>
+                            <hr>    
+                    
+                        </div>
+          `
+          )
+          return
+        }
         $('#misCategoriasNav').empty()
         $('#misCategoriasDashboard').empty()
         for (let i = 0; i < items.length; i++) {
@@ -105,6 +120,20 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
+        if (items.length == 0) {
+          $('#usuariosBloqueadosDashboard').empty()
+          $('#usuariosBloqueadosDashboard').append(
+            `
+               <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading text-center">No hay usuarios</h4>
+                            <p class="text-center">Aqui apareceran los usuarios bloqueados</p>
+                            <hr>    
+                    
+                        </div>
+          `
+          )
+          return
+        }
         $('#usuariosBloqueadosDashboard').empty()
         for (let i = 0; i < items.length; i++) {
           $('#usuariosBloqueadosDashboard').append(
@@ -153,6 +182,20 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
+        if (items.length == 0) {
+          $('#misMetodosPagoDashboard').empty()
+          $('#misMetodosPagoDashboard').append(
+            `
+               <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading text-center">No hay metodos de pago</h4>
+                            <p class="text-center">Aqui apareceran los metodos de pago</p>
+                            <hr>    
+                          
+                        </div>
+          `
+          )
+          return
+        }
         $('#misMetodosPagoDashboard').empty()
         for (let i = 0; i < items.length; i++) {
           $('#misMetodosPagoDashboard').append(

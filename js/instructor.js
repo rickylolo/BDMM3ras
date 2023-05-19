@@ -95,8 +95,8 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
+        $('#miReporteInstructor').empty()
         if (items.length == 0) {
-          $('#miReporteInstructor').empty()
           $('#miReporteInstructor').append(`
                           <div class="alert alert-primary" role="alert">
                             <h4 class="alert-heading text-center">No hay cursos en progreso</h4>
@@ -105,7 +105,6 @@ $(document).ready(function () {
                         </div>`)
           return
         }
-        $('#miReporteInstructor').empty()
         for (let i = 0; i < items.length; i++) {
           if (items[i].categoriaNombre == null)
             items[i].categoriaNombre = 'Ninguna categoría'
@@ -160,39 +159,68 @@ $(document).ready(function () {
       })
   }
 
-  cargarIngresosMetodosPago()
-  function cargarIngresosMetodosPago() {
+  cargarReporteCursoBaja()
+  function cargarReporteCursoBaja() {
     $.ajax({
       type: 'POST',
-      data: { funcion: 'getReporteIngresosMetodo' },
+      data: { funcion: 'getReporteInstructorBaja' },
       url: 'php/API/Curso.php',
     })
       .done(function (data) {
         var items = JSON.parse(data)
-        $('#misMetodosPago').empty()
+        $('#miReporteInstructorBaja').empty()
+        if (items.length == 0) {
+          $('#miReporteInstructorBaja').append(`
+                               <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading text-center">No hay cursos dados de baja</h4>
+                            <p class="text-center">Puedes dar de baja cursos que ya hayas aprobado previamente.</p>
+                            <hr>               
+                        </div>`)
+          return
+        }
         for (let i = 0; i < items.length; i++) {
-          $('#misMetodosPago').append(
-            `
-           <a class="list-group-item list-group-item-action" aria-current="true">
-                        <div class="misMetodosImgs d-flex w-100 justify-content-between">
-                            <div class="d-flex flex-fill">
-                                <img  src="data:image/jpeg;base64,` +
-              items[i].imagenMetodo +
-              `">
-                                <p class="fs-5 p-3 fw-bold align-middle">` +
-              items[i].nombreMetodo +
+          if (items[i].categoriaNombre == null)
+            items[i].categoriaNombre = 'Ninguna categoría'
+
+          $('#miReporteInstructorBaja').append(
+            `<a class="list-group-item list-group-item-action misCursosInstructor" aria-current="true">
+                    <div class="d-flex flex-row miImagen justify-content-between">
+                        <div class="d-flex justify-content-start">
+                            <img  src="data:image/jpeg;base64,` +
+              items[i].imagenCurso +
+              `" class="mt-2 pfp">
+                            <div class="p-1 d-flex flex-column">
+                                <p class="fs-5">` +
+              items[i].cursoNombre +
               `</p>
-
+                                <p class="text-muted fs-6">` +
+              items[i].categoriaNombre +
+              `</p>
                             </div>
-                            <p class="fs-6 p-3 fw-bold align-middle">` +
-              items[i].totalIngresos +
-              `MXN</p>
                         </div>
-
-
-                    </a>
-
-          `
+                        <div class="d-flex mt-2 justify-content-end">
+                            <div class="d-flex me-4 pt-2 pb-4">
+                                <p class="ps-4  text-muted fs-6 fw-light">Alumnos: <b>` +
+              items[i].noAlumnos +
+              `</b>
+                                </p>
+                                <p class="ps-4  text-muted fs-6 fw-light">Promedio nivel: <b>` +
+              items[i].Promedio +
+              `</b>
+                                </p>
+                                <p class="ps-4  text-muted fs-6 fw-light">Total ingresos: <b>` +
+              items[i].Ingresos +
+              ` MXN</b>
+                                </p>
+                            </div>
+                         
+                            <p class="mb-1 verCursoDetalle" id="` +
+              items[i].Curso_id +
+              `" data-bs-toggle="modal" data-bs-target="#miModalCursoDetalle"><button type="button" class="btn btn-success"><i class="bi bi-search"></i></button>
+                            </p>
+                        </div>
+                    </div>
+                </a> `
           )
         }
       })
@@ -210,8 +238,8 @@ $(document).ready(function () {
     })
       .done(function (data) {
         var items = JSON.parse(data)
+        $('#miReporteInstructorAprobados').empty()
         if (items.length == 0) {
-          $('#miReporteInstructorAprobados').empty()
           $('#miReporteInstructorAprobados').append(`
                                <div class="alert alert-primary" role="alert">
                             <h4 class="alert-heading text-center">No hay cursos aprobados</h4>
@@ -220,7 +248,6 @@ $(document).ready(function () {
                         </div>`)
           return
         }
-        $('#miReporteInstructorAprobados').empty()
         for (let i = 0; i < items.length; i++) {
           if (items[i].categoriaNombre == null)
             items[i].categoriaNombre = 'Ninguna categoría'
@@ -267,6 +294,47 @@ $(document).ready(function () {
                         </div>
                     </div>
                 </a> `
+          )
+        }
+      })
+      .fail(function (data) {
+        console.error(data)
+      })
+  }
+
+  cargarIngresosMetodosPago()
+  function cargarIngresosMetodosPago() {
+    $.ajax({
+      type: 'POST',
+      data: { funcion: 'getReporteIngresosMetodo' },
+      url: 'php/API/Curso.php',
+    })
+      .done(function (data) {
+        var items = JSON.parse(data)
+        $('#misMetodosPago').empty()
+        for (let i = 0; i < items.length; i++) {
+          $('#misMetodosPago').append(
+            `
+           <a class="list-group-item list-group-item-action" aria-current="true">
+                        <div class="misMetodosImgs d-flex w-100 justify-content-between">
+                            <div class="d-flex flex-fill">
+                                <img  src="data:image/jpeg;base64,` +
+              items[i].imagenMetodo +
+              `">
+                                <p class="fs-5 p-3 fw-bold align-middle">` +
+              items[i].nombreMetodo +
+              `</p>
+
+                            </div>
+                            <p class="fs-6 p-3 fw-bold align-middle">` +
+              items[i].totalIngresos +
+              `MXN</p>
+                        </div>
+
+
+                    </a>
+
+          `
           )
         }
       })
@@ -645,6 +713,11 @@ $(document).ready(function () {
 
   // -- VER REPORTE CURSO DETALLE --
   $('#miReporteInstructorAprobados').on(
+    'click',
+    '.verCursoDetalle',
+    funcVerReporteCursoDetalle
+  )
+  $('#miReporteInstructorBaja').on(
     'click',
     '.verCursoDetalle',
     funcVerReporteCursoDetalle

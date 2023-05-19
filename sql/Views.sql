@@ -176,14 +176,13 @@ GROUP BY  E.MetodoPago_id;
 
 DROP VIEW IF EXISTS vKardex;
 CREATE VIEW vKardex AS
-SELECT A.Usuario_id, B.Curso_id, B.isFinalizado, imagenCurso, C.nombre nombreCurso, CONCAT(nivelesCompletados,'/',noNiveles) Progreso, D.tiempoRegistro ultimoNivel, F.nombre nombreCategoria, B.tiempoCompletado, B.tiempoRegistro
+SELECT A.Usuario_id, B.Curso_id, B.isFinalizado, C.isBaja, imagenCurso,C.isBorrador, C.nombre nombreCurso, CONCAT(nivelesCompletados,'/',noNiveles) Progreso, D.tiempoRegistro ultimoNivel, F.nombre nombreCategoria, B.tiempoCompletado, B.tiempoRegistro
 FROM Usuario A
  JOIN usuarioCurso B ON A.Usuario_id= B.Usuario_id
  JOIN Curso C ON B.Curso_id = C.Curso_id
  JOIN nivelCurso D ON B.usuarioCurso_id = D.usuarioCurso_id
  JOIN CursoCategoria E ON E.Curso_id = C.Curso_id
  JOIN Categoria F ON E.Categoria_id = F.Categoria_id
- WHERE C.isBorrador <> 1
 GROUP BY A.Usuario_id,B.Curso_id;
 
 

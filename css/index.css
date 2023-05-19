@@ -31,10 +31,10 @@
   display: none;
 }
 .image-upload img {
-  border-radius: 1%;
-  width: 75%;
-  object-fit: contain;
-  max-height: 35rem;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  object-fit: cover;
 }
 #navbarCursosInstructor {
   background: white;

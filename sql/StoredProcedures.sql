@@ -202,6 +202,12 @@ BEGIN
         FROM vCursoInstructor
         WHERE Usuario_id = sp_Usuario_id AND isBorrador = 0 AND isBaja <> 1;
    END IF;
+   
+      	IF Operacion = 'F' THEN /*GET REPORTE INSTRUCTOR BAJA*/
+		SELECT Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, cursoNombre, descripcion, isBaja, CursoCategoria_id, categoriaNombre, Ingresos, Promedio, noAlumnos
+        FROM vCursoInstructor
+        WHERE Usuario_id = sp_Usuario_id AND isBorrador = 0 AND isBaja = 1;
+   END IF;
       	IF Operacion = 'Q' THEN /*GET INGRESOS METODOS*/
 		SELECT Usuario_id, nombreMetodo, imagenMetodo, totalIngresos
         FROM vObtenerTotalGananciasReporteInstructor
@@ -210,31 +216,52 @@ BEGIN
         IF Operacion = 'X' THEN /*GET CURSO MEJOR CALIFICADO */
 		SELECT nombreCompleto, Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
 		FROM vCursosMejorCalificado
-		WHERE isBaja <> 1;
+		WHERE isBaja <> 1 LIMIT 4;
    END IF;
         IF Operacion = 'Y' THEN /*GET CURSOS MAS VENDIDOS*/
 		SELECT nombreCompleto, Curso_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja, misCursosVendidos
         FROM vCursosMasVendido
-		WHERE isBaja <> 1;
+		WHERE isBaja <> 1 LIMIT 4;
    END IF;
         IF Operacion = 'Z' THEN /*GET CURSOS MAS RECIENTES*/
 		SELECT CONCAT(B.nombre,' ',apellidoPaterno,' ',apellidoMaterno) AS nombreCompleto, Curso_id, A.Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, A.nombre, A.descripcion, isBaja
         FROM vCurso A
         LEFT JOIN Usuario B
 		ON A.Usuario_id= B.Usuario_id 
-        WHERE isBaja <> 1;
+        WHERE isBaja <> 1 LIMIT 4;
    END IF;
 	IF Operacion = 'S' THEN /*GET CURSOS SEARCH*/
 		SELECT CONCAT(B.nombre,' ',apellidoPaterno,' ',apellidoMaterno) AS nombreCompleto, Curso_id, A.Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, A.nombre, A.descripcion, isBaja
         FROM vCurso A
         LEFT JOIN Usuario B
 		ON A.Usuario_id= B.Usuario_id 
-        WHERE isBaja <> 1 AND  (sp_nombre IS NULL OR A.nombre LIKE CONCAT("%",sp_nombre,"%"));
+        WHERE isBaja <> 1 AND  (sp_nombre IS NULL OR A.nombre LIKE CONCAT("%",sp_nombre,"%")) LIMIT 20;
    END IF;
-		IF Operacion = 'K' THEN /*GET KARDEX*/
-		SELECT Usuario_id, Curso_id, isFinalizado, imagenCurso, nombreCurso, Progreso, DATE(ultimoNivel) ultimoNivel, nombreCategoria, DATE(tiempoCompletado) tiempoCompletado,DATE(tiempoRegistro) tiempoRegistro
-        FROM vKardex
+		IF Operacion = 'K' THEN /*GET KARDEX TODOS*/
+		SELECT Usuario_id,isBaja, Curso_id, isFinalizado, imagenCurso, nombreCurso, Progreso, DATE(ultimoNivel) ultimoNivel, nombreCategoria, DATE(tiempoCompletado) tiempoCompletado,DATE(tiempoRegistro) tiempoRegistro
+        FROM vKardex 
         WHERE Usuario_id = sp_Usuario_id;
+
+   END IF;
+   
+   		IF Operacion = 'O' THEN /*GET KARDEX TODOS SEARCH*/
+		SELECT Usuario_id,isBaja, Curso_id, isFinalizado, imagenCurso, nombreCurso, Progreso, DATE(ultimoNivel) ultimoNivel, nombreCategoria, DATE(tiempoCompletado) tiempoCompletado,DATE(tiempoRegistro) tiempoRegistro
+        FROM vKardex 
+        WHERE Usuario_id = sp_Usuario_id AND (sp_nombre IS NULL OR nombreCurso LIKE CONCAT("%",sp_nombre,"%"));
+
+   END IF;
+   
+   	IF Operacion = 'N' THEN /*GET KARDEX ACTIVOS*/
+		SELECT Usuario_id, Curso_id, isFinalizado, imagenCurso, nombreCurso, Progreso, DATE(ultimoNivel) ultimoNivel, nombreCategoria, DATE(tiempoCompletado) tiempoCompletado,DATE(tiempoRegistro) tiempoRegistro
+        FROM vKardex 
+        WHERE Usuario_id = sp_Usuario_id AND isBaja = 0;
+
+   END IF;
+      	IF Operacion = 'H' THEN /*GET KARDEX FINALIZADOS*/
+		SELECT Usuario_id, Curso_id, isFinalizado, imagenCurso, nombreCurso, Progreso, DATE(ultimoNivel) ultimoNivel, nombreCategoria, DATE(tiempoCompletado) tiempoCompletado,DATE(tiempoRegistro) tiempoRegistro
+        FROM vKardex 
+        WHERE Usuario_id = sp_Usuario_id AND isFinalizado = 1;
+
    END IF;
    		IF Operacion = 'C' THEN /*GET DIPLOMA*/
 		SELECT Usuario_id, Curso_id, Alumno, tiempoCompletado, Instructor, nombreCurso
@@ -666,7 +693,7 @@ SELECT * FROM UsuarioCurso;
 SELECT * FROM nivelCurso;
 DELETE FROM nivelCurso;
 DELETE FROM UsuarioCurso;
-
+DELETE FROM comentarioCurso;
 CALL sp_GestionNivelCurso(
 'E',             #Operacion
 NULL, 		    #usuarioCurso Id

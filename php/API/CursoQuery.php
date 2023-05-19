@@ -151,6 +151,22 @@ class Curso extends DB
         return $query;
     }
 
+        function getReporteInstructorBaja($Usuario_id)
+    {
+        $get = "CALL sp_GestionCurso(
+            'F', 	#Operacion
+            NULL, 	# Curso Id
+            $Usuario_id, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            NULL,	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
        // QUERY GET DIPLOMA
 
     function getDiploma($Usuario_id, $Curso_id)
@@ -295,7 +311,6 @@ class Curso extends DB
     }
 
 
-        // QUERY Get Datos Cursos de un Usuario
     function getKardex($Usuario_id)
     {
         $get = "CALL sp_GestionCurso(
@@ -311,6 +326,56 @@ class Curso extends DB
         $query = $this->connect()->query($get);
         return $query;
     }
+
+    function getKardexSearch($Usuario_id, $Texto)
+    {
+        $get = "CALL sp_GestionCurso(
+            'O', 	#Operacion
+            NULL, 	# Curso Id
+            $Usuario_id, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            '$Texto',	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
+    function getKardexTerminados($Usuario_id)
+    {
+        $get = "CALL sp_GestionCurso(
+            'H', 	#Operacion
+            NULL, 	# Curso Id
+            $Usuario_id, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            NULL,	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
+     
+    function getKardexActivos($Usuario_id)
+    {
+        $get = "CALL sp_GestionCurso(
+            'N', 	#Operacion
+            NULL, 	# Curso Id
+            $Usuario_id, 	# Usuario Id
+            NULL,  	# Curso Costo
+            NULL,	# Curso Imagen
+            NULL,	# Curso Nombre
+            NULL, 	# Curso Descripcion
+            NULL 	# Curso isBaja
+        ); ";
+        $query = $this->connect()->query($get);
+        return $query;
+    }
+
 
 
     // ---------------------------------------INSERTAR INFORMACION------------------------------------------

@@ -34,22 +34,9 @@ session_start(); // Inicio mi sesion PHP
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="bi bi-list"></i> Categorías
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="misCategoriasNav">
-
-
-                        </ul>
-                    </li>
-
+               
                 </ul>
-                <form class="d-flex me-2" role="search">
-                    <input class="form-control " type="search" placeholder="Buscar" aria-label="Buscar">
-                    <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search"></i></button>
-
-                </form>
+              
                 <div class="p-2">
                     <?php
                     if ($_SESSION == NULL) {
@@ -170,6 +157,10 @@ session_start(); // Inicio mi sesion PHP
                  
                 </div>
 
+           <div class="fs-5 ps-2 fw-bold pt-4">Cursos Dados de Baja</div>
+                <div id="miReporteInstructorBaja" class="mt-1 mb-4">
+                 
+                </div>
 
 
 

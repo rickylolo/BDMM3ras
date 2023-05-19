@@ -427,6 +427,43 @@ class cursoAPI
         }
     }
 
+    function getReporteInstructorBaja($Usuario_id)
+    {
+
+        $Curso = new Curso();
+        $arrCursos = array();
+        $arrCursos["Datos"] = array();
+
+        $res = $Curso->getReporteInstructorBaja($Usuario_id);
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $obj = array(
+                    "Curso_id" => $row['Curso_id'],
+                    "Usuario_id" => $row['Usuario_id'],
+                    "noNiveles" => $row['noNiveles'],
+                    "costoCurso" => $row['costoCurso'],
+                    "noComentarios" => $row['noComentarios'],
+                    "noLikes" => $row['noLikes'],
+                    "noDislikes" => $row['noDislikes'],
+                    "imagenCurso" => base64_encode(($row['imagenCurso'])),
+                    "cursoNombre" => $row['cursoNombre'],
+                    "descripcion" => $row['descripcion'],
+                    "isBaja" => $row['isBaja'],
+                    "CursoCategoria_id" => $row['CursoCategoria_id'],
+                    "categoriaNombre" => $row['categoriaNombre'],
+                    "Ingresos" => $row['Ingresos'],
+                    "Promedio" => $row['Promedio'],
+                    "noAlumnos" => $row['noAlumnos']
+                );
+                array_push($arrCursos["Datos"], $obj);
+            }
+            echo json_encode($arrCursos["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
+    }
+    
     function insertarCursoCategoria($Curso_id, $Categoria_id)
     {
         $Curso = new Curso();
@@ -510,8 +547,95 @@ class cursoAPI
         }
     }
 
-    
+    function getKardexTerminados($Usuario_id)
+    {
+         $Curso = new Curso();
+        $arrCursos = array();
+        $arrCursos["Datos"] = array();
 
+        $res = $Curso->getKardexTerminados($Usuario_id);
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $obj = array( // nombreCategoria, tiempoCompletado
+                    "Curso_id" => $row['Curso_id'],
+                    "Usuario_id" => $row['Usuario_id'],
+                    "isFinalizado" => $row['isFinalizado'],
+                    "nombreCurso" => $row['nombreCurso'],
+                    "Progreso" => $row['Progreso'],
+                    "ultimoNivel" => $row['ultimoNivel'],
+                    "imagenCurso" => base64_encode(($row['imagenCurso'])),
+                    "nombreCategoria" => $row['nombreCategoria'],
+                    "tiempoCompletado" => $row['tiempoCompletado'],
+                     "tiempoRegistro" => $row['tiempoRegistro']
+                );
+                array_push($arrCursos["Datos"], $obj);
+            }
+            echo json_encode($arrCursos["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
+    }
+
+    function getKardexActivos($Usuario_id)
+    {
+         $Curso = new Curso();
+        $arrCursos = array();
+        $arrCursos["Datos"] = array();
+
+        $res = $Curso->getKardexActivos($Usuario_id);
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $obj = array( // nombreCategoria, tiempoCompletado
+                    "Curso_id" => $row['Curso_id'],
+                    "Usuario_id" => $row['Usuario_id'],
+                    "isFinalizado" => $row['isFinalizado'],
+                    "nombreCurso" => $row['nombreCurso'],
+                    "Progreso" => $row['Progreso'],
+                    "ultimoNivel" => $row['ultimoNivel'],
+                    "imagenCurso" => base64_encode(($row['imagenCurso'])),
+                    "nombreCategoria" => $row['nombreCategoria'],
+                    "tiempoCompletado" => $row['tiempoCompletado'],
+                     "tiempoRegistro" => $row['tiempoRegistro']
+                );
+                array_push($arrCursos["Datos"], $obj);
+            }
+            echo json_encode($arrCursos["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
+    }
+
+    function getKardexSearch($Usuario_id, $Texto)
+    {
+         $Curso = new Curso();
+        $arrCursos = array();
+        $arrCursos["Datos"] = array();
+
+        $res = $Curso->getKardexSearch($Usuario_id,$Texto);
+        if ($res) { // Entra si hay información
+            while ($row = $res->fetch(PDO::FETCH_ASSOC)) {
+                $obj = array( // nombreCategoria, tiempoCompletado
+                    "Curso_id" => $row['Curso_id'],
+                    "Usuario_id" => $row['Usuario_id'],
+                    "isFinalizado" => $row['isFinalizado'],
+                    "nombreCurso" => $row['nombreCurso'],
+                    "Progreso" => $row['Progreso'],
+                    "ultimoNivel" => $row['ultimoNivel'],
+                    "imagenCurso" => base64_encode(($row['imagenCurso'])),
+                    "nombreCategoria" => $row['nombreCategoria'],
+                    "tiempoCompletado" => $row['tiempoCompletado'],
+                     "tiempoRegistro" => $row['tiempoRegistro']
+                );
+                array_push($arrCursos["Datos"], $obj);
+            }
+            echo json_encode($arrCursos["Datos"]);
+        } else {
+            header("Location:../index.php");
+            exit();
+        }
+    }
     function getReporteCursoDetalleInstructor($Curso_id)
     {
          $Curso = new Curso();
@@ -640,11 +764,35 @@ if (isset($_POST['funcion'])) {
             $var = new cursoAPI();
             $var->getReporteInstructorAprobados($id);
             break;
-        case "getKardex":
+        case "getReporteInstructorBaja":
+            session_start();
+            $id = $_SESSION['Usuario_id'];
+            $var = new cursoAPI();
+            $var->getReporteInstructorBaja($id);
+            break;
+        case "getKardex": // TODOS
             session_start();
             $id = $_SESSION['Usuario_id'];
             $var = new cursoAPI();
             $var->getKardex($id);
+            break;
+        case "getKardexSearch": // BUSQUEDA
+            session_start();
+            $id = $_SESSION['Usuario_id'];
+            $var = new cursoAPI();
+            $var->getKardexSearch($id,$_POST['texto']);
+            break;
+        case "getKardexTerminados": // TERMINADOS
+            session_start();
+            $id = $_SESSION['Usuario_id'];
+            $var = new cursoAPI();
+            $var->getKardexTerminados($id);
+            break;
+        case "getKardexActivos": // ACTIVOS
+            session_start();
+            $id = $_SESSION['Usuario_id'];
+            $var = new cursoAPI();
+            $var->getKardexActivos($id);
             break;
         case "getDiploma":
             session_start();
