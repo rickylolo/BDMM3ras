@@ -151,7 +151,7 @@ class Curso extends DB
         return $query;
     }
 
-        function getReporteInstructorBaja($Usuario_id)
+    function getReporteInstructorBaja($Usuario_id)
     {
         $get = "CALL sp_GestionCurso(
             'F', 	#Operacion

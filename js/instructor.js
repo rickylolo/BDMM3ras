@@ -827,12 +827,21 @@ $(document).ready(function () {
   // -- CURSO --
   $('#ButtonRegistrarCurso').click(funcRegistrarCurso)
   function funcRegistrarCurso() {
-    var form_data = new FormData()
     var file_data = $('#cursoIMG').prop('files')[0]
     var descCurso = $('#descCurso').val()
     var nombreCurso = $('#nombreCurso').val()
     var costoCurso = $('#costoCurso').val()
 
+    if (!file_data) {
+      alert('Favor de cargar la imagen')
+      return
+    }
+    if (nombreCurso == '' || costoCurso == '' || descCurso == '') {
+      alert('Faltan llenar Campos')
+      return
+    }
+
+    var form_data = new FormData()
     form_data.append('funcion', 'insertarCurso')
     form_data.append('file', file_data)
     form_data.append('nombreCurso', nombreCurso)
@@ -874,13 +883,7 @@ $(document).ready(function () {
   function funcRegistrarCursoCategoria() {
     var idCurso = $('#miCursoSelectedEdit').val()
     var idCategoria = $('#miCategoriaParaCurso').val()
-    if (
-      idCurso == null ||
-      idCurso == '' ||
-      idCategoria == null ||
-      idCategoria == ''
-    )
-      return
+    if (idCurso == '' || idCategoria == '') return
 
     $.ajax({
       url: 'php/API/Curso.php',
@@ -907,6 +910,12 @@ $(document).ready(function () {
     var nombreNivel = $('#nivelName').val()
     var costoNivel = $('#costoNivel').val()
     var idCurso = $('#miCursoSelectedEdit').val()
+
+    if (nombreNivel == '' || costoNivel == '' || idCurso == '') {
+      alert('Faltan llenar Campos')
+      return
+    }
+
     $.ajax({
       url: 'php/API/Nivel.php',
       type: 'POST',
@@ -936,12 +945,17 @@ $(document).ready(function () {
   // -- MULTIMEDIA --
   $('#ButtonRegistrarMultimedia').click(funcRegistrarMultimedia)
   function funcRegistrarMultimedia() {
-    var form_data = new FormData()
     var file_data = $('#miMultimediaNivelModal').prop('files')[0]
     var texto = $('#TextoNivel').val()
     var Nivel_id = $('#miNivelSeleccionado').val()
     var tipoMultimedia = $('#miTipoMultimedia').val()
 
+    if (!file_data && texto == '') {
+      alert('Porfavor carga multimedia o escribe un texto')
+      return
+    }
+
+    var form_data = new FormData()
     form_data.append('funcion', 'registrarMultimedia')
     form_data.append('file', file_data)
     form_data.append('Nivel_id', Nivel_id)
@@ -977,13 +991,27 @@ $(document).ready(function () {
   // -- CURSO --
   $('#ButtonActualizarCurso').click(funcActualizarCurso)
   function funcActualizarCurso() {
-    var form_data = new FormData()
     var file_data = $('#E_cursoIMG').prop('files')[0]
     var descCurso = $('#E_descCurso').val()
     var nombreCurso = $('#E_nombreCurso').val()
     var costoCurso = $('#E_costoCurso').val()
     var cursoID = $('#miCursoSelectedEdit').val()
 
+    if (!file_data) {
+      alert('Favor de cargar la imagen')
+      return
+    }
+    if (
+      nombreCurso == '' ||
+      costoCurso == '' ||
+      descCurso == '' ||
+      cursoID == ''
+    ) {
+      alert('Faltan llenar Campos')
+      return
+    }
+
+    var form_data = new FormData()
     form_data.append('funcion', 'actualizarCurso')
     form_data.append('file', file_data)
     form_data.append('Curso_id', cursoID)
@@ -1018,6 +1046,16 @@ $(document).ready(function () {
     var costoNivel = $('#E_costoNivel').val()
     var idNivel = $('#miNivelSelected').val()
     var cursoID = $('#miCursoSelectedEdit').val()
+
+    if (
+      nombreNivel == '' ||
+      costoNivel == '' ||
+      idNivel == '' ||
+      cursoID == ''
+    ) {
+      alert('Faltan llenar Campos')
+      return
+    }
     $.ajax({
       url: 'php/API/Nivel.php',
       type: 'POST',
@@ -1041,12 +1079,16 @@ $(document).ready(function () {
   // -- MULTIMEDIA --
   $('#ButtonActualizarMultimedia').click(funcActualizarMultimedia)
   function funcActualizarMultimedia() {
-    var form_data = new FormData()
     var multimediaId = $('#miMultimediaSeleccionada').val()
     var file_data = $('#E_miMultimediaNivelModal').prop('files')[0]
     var texto = $('#E_TextoNivel').val()
     var tipoMultimedia = $('#E_miTipoMultimedia').val()
 
+    if (!file_data && texto == '') {
+      alert('Porfavor carga multimedia o escribe un texto')
+      return
+    }
+    var form_data = new FormData()
     form_data.append('funcion', 'actualizarMultimedia')
     form_data.append('file', file_data)
     form_data.append('Multimedia_id', multimediaId)

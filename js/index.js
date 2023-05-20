@@ -98,7 +98,9 @@ $(document).ready(function () {
     })
       .done(function (data) {
         if (data == 0) return
+
         var items = JSON.parse(data)
+        if (items.length == 0) return
         // // Datos de mi navbar
 
         // Imagen 1
