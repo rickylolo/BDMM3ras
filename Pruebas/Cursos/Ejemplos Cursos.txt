@@ -1,0 +1,30 @@
+1	Introducción a la Fotografía Digital	
+Aprende los fundamentos de la fotografía digital, desde el manejo de la cámara hasta la edición.	$500
+
+2	Desarrollo Web para Principiantes	
+Descubre los conceptos básicos del desarrollo web utilizando HTML, CSS y JavaScript.	$750
+
+3	Marketing Digital Avanzado	
+Amplía tus conocimientos en marketing digital y descubre estrategias avanzadas de promoción.	$1000
+
+4	Inglés Conversacional Intensivo
+Mejora tus habilidades de conversación en inglés a través de ejercicios prácticos y situaciones reales.	$600
+
+5	Introducción a la Programación en Python
+Aprende los conceptos fundamentales de la programación utilizando Python y desarrolla tus primeros programas.
+$800
+
+6	Gestión de Proyectos Eficiente
+Aprende las mejores prácticas en gestión de proyectos y desarrolla habilidades para liderar equipos.	$900
+
+7	Diseño Gráfico Creativo
+Explora tu lado creativo y domina herramientas de diseño gráfico para crear piezas visuales impactantes.	$70
+
+8	Introducción a la Inteligencia Artificial	
+Descubre el mundo de la inteligencia artificial y su aplicación en diferentes campos.	$120
+
+9	Administración Financiera para Emprendedores	
+Conoce los conceptos clave de la administración financiera y gestiona tus finanzas empresariales.	$85
+
+10	Yoga y Meditación para el Bienestar	
+Aprende técnicas de yoga y meditación para reducir el estrés y mejorar tu bienestar mental.	$55
