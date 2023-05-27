@@ -716,6 +716,20 @@ $(document).ready(function () {
       .done(function (data) {
         var items = JSON.parse(data)
         $('#misValoraciones').empty()
+        
+        if (items.length == 0) {
+          $('#misValoraciones').empty()
+          $('#misValoraciones').append(
+            `
+                             <div class="alert alert-primary" role="alert">
+                            <h4 class="alert-heading text-center">No hay valoraciones</h4>
+                            <p class="text-center">Los usuarios que terminen el curso puedan dar valoraciones ya sean positivas o negativas.</p>
+                
+                        </div>
+            `
+          )
+          return
+        }
         for (let i = 0; i < items.length; i++) {
           if (items[i].isLike == 1) {
             $('#misValoraciones').append(

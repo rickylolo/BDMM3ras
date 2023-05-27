@@ -14,11 +14,17 @@ SELECT  MetodoPago_id, nombreMetodo, imagenMetodo
 FROM MetodoPago;
 
 /*--------------------------------------------------------------------------------CURSO--------------------------------------------------------------------------*/
+DROP VIEW IF EXISTS vCursoNoBorrador;
+CREATE VIEW vCursoNoBorrador AS
+SELECT  Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja, isBorrador
+FROM Curso
+WHERE isBorrador <> 1
+ORDER BY Curso_id DESC;
+
 DROP VIEW IF EXISTS vCurso;
 CREATE VIEW vCurso AS
 SELECT  Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja, isBorrador
-FROM Curso
-WHERE isBorrador <> 1;
+FROM Curso;
 
 DROP VIEW IF EXISTS vCursoInstructor;
 CREATE VIEW vCursoInstructor AS
@@ -55,7 +61,7 @@ LEFT JOIN Usuario C
 ON A.Usuario_id= C.Usuario_id 
 WHERE A.isBorrador <> 1
 GROUP BY A.Curso_id
-ORDER BY misCursosVendidos;
+ORDER BY misCursosVendidos DESC;
 
 /*--------------------------------------------------------------------------------CATEGORIA--------------------------------------------------------------------------*/
 DROP VIEW IF EXISTS vCategoria;

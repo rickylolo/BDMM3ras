@@ -570,6 +570,7 @@ $(document).ready(function () {
       })
   }
 
+
   function verReporteCursoDetallado(Curso_id) {
     $.ajax({
       type: 'POST',
@@ -859,7 +860,7 @@ $(document).ready(function () {
       processData: false,
     })
       .done(function (data) {
-        console.log(data)
+        cargarReporteCurso()
         $('#miModalEditarCurso').modal('show')
         $('#miModalCurso').modal('hide')
         var items = JSON.parse(data)
@@ -869,11 +870,18 @@ $(document).ready(function () {
         $('#costoCurso').val('')
         // CARGAR DATOS MODAL EDIT CURSO
         // Imagen
+        console.log(items)
         document.getElementById('miImagenCursoSelected').src =
+          'data:image/jpeg;base64,' + items[0].imagenCurso
+          document.getElementById('E_img_cursoIMG').src =
           'data:image/jpeg;base64,' + items[0].imagenCurso
         // Mi nombre
         $('#nombreCursoSelected').text(items[0].nombre)
         $('#miCursoSelectedEdit').val(items[0].Curso_id)
+
+        $('#E_nombreCurso').val(items[0].nombre)
+        $('#E_descCurso').val(items[0].descripcion)
+        $('#E_costoCurso').val(items[0].costoCurso)
       })
       // MANEJO DE ERRORES DEL SERVIDOR
       .fail(function (jqXHR, textStatus, errorThrown) {
@@ -1000,10 +1008,6 @@ $(document).ready(function () {
     var costoCurso = $('#E_costoCurso').val()
     var cursoID = $('#miCursoSelectedEdit').val()
 
-    if (!file_data) {
-      alert('Favor de cargar la imagen')
-      return
-    }
     if (
       nombreCurso == '' ||
       costoCurso == '' ||

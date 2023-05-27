@@ -185,7 +185,7 @@ BEGIN
    END IF;
       IF Operacion = 'A' THEN /*GET ALL CURSO*/
 		SELECT Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, nombre, descripcion, isBaja
-        FROM vCurso;
+        FROM vCursoNoBorrador;
    END IF;
      IF Operacion = 'G' THEN /*GET CURSO*/
 	SELECT Curso_id, Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, cursoNombre, descripcion, isBaja, categoriaNombre
@@ -225,14 +225,15 @@ BEGIN
    END IF;
         IF Operacion = 'Z' THEN /*GET CURSOS MAS RECIENTES*/
 		SELECT CONCAT(B.nombre,' ',apellidoPaterno,' ',apellidoMaterno) AS nombreCompleto, Curso_id, A.Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, A.nombre, A.descripcion, isBaja
-        FROM vCurso A
+        FROM vCursoNoBorrador A
         LEFT JOIN Usuario B
 		ON A.Usuario_id= B.Usuario_id 
-        WHERE isBaja <> 1 LIMIT 4;
+	    WHERE isBaja <> 1 
+        ORDER BY Curso_id DESC LIMIT 4;
    END IF;
 	IF Operacion = 'S' THEN /*GET CURSOS SEARCH*/
 		SELECT CONCAT(B.nombre,' ',apellidoPaterno,' ',apellidoMaterno) AS nombreCompleto, Curso_id, A.Usuario_id, noNiveles, costoCurso, noComentarios, noLikes, noDislikes, imagenCurso, A.nombre, A.descripcion, isBaja
-        FROM vCurso A
+        FROM vCursoNoBorrador A
         LEFT JOIN Usuario B
 		ON A.Usuario_id= B.Usuario_id 
         WHERE isBaja <> 1 AND  (sp_nombre IS NULL OR A.nombre LIKE CONCAT("%",sp_nombre,"%")) LIMIT 20;

@@ -211,6 +211,7 @@ class cursoAPI
                     "noComentarios" => $row['noComentarios'],
                     "noLikes" => $row['noLikes'],
                     "noDislikes" => $row['noDislikes'],
+                    "costoCurso" => $row['costoCurso'],
                     "imagenCurso" => base64_encode(($row['imagenCurso'])),
                     "nombre" => $row['nombre'],
                     "descripcion" => $row['descripcion'],
@@ -681,7 +682,6 @@ if (isset($_POST['funcion'])) {
             $binariosImagen = fread($imagenSubida, $tamanoArchivo);
             $var = new cursoAPI();
             $var->insertarCurso($id, $_POST['costoCurso'], $binariosImagen, $_POST['nombreCurso'], $_POST['descripcionCurso']);
-            echo 'Curso insertado satisfactoriamente';
             break;
         case "actualizarCurso":
              $binariosImagen = '';

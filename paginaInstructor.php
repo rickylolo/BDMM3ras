@@ -245,7 +245,7 @@ session_start(); // Inicio mi sesion PHP
                     <div class="d-flex miImagen align-items-start">
                         <img src="" id="miImagenCursoSelected" class="pfp">
                         <div class="p-1 d-flex flex-column">
-                            <p class="fs-5 fw-bold" id="nombreCursoSelected"></p>
+                            <p class="fs-4 ps-4 fw-bold" id="nombreCursoSelected"></p>
                         </div>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -275,8 +275,8 @@ session_start(); // Inicio mi sesion PHP
                         <div class="row">
                             <div class="col-4">
                                 <div class="image-upload d-flex justify-content-center p-2">
-                                    <label for="cursoIMG">
-                                    <img src="img/camera.jpg" alt="" id="E_img_cursoIMG" width="250px" height="250px">
+                                    <label for="E_cursoIMG">
+                                    <img src="img/camera.jpg" class="img-fluid" alt="" id="E_img_cursoIMG" width="250px" height="250px">
                                     </label>
                                     <input type="file" onchange="vista_preliminarEditarCurso(event)" accept="image/jpeg" class="form-control" id="E_cursoIMG" name="E_cursoIMG" aria-describedby="basic-addon1">
                                 </div>
@@ -312,7 +312,7 @@ session_start(); // Inicio mi sesion PHP
                         </div>
 
                         <div class="p-4 d-flex justify-content-center">
-                                <button class="btn btn-primary" id="ButtonActualizarCurso" data-bs-dismiss="modal">Actualizar</button>
+                                <button class="btn btn-primary" id="ButtonActualizarCurso">Actualizar</button>
                         </div>
                     </div>
 
@@ -357,7 +357,7 @@ session_start(); // Inicio mi sesion PHP
                         </div>
                     <div class="modal-footer">
 
-
+                      <br class="solid pt-2 pb-2">
                     </div>
                 </div>
             </div>
@@ -383,7 +383,7 @@ session_start(); // Inicio mi sesion PHP
 
                         <div class="image-upload d-flex justify-content-center p-2">
                             <label for="cursoIMG">
-                                <img src="img/camera.jpg" alt="" id="img_cursoIMG" width="250px" height="250px">
+                                <img src="img/camera.jpg" class="img-fluid" alt="" id="img_cursoIMG" width="250px" height="250px">
                             </label>
                             <input type="file" onchange="vista_preliminarCurso(event)" accept="image/jpeg" class="form-control" id="cursoIMG" name="cursoIMG" aria-describedby="basic-addon1">
 
