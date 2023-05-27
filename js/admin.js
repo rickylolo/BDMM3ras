@@ -302,6 +302,7 @@ $(document).ready(function () {
       processData: false,
     })
       .done(function () {
+        cargarMetodosPago()
         alert('Registro de metodo de pago correctamente')
         $('#metodoIMG').val('')
         $('#tipoMetodo').val('')

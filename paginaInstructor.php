@@ -418,7 +418,7 @@ session_start(); // Inicio mi sesion PHP
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" id="ButtonRegistrarCurso" data-bs-toggle="modal" data-bs-target="#miModalEditarCurso">Registrar
+                        <button type="button" class="btn btn-success" id="ButtonRegistrarCurso">Registrar
                         </button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
 

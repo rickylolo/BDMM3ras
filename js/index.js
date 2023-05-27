@@ -1626,7 +1626,7 @@ $(document).ready(function () {
     })
       .done(function () {
         $('#miModal').modal('hide')
-        alert('Registro de estudiante correctamente')
+        alert('Registro de instructor correctamente')
         $('#userIMG').val('')
         $('#email').val('')
         $('#usuario').val('')

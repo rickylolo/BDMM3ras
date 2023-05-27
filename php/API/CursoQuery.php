@@ -207,13 +207,13 @@ class Curso extends DB
 
     function insertarCurso($Usuario_id, $costoCurso, $imagenCurso, $nombreCurso, $descripcionCurso)
     {
-        $imagenCurso = mysqli_escape_string($this->myCon(), $imagenCurso); //IMAGEN
+        $imagenCurso2 = mysqli_escape_string($this->myCon(), $imagenCurso); //IMAGEN
         $insert = "CALL sp_GestionCurso(
            'I', 	#Operacion
             NULL, 	# Curso Id
             $Usuario_id, 	# Usuario Id
             $costoCurso,  	# Curso Costo
-            '$imagenCurso',	# Curso Imagen
+            '$imagenCurso2',	# Curso Imagen
             '$nombreCurso',	# Curso Nombre
             '$descripcionCurso', 	# Curso Descripcion
             NULL 		# Curso isBaja

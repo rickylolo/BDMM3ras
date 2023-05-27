@@ -859,6 +859,9 @@ $(document).ready(function () {
       processData: false,
     })
       .done(function (data) {
+        console.log(data)
+        $('#miModalEditarCurso').modal('show')
+        $('#miModalCurso').modal('hide')
         var items = JSON.parse(data)
         $('#cursoIMG').val('')
         $('#nombreCurso').val('')
