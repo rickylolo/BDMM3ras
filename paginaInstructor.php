@@ -18,7 +18,7 @@ session_start(); // Inicio mi sesion PHP
     <link href="css/index.css" rel="stylesheet">
     <link href="css/instructor.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/bootstrap-icons.css">
 </head>
 
 <body>
@@ -958,8 +958,8 @@ session_start(); // Inicio mi sesion PHP
             </div>
     </footer>
 
-    <script src="js/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
